@@ -400,3 +400,28 @@ server ftp://ftp.g10code.com/g10code/adns
 # verified: Sig D869 2123 C406 5DEA 5E0F  3AB5 249B 39D2 4F25 E3B6
 file adns-1.4-g10-6.tar.bz2
 chk  cc124d58828ab1d6fa7df49aaeb37985c5225de5
+
+# jpeg
+server http://www.claws-mail.org/win32
+
+file jpeg-9.tar.gz
+chk  724987e7690ca3d74d6ab7c1f1b6854e88ca204b
+
+# libsoup
+server ftp://ftp.gnome.org/pub/GNOME/sources/libsoup/2.40/
+
+file libsoup-2.40.3.tar.xz
+chk  63ce1d2b022b58831430099b28dee3b47fb63ed1
+
+# libwebp
+server http://downloads.webmproject.org/releases/webp
+
+file libwebp-0.4.3.tar.gz
+chk  1c307a61c4d0018620b4ba9a58e8f48a8d6640ef
+
+# webkitgtk
+server http://webkitgtk.org/releases
+
+file webkit-1.3.10.tar.gz
+chk  a5ea274a461b7527d900b60e16e895618cf80949
+

@@ -62,6 +62,9 @@ EXTRA_DIST = pkg-config gpg4win.nsi gpg4win-src.nsi \
         inst-w32pth.nsi		   uninst-w32pth.nsi	      \
         inst-zlib.nsi        	   uninst-zlib.nsi            \
 	inst-bzip2.nsi             uninst-bzip2.nsi           \
+	inst-jpeg.nsi     uninst-jpeg.nsi         \
+	inst-webkit.nsi     uninst-webkit.nsi         \
+	inst-libsoup.nsi     uninst-libsoup.nsi         \
         inst-final.nsi
 
 SUBDIRS = dictionaries
@@ -82,6 +85,7 @@ CLEANFILES = g4wihelp.dll versioninfo.txt \
 gpg4win_spkgs = glib libffi gdk-pixbuf gtk+ expat \
                 libgpg-error gpgme libpng enchant \
 		gpa libgsasl libtasn1 opencdk gnutls curl libxml2 \
+		jpeg libsoup webkit \
                 libetpan claws-mail \
 		gnupg2 pinentry libassuan libksba libgcrypt \
 		adns dirmngr w32pth regex libiconv gettext
@@ -114,6 +118,11 @@ gpg4win_pkg_libgcrypt_make_args = -j$(NUMPROC)
 gpg4win_pkg_adns_make_args = -j$(NUMPROC)
 gpg4win_pkg_dirmngr_make_args = -j$(NUMPROC)
 gpg4win_pkg_w32pth_make_args = -j$(NUMPROC)
+gpg4win_pkg_jpeg_make_args = -j$(NUMPROC)
+gpg4win_pkg_libsoup_make_args = -j$(NUMPROC)
+gpg4win_pkg_webkit_make_args = -j$(NUMPROC)
+
+
 
 gpg4win_pkg_libiconv_ex_configure = \
 	--enable-shared=no --enable-static=yes
@@ -283,7 +292,7 @@ gpg4win_pkg_claws_mail_configure = \
   --enable-libetpan --disable-dbus --disable-valgrind --disable-ipv6 \
   --disable-jpilot --disable-startup-notification \
   --disable-spamassassin-plugin --disable-bogofilter-plugin \
-  --disable-fancy-plugin --disable-geolocation-plugin \
+  --enable-fancy-plugin --disable-geolocation-plugin \
   --disable-acpi_notifier-plugin --disable-clamd-plugin \
   --disable-bogofilter-plugin --disable-spamassassin-plugin \
   --disable-perl-plugin --disable-python-plugin --disable-demo-plugin \
@@ -291,6 +300,45 @@ gpg4win_pkg_claws_mail_configure = \
 	CFLAGS=\"-ggdb\" \
 	CPPFLAGS=\"-I$(idir)/include\" \
 	LDFLAGS=\"-L$(idir)/lib\" LIBS=\"-lexpat\"
+
+gpg4win_pkg_jpeg_configure = \
+							--with-libiconv-prefix=$(idir)
+
+gpg4win_pkg_libsoup_configure = \
+							--without-apache-httpd --with-libiconv-prefix=$(idir) \
+							CPPFLAGS=\"-I$(idir)/include\" LIBS=\"-L$(idir)/lib\"
+
+gpg4win_pkg_webkit_configure = \
+                --enable-silent-rules \
+                --disable-datalist \
+                --disable-dom-storage \
+                --disable-icon-database \
+                --disable-offline-web-applications \
+                --disable-xslt \
+                --disable-eventsource \
+                --disable-filters \
+                --disable-gtk-doc-html \
+								--disable-svg-foreign-object \
+								--disable-web-sockets \
+								--disable-jit \
+                --disable-workers \
+                --disable-shared-workers \
+                --disable-silent-rules \
+                --disable-video \
+                --disable-xpath \
+                --disable-database \
+								--with-unicode-backend=glib \
+                --with-target=win32 \
+								--disable-indexed-database \
+								--disable-glibtest \
+								--disable-javascript-debugger \
+								--disable-3D-canvas \
+								--disable-channel-messaging \
+								--disable-debug \
+               CFLAGS=\"-I$(idir)/include -g -O2 -std=gnu99 -mms-bitfields\" \
+               CXXFLAGS=\"-I$(idir)/include -g -O2 -std=gnu++98 -mms-bitfields\" \
+               CPPFLAGS=\"-I$(idir)/include -g -O2 -std=gnu++98 -mms-bitfields\" \
+         CC=$(CC) LIBS=\"-L$(idir)/lib\"
 
 
 # This is not anymore needed sinces 3.8.0 already builds a PDF version.

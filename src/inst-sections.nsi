@@ -128,6 +128,15 @@
 !ifdef HAVE_PKG_GPGME
 !include "inst-gpgme.nsi"
 !endif
+!ifdef HAVE_PKG_WEBKIT
+!include "inst-webkit.nsi"
+!endif
+!ifdef HAVE_PKG_JPEG
+!include "inst-jpeg.nsi"
+!endif
+!ifdef HAVE_PKG_LIBSOUP
+!include "inst-libsoup.nsi"
+!endif
 
 # These are displayed in the selection dialog.
 
@@ -155,6 +164,15 @@
 !include "uninst-claws-mail.nsi"
 !endif
 
+!ifdef HAVE_PKG_LIBSOUP
+!include "uninst-libsoup.nsi"
+!endif
+!ifdef HAVE_PKG_JPEG
+!include "uninst-jpeg.nsi"
+!endif
+!ifdef HAVE_PKG_WEBKIT
+!include "uninst-webkit.nsi"
+!endif
 !ifdef HAVE_PKG_GPGME
 !include "uninst-gpgme.nsi"
 !endif

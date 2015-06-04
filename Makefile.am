@@ -34,6 +34,7 @@ EXTRA_DIST = autogen.sh \
 				patches/claws-mail-3.11.1/06-pthread.patch \
 				patches/claws-mail-3.11.1/07-g_stat.patch \
 				patches/claws-mail-3.11.1/08-libravatar-prefs_common.patch \
+				patches/claws-mail-3.11.1/09-fancy-defs.patch \
         patches/dirmngr-1.1.1/dirmngr-pth.patch \
         patches/glib-2.41.0/01-socket.patch \
         patches/glib-2.41.0/03-remove-rand_s.patch \
@@ -51,4 +52,5 @@ EXTRA_DIST = autogen.sh \
         patches/gnutls-2.12.23/omit-doc.patch \
 				patches/libetpan-1.6/mingw-closesocket-include.patch \
         patches/libtasn1-2.14/gnulib-mingw-w64-fix.patch \
-				patches/w32pth-2.0.5/01-def-fix.patch
+				patches/w32pth-2.0.5/01-def-fix.patch \
+				patches/webkit-1.3.10/01-fixes.patch

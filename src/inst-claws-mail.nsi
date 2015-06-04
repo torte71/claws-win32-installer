@@ -52,6 +52,7 @@ ${MementoSection} "Claws-Mail" SEC_claws_mail
   File ${prefix}/lib/claws-mail/plugins/att_remover.dll
   File ${prefix}/lib/claws-mail/plugins/attachwarner.dll
   File ${prefix}/lib/claws-mail/plugins/bsfilter.dll
+  File ${prefix}/lib/claws-mail/plugins/fancy.dll
   File ${prefix}/lib/claws-mail/plugins/fetchinfo.dll
   File ${prefix}/lib/claws-mail/plugins/libravatar.dll
   File ${prefix}/lib/claws-mail/plugins/notification.dll

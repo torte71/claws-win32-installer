@@ -252,17 +252,21 @@ GPG4WIN_SPKG([gnupg2], [libiconv libgcrypt libksba libassuan libgpg-error dnl
                         w32pth zlib bzip2 adns pinentry])
 #GPG4WIN_SPKG([scute], [libgpg-error libassuan])
 #GPG4WIN_SPKG([paperkey])
+GPG4WIN_SPKG([jpeg])
+GPG4WIN_SPKG([libxml2], [zlib])
+GPG4WIN_SPKG([libsoup], [gnutls libxml2])
+GPG4WIN_SPKG([webkit], [jpeg libpng glib gtk+ libsoup libxml2])
+
 GPG4WIN_SPKG([gpa], [libiconv gettext zlib gtk+ libpng glib gpgme])
 GPG4WIN_SPKG([libgsasl])
 GPG4WIN_SPKG([libtasn1])
 GPG4WIN_SPKG([gnutls], [libgsasl libtasn1 libgcrypt])
-GPG4WIN_SPKG([libxml2], [zlib])
 GPG4WIN_SPKG([regex])
 GPG4WIN_SPKG([crypt])
 GPG4WIN_SPKG([libetpan], [gnutls])
 GPG4WIN_SPKG([claws-mail], [libiconv gettext zlib gtk+ libpng enchant glib dnl
                             gpgme crypt regex libetpan gnutls dnl
-                            libxml2 expat])
+                            libxml2 expat webkit])
 GPG4WIN_SPKG([w32pth])
 GPG4WIN_SPKG([libiconv])
 GPG4WIN_SPKG([gettext], [libiconv])

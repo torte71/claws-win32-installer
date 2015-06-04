@@ -132,6 +132,18 @@
 !define gpg4win_pkg_claws_mail @gpg4win_pkg_claws_mail@
 !define gpg4win_pkg_claws_mail_version @gpg4win_pkg_claws_mail_version@
 
+@HAVE_PKG_WEBKIT@
+!define gpg4win_pkg_webkit @gpg4win_pkg_webkit@
+!define gpg4win_pkg_webkit_version @gpg4win_pkg_webkit_version@
+
+@HAVE_PKG_JPEG@
+!define gpg4win_pkg_jpeg @gpg4win_pkg_jpeg@
+!define gpg4win_pkg_jpeg_version @gpg4win_pkg_jpeg_version@
+
+@HAVE_PKG_LIBSOUP@
+!define gpg4win_pkg_libsoup @gpg4win_pkg_libsoup@
+!define gpg4win_pkg_libsoup_version @gpg4win_pkg_libsoup_version@
+
 @HAVE_PKG_ZLIB@
 !define gpg4win_pkg_zlib @gpg4win_pkg_zlib@
 !define gpg4win_pkg_zlib_version @gpg4win_pkg_zlib_version@
