@@ -1,0 +1,428 @@
+# NEWS for gpg4win                                   -*- coding: latin-1 -*-
+#
+# The version number given below are for the standard installers as
+# distributed by www.gpg4win.org.
+Noteworthy changes in version 2.2.5 (unreleased)
+------------------------------------------------
+
+~~~~~~~~~~~~~~~
+GnuPG:          2.0.27
+Kleopatra:      2.2.0-git945878c
+GPA:            0.9.7
+GpgOL:          1.2.1
+GpgEX:          1.0.1
+Claws-Mail:     3.9.1
+Kompendium DE:  3.0.0
+Kompendium EN:  3.0.0
+~~~~~~~~~~~~~~~
+
+Noteworthy changes in version 2.2.4 (2015-03-17)
+------------------------------------------------
+(en) GnuPG has been updated to version 2.0.27. See release notes on
+     www.gnupg.org for details.
+
+(de) GnuPG wurde auf Version 2.0.27 aktualisiert. Details zu dieser
+     Version finden sich unter www.gnupg.org
+
+(en) Libgcrypt has been updated to version 1.6.3 (includes fix for
+     CVE-2014-3591)
+
+(de) Libgcrypt wurde auf Version 1.6.3 aktualisiert (enthält den
+     fix für CVE-2014-3591)
+
+(en) An issue has been fixed which could cause extracted files from
+     TAR Archives to be truncated.
+
+(de) Ein Problem wurde behoben durch welches Ausgabedateien beim
+     extrahieren von TAR Archiven beschädigt wurden.
+
+~~~~~~~~~~~~~~~
+GnuPG:          2.0.27
+Kleopatra:      2.2.0-git945878c
+GPA:            0.9.7
+GpgOL:          1.2.1
+GpgEX:          1.0.1
+Claws-Mail:     3.9.1
+Kompendium DE:  3.0.0
+Kompendium EN:  3.0.0
+~~~~~~~~~~~~~~~
+
+Noteworthy changes in version 2.2.3 (2014-11-25)
+------------------------------------------------
+(en) The vanilla installer has been fixed by including GnuTLS.
+
+(de) Das "Vanilla" Installationspaket wurde repariert indem GnuTLS
+     eingebunden wurde.
+
+(en) Creation of portable versions with mkportable has been fixed.
+
+(de) Die Erstellung einer portablen Version mit mkportable funktioniert
+     wieder.
+
+(en) GPA now works again under Windows XP.
+
+(de) GPA funktioniert wieder unter Windows XP.
+
+(en) Verification of a detached signature without specifying what
+     should be verified may now show a warning and has been disabled
+     in batch mode.
+
+(de) Die Verifikation von abgetrennten Signaturdateien ohne den
+     Dateinamen anzugeben, erzeugt nun ggf. eine Warnung und wird im
+     Batch Modus verhindert.
+
+(en) Tar archives can now include files and folders that use
+     special characters (e.g. umlauts) which can be encoded
+     in the native Windows 8-Bit codepage.
+
+(de) Tar Archive können mit Dateien und Ordner umgehen deren
+     Namen Sonderzeichen (z.B. Umlaute) enthalten welche in der
+     nativen Windows 8-Bit Zeichenkodierung kodiert sein dürfen.
+
+(en) Kleopatra now handles preprocessing (e.g. archiving) errors
+     and safely aborts the operation.
+
+(de) Kleopatra erkennt nun Fehler bei der Vorverarbeitung von Dateien
+     (z.B. Archivieren) und bricht die Operation sicher ab.
+
+(en) GPA has been updated to version 0.9.6.
+
+(de) GPA wurde auf Version 0.9.6 aktualisiert.
+
+(en) A security problem in the libksba library has been fixed.
+
+(de) Eine Sicherheitsproblem in der libksba Bibliothek wurde behoben.
+
+~~~~~~~~~~~~~~~
+GnuPG:          2.0.26
+Kleopatra:      2.2.0-git945878c
+GPA:            0.9.6
+GpgOL:          1.2.1
+GpgEX:          1.0.1
+Claws-Mail:     3.9.1
+Kompendium DE:  3.0.0
+Kompendium EN:  3.0.0
+~~~~~~~~~~~~~~~
+
+Noteworthy changes in version 2.2.2 (2014-09-03)
+------------------------------------------------
+
+(en) GnuPG has been updated to version 2.0.26. See release notes on
+     www.gnupg.org for details.
+
+(de) GnuPG wurde auf Version 2.0.26 aktualisiert. Details zu dieser
+     Version finden sich unter www.gnupg.org
+
+(en) Sreen reader support and accessibility of Kleopatra was improved.
+
+(de) Screenreader-Unterstützung und Barrierfreiheit von Kleopatra
+     verbessert.
+
+(en) A library load problem has been fixed that could keep Kleopatra
+     from starting on some systems.
+
+(de) Ein Problem wurde behoben, welches dazu führen konnte, dass Kleopatra
+     auf manchen System nicht startete.
+
+(en) Kleopatra has been updated to KDE Sofware Collection 4.14.
+
+(de) Kleopatra wurde auf den Stand der KDE Software Collection 4.14
+     aktualisiert.
+
+(en) Used libraries have been updated to their latest stable relase.
+
+(de) Verwendete Bibliotheken wurden aktualisiert.
+
+(en) GpgEX no longer crashes if the environment variable GNUPGHOME is set.
+
+(de) GpgEX stürzt nicht mehr ab, wenn die Umgebungsvariable GNUPGHOME gesetzt
+     ist.
+
+(en) Pinentry-qt warning and confirmation dialogs should now open always in
+     foreground.
+
+(de) Bestätigungs- und Warnmeldungen von pinentry-qt öffnen sich nun immer
+     im Vordergrund.
+
+(en) Problems with Outlook sender and recipient address lookup have been
+     fixed in GpgOL. Especially for Microsoft Exchange addresses.
+
+(de) Probleme mit der Auflösung von Sender- und Empfängeradressen wurden
+     in GpgOL behoben. Insbesondere bei der Verwendung von Microsoft
+     Exchange Adressbüchern.
+
+(en) Command line output is encoded to the Windows console encoding.
+
+(de) Kommandozeilen-Ausgaben werden im zur Windows-Konsole passenden
+     Encoding ausgegeben.
+
+(en) The pinentry dialog is now translated correctly in the French locale.
+
+(de) Der Pinentry-Dialog ist nun auch in Französisch verfügbar.
+
+(en) Command line wildcards (like *.txt) work again.
+
+(de) Platzhalter (wie *.txt) in Kommandozeilenaufrufen funktionieren wieder.
+
+~~~~~~~~~~~~~~~
+GnuPG:          2.0.26
+Kleopatra:      2.2.0-gitac229d2
+GPA:            0.9.4
+GpgOL:          1.2.1
+GpgEX:          1.0.1
+Claws-Mail:     3.9.1
+Kompendium DE:  3.0.0
+Kompendium EN:  3.0.0
+~~~~~~~~~~~~~~~
+
+
+Noteworthy changes in version 2.2.1 (2013-10-08)
+------------------------------------------------
+
+(de) Ein Fehler der eine mögliche endlosschleife in GnuPG auslösen
+   konnte wurde behoben. [CVE-2013-4402]
+
+(en) Fixed possible infinite recursion in the compressed packet
+   parser. [CVE-2013-4402]
+
+(en) Kleopatra no longer crashes when using Microsoft Office IME.
+
+(de) Kleopatra stürzt nun nicht mehr ab wenn man Microsoft Office IME
+     verwendet.
+
+(en) Support for SPR332 and 532 pinpads.
+
+(de) Unterstützung für SPR332 und 532 Pinpads.
+
+~~~~~~~~~~~~~~~
+GnuPG:          2.0.22
+Kleopatra:      2.2.0
+GPA:            0.9.4
+GpgOL:          1.2.0
+GpgEX:          1.0.0
+Claws-Mail:     3.9.1
+Kompendium DE:  3.0.0
+Kompendium EN:  3.0.0
+~~~~~~~~~~~~~~~
+
+
+Noteworthy changes in version 2.2.0 (2013-08-20)
+------------------------------------------------
+
+(en) GpgEx now works on Windows 64 bit.
+
+(de) GpgEX funktioniert nun unter Windows 64 bit.
+
+(en) Gpg-agent may now be used as Pageant (PuTTY authentication agent)
+     replacement with additional smartcard support.
+
+(de) Gpg-agent kann nun als Pageant (PuTTY authentication agent) Ersatz
+     genutzt werden - mit zusätzlicher SmartCard-Unterstützung.
+
+(en) Pinentry now allows to paste in the passphrase.
+
+(de) Das Einfügen von Passphrasen aus der Zwischenablage ist nun erlaubt.
+
+(en) Kleopatra no longer crashes when started by a regular user on
+     terminal servers (Windows Server).
+
+(de) Crash beim Start von Kleopatra durch einen gewöhnlichen Nutzer auf
+     Terminalservern (Windows Server) behoben.
+
+(en) GpgOL provides rudimentary support for Outlook 2010 and 2013.
+     The following crypto functions are already available via the new
+     GpgOL ribbon rsp. Outlook's context menu (no MIME parsing, yet):
+     - Encrypting/decrypting mail bodys
+     - Saving and decrypting attachments
+     - Attaching and encrypting files
+     - Signing and signature verification (of opaque signatures)
+
+(de) GpgOL bietet rudimentäre Unterstützung für Outlook 2010 und 2013.
+     Folgende Krypto-Operationen sind bereits über das neue
+     GpgOL-Ribbon bzw. über das Kontextmenü von Outlook möglich
+     (kein MIME-Parsing):
+     - Verschlüsseln/Entschlüsseln des Mail-Bodys.
+     - Speichern und Entschlüsseln von Anhängen.
+     - Dateien anhängen und verschlüsseln.
+     - Signieren/Prüfen (von opaken Signaturen).
+
+(en) Extracting a tarball through the Kleopatra GUI now works reliable
+
+(de) Das Entpacken eines tar Archivs funktioniert nun auch über Kleopatra
+     zuverlässig.
+
+(en) Added mkportable.exe as a tool to create a portable installation.
+
+(de) Neues Werkzeug mkportable.exe um eine portable Installation zu
+     erstellen.
+
+(en) Kleopatra now allows it to generate keys with a size up to 4096 bit.
+
+(de) Kleopatra erlaubt es nun Zertifikate mit einer Länge von
+     bis zu 4096 bit zu erstellen.
+
+~~~~~~~~~~~~~~~
+GnuPG:          2.0.21
+Kleopatra:      2.2.0
+GPA:            0.9.4
+GpgOL:          1.2.0
+GpgEX:          1.0.0
+Claws-Mail:     3.9.1
+Kompendium DE:  3.0.0
+Kompendium EN:  3.0.0
+~~~~~~~~~~~~~~~
+
+
+Noteworthy changes in version 2.1.1 (2013-05-28)
+------------------------------------------------
+
+(en) New versions of GnuPG, GpgOL, GPA, Kleopatra, and Claws-Mail.
+
+(de) Neue Versionen von GnuPG, GpgOL, GPA, Kleopatra and Claws-Mail.
+
+(en) Development files for the crypto libraries will now be installed.
+
+(de) Entwicklerwerkzeuge für die Krypto-Bibliotheken werden nun mit
+     installiert.
+
+~~~~~~~~~~~~~~~
+GnuPG:          2.0.20
+Kleopatra:      2.1.1
+GPA:            0.9.4
+GpgOL:          1.1.3
+GpgEX:          0.9.7
+Claws-Mail:     3.9.1
+Kompendium DE:  3.0.0
+Kompendium EN:  3.0.0-beta1
+~~~~~~~~~~~~~~~
+
+
+Noteworthy changes in version 2.1.0 (2011-03-15)
+------------------------------------------------
+
+(en) New versions of GnuPG, Kleopatra, GpgEX, GpgOL, Claws.
+
+(de) Neue Versionen von GnuPG, Kleopatra, GpgEX, GpgOL, Claws.
+
+~~~~~~~~~~~~~~~
+GnuPG:          2.0.17
+Kleopatra:      2.1.0 (2011-02-04)
+GPA:            0.9.1-svn1024
+GpgOL:          1.1.2
+GpgEX:          0.9.7
+Claws-Mail:     3.7.8cvs47
+Kompendium DE:  3.0.0
+Kompendium EN:  3.0.0-beta1
+~~~~~~~~~~~~~~~
+
+
+Noteworthy changes in version 2.0.4 (2010-07-28)
+------------------------------------------------
+
+(en) GpgSM bug fix.
+
+(de) GpgSM Fehler wurde beseitigt.
+
+~~~~~~~~~~~~~~~
+GnuPG:        2.0.14 + 02-gpgsm-realloc-bug.patch
+Kleopatra:    2.0.14-svn1098530 (20100303)
+GPA:          0.9.0
+GpgOL:        1.1.1
+GpgEX:        0.9.5
+Claws-Mail:   3.7.4cvs1
+Kompendium:   3.0.0
+~~~~~~~~~~~~~~~
+
+
+Noteworthy changes in version 2.0.3 (2010-05-29)
+------------------------------------------------
+
+(en) Bug fixes.
+
+(de) Fehler wurden beseitigt.
+
+~~~~~~~~~~~~~~~
+GnuPG:        2.0.14
+Kleopatra:    2.0.14-svn1098530 (20100303)
+GPA:          0.9.0
+GpgOL:        1.1.1
+GpgEX:        0.9.5
+Claws-Mail:   3.7.4cvs1
+Kompendium:   3.0.0
+~~~~~~~~~~~~~~~
+
+
+Noteworthy changes in version 2.0.2 (2010-04-12)
+------------------------------------------------
+
+(en) Bug fixes and UI improvements.
+
+(de) Fehler wurden beseitigt und die Benutzerschnittstelle verbessert.
+
+~~~~~~~~~~~~~~~
+GnuPG:        2.0.14
+Kleopatra:    2.0.14-svn1098530 (20100303)
+GPA:          0.9.0
+GpgOL:        1.1.1
+GpgEX:        0.9.5
+Claws-Mail:   3.7.4cvs1
+Kompendium:   3.0.0-rc1
+~~~~~~~~~~~~~~~
+
+
+Noteworthy changes in version 2.0.1 (2009-09-28)
+------------------------------------------------
+
+(en) Fixed a problem opening Office documents and URLs with a running
+     GpgOL.
+
+(de) Ein Problem beim Öffnen von Office Dokumenten und URLs mit einem
+     laufenden GpgOL wurde behoben.
+
+~~~~~~~~~~~~~~~
+GnuPG:        2.0.12
+Kleopatra:    2.0.11-svn1008232 (2009-09-25)
+GPA:          0.9.0
+GpgOL:        1.0.1
+GpgEX:        0.9.3
+Claws-Mail:   3.7.2cvs27
+Kompendium:   3.0.0-beta4
+~~~~~~~~~~~~~~~
+
+
+
+Noteworthy changes in version 2.0.0 (2009-08-07)
+------------------------------------------------
+
+(en) First production release of this major redesign.  Over the last
+     15 months we did 15 beta releases and hopefully squashed most of
+     the serious bugs.
+
+(de) Dies ist das erste produktionsreife Version der neuen Gpg4win
+     Architektur.  In den vergangenen 15 Monaten wurden 16 Beta
+     Versionen veröffentlicht um die meisten der gravierenden
+     Programmfehler zu beseitigen.
+
+~~~~~~~~~~~~~~~
+GnuPG:        2.0.12
+Kleopatra:    20090807
+GPA:          0.9.0
+GpgOL:        1.0.0
+GpgEX:        0.9.3
+Claws-Mail:   3.7.2
+Kompendium:   3.0.0-beta3
+~~~~~~~~~~~~~~~
+
+
+For older news see the file ONEWS in the source distribution.
+
+# Copyright 2009 g10 Code GmbH
+#
+# This file is free software; as a special exception the author gives
+# unlimited permission to copy and/or distribute it, with or without
+# modifications, as long as this notice is preserved.
+#
+# This file is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY, to the extent permitted by law; without even the
+# implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
+# PURPOSE.

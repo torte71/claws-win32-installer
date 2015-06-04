@@ -1,0 +1,159 @@
+#! /bin/sh
+patch -p1 -l -f $* < $0
+exit $?
+
+diff -ur claws-mail-3.11.1-orig/src/common/utils.c claws-mail-3.11.1/src/common/utils.c
+--- claws-mail-3.11.1-orig/src/common/utils.c	2015-05-30 16:45:13.324862810 +0200
++++ claws-mail-3.11.1/src/common/utils.c	2015-05-30 17:38:05.886379980 +0200
+@@ -203,7 +203,7 @@
+ 	char *name = g_win32_locale_filename_from_utf8(filename);
+ 	int fd = open(name, flags, mode);
+ 	g_free(name);
+-	return fp;
++	return fd;
+ #else
+ 	return open(filename, flags, mode);
+ #endif
+diff -ur claws-mail-3.11.1-orig/src/common/w32lib.h claws-mail-3.11.1/src/common/w32lib.h
+--- claws-mail-3.11.1-orig/src/common/w32lib.h	2015-05-30 16:45:13.324862810 +0200
++++ claws-mail-3.11.1/src/common/w32lib.h	2015-05-30 17:41:55.188546900 +0200
+@@ -76,13 +76,18 @@
+ #include <stdio.h>
+ 
+ #ifdef __MINGW32__
+-#include <_mingw.h>
+-#define MINGW32_VERSION (__MINGW32_MAJOR_VERSION * 100 \
++# include <_mingw.h>
++# define MINGW32_VERSION (__MINGW32_MAJOR_VERSION * 100 \
+ 			 + __MINGW32_MINOR_VERSION)
+-#include <wchar.h>
+-#include <dirent.h>
+-#include <sys/time.h>
+-#endif
++# define MINGW64_VERSION (__MINGW64_VERSION_MAJOR * 100 \
++			 + __MINGW64_VERSION_MINOR)
++# include <wchar.h>
++# include <dirent.h>
++# include <sys/time.h>
++# if MINGW64_VERSION >= 200
++#  include <sys/types.h>
++# endif
++#endif /* __MINGW32__ */
+ 
+ /* Mingw32 3.4.4 defines interface to struct and thus breaks our own
+    use of that symbol.  Undef it here. */
+@@ -123,9 +128,10 @@
+ 
+ /* functions */
+ /*** str ***/
++#if MINGW64_VERSION < 200
+ int strcasecmp( const char *s1, const char *s2 );
+-
+ int strncasecmp( const char *s1, const char *s2, size_t n );
++#endif
+ 
+ /*** dir ***/
+ #ifndef __MINGW32__
+@@ -167,10 +173,12 @@
+ struct dirent *readdir( DIR *dir );
+ 
+ #if defined (__MINGW32__) && MINGW32_VERSION < 312
++# if MINGW64_VERSION < 200
+ struct timezone {
+   int tz_minuteswest;
+   int tz_dsttime;
+ };
++# endif
+ #endif
+ 
+ /*** stat ***/
+@@ -181,7 +189,9 @@
+ 
+ /*** sys/time ***/
+ #if ! defined (__MINGW32__) || MINGW32_VERSION < 312
++# if MINGW64_VERSION < 200
+ int gettimeofday( struct timeval *tv, struct timezone *tz );
++# endif
+ #endif
+ 
+ /*** unistd ***/
+@@ -193,14 +203,18 @@
+ /*** stdlib ***/
+ long int random( void );
+ void srandom( unsigned int seed );
++#if MINGW64_VERSION < 200
+ int truncate( const char *path, off_t length );
++#endif
+ 
+ /*** signal ***/
+ int kill( pid_t pid, int sig );
+ 
+ /*** stdio ***/
++#if MINGW64_VERSION < 200
+ FILE *popen( const char *command, const char *type );
+ int pclose( FILE *stream );
++#endif
+ 
+ /*** w32_account.c ***/
+ int w32_is_administrator (void);
+diff -ur claws-mail-3.11.1-orig/src/common/w32_stdio.c claws-mail-3.11.1/src/common/w32_stdio.c
+--- claws-mail-3.11.1-orig/src/common/w32_stdio.c	2015-05-30 16:45:13.328862919 +0200
++++ claws-mail-3.11.1/src/common/w32_stdio.c	2015-05-30 16:49:05.175105291 +0200
+@@ -23,9 +23,11 @@
+ 
+ #include "w32lib.h"
+ 
++#if MINGW64_VERSION < 200
+ FILE *popen( const char *command, const char *type ){
+   return NULL;
+ }
++#endif
+ 
+ int pclose( FILE *stream ){
+   return -1;
+diff -ur claws-mail-3.11.1-orig/src/common/w32_stdlib.c claws-mail-3.11.1/src/common/w32_stdlib.c
+--- claws-mail-3.11.1-orig/src/common/w32_stdlib.c	2015-05-30 16:45:13.328862919 +0200
++++ claws-mail-3.11.1/src/common/w32_stdlib.c	2015-05-30 16:49:19.643494879 +0200
+@@ -31,6 +31,8 @@
+   srand( seed );
+ }
+ 
++#if MINGW64_VERSION < 200
+ int truncate( const char *path, off_t length ){
+   return -1;
+ }
++#endif
+diff -ur claws-mail-3.11.1-orig/src/common/w32_string.c claws-mail-3.11.1/src/common/w32_string.c
+--- claws-mail-3.11.1-orig/src/common/w32_string.c	2015-05-30 16:45:13.328862919 +0200
++++ claws-mail-3.11.1/src/common/w32_string.c	2015-05-30 16:49:53.552407957 +0200
+@@ -24,6 +24,7 @@
+ 
+ #include "w32lib.h"
+ 
++#if MINGW64_VERSION < 200
+ int strcasecmp( const char *s1, const char *s2 ){
+   size_t len1, len2, len;
+ 
+@@ -49,4 +50,4 @@
+ 
+    return 0;
+ }
+-
++#endif /* MINGW64_VERSION < 200 */
+diff -ur claws-mail-3.11.1-orig/src/common/w32_time.c claws-mail-3.11.1/src/common/w32_time.c
+--- claws-mail-3.11.1-orig/src/common/w32_time.c	2015-05-30 16:45:13.324862810 +0200
++++ claws-mail-3.11.1/src/common/w32_time.c	2015-05-30 17:46:23.907774920 +0200
+@@ -25,6 +25,7 @@
+ #include "w32lib.h"
+ 
+ #if ! defined (__MINGW32__) || MINGW32_VERSION < 312
++# if MINGW64_VERSION < 200
+ int gettimeofday( struct timeval *tv, struct timezone *tz ){
+   struct _timeb tstruct;
+   _ftime( &tstruct );
+@@ -32,4 +33,5 @@
+   tv->tv_usec = tstruct.millitm;
+   return 1;
+ }
++# endif
+ #endif

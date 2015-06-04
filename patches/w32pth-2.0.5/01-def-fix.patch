@@ -1,0 +1,15 @@
+#! /bin/sh
+patch -p1 -f $* < $0
+exit $?
+
+diff -ur w32pth-2.0.5.orig/libw32pth.def w32pth-2.0.5/libw32pth.def
+--- w32pth-2.0.5.orig/libw32pth.def	2015-05-25 18:30:22.734187106 +0200
++++ w32pth-2.0.5/libw32pth.def	2015-05-25 18:30:32.838459236 +0200
+@@ -18,7 +18,6 @@
+ ;; 02110-1301, USA.
+ 
+ 
+-EXPORTS
+       pth_init  @1
+       pth_kill  @2
+       pth_ctrl  @3

@@ -1,0 +1,31 @@
+#! /bin/sh
+patch -p1 -l -f $* < $0
+exit $?
+
+commit 4dbb2b5d931e7853bd8e7d69ab8f63106f1ddcb2
+Author: Andrej Kacian <ticho@claws-mail.org>
+Date:   Sat May 30 18:31:26 2015 +0200
+
+    RSSyl: Remove unnecessary use of link() in rssyl_add_msgs().
+
+diff --git a/src/plugins/rssyl/rssyl.c b/src/plugins/rssyl/rssyl.c
+index 3b2675a..6e2590a 100644
+--- a/src/plugins/rssyl/rssyl.c
++++ b/src/plugins/rssyl/rssyl.c
+@@ -782,12 +782,10 @@ static gint rssyl_add_msgs(Folder *folder, FolderItem *dest, GSList *file_list,
+ 		g_return_val_if_fail(destfile != NULL, -1);
+ 		debug_print("RSSyl: add_msgs: new filename is '%s'\n", destfile);
+ 
+-		if( link(fileinfo->file, destfile) < 0 ) {
+-			if( copy_file(fileinfo->file, destfile, TRUE) < 0 ) {
+-				g_warning("can't copy message %s to %s\n", fileinfo->file, destfile);
+-				g_free(destfile);
+-				return -1;
+-			}
++		if( copy_file(fileinfo->file, destfile, TRUE) < 0 ) {
++			g_warning("can't copy message %s to %s\n", fileinfo->file, destfile);
++			g_free(destfile);
++			return -1;
+ 		}
+ 
+ 		if( relation != NULL )

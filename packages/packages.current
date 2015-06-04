@@ -1,0 +1,402 @@
+# packages.current - list of current packages for use with gpg4win -*- sh -*-
+#
+# The download script processes the statements here to
+# actually download the packages.  The syntax is trivial:
+#
+# If the first non whitespace character of a line is #, the line is
+# considered a comment.  If the first word of a line is "server", the
+# rest of the line will be taken as the base URL for following file
+# commands.  If the first word of a line is "file" the rest of the
+# line will be appended to the current base URL (with a / as
+# delimiter).  The statement "chk" is followed by the SHA1 checksum of
+# the last file.
+
+
+#
+# GNU
+#
+server ftp://ftp.cs.tu-berlin.de/pub/gnu
+
+# checked: 2014-06-20 ah - updated
+# verified with key: 4622 25C3 B46F 3487 9FC8  496C D605 848E D7E6 9871
+file gettext/gettext-0.19.1.tar.xz
+chk  e0d425de1bd1a16993b262ff37eaf08abee8f953
+
+# checked: 2014-06-20 ah
+file libiconv/libiconv-1.14.tar.gz
+chk  be7d67e50d72ff067b2c0291311bc283add36965
+
+#
+# zlib
+#
+server http://zlib.net
+
+# checked: 2014-06-20 ah
+file zlib-1.2.8.tar.gz
+chk  a4d316c404ff54ca545ea71a27af7dbc29817088
+
+
+#
+# GNU TLS and support libraries
+#
+
+server ftp://ftp.gnu.org/pub/gnu
+
+# checked: 2014-06-20 ah
+file gsasl/libgsasl-1.8.0.tar.gz
+chk  08fd5dfdd3d88154cf06cb0759a732790c47b4f7
+
+# checked: 2014-06-20 ah
+file libtasn1/libtasn1-2.14.tar.gz
+chk  22f9e0b15f870c8e03ac9cc1ead969d4d84eb931
+
+
+server ftp://ftp.gnutls.org/gcrypt
+# checked: 2014-06-20 ah
+# verified with key 1F42 4189 05D8 206A A754  CCDC 29EE 58B9 9686 5171
+file gnutls/v2.12/gnutls-2.12.23.tar.bz2
+chk 3c0ba2153560abfb08d88dcb016cd6b72e465db5
+
+
+#
+# libetpan for claws
+#
+
+# (Kept on our own mirror due to Sourceforge/github peculiarities.)
+server http://ticho.kacian.sk/~ticho/
+
+file   libetpan-1.6.tar.gz
+chk    54d0c6d612e3981cc71e52e3c9e04d5805d9917f
+
+file   claws-mail-3.11.1.tar.xz
+chk    b0c07906043f7a3ec726c7a96d6dcfc3c148b9cc
+
+file   expat-2.1.0.tar.gz
+chk    b08197d146930a5543a7b99e871cba3da614f6f0
+
+#
+# curl for Claws plugins
+#
+
+server http://curl.haxx.se/download
+
+file  curl-7.42.1.tar.bz2
+chk   f65708915875b8cb35edb51d8dd31440dc02fbd3
+
+
+#
+# libxml2 for Claws plugins
+
+# checked: 2014-06-20 ah - updated
+# checked checksum with linuxfromscratch handbook and mxe repository
+
+server ftp://xmlsoft.org/libxml2
+
+file   libxml2-2.9.1.tar.gz
+chk    eb3e2146c6d68aea5c2a4422ed76fe196f933c21
+
+#
+# regex for Claws
+# (Kept on our own mirror due to Sourceforge and packaging pecularities.)
+# (Note that this is incompatible to various other variants of
+# regex.dll floating around, but this is what claws expects.)
+server ftp://ftp.g10code.com/g10code/misc
+file   regex-20090805.tar.gz
+chk    56c87366f49916997729fc335747a6a55a2bacc3
+
+# Crypt for claws.
+# (Kept on our own mirror due to Sourceforge and packaging pecularities.)
+server ftp://ftp.g10code.com/g10code/misc
+file   crypt-1.1.tar.gz
+chk    04b4c2ac296499d378f4a35bbeb1b129165b2e61
+
+#
+# bsfilter.exe for antispam in Claws
+#
+server http://www.claws-mail.org/win32
+
+#file bsfilter-1.0.16-bin.tar.gz
+#chk  5ed34f22ebf433d83cd3571309b5cbc52c45d6d2
+
+#file bsfilter-1.0.16-lib.tar.gz
+#chk  c7fa5ec9c70c75b7b1bc852bac8eb0a5ec9e01ea
+
+#file bsfilter-1.0.16-src.tar.gz
+#chk  fe718884dd7ca0652613a2cb5c302ac6323605d8
+
+#
+# Enchant for Claws
+#
+
+server http://www.abisource.com/downloads/enchant/1.6.0
+
+# checked: 2014-06-20 ah
+file   enchant-1.6.0.tar.gz
+chk    321f9cf0abfa1937401676ce60976d8779c39536
+
+#
+# Claws
+#
+
+#
+# GLIB
+#
+# The GTK boyz seem to think that sha256sum files on the server
+# magically get them a lot of additional security karma.
+#
+#   And it's plain to see
+#   You were meant for me
+#   Yeah I'm your .sig
+#   Your 21th Century sig
+#   21th Century sig, I wanna be your file
+#
+server http://ftp.gnome.org/pub/gnome/sources/glib/2.45
+
+# checked: 2014-06-20 ah - updated
+# compared checksum with debian experimental version. Signed with key:
+# 3D0E FB95 E7B5 237F 16E8  2258 E352 D5C5 1C50 41D4
+file glib-2.45.2.tar.xz
+chk  495f7cc9281847ecfbbaf9d3edd9eb2a2123350e
+
+#
+# GDK-PIXBUF
+#
+server http://ftp.gnome.org/pub/gnome/sources/gdk-pixbuf/2.30/
+
+# checked: 2014-06-20 ah - updated
+# verified with linuxfromscratch and frugalware checksums
+file gdk-pixbuf-2.30.8.tar.xz
+chk  6277b4e5b5e334b3669f15ae0376e184be9e8cd8
+
+
+#
+# ATK
+#
+server http://ftp.gnome.org/pub/gnome/sources/atk/1.32
+
+# checked: 2013-04-29 wk (1.32.0 still the latest in 1.32)
+file atk-1.32.0.tar.bz2
+chk  876e88e4259d07bb7905d66c085a50a47e37f9e4
+
+server http://ftp.gnome.org/pub/gnome/binaries/win32/atk/1.32
+
+# checked: 2013-04-29 wk
+name atk-1.32.0.zip
+file atk_1.32.0-2_win32.zip
+chk  3c31c9d6b19af840e2bd8ccbfef4072a6548dc4e
+
+# checked: 2013-04-29 wk
+name atk-dev-1.32.0.zip
+file atk-dev_1.32.0-2_win32.zip
+chk  d0b8c53e01e4541d3d3befc82e41fb5b84949030
+
+#
+# PANGO
+#
+server http://ftp.gnome.org/pub/gnome/sources/pango/1.29
+
+# fixme: 2013-04-29 wk - There is a 1.29.5 but no 1.29.5 binaries
+#                        What shall we do:  Update to 1.32?  There are no
+#                        1.32 binaries either.
+file pango-1.29.4.tar.bz2
+chk  3b4dfe317b328061893cf0728afebe292bbcc05b
+
+server http://ftp.gnome.org/pub/gnome/binaries/win32/pango/1.29
+
+name pango-1.29.4.zip
+file pango_1.29.4-1_win32.zip
+chk  3959319bd04fbce513458857f334ada279b8cdd4
+
+name pango-dev-1.29.4.zip
+file pango-dev_1.29.4-1_win32.zip
+chk  49ae12458f2e29c27ed9d1390d95db18fd4a49ac
+
+#
+# CAIRO
+#
+server http://cairographics.org/releases
+
+# checked: 2013-04-29 wk - 1.10.2 is the latest in the 1.10 series.
+file cairo-1.10.2.tar.gz
+chk  ccce5ae03f99c505db97c286a0c9a90a926d3c6e
+
+server http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies
+# checked: 2013-07-16 ah most recent package on that server is from
+# 2012-09-27 TODO -> Move to another source / source build of those
+# dependencies
+
+# checked: 2013-04-29 wk
+name cairo-1.10.2.zip
+file cairo_1.10.2-2_win32.zip
+chk  d44cd66a9f4d7d29a8f2c28d1c1c5f9b0525ba44
+name cairo-dev-1.10.2.zip
+file cairo-dev_1.10.2-2_win32.zip
+chk  45cae1fac45a6c6f33498c37c0cdc47722614d92
+
+# checked: 2013-04-29 wk
+file freetype-2.4.2.tar.bz2
+chk  cc257ceda2950b8c80950d780ccf3ce665a815d1
+name freetype-2.4.2.zip
+file freetype_2.4.2-1_win32.zip
+chk  c20ab9ff053fe59f73612fd392f6e6dc01af614a
+name freetype-dev-2.4.2.zip
+file freetype-dev_2.4.2-1_win32.zip
+chk  00e877d7ec7c416e2b48a392324a5502019a20bf
+
+server http://www.fontconfig.org/release
+
+# checked: 2013-04-29 wk - 2.8.0 still the latest in 2.8
+file fontconfig-2.8.0.tar.gz
+chk  570fb55eb14f2c92a7b470b941e9d35dbfafa716
+
+server http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies
+
+# checked: 2013-04-29 wk
+name fontconfig-2.8.0.zip
+file fontconfig_2.8.0-2_win32.zip
+chk  37a3117ea6cc50c8a88fba9b6018f35a04fa71ce
+name fontconfig-dev-2.8.0.zip
+file fontconfig-dev_2.8.0-2_win32.zip
+chk  0b772aaeb0a7a0d5de21afd901d6cf00753efa51
+
+#
+# GTK+
+#
+server http://ftp.gnome.org/pub/gnome/sources/gtk+/2.24
+
+file gtk+-2.24.27.tar.xz
+chk  dae8cbb37f318c9e7a299d4a8dfccaf13edd8e27
+
+#
+# GIMP stuff for W32
+#
+server http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies
+
+# checked: 2012-03-28 wk - Not updated - not a security problem
+name pkgconfig-0.23.tar.gz
+file pkg-config-0.23.tar.gz
+chk  b59dddd6b5320bd74c0f74b3339618a327096b2a
+
+name pkgconfig-0.23.zip
+file pkg-config_0.23-3_win32.zip
+chk  d063e705812e1ee7feb8f35d51b3cad04ca13b0d
+
+
+# PNG
+
+# last changed: 2015-04-16
+# by: ah
+# verified: Sig 8048 643B A2C8 40F4 F92A  195F F549 84BF A16C 640F
+server ftp://ftp.simplesystems.org/pub/png/src/
+file libpng14/libpng-1.4.16.tar.xz
+chk  4492cfbe3617758678b178e5f521893611fa2d13
+
+#
+# LibFFI
+#
+server ftp://sourceware.org/pub/libffi
+
+# checked: 2013-04-29 wk - updated from 3.0.10.
+# checked: 2014-07-16 ah - only rc availble from 3.0.14
+file libffi-3.0.13.tar.gz
+chk  f5230890dc0be42fb5c58fbf793da253155de106
+
+
+#
+# Pth emulation
+#
+
+server ftp://ftp.g10code.com/g10code/w32pth
+
+# checked: 2014-07-16 ah
+file w32pth-2.0.5.tar.bz2
+chk  d648b98ce215f81e901f3f982470d37c704433a6
+
+#
+# Stripped down version of BZIP2
+# (full source at http://bzip.org)
+#
+server ftp://ftp.g10code.com/g10code/bzip2
+
+# checked: 2014-07-16 ah
+file bzip2-1.0.6-g10.tar.gz
+chk  6e38be3377340a21a1f13ff84b5e6adce97cd1d4
+
+#
+# GnuPG et al.
+#
+# All tarballs from this server are verified with an openpgp
+# signature made by "Werner Koch (dist sig)".
+# D869 2123 C406 5DEA 5E0F  3AB5 249B 39D2 4F25 E3B6
+server ftp://ftp.gnupg.org/gcrypt
+
+# checked: 2014-07-16 ah - updated
+file libgpg-error/libgpg-error-1.13.tar.bz2
+chk  50fbff11446a7b0decbf65a6e6b0eda17b5139fb
+
+# last changed: 2015-03-09
+# by: ah
+file libgcrypt/libgcrypt-1.6.3.tar.bz2
+chk  9456e7b64db9df8360a1407a38c8c958da80bbf1
+
+# checked: 2014-11-25 ah
+file libksba/libksba-1.3.2.tar.bz2
+chk  37d0893a587354af2b6e49f6ae701ca84f52da67
+
+# last changed: 2015-03-09
+# by: ah
+file libassuan/libassuan-2.2.0.tar.bz2
+chk  7cf0545955ce414044bb99b871d324753dd7b2e5
+
+# last changed: 2015-02-18
+# by: ah
+name gnupg2-2.0.27.tar.bz2
+file gnupg/gnupg-2.0.27.tar.bz2
+chk  d065be185f5bac8ea07b210ab7756e79b83b63d4
+
+# checked: 2014-07-16 ah
+file dirmngr/dirmngr-1.1.1.tar.bz2
+chk  e708d4aa5ce852f4de3f4b58f4e4f221f5e5c690
+
+# last changed: 2015-03-09
+# by: ah
+file pinentry/pinentry-0.9.0.tar.bz2
+chk  f8e5c774c35fbb91d84e82559baf76f6b4513236
+
+# checked: 2014-07-16 ah
+file scute/scute-1.4.0.tar.bz2
+chk  e28141d2b03612c09512651795976c58ed3f8035
+
+# last changed: 2015-04-16
+# by: ah
+file gpgme/gpgme-1.5.4.tar.bz2
+chk  8cf1bcce8603bd7d006065f08059cf85462828c4
+
+# last changed: 2015-03-09
+# by: ah
+file gpa/gpa-0.9.7.tar.bz2
+chk  9eb07bcceeb986c7b6dbce8a18b82a2c344b50ce
+
+# (Snapshots)
+# server ftp://ftp.g10code.com/g10code/scratch
+
+
+#
+#  GnuPG utilities
+#
+server http://www.jabberwocky.com/software/paperkey
+
+# checked: 2014-07-16 ah
+file paperkey-1.3.tar.gz
+chk  16af56d0e7bdf081d60c59ea4d72e7df6d9cec21
+
+#
+# adns
+#
+server ftp://ftp.g10code.com/g10code/adns
+
+# last changed: 2015-04-16
+# by: ah
+# verified: Sig D869 2123 C406 5DEA 5E0F  3AB5 249B 39D2 4F25 E3B6
+file adns-1.4-g10-6.tar.bz2
+chk  cc124d58828ab1d6fa7df49aaeb37985c5225de5

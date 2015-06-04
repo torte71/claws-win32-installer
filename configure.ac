@@ -1,0 +1,325 @@
+# configure.ac for GPG4Win
+# Copyright (C) 2005, 2006, 2007, 2008, 2010 g10 Code GmbH
+#
+# This file is part of GPG4Win
+#
+# GPG4Win is free software; you can redistribute it and/or modify it
+# under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# GPG4Win is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, see <http://www.gnu.org/licenses/>.
+
+# (Process this file with autoconf to produce a configure script.)
+
+AC_PREREQ(2.59)
+min_automake_version="1.9.3"
+
+# To build a release you need to create a tag with the version number
+# (git tag -s gpg4win-2.x.y) and run "./autogen.sh --force".  Please
+# bump the version number immediately after the release and do another
+# commit and push so that the git magic is able to work.
+#
+# After a release the make target "copy-news" is to be called as well!
+m4_define([my_version], [3.11.1-beta4])
+
+AC_INIT([claws-mail],
+				[my_version],[ticho@claws-mail.org])
+
+PACKAGE=$PACKAGE_NAME
+VERSION=$PACKAGE_VERSION
+GIT_REVISION=git_revision
+GIT_REVISION_DEC=git_revision_dec
+
+
+AC_CONFIG_SRCDIR(src/config.nsi.in)
+AC_CONFIG_MACRO_DIR(m4)
+
+AM_INIT_AUTOMAKE([tar-ustar])
+AM_MAINTAINER_MODE
+AC_CANONICAL_HOST
+AM_CONFIG_HEADER(config.h)
+
+# Language support
+AM_PO_SUBDIRS
+
+
+AC_SUBST(PACKAGE)
+AC_SUBST(VERSION)
+if echo "${PACKAGE_VERSION}" | egrep 'svn|rc|beta|git' >/dev/null ; then
+  IS_BETA_BUILD=yes
+else
+  IS_BETA_BUILD=no
+fi
+AC_SUBST(IS_BETA_BUILD)
+
+# Generate extended version information.  Note, that for NSIS use we
+# must not translate the dots to commas in the BUILD_FILEVERSION.
+BUILD_TIMESTAMP=`date --iso-8601=minutes`
+BUILD_ISODATE=`date --iso-8601`
+dnl changequote(,)dnl
+BUILD_FILEVERSION=`echo "$VERSION" | sed 's/-beta/./'`
+AC_SUBST(BUILD_TIMESTAMP)
+AC_SUBST(BUILD_ISODATE)
+AC_SUBST(BUILD_FILEVERSION)
+
+# For development of this package it is useful to build without
+# creating the source installer (takes a long time).  This option may
+# be used to suppress creation of the source installer.
+AC_ARG_ENABLE(source-installer,
+    AC_HELP_STRING([--disable-source-installer],
+                   [Do not create the Source installer]),
+                    build_source_installer=$enableval,
+                    build_source_installer=yes)
+AM_CONDITIONAL(BUILD_SOURCE_INSTALLER, test "$build_source_installer" = yes)
+
+
+AC_ARG_ENABLE(fast-makensis,
+    AC_HELP_STRING([--enable-fast-makensis],
+                   [Use a less efficient compressor to speed up building]),
+                    use_fast_makensis=$enableval,
+                    use_fast_makensis=no)
+if test "$use_fast_makensis" = yes; then
+  EXTRA_MAKENSIS_FLAGS="${EXTRA_MAKENSIS_FLAGS} -DDISABLE_LZMA=1"
+fi
+AC_SUBST(EXTRA_MAKENSIS_FLAGS)
+
+
+# Required tools.
+AC_PROG_CC
+AC_PROG_CPP
+AC_PROG_RANLIB
+AC_CHECK_TOOL(AR, ar, :)
+AC_CHECK_TOOLS(STRIP, strip)
+AC_CHECK_TOOLS(DLLTOOL, dlltool)
+AC_CHECK_PROGS(MAKE, make)
+AC_CHECK_PROGS(UNZIP, unzip)
+AC_CHECK_PROGS(TAR, tar)
+AC_CHECK_PROGS(MKDIR, mkdir)
+AC_CHECK_PROGS(CP, cp)
+AC_CHECK_PROGS(RM, rm)
+AC_CHECK_PROGS(STOW, stow)
+AC_CHECK_PROGS(MAKENSIS, makensis)
+AC_CHECK_PROGS(ZCAT, zcat)
+AC_CHECK_PROGS(TEXI2DVI, texi2dvi)
+AC_CHECK_PROGS(DVIPDF, dvipdf)
+AC_CHECK_PROGS(CONVERT, convert)
+AC_CHECK_PROGS(SHA1SUM, sha1sum)
+AC_CHECK_PROGS(MSGFMT, msgfmt)
+AC_CHECK_PROGS(BUILD_CC, gcc cc)
+AC_PROG_INSTALL
+
+missing_tools=
+for i in DLLTOOL MAKE UNZIP TAR MKDIR CP RM STOW MAKENSIS ZCAT TEXI2DVI \
+         DVIPDF CONVERT SHA1SUM MSGFMT BUILD_CC; do
+   eval tmp='$'$i
+   if test -z "$tmp"; then
+      missing_tools="$missing_tools `echo $i | tr 'A-Z' 'a-z'`"
+   fi
+done
+
+# This only works on Linux, obviously...
+if test -f /proc/cpuinfo; then
+	NUMPROC=`grep -c processor /proc/cpuinfo`
+else
+	NUMPROC=1
+fi
+AC_SUBST(NUMPROC)
+
+changequote(,)dnl
+gcc_major_minor=$($CC --version \
+									| awk 'NR==1 {split($NF,a,"."); print a[1] "." a[2]}')
+changequote([,])dnl
+
+missing_opt_tools=""
+
+libgcc_dll=no
+AC_ARG_WITH([libgcc_s_sjlj-1-dll],
+           AC_HELP_STRING([--with-libgcc_s_sjlj-1-dll=FILE],
+                          [use the libgcc_s_sjlj-1 DLL]),
+           [libgcc_dll=$withval])
+
+if test "$libgcc_dll" = "no"; then
+  file="/usr/lib/gcc/$host/${gcc_major_minor}-win32/libgcc_s_sjlj-1.dll"
+  if test -r "$file"; then
+    libgcc_dll="$file"
+  fi
+fi
+if test "$libgcc_dll" = "no"; then
+  missing_opt_tools="libgcc_s_sjlj-1.dll $missing_opt_tools"
+else
+  if test -r "$libgcc_dll"; then
+    cp $libgcc_dll src/libgcc_s_sjlj-1.dll-x
+  else
+    missing_opt_tools="libgcc_s_sjlj-1.dll $missing_opt_tools"
+  fi
+fi
+
+libstdcpp_dll=no
+AC_ARG_WITH([libstdc++-6-dll],
+           AC_HELP_STRING([--with-libstdc++-6-dll=FILE],
+                          [use the libstd++-6 DLL]),
+           [libstdcpp_dll=$withval])
+if test "$libstdcpp_dll" = "no"; then
+  file="/usr/lib/gcc/$host/${gcc_major_minor}-win32/libstdc++-6.dll"
+  if test -r "$file"; then
+    libstdcpp_dll="$file"
+  fi
+fi
+if test "$libstdcpp_dll" = "no"; then
+  missing_opt_tools="libstdc++-6.dll $missing_opt_tools"
+else
+  if test -r "$libstdcpp_dll"; then
+    cp $libstdcpp_dll src/libstdc++-6.dll-x
+  else
+    missing_opt_tools="libstdc++-6.dll $missing_opt_tools"
+ fi
+fi
+
+libwinpthread_dll=no
+AC_ARG_WITH([libwinpthread-1-dll],
+           AC_HELP_STRING([--with-libwinpthread-1-dll=FILE],
+                          [use the libwinpthread-1 DLL]),
+           [libwinpthread_dll=$withval])
+
+if test "$libwinpthread_dll" = "no"; then
+  file="/usr/$host/lib/libwinpthread-1.dll"
+  if test -r "$file"; then
+    libwinpthread_dll="$file"
+  fi
+fi
+if test "$libwinpthread_dll" = "no"; then
+  missing_opt_tools="libwinpthread-1.dll $missing_opt_tools"
+else
+  if test -r "$libwinpthread_dll"; then
+    cp $libwinpthread_dll src/libwinpthread-1.dll-x
+  else
+    missing_opt_tools="libwinpthread-1.dll $missing_opt_tools"
+  fi
+fi
+
+# For the manual we need:
+AC_CHECK_PROGS(DOCBOOK2HTML, docbook2html)
+AC_CHECK_PROGS(DOCBOOK2TXT, docbook2txt)
+AC_CHECK_PROGS(DOCBOOK2PS, docbook2ps)
+AC_CHECK_PROGS(DOCBOOK2PDF, docbook2pdf)
+
+
+# Optional tools.
+
+AC_CHECK_PROGS(WGET, wget)
+
+
+# Packages.
+gpg4win_dup_sources=""
+
+
+GPG4WIN_SPKG([zlib])
+
+GPG4WIN_BPKG_GTK([pkgconfig])
+
+GPG4WIN_SPKG([libffi], [pkgconfig])
+GPG4WIN_SPKG([glib], [libiconv gettext pkgconfig libffi zlib])
+GPG4WIN_SPKG([expat])
+GPG4WIN_BPKG_GTK_DEV([atk], [glib pkgconfig])
+GPG4WIN_BPKG_GTK_DEV([pango], [glib pkgconfig])
+GPG4WIN_BPKG_GTK_DEV([cairo], [glib pkgconfig])
+GPG4WIN_BPKG_GTK_DEV([freetype], [pkgconfig zlib])
+GPG4WIN_BPKG_GTK_DEV([fontconfig], [pkgconfig zlib expat])
+GPG4WIN_SPKG([gdk-pixbuf], [glib])
+GPG4WIN_SPKG([gtk+], [libiconv gettext pkgconfig atk pango dnl
+                      glib gdk-pixbuf cairo])
+GPG4WIN_SPKG([libpng], [pkgconfig])
+GPG4WIN_SPKG([enchant], [pkgconfig glib])
+
+GPG4WIN_SPKG([bzip2])
+GPG4WIN_SPKG([adns])
+GPG4WIN_SPKG([libgpg-error], [libiconv gettext])
+GPG4WIN_SPKG([libgcrypt], [libgpg-error])
+GPG4WIN_SPKG([libksba], [libgpg-error])
+GPG4WIN_SPKG([libassuan], [libgpg-error w32pth])
+GPG4WIN_SPKG([dirmngr], [libgpg-error libgcrypt libassuan libksba w32pth])
+GPG4WIN_SPKG([pinentry], [libiconv gtk+])
+GPG4WIN_SPKG([gpgme], [libgpg-error gnupg2 glib])
+GPG4WIN_SPKG([curl], [zlib gnutls])
+GPG4WIN_SPKG([gnupg2], [libiconv libgcrypt libksba libassuan libgpg-error dnl
+                        w32pth zlib bzip2 adns pinentry])
+#GPG4WIN_SPKG([scute], [libgpg-error libassuan])
+#GPG4WIN_SPKG([paperkey])
+GPG4WIN_SPKG([gpa], [libiconv gettext zlib gtk+ libpng glib gpgme])
+GPG4WIN_SPKG([libgsasl])
+GPG4WIN_SPKG([libtasn1])
+GPG4WIN_SPKG([gnutls], [libgsasl libtasn1 libgcrypt])
+GPG4WIN_SPKG([libxml2], [zlib])
+GPG4WIN_SPKG([regex])
+GPG4WIN_SPKG([crypt])
+GPG4WIN_SPKG([libetpan], [gnutls])
+GPG4WIN_SPKG([claws-mail], [libiconv gettext zlib gtk+ libpng enchant glib dnl
+                            gpgme crypt regex libetpan gnutls dnl
+                            libxml2 expat])
+GPG4WIN_SPKG([w32pth])
+GPG4WIN_SPKG([libiconv])
+GPG4WIN_SPKG([gettext], [libiconv])
+
+
+GPG4WIN_FINALIZE
+
+# Throw an error if required tools are missing
+if test -n "$missing_tools"; then
+    for i in $missing_tools; do
+      AC_MSG_NOTICE([$i is missing])
+    done
+    AC_MSG_ERROR([[
+***
+*** Required tools not found. Please consult the above messages
+*** and install them before running configure again.
+***]])
+fi
+
+# Throw an error if any duplicate source packages have been found
+if test -n "$gpg4win_dup_sources"; then
+    tmp=
+    for i in $gpg4win_dup_sources; do
+      tmp="$tmp
+$i"
+    done
+    AC_MSG_ERROR([Packages with more that one source version:$tmp])
+fi
+
+
+# Finalize.
+
+AC_CONFIG_FILES(Makefile)
+AC_CONFIG_FILES(packages/Makefile src/Makefile po/Makefile.in)
+AC_CONFIG_FILES(po/build-cc)
+AC_CONFIG_FILES(src/config.nsi src/gpg4win.mk)
+AC_CONFIG_FILES(doc/Makefile)
+AC_CONFIG_FILES(doc/logo/Makefile)
+AC_CONFIG_FILES(src/dictionaries/Makefile)
+AC_OUTPUT
+
+# Throw a warning if optional tools are missing
+if test -n "$missing_opt_tools"; then
+    AC_MSG_WARN([[
+***
+*** Some tools not found.  They may or may not be needed depending on
+*** the packages you want to include.  For example GLIB and GTK+
+*** require certain tools; you may need to install a recent version of
+*** GLIB and GTK+ on the build machine to allow for cross-compiling.
+***]])
+    for i in $missing_opt_tools; do
+      AC_MSG_NOTICE([$i is missing])
+    done
+fi
+
+echo "
+        $PACKAGE_NAME-$PACKAGE_VERSION prepared for make
+
+        Platform: $host
+"
