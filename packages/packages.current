@@ -63,7 +63,7 @@ chk 3c0ba2153560abfb08d88dcb016cd6b72e465db5
 #
 
 # (Kept on our own mirror due to Sourceforge/github peculiarities.)
-server http://ticho.kacian.sk/~ticho/
+server http://www.claws-mail.org/win32/
 
 file   libetpan-1.6.tar.gz
 chk    54d0c6d612e3981cc71e52e3c9e04d5805d9917f
