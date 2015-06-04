@@ -24,9 +24,8 @@ SUBDIRS = doc packages po src
 
 # find patches -type f | sort | sed 's/$/ \\/' | sed 's/^/             /'
 
-EXTRA_DIST = autogen.sh README.GIT ONEWS \
+EXTRA_DIST = autogen.sh \
         doc/license-page doc/GPLv3 \
-        build-aux/git-log-footer build-aux/git-log-fix \
 				patches/claws-mail-3.11.1/01-mingw.patch \
 				patches/claws-mail-3.11.1/02-ldap-opt.patch \
 				patches/claws-mail-3.11.1/03-rssyl.patch \
