@@ -44,7 +44,7 @@ src/gpg4win.mk
 /src/sha1sum.exe
 /src/sha256sum.exe
 /src/versioninfo.txt
-/src/gpg4win-*.exe
+/src/claws-mail-*.exe
 /src/HOWTO-SMIME.de.txt
 /src/HOWTO-SMIME.en.txt
 /src/COMPONENTS-list.tmp
