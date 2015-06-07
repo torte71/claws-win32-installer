@@ -53,6 +53,7 @@ const char * const full_files[] =
   "lib/claws-mail/plugins/att_remover.dll",
   "lib/claws-mail/plugins/bsfilter.dll",
   "lib/claws-mail/plugins/fetchinfo.dll",
+  "lib/claws-mail/plugins/libravatar.dll",
   "lib/claws-mail/plugins/notification.dll",
   "lib/claws-mail/plugins/pgpcore.dll",
   "lib/claws-mail/plugins/pgpinline.deps",
