@@ -37,7 +37,7 @@ Section "-gpg4win" SEC_gpg4win
   DetailPrint "VERSION closed"
 
   # Register the install directory for the GnuPG suite.
-  WriteRegStr HKLM "Software\GNU\GnuPG" "Install Directory" $INSTDIR
+  WriteRegStr HKLM "Software\GNU\Claws Mail" "Install Directory" $INSTDIR
   DetailPrint "Saved install directory in the registry"
 
   # Also write it to be recalled on new installation.  Currently
@@ -48,7 +48,7 @@ Section "-gpg4win" SEC_gpg4win
   # Although we don't want to delete the user's Lang Registry Setting
   # because he might have have selected a different language than his
   # default.  We delete the global Lang of the installation.
-  DeleteRegValue HKLM "Software\GNU\GnuPG" "Lang"
+  DeleteRegValue HKLM "Software\GNU\Claws Mail" "Lang"
   DetailPrint "Deleted obsolete Lang entry"
 
   # This old key is required for GPGee.  Please do not use in new
@@ -58,8 +58,8 @@ Section "-gpg4win" SEC_gpg4win
   #       To cope with old installations we actually remove this value.
   #       However we can only remove the HKLM version not those set by
   #       the user under HKCU.
-  #WriteRegStr HKLM "Software\GNU\GnuPG" "gpgProgram" "$INSTDIR\gpg.exe"
-  DeleteRegValue HKLM "Software\GNU\GnuPG" "gpgProgram"
+  #WriteRegStr HKLM "Software\GNU\Claws Mail" "gpgProgram" "$INSTDIR\gpg.exe"
+  DeleteRegValue HKLM "Software\GNU\Claws Mail" "gpgProgram"
   DetailPrint "Deleted obsolete gpgProgram value"
 
   # Add the public directory to the PATH
@@ -85,12 +85,3 @@ Section "-gpg4win" SEC_gpg4win
 !endif
 
 SectionEnd
-
-LangString DESC_Menu_gpg4win_readme ${LANG_ENGLISH} \
-   "General information on Gpg4win"
-
-LangString DESC_Menu_gpg4win_howtosmime ${LANG_ENGLISH} \
-   "Instruction to configure S/MIME"
-
-LangString DESC_Menu_gnupg_faq ${LANG_ENGLISH} \
-   "Show the Frequently Asked Questions document for GnuPG"

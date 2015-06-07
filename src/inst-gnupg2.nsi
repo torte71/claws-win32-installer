@@ -27,7 +27,6 @@
 
 
 ${MementoSection} "GnuPG" SEC_gnupg2
-  SectionIn RO
 
   SetOutPath "$INSTDIR"
 !ifdef SOURCES

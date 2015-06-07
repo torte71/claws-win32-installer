@@ -26,12 +26,8 @@
 LangString T_SetDefaultClient ${LANG_ENGLISH} \
      "Do you want to make Claws Mail your default mail client?"
 
-
-!ifdef GPG4WIN_LIGHT
-  ${MementoSection} "Claws-Mail" SEC_claws_mail
-!else
-  ${MementoUnselectedSection} "Claws-Mail" SEC_claws_mail
-!endif
+${MementoSection} "Claws-Mail" SEC_claws_mail
+	SectionIn RO
 
   SetOutPath "$INSTDIR"
 !ifdef SOURCES
@@ -39,11 +35,7 @@ LangString T_SetDefaultClient ${LANG_ENGLISH} \
 !else
   File ${prefix}/bin/claws-mail.exe
 
-!ifndef GPG4WIN_LIGHT
-!ifndef GPG4WIN_VANILLA
   File ${prefix}/share/doc/claws-mail/manual/en/claws-mail-manual.pdf
-!endif
-!endif
 
   SetOutPath "$INSTDIR\share\claws-mail"
   File ${prefix}/share/claws-mail/ca-certificates.crt

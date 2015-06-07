@@ -72,8 +72,8 @@ Section Uninstall
   StrCmp $R0 "" +2
   StrCpy $MYTMP $R0
   Delete "$SMPROGRAMS\$MYTMP\*.lnk"
-  Delete "$SMPROGRAMS\$MYTMP\$(DESC_Menu_manuals)\*"
-  RMDir "$SMPROGRAMS\$MYTMP\$(DESC_Menu_manuals)"
+	Delete "$SMPROGRAMS\$MYTMP\$(DESC_Menu_manuals)\*"
+	RMDir "$SMPROGRAMS\$MYTMP\$(DESC_Menu_manuals)"
 
   RMDir "$SMPROGRAMS\$MYTMP\$(DESC_Desktop_manuals)"
   StrCpy $MYTMP "$SMPROGRAMS\$MYTMP"

@@ -139,7 +139,7 @@ Var OtherGnuPGDetected
 !insertmacro MUI_PAGE_LICENSE "license.blurb"
 
 !define MUI_PAGE_CUSTOMFUNCTION_SHOW PrintNonAdminWarning
-!insertmacro MUI_PAGE_COMPONENTS
+#!insertmacro MUI_PAGE_COMPONENTS
 
 !define MUI_PAGE_CUSTOMFUNCTION_LEAVE CheckExistingVersion
 !insertmacro MUI_PAGE_DIRECTORY
@@ -165,8 +165,6 @@ Var STARTMENU_FOLDER
 !define MUI_PAGE_CUSTOMFUNCTION_PRE ShowFinalWarnings
 
 # Finish page
-!define MUI_FINISHPAGE_SHOWREADME "share\gpg4win\README.$(T_LangCode).txt"
-!define MUI_FINISHPAGE_SHOWREADME_TEXT "$(T_ShowReadme)"
 #!define MUI_FINISHPAGE_RUN
 #!define MUI_FINISHPAGE_RUN_FUNCTION RunOnFinish
 #!define MUI_FINISHPAGE_RUN_TEXT "$(T_RunKeyManager)"
@@ -216,7 +214,7 @@ ReserveFile "${TOP_SRCDIR}\src\gpg4win-splash.wav"
 !endif
 ReserveFile "${TOP_SRCDIR}\COPYING"
 ReserveFile "installer-options.ini"
-ReserveFile "${TOP_SRCDIR}\doc\logo\gpg4win-logo-164x314.bmp"
+ReserveFile "${TOP_SRCDIR}\doc\logo\claws-mail-nsis-wizard-install-164x314.bmp"
 
 # Language support
 
@@ -238,9 +236,6 @@ LangString T_RunKeyManager ${LANG_ENGLISH} \
 LangString T_MoreInfo ${LANG_ENGLISH} \
    "Click here for the project's homepage"
 LangString T_MoreInfoURL ${LANG_ENGLISH} "${WEBSITE}"
-
-LangString T_ShowReadme ${LANG_ENGLISH} \
-   "Show the README file"
 
 LangString T_NoKeyManager ${LANG_ENGLISH} \
    "No key manager has been installed, thus we can't run one now."

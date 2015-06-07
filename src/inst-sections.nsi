@@ -125,50 +125,50 @@
 !ifdef HAVE_PKG_PINENTRY
 !include "inst-pinentry.nsi"
 !endif
-!ifdef HAVE_PKG_GNUPG2
-!include "inst-gnupg2.nsi"
-!endif
 !ifdef HAVE_PKG_GPGME
 !include "inst-gpgme.nsi"
 !endif
 
 # These are displayed in the selection dialog.
 
-!ifdef HAVE_PKG_GPA
-!include "inst-gpa.nsi"
-!endif
 !ifdef HAVE_PKG_CLAWS_MAIL
 !include "inst-claws-mail.nsi"
+!endif
+!ifdef HAVE_PKG_GNUPG2
+!include "inst-gnupg2.nsi"
+!endif
+!ifdef HAVE_PKG_GPA
+!include "inst-gpa.nsi"
 !endif
 
 !include "inst-final.nsi"
 
 # We have to invoke the uninstallers in reverse order!
 
-!ifdef HAVE_PKG_CLAWS_MAIL
-!include "uninst-claws-mail.nsi"
-!endif
 !ifdef HAVE_PKG_GPA
 !include "uninst-gpa.nsi"
+!endif
+!ifdef HAVE_PKG_GNUPG2
+!include "uninst-gnupg2.nsi"
+!endif
+!ifdef HAVE_PKG_CLAWS_MAIL
+!include "uninst-claws-mail.nsi"
 !endif
 
 !ifdef HAVE_PKG_GPGME
 !include "uninst-gpgme.nsi"
 !endif
-!ifdef HAVE_PKG_GNUPG2
-!include "uninst-gnupg2.nsi"
-!endif
 !ifdef HAVE_PKG_PINENTRY
 !include "uninst-pinentry.nsi"
 !endif
-!ifdef HAVE_PKG_GNUTLS
-!include "uninst-gnutls.nsi"
+!ifdef HAVE_PKG_LIBXML2
+!include "uninst-libxml2.nsi"
 !endif
 !ifdef HAVE_PKG_CURL
 !include "uninst-curl.nsi"
 !endif
-!ifdef HAVE_PKG_LIBXML2
-!include "uninst-libxml2.nsi"
+!ifdef HAVE_PKG_GNUTLS
+!include "uninst-gnutls.nsi"
 !endif
 !ifdef HAVE_PKG_GTK_
 !include "uninst-gtk+.nsi"
@@ -288,28 +288,6 @@ StrCmp $R0 "" +2
 
 
 
-!ifdef HAVE_PKG_GPGOL
-  g4wihelp::config_fetch_bool "inst_gpgol"
-  StrCmp $R0 "1" 0 calc_defaults_gpgol_not_one
-   !insertmacro SelectSection ${SEC_gpgol}
-   Goto calc_defaults_gpgol_done
-  calc_defaults_gpgol_not_one:
-  StrCmp $R0 "0" 0 calc_defaults_gpgol_done
-   !insertmacro UnselectSection ${SEC_gpgol}
-calc_defaults_gpgol_done:
-!endif
-
-!ifdef HAVE_PKG_GPGEX
-  g4wihelp::config_fetch_bool "inst_gpgex"
-  StrCmp $R0 "1" 0 calc_defaults_gpgex_not_one
-   !insertmacro SelectSection ${SEC_gpgex}
-   Goto calc_defaults_gpgex_done
-  calc_defaults_gpgex_not_one:
-  StrCmp $R0 "0" 0 calc_defaults_gpgex_done
-   !insertmacro UnselectSection ${SEC_gpgex}
-calc_defaults_gpgex_done:
-!endif
-
 !ifdef HAVE_PKG_GPA
   g4wihelp::config_fetch_bool "inst_gpa"
   StrCmp $R0 "1" 0 calc_defaults_gpa_not_one
@@ -330,50 +308,6 @@ calc_defaults_gpa_done:
   StrCmp $R0 "0" 0 calc_defaults_claws_mail_done
    !insertmacro UnselectSection ${SEC_claws_mail}
 calc_defaults_claws_mail_done:
-!endif
-
-!ifdef HAVE_PKG_MAN_NOVICE_DE
-  g4wihelp::config_fetch_bool "inst_man_novice_de"
-  StrCmp $R0 "1" 0 calc_defaults_man_novice_de_not_one
-   !insertmacro SelectSection ${SEC_man_novice_de}
-   Goto calc_defaults_man_novice_de_done
-  calc_defaults_man_novice_de_not_one:
-  StrCmp $R0 "0" 0 calc_defaults_man_novice_de_done
-   !insertmacro UnselectSection ${SEC_man_novice_de}
-calc_defaults_man_novice_de_done:
-!endif
-
-!ifdef HAVE_PKG_MAN_NOVICE_EN
-  g4wihelp::config_fetch_bool "inst_man_novice_en"
-  StrCmp $R0 "1" 0 calc_defaults_man_novice_en_not_one
-   !insertmacro SelectSection ${SEC_man_novice_en}
-   Goto calc_defaults_man_novice_en_done
-  calc_defaults_man_novice_en_not_one:
-  StrCmp $R0 "0" 0 calc_defaults_man_novice_en_done
-   !insertmacro UnselectSection ${SEC_man_novice_en}
-calc_defaults_man_novice_en_done:
-!endif
-
-!ifdef HAVE_PKG_MAN_ADVANCED_DE
-  g4wihelp::config_fetch_bool "inst_man_advanced_de"
-  StrCmp $R0 "1" 0 calc_defaults_man_advanced_de_not_one
-   !insertmacro SelectSection ${SEC_man_advanced_de}
-   Goto calc_defaults_man_advanced_de_done
-  calc_defaults_man_advanced_de_not_one:
-  StrCmp $R0 "0" 0 calc_defaults_man_advanced_de_done
-   !insertmacro UnselectSection ${SEC_man_advanced_de}
-calc_defaults_man_advanced_de_done:
-!endif
-
-!ifdef HAVE_PKG_MAN_ADVANCED_EN
-  g4wihelp::config_fetch_bool "inst_man_advanced_en"
-  StrCmp $R0 "1" 0 calc_defaults_man_advanced_en_not_one
-   !insertmacro SelectSection ${SEC_man_advanced_en}
-   Goto calc_defaults_man_advanced_en_done
-  calc_defaults_man_advanced_en_not_one:
-  StrCmp $R0 "0" 0 calc_defaults_man_advanced_en_done
-   !insertmacro UnselectSection ${SEC_man_advanced_en}
-calc_defaults_man_advanced_en_done:
 !endif
 
 FunctionEnd
@@ -483,7 +417,9 @@ Function CalcDepends
   # these packages in the RO section and enabling them by default, but
   # it doesn't harm to add it explicitely here as well.
 
+  !insertmacro SelectSection ${SEC_claws_mail}
   !insertmacro SelectSection ${SEC_gnupg2}
+  !insertmacro SelectSection ${SEC_gpa}
 
   # Then enable all dependencies, mostly in reverse build list order!
   # An exception are the claws plugins, which are build after claws,
@@ -804,21 +740,6 @@ Function .onSelChange
 FunctionEnd
 
 
-# Note used anymore:
-# This function is run from the finish page.
-#Function RunOnFinish
-#!ifdef HAVE_PKG_GPA
-#    SectionGetFlags ${SEC_gpa} $R0
-#    IntOp $R0 $R0 & ${SF_SELECTED}
-#    IntCmp $R0 ${SF_SELECTED} 0 no_gpa_avail
-#       Exec "$INSTDIR\gpa.exe"
-#       Return
-#   no_gpa_avail:
-#!endif
-#  MessageBox MB_OK "$(T_NoKeyManager)"
-#FunctionEnd
-
-
 # This must be in a central place.  Urgs.
 
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
@@ -830,18 +751,6 @@ FunctionEnd
 !endif
 !ifdef HAVE_PKG_CLAWS_MAIL
   !insertmacro MUI_DESCRIPTION_TEXT ${SEC_claws_mail} $(DESC_SEC_claws_mail)
-!endif
-!ifdef HAVE_PKG_MAN_NOVICE_EN
-  !insertmacro MUI_DESCRIPTION_TEXT ${SEC_man_novice_en} $(DESC_SEC_man_novice_en)
-!endif
-!ifdef HAVE_PKG_MAN_ADVANCED_EN
-  !insertmacro MUI_DESCRIPTION_TEXT ${SEC_man_advanced_en} $(DESC_SEC_man_advanced_en)
-!endif
-!ifdef HAVE_PKG_MAN_NOVICE_DE
-  !insertmacro MUI_DESCRIPTION_TEXT ${SEC_man_novice_de} $(DESC_SEC_man_novice_de)
-!endif
-!ifdef HAVE_PKG_MAN_ADVANCED_DE
-  !insertmacro MUI_DESCRIPTION_TEXT ${SEC_man_advanced_de} $(DESC_SEC_man_advanced_de)
 !endif
 !insertmacro MUI_FUNCTION_DESCRIPTION_END
 
@@ -888,36 +797,12 @@ Section "-startmenu"
     CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Claws-Mail.lnk" \
 	"$INSTDIR\claws-mail.exe" \
         "" "" "" SW_SHOWNORMAL "" $(DESC_Menu_claws_mail)
-!ifndef GPG4WIN_LIGHT
-!ifndef GPG4WIN_VANILLA
     CreateShortCut \
         "$SMPROGRAMS\$STARTMENU_FOLDER\$(DESC_Menu_manuals)\Claws-Mail Manual.lnk" \
 	"$INSTDIR\claws-mail-manual.pdf" \
 	"" "" "" SW_SHOWNORMAL "" $(DESC_Menu_claws_mail_pdf)
-!endif
-!endif
   no_claws_mail_menu:
 !endif
-
- StrCmp $LANGUAGE ${LANG_GERMAN} 0 +3
-    # German
-    CreateShortCut \
-      "$SMPROGRAMS\$STARTMENU_FOLDER\$(DESC_Menu_manuals)\Gpg4win HOWTO SMIME.lnk" \
-      "$INSTDIR\share\gpg4win\HOWTO-SMIME.de.txt" \
-      "" "" "" SW_SHOWNORMAL "" $(DESC_Menu_gpg4win_howtosmime)
-    Goto leaveHowtosmimeStartmenu
-    # English
-    CreateShortCut \
-      "$SMPROGRAMS\$STARTMENU_FOLDER\$(DESC_Menu_manuals)\Gpg4win HOWTO SMIME.lnk" \
-      "$INSTDIR\share\gpg4win\HOWTO-SMIME.en.txt" \
-      "" "" "" SW_SHOWNORMAL "" $(DESC_Menu_gpg4win_howtosmime)
-    leaveHowtosmimeStartmenu:
-
-    CreateShortCut \
-      "$SMPROGRAMS\$STARTMENU_FOLDER\$(DESC_Menu_manuals)\Gpg4win README.lnk" \
-      "$INSTDIR\share\gpg4win\README.$(T_LangCode).txt" \
-      "" "" "" SW_SHOWNORMAL "" $(DESC_Menu_gpg4win_readme)
-
 
 # No more uninstall link because Windows has its own feature to call
 #  the uninstaller.
@@ -945,9 +830,6 @@ Section "-startmenu"
   Delete "$DESKTOP\$(DESC_Desktop_manuals)\Claws-Mail Manual.lnk"
   Delete "$DESKTOP\$(DESC_Desktop_manuals)\GPGee Manual.lnk"
   Delete "$DESKTOP\$(DESC_Desktop_manuals)\GnuPG FAQ.lnk"
-  Delete "$DESKTOP\$(DESC_Desktop_manuals)\Gpg4Win README.lnk"
-  Delete "$DESKTOP\$(DESC_Desktop_manuals)\Gpg4win README.lnk"
-  Delete "$DESKTOP\$(DESC_Desktop_manuals)\Gpg4win HOWTO SMIME.lnk"
 
   CreateDirectory "$DESKTOP\$(DESC_Desktop_manuals)"
 
@@ -974,25 +856,6 @@ Section "-startmenu"
 	"" "" "" SW_SHOWNORMAL "" $(DESC_Menu_claws_mail_pdf)
   no_claws_mail_desktop:
 !endif
-
-    CreateShortCut \
-      "$DESKTOP\$(DESC_Desktop_manuals)\Gpg4win README.lnk" \
-      "$INSTDIR\share\gpg4win\README.$(T_LangCode).txt" \
-      "" "" "" SW_SHOWNORMAL "" $(DESC_Menu_gpg4win_readme)
-
- StrCmp $LANGUAGE ${LANG_GERMAN} 0 +3
-    # German
-    CreateShortCut \
-      "$DESKTOP\$(DESC_Desktop_manuals)\Gpg4win HOWTO SMIME.lnk" \
-      "$INSTDIR\share\gpg4win\HOWTO-SMIME.de.txt" \
-      "" "" "" SW_SHOWNORMAL "" $(DESC_Menu_gpg4win_howtosmime)
-    Goto leaveHowtosmimeDesktop
-    # English
-    CreateShortCut \
-      "$DESKTOP\$(DESC_Desktop_manuals)\Gpg4win HOWTO SMIME.lnk" \
-      "$INSTDIR\share\gpg4win\HOWTO-SMIME.en.txt" \
-      "" "" "" SW_SHOWNORMAL "" $(DESC_Menu_gpg4win_howtosmime)
-    leaveHowtosmimeDesktop:
 
 no_desktop:
 
