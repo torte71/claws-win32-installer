@@ -33,6 +33,7 @@ EXTRA_DIST = autogen.sh \
 				patches/claws-mail-3.11.1/05-ldflags.patch \
 				patches/claws-mail-3.11.1/06-pthread.patch \
 				patches/claws-mail-3.11.1/07-g_stat.patch \
+				patches/claws-mail-3.11.1/08-libravatar-prefs_common.patch \
         patches/dirmngr-1.1.1/dirmngr-pth.patch \
         patches/glib-2.41.0/01-socket.patch \
         patches/glib-2.41.0/03-remove-rand_s.patch \
