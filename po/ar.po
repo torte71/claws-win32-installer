@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Gpg4Win\n"
 "Report-Msgid-Bugs-To: ticho@claws-mail.org\n"
-"POT-Creation-Date: 2015-06-07 21:53+0200\n"
+"POT-Creation-Date: 2015-06-08 11:10+0200\n"
 "PO-Revision-Date: 2008-03-11 23:52+0200\n"
 "Last-Translator: Ahmad Gharbeia <ahmad@gharbeia.org>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
@@ -115,10 +115,6 @@ msgstr "ÇäŞÑ åäÇ áÊÒæÑ ÕİÍÉ ÇáãÔÑæÚ"
 msgctxt "T_MoreInfoURL"
 msgid "${WEBSITE}"
 msgstr ""
-
-msgctxt "T_ShowReadme"
-msgid "Show the README file"
-msgstr "ØÇáÚ ãáİ README"
 
 msgctxt "T_NoKeyManager"
 msgid "No key manager has been installed, thus we can't run one now."
@@ -312,19 +308,19 @@ msgctxt "DESC_Menu_gpa"
 msgid "Run the GNU Privacy Assistant key management tool."
 msgstr "ÔÛá ÃÏÇÉ ÅÏÇÑÉ ÇáãİÇÊíÍ ßáíæÈÇÊÑÇ."
 
-#, fuzzy
-msgctxt "DESC_Menu_gpg4win_readme"
-msgid "General information on Gpg4win"
-msgstr "ãÚáæãÇÊ ÚÇãÉ Úä Gpg4Win"
-
-msgctxt "DESC_Menu_gpg4win_howtosmime"
-msgid "Instruction to configure S/MIME"
-msgstr ""
+#~ msgctxt "T_ShowReadme"
+#~ msgid "Show the README file"
+#~ msgstr "ØÇáÚ ãáİ README"
 
 #, fuzzy
-msgctxt "DESC_Menu_gnupg_faq"
-msgid "Show the Frequently Asked Questions document for GnuPG"
-msgstr "ØÇáÚ ÇáÃÓÆáÉ ÇáÔÇÆÚÉ Íæá GnuPG"
+#~ msgctxt "DESC_Menu_gpg4win_readme"
+#~ msgid "General information on Gpg4win"
+#~ msgstr "ãÚáæãÇÊ ÚÇãÉ Úä Gpg4Win"
+
+#, fuzzy
+#~ msgctxt "DESC_Menu_gnupg_faq"
+#~ msgid "Show the Frequently Asked Questions document for GnuPG"
+#~ msgstr "ØÇáÚ ÇáÃÓÆáÉ ÇáÔÇÆÚÉ Íæá GnuPG"
 
 #~ msgctxt "T_AboutGpg4winSrcVersion"
 #~ msgid "This is Gpg4win version ${VERSION}"

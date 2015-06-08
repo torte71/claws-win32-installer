@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: ticho@claws-mail.org\n"
-"POT-Creation-Date: 2015-06-07 21:53+0200\n"
+"POT-Creation-Date: 2015-06-08 11:10+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -84,19 +84,19 @@ msgctxt "T_AboutGpg4winSrcReleaseDate"
 msgid "release date ${_BUILD_ISODATE}"
 msgstr ""
 
-#: src/installer.nsi:223
+#: src/installer.nsi:221
 msgctxt "T_LangCode"
 msgid "en"
 msgstr ""
 
-#: src/installer.nsi:226
+#: src/installer.nsi:224
 msgctxt "T_GPLHeader"
 msgid ""
 "This software is licensed under the terms of the GNU General Public License "
 "(GPL)."
 msgstr ""
 
-#: src/installer.nsi:230
+#: src/installer.nsi:228
 msgctxt "T_GPLShort"
 msgid ""
 "In short: You are allowed to run this software for any purpose. You may "
@@ -104,89 +104,84 @@ msgid ""
 "received."
 msgstr ""
 
-#: src/installer.nsi:235
+#: src/installer.nsi:233
 msgctxt "T_RunKeyManager"
 msgid "Run the key manager"
 msgstr ""
 
-#: src/installer.nsi:238
+#: src/installer.nsi:236
 msgctxt "T_MoreInfo"
 msgid "Click here for the project's homepage"
 msgstr ""
 
-#: src/installer.nsi:240
+#: src/installer.nsi:238
 msgctxt "T_MoreInfoURL"
 msgid "${WEBSITE}"
 msgstr ""
 
-#: src/installer.nsi:242
-msgctxt "T_ShowReadme"
-msgid "Show the README file"
-msgstr ""
-
-#: src/installer.nsi:245
+#: src/installer.nsi:240
 msgctxt "T_NoKeyManager"
 msgid "No key manager has been installed, thus we can't run one now."
 msgstr ""
 
-#: src/installer.nsi:250
+#: src/installer.nsi:245
 msgctxt "DESC_Menu_manuals"
 msgid "Documentation"
 msgstr ""
 
-#: src/installer.nsi:253
+#: src/installer.nsi:248
 msgctxt "DESC_Menu_uninstall"
 msgid "Uninstall"
 msgstr ""
 
-#: src/installer.nsi:257
+#: src/installer.nsi:252
 msgctxt "DESC_Desktop_manuals"
 msgid "Gpg4win Documentation"
 msgstr ""
 
-#: src/installer.nsi:453
+#: src/installer.nsi:448
 msgctxt "T_InstallOptions"
 msgid "Install Options"
 msgstr ""
 
-#: src/installer.nsi:456
+#: src/installer.nsi:451
 msgctxt "T_InstallOptLinks"
 msgid "Start links"
 msgstr ""
 
-#: src/installer.nsi:458
+#: src/installer.nsi:453
 msgctxt "T_InstOptLabelA"
 msgid "Please select where Claws Mail shall install links:"
 msgstr ""
 
-#: src/installer.nsi:461
+#: src/installer.nsi:456
 msgctxt "T_InstOptLabelB"
 msgid "(Only programs will be linked into the quick launch bar.)"
 msgstr ""
 
-#: src/installer.nsi:464
+#: src/installer.nsi:459
 msgctxt "T_InstOptFieldA"
 msgid "Start Menu"
 msgstr ""
 
-#: src/installer.nsi:467
+#: src/installer.nsi:462
 msgctxt "T_InstOptFieldB"
 msgid "Desktop"
 msgstr ""
 
-#: src/installer.nsi:470
+#: src/installer.nsi:465
 msgctxt "T_InstOptFieldC"
 msgid "Quick Launch Bar"
 msgstr ""
 
-#: src/installer.nsi:476
+#: src/installer.nsi:471
 msgctxt "T_FoundExistingVersion"
 msgid ""
 "Version $R1 has already been installed.\n"
 "Do you want to overwrite it with version ${VERSION}?"
 msgstr ""
 
-#: src/installer.nsi:479
+#: src/installer.nsi:474
 msgctxt "T_FoundExistingOldVersion"
 msgid ""
 "An old version $R1 has already been installed.  It is strongly recommended "
@@ -194,7 +189,7 @@ msgid ""
 "Do you want to continue installing Claws Mail ${VERSION} anyway?"
 msgstr ""
 
-#: src/installer.nsi:484
+#: src/installer.nsi:479
 msgctxt "T_FoundExistingVersionB"
 msgid ""
 "A version of Claws Mail has already been installed on the system. There will "
@@ -203,14 +198,14 @@ msgid ""
 "Do you want to continue installing Claws Mail?"
 msgstr ""
 
-#: src/installer.nsi:495
+#: src/installer.nsi:490
 msgctxt "T_FoundOldSeeManual"
 msgid ""
 "Please see the Claws Mail user manual to learn how to migrate existing keys "
 "from other GnuPG based installations."
 msgstr ""
 
-#: src/installer.nsi:500
+#: src/installer.nsi:495
 msgctxt "T_FoundOldGnuPP"
 msgid ""
 "An old installation of GnuPP (GNU Privacy Project) has been been detected.  "
@@ -220,7 +215,7 @@ msgid ""
 "installation later?"
 msgstr ""
 
-#: src/installer.nsi:509
+#: src/installer.nsi:504
 msgctxt "T_FoundOldGnuPT"
 msgid ""
 "An installation of GnuPT has been been detected.  This may cause problems "
@@ -229,7 +224,7 @@ msgid ""
 "Do you want to continue installing Claws Mail?"
 msgstr ""
 
-#: src/installer.nsi:516
+#: src/installer.nsi:511
 msgctxt "T_FoundOldWinPTSF"
 msgid ""
 "An old installation of the Sourceforge hosted WinPT has been been detected.  "
@@ -239,7 +234,7 @@ msgid ""
 "installation later?"
 msgstr ""
 
-#: src/installer.nsi:526
+#: src/installer.nsi:521
 msgctxt "T_FoundOldGnuPack"
 msgid ""
 "An installation of GnuPG-Pack has been been detected. You need to uninstall "
@@ -248,13 +243,13 @@ msgid ""
 "The installation will be aborted now!"
 msgstr ""
 
-#: src/installer.nsi:535
+#: src/installer.nsi:530
 msgctxt "T_AdminNeeded"
 msgid ""
 "Warning: Administrator permissions required for a successful installation"
 msgstr ""
 
-#: src/installer.nsi:539
+#: src/installer.nsi:534
 msgctxt "T_CloseOtherApps"
 msgid ""
 "Please make sure that other applications are not running. In particular you "
@@ -262,12 +257,12 @@ msgid ""
 "install anyway but a reboot will be required then."
 msgstr ""
 
-#: src/installer.nsi:544
+#: src/installer.nsi:539
 msgctxt "T_ShuttingDownWinPT"
 msgid "Trying to shutdown a possible running instance of WinPT."
 msgstr ""
 
-#: src/installer.nsi:546
+#: src/installer.nsi:541
 msgctxt "T_ShuttingDownDirMngr"
 msgid "Trying to shutdown a possible running instance of DirMngr."
 msgstr ""
@@ -277,17 +272,17 @@ msgctxt "T_SetDefaultClient"
 msgid "Do you want to make Claws Mail your default mail client?"
 msgstr ""
 
-#: src/inst-claws-mail.nsi:141
+#: src/inst-claws-mail.nsi:142
 msgctxt "DESC_SEC_claws_mail"
 msgid "Claws Mail-User-Agent"
 msgstr ""
 
-#: src/inst-claws-mail.nsi:144
+#: src/inst-claws-mail.nsi:145
 msgctxt "DESC_Menu_claws_mail"
 msgid "Run the Claws mailprogram."
 msgstr ""
 
-#: src/inst-claws-mail.nsi:147
+#: src/inst-claws-mail.nsi:148
 msgctxt "DESC_Menu_claws_mail_pdf"
 msgid "Show the online manual of Claws Mail"
 msgstr ""
@@ -297,27 +292,12 @@ msgctxt "DESC_SEC_gnupg2"
 msgid "GNU Privacy Guard"
 msgstr ""
 
-#: src/inst-gpa.nsi:81
+#: src/inst-gpa.nsi:73
 msgctxt "DESC_SEC_gpa"
 msgid "GNU Privacy Assistant"
 msgstr ""
 
-#: src/inst-gpa.nsi:84
+#: src/inst-gpa.nsi:76
 msgctxt "DESC_Menu_gpa"
 msgid "Run the GNU Privacy Assistant key management tool."
-msgstr ""
-
-#: src/inst-gpg4win.nsi:89
-msgctxt "DESC_Menu_gpg4win_readme"
-msgid "General information on Gpg4win"
-msgstr ""
-
-#: src/inst-gpg4win.nsi:92
-msgctxt "DESC_Menu_gpg4win_howtosmime"
-msgid "Instruction to configure S/MIME"
-msgstr ""
-
-#: src/inst-gpg4win.nsi:95
-msgctxt "DESC_Menu_gnupg_faq"
-msgid "Show the Frequently Asked Questions document for GnuPG"
 msgstr ""
