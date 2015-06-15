@@ -66,6 +66,7 @@ EXTRA_DIST = pkg-config gpg4win.nsi gpg4win-src.nsi \
 	inst-bzip2.nsi             uninst-bzip2.nsi           \
 	inst-jpeg.nsi     uninst-jpeg.nsi         \
 	inst-webkit.nsi     uninst-webkit.nsi         \
+	inst-glib-networking.nsi     uninst-glib-networking.nsi         \
 	inst-libsoup.nsi     uninst-libsoup.nsi         \
         inst-final.nsi
 
@@ -87,7 +88,7 @@ CLEANFILES = g4wihelp.dll versioninfo.txt \
 gpg4win_spkgs = glib libffi gdk-pixbuf gtk+ expat \
                 libgpg-error gpgme libpng enchant \
 		gpa libgsasl libtasn1 opencdk gnutls curl libxml2 \
-		jpeg libsoup webkit gmp nettle \
+		jpeg glib-networking libsoup webkit gmp nettle \
                 libetpan claws-mail \
 		gnupg2 pinentry libassuan libksba libgcrypt \
 		adns dirmngr w32pth regex libiconv gettext
@@ -121,6 +122,7 @@ gpg4win_pkg_adns_make_args = -j$(NUMPROC)
 gpg4win_pkg_dirmngr_make_args = -j$(NUMPROC)
 gpg4win_pkg_w32pth_make_args = -j$(NUMPROC)
 gpg4win_pkg_jpeg_make_args = -j$(NUMPROC)
+gpg4win_pkg_glib_networking_make_args = -j$(NUMPROC)
 gpg4win_pkg_libsoup_make_args = -j$(NUMPROC)
 gpg4win_pkg_webkit_make_args = -j$(NUMPROC)
 gpg4win_pkg_gmp_make_args = -j$(NUMPROC)
@@ -318,6 +320,15 @@ gpg4win_pkg_claws_mail_configure = \
 
 gpg4win_pkg_jpeg_configure = \
 							--with-libiconv-prefix=$(idir)
+
+gpg4win_pkg_glib_networking_configure = \
+  --disable-glibtest \
+	--without-libproxy \
+	--without-gnome-proxy \
+	--with-gnutls \
+	--without-pkcs11 \
+	LDFLAGS=\"-L$(idir)/lib\" \
+	CPPFLAGS=\"-I$(idir)/include\"
 
 gpg4win_pkg_libsoup_configure = \
 							--without-apache-httpd --with-libiconv-prefix=$(idir) \

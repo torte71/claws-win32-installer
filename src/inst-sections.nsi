@@ -134,6 +134,9 @@
 !ifdef HAVE_PKG_JPEG
 !include "inst-jpeg.nsi"
 !endif
+!ifdef HAVE_PKG_GLIB_NETWORKING
+!include "inst-glib-networking.nsi"
+!endif
 !ifdef HAVE_PKG_LIBSOUP
 !include "inst-libsoup.nsi"
 !endif
@@ -178,6 +181,9 @@
 !endif
 !ifdef HAVE_PKG_LIBSOUP
 !include "uninst-libsoup.nsi"
+!endif
+!ifdef HAVE_PKG_GLIB_NETWORKING
+!include "uninst-glib-networking.nsi"
 !endif
 !ifdef HAVE_PKG_JPEG
 !include "uninst-jpeg.nsi"

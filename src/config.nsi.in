@@ -148,6 +148,10 @@
 !define gpg4win_pkg_jpeg @gpg4win_pkg_jpeg@
 !define gpg4win_pkg_jpeg_version @gpg4win_pkg_jpeg_version@
 
+@HAVE_PKG_GLIB_NETWORKING@
+!define gpg4win_pkg_glib_networking @gpg4win_pkg_glib_networking@
+!define gpg4win_pkg_glib_networking_version @gpg4win_pkg_glib_networking_version@
+
 @HAVE_PKG_LIBSOUP@
 !define gpg4win_pkg_libsoup @gpg4win_pkg_libsoup@
 !define gpg4win_pkg_libsoup_version @gpg4win_pkg_libsoup_version@

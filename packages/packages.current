@@ -419,6 +419,12 @@ server http://www.claws-mail.org/win32
 file jpeg-9.tar.gz
 chk  724987e7690ca3d74d6ab7c1f1b6854e88ca204b
 
+# glib-networking
+server http://ftp.acc.umu.se/pub/gnome/sources/glib-networking/2.45
+
+file glib-networking-2.45.1.tar.xz
+chk  e6e17d1d6ed86a99db228fcf3ea1bd7f844a0cb5
+
 # libsoup
 server ftp://ftp.gnome.org/pub/GNOME/sources/libsoup/2.40/
 

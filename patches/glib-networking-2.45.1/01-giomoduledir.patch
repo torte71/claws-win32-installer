@@ -1,0 +1,16 @@
+#! /bin/sh
+patch -p1 -l -f $* < $0
+exit $?
+
+diff -ur glib-networking-2.45.1-orig/configure glib-networking-2.45.1/configure
+--- glib-networking-2.45.1-orig/configure	2015-06-15 23:33:23.402189411 +0200
++++ glib-networking-2.45.1/configure	2015-06-15 23:36:30.667205438 +0200
+@@ -14175,7 +14175,7 @@
+ 
+ GLIB_CFLAGS="$GLIB_CFLAGS -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_46"
+ 
+-GIO_MODULE_DIR=$($PKG_CONFIG --variable giomoduledir gio-2.0)
++GIO_MODULE_DIR=$($PKG_CONFIG --define-variable=prefix=${prefix} --variable giomoduledir gio-2.0)
+ if test "$GIO_MODULE_DIR" = ""; then :
+   { { $as_echo "$as_me:${as_lineno-$LINENO}: error: in \`$ac_pwd':" >&5
+ $as_echo "$as_me: error: in \`$ac_pwd':" >&2;}
