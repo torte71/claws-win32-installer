@@ -27,7 +27,7 @@ min_automake_version="1.9.3"
 # commit and push so that the git magic is able to work.
 #
 # After a release the make target "copy-news" is to be called as well!
-m4_define([my_version], [3.11.1-beta6])
+m4_define([my_version], [3.11.1-beta7])
 
 AC_INIT([claws-mail],
 				[my_version],[ticho@claws-mail.org])

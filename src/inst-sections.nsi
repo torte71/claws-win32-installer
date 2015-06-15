@@ -495,6 +495,7 @@ Function CalcDepends
   !insertmacro SelectSection ${SEC_regex}
   !insertmacro SelectSection ${SEC_libetpan}
   !insertmacro SelectSection ${SEC_gnutls}
+  !insertmacro SelectSection ${SEC_libxml2}
   # These are not build dependencies, but we always want to install
   # all plugins.
   skip_claws_mail:

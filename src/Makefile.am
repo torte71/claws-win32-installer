@@ -297,8 +297,8 @@ gpg4win_pkg_claws_mail_configure = \
   --disable-bogofilter-plugin --disable-spamassassin-plugin \
   --disable-perl-plugin --disable-python-plugin --disable-demo-plugin \
   --disable-newmail-plugin --disable-mailmbox-plugin \
-	CFLAGS=\"-ggdb\" \
-	CPPFLAGS=\"-I$(idir)/include\" \
+	CFLAGS=\"-g -O2 \" \
+	CPPFLAGS=\"-g -O2 -I$(idir)/include\" \
 	LDFLAGS=\"-L$(idir)/lib\" LIBS=\"-lexpat\"
 
 gpg4win_pkg_jpeg_configure = \
