@@ -104,6 +104,14 @@
 !define gpg4win_pkg_libtasn1 @gpg4win_pkg_libtasn1@
 !define gpg4win_pkg_libtasn1_version @gpg4win_pkg_libtasn1_version@
 
+@HAVE_PKG_GMP@
+!define gpg4win_pkg_gmp @gpg4win_pkg_gmp@
+!define gpg4win_pkg_gmp_version @gpg4win_pkg_gmp_version@
+
+@HAVE_PKG_NETTLE@
+!define gpg4win_pkg_nettle @gpg4win_pkg_nettle@
+!define gpg4win_pkg_nettle_version @gpg4win_pkg_nettle_version@
+
 @HAVE_PKG_GNUTLS@
 !define gpg4win_pkg_gnutls @gpg4win_pkg_gnutls@
 !define gpg4win_pkg_gnutls_version @gpg4win_pkg_gnutls_version@

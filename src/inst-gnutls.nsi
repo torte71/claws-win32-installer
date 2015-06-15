@@ -32,9 +32,7 @@ Section "-gnutls" SEC_gnutls
   File ${gpg4win_pkg_gnutls}
 !else
 
-  File ${prefix}/bin/libgnutls-26.dll
-  File ${prefix}/bin/libgnutls-extra-26.dll
-  File ${prefix}/bin/libgnutls-openssl-27.dll
+  File ${prefix}/bin/libgnutls-30.dll
 
 !endif
 SectionEnd

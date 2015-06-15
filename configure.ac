@@ -221,8 +221,18 @@ gpg4win_dup_sources=""
 
 
 GPG4WIN_SPKG([zlib])
+GPG4WIN_SPKG([bzip2])
+GPG4WIN_SPKG([adns])
+GPG4WIN_SPKG([w32pth])
+GPG4WIN_SPKG([jpeg])
+GPG4WIN_SPKG([gmp])
+GPG4WIN_SPKG([regex])
+GPG4WIN_SPKG([crypt])
 
 GPG4WIN_BPKG_GTK([pkgconfig])
+
+GPG4WIN_SPKG([libiconv])
+GPG4WIN_SPKG([gettext], [libiconv])
 
 GPG4WIN_SPKG([libffi], [pkgconfig])
 GPG4WIN_SPKG([glib], [libiconv gettext pkgconfig libffi zlib])
@@ -238,8 +248,6 @@ GPG4WIN_SPKG([gtk+], [libiconv gettext pkgconfig atk pango dnl
 GPG4WIN_SPKG([libpng], [pkgconfig])
 GPG4WIN_SPKG([enchant], [pkgconfig glib])
 
-GPG4WIN_SPKG([bzip2])
-GPG4WIN_SPKG([adns])
 GPG4WIN_SPKG([libgpg-error], [libiconv gettext])
 GPG4WIN_SPKG([libgcrypt], [libgpg-error])
 GPG4WIN_SPKG([libksba], [libgpg-error])
@@ -247,29 +255,21 @@ GPG4WIN_SPKG([libassuan], [libgpg-error w32pth])
 GPG4WIN_SPKG([dirmngr], [libgpg-error libgcrypt libassuan libksba w32pth])
 GPG4WIN_SPKG([pinentry], [libiconv gtk+])
 GPG4WIN_SPKG([gpgme], [libgpg-error gnupg2 glib])
-GPG4WIN_SPKG([curl], [zlib gnutls])
 GPG4WIN_SPKG([gnupg2], [libiconv libgcrypt libksba libassuan libgpg-error dnl
                         w32pth zlib bzip2 adns pinentry])
-#GPG4WIN_SPKG([scute], [libgpg-error libassuan])
-#GPG4WIN_SPKG([paperkey])
-GPG4WIN_SPKG([jpeg])
 GPG4WIN_SPKG([libxml2], [zlib])
-GPG4WIN_SPKG([libsoup], [gnutls libxml2])
-GPG4WIN_SPKG([webkit], [jpeg libpng glib gtk+ libsoup libxml2])
-
-GPG4WIN_SPKG([gpa], [libiconv gettext zlib gtk+ libpng glib gpgme])
 GPG4WIN_SPKG([libgsasl])
 GPG4WIN_SPKG([libtasn1])
-GPG4WIN_SPKG([gnutls], [libgsasl libtasn1 libgcrypt])
-GPG4WIN_SPKG([regex])
-GPG4WIN_SPKG([crypt])
+GPG4WIN_SPKG([nettle], [gmp])
+GPG4WIN_SPKG([gnutls], [gmp nettle libgsasl libtasn1 libgcrypt])
+GPG4WIN_SPKG([libsoup], [gnutls libxml2])
+GPG4WIN_SPKG([webkit], [jpeg libpng glib gtk+ libsoup libxml2])
+GPG4WIN_SPKG([gpa], [libiconv gettext zlib gtk+ libpng glib gpgme])
+GPG4WIN_SPKG([curl], [zlib gnutls])
 GPG4WIN_SPKG([libetpan], [gnutls])
 GPG4WIN_SPKG([claws-mail], [libiconv gettext zlib gtk+ libpng enchant glib dnl
                             gpgme crypt regex libetpan gnutls dnl
-                            libxml2 expat webkit])
-GPG4WIN_SPKG([w32pth])
-GPG4WIN_SPKG([libiconv])
-GPG4WIN_SPKG([gettext], [libiconv])
+                            libxml2 expat webkit curl])
 
 
 GPG4WIN_FINALIZE

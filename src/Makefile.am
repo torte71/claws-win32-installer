@@ -33,6 +33,8 @@ EXTRA_DIST = pkg-config gpg4win.nsi gpg4win-src.nsi \
         inst-libgsasl.nsi	   uninst-libgsasl.nsi        \
         inst-libtasn1.nsi	   uninst-libtasn1.nsi        \
         inst-gnutls.nsi		   uninst-gnutls.nsi	      \
+        inst-gmp.nsi		   uninst-gmp.nsi	      \
+        inst-nettle.nsi		   uninst-nettle.nsi	      \
         inst-curl.nsi		   uninst-curl.nsi	      \
         inst-libxml2.nsi	   uninst-libxml2.nsi	      \
         inst-libetpan.nsi	   uninst-libetpan.nsi        \
@@ -85,7 +87,7 @@ CLEANFILES = g4wihelp.dll versioninfo.txt \
 gpg4win_spkgs = glib libffi gdk-pixbuf gtk+ expat \
                 libgpg-error gpgme libpng enchant \
 		gpa libgsasl libtasn1 opencdk gnutls curl libxml2 \
-		jpeg libsoup webkit \
+		jpeg libsoup webkit gmp nettle \
                 libetpan claws-mail \
 		gnupg2 pinentry libassuan libksba libgcrypt \
 		adns dirmngr w32pth regex libiconv gettext
@@ -121,6 +123,8 @@ gpg4win_pkg_w32pth_make_args = -j$(NUMPROC)
 gpg4win_pkg_jpeg_make_args = -j$(NUMPROC)
 gpg4win_pkg_libsoup_make_args = -j$(NUMPROC)
 gpg4win_pkg_webkit_make_args = -j$(NUMPROC)
+gpg4win_pkg_gmp_make_args = -j$(NUMPROC)
+gpg4win_pkg_nettle_make_args = -j$(NUMPROC)
 
 
 
@@ -263,9 +267,20 @@ gpg4win_pkg_gnutls_configure = \
   --disable-cxx \
   --with-libgcrypt \
   --without-p11-kit \
+	--disable-gtk-doc-html \
   --with-libtasn1-prefix=$(idir) \
   --with-libgcrypt-prefix=$(idir) \
 	CPPFLAGS=\"-I$(idir)/include\" LDFLAGS=\"-L$(idir)/lib\"
+
+gpg4win_pkg_gmp_configure = \
+  --disable-static \
+	--enable-shared \
+	--disable-cxx
+
+gpg4win_pkg_nettle_configure = \
+  --enable-public-key \
+	CPPFLAGS=\"-I$(idir)/include\" \
+	LDFLAGS=\"-L$(idir)/lib\"
 
 # In 2.12.21 gnutls_openssl is not linked to libtasn1, thus we use
 # this hack to here.  (Using the included minitasn does work either

@@ -32,7 +32,7 @@ Section "-libtasn1" SEC_libtasn1
   File ${gpg4win_pkg_libtasn1}
 !else
 
-  File ${prefix}/bin/libtasn1-3.dll
+  File ${prefix}/bin/libtasn1-6.dll
 
 !endif
 SectionEnd

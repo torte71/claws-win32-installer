@@ -137,6 +137,12 @@
 !ifdef HAVE_PKG_LIBSOUP
 !include "inst-libsoup.nsi"
 !endif
+!ifdef HAVE_PKG_GMP
+!include "inst-gmp.nsi"
+!endif
+!ifdef HAVE_PKG_NETTLE
+!include "inst-nettle.nsi"
+!endif
 
 # These are displayed in the selection dialog.
 
@@ -164,6 +170,12 @@
 !include "uninst-claws-mail.nsi"
 !endif
 
+!ifdef HAVE_PKG_NETTLE
+!include "uninst-nettle.nsi"
+!endif
+!ifdef HAVE_PKG_GMP
+!include "uninst-gmp.nsi"
+!endif
 !ifdef HAVE_PKG_LIBSOUP
 !include "uninst-libsoup.nsi"
 !endif

@@ -30,7 +30,7 @@ Section "-un.libtasn1"
   Call un.SourceDelete
 !else
 
-  Delete "$INSTDIR\libtasn1-3.dll"
+  Delete "$INSTDIR\libtasn1-6.dll"
   RMDir "$INSTDIR"
 
 !endif
