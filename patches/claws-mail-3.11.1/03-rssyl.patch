@@ -2,9 +2,9 @@
 patch -p1 -l -f $* < $0
 exit $?
 
-diff -ur claws-mail-3.11.1/src/plugins/rssyl/claws.def claws-mail-3.11.1-rssyl/src/plugins/rssyl/claws.def
---- claws-mail-3.11.1/src/plugins/rssyl/claws.def	2014-10-27 19:58:16.000000000 +0100
-+++ claws-mail-3.11.1-rssyl/src/plugins/rssyl/claws.def	2015-05-30 18:25:20.550725114 +0200
+diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/claws.def claws-mail-3.11.1/src/plugins/rssyl/claws.def
+--- claws-mail-3.11.1-orig/src/plugins/rssyl/claws.def	2015-06-17 01:23:50.038587414 +0200
++++ claws-mail-3.11.1/src/plugins/rssyl/claws.def	2015-06-17 01:32:42.900857918 +0200
 @@ -1,10 +1,9 @@
  LIBRARY CLAWS-MAIL.EXE
  EXPORTS
@@ -62,12 +62,12 @@ diff -ur claws-mail-3.11.1/src/plugins/rssyl/claws.def claws-mail-3.11.1-rssyl/s
  log_error
  log_print
  log_warning
-@@ -73,13 +83,18 @@
+@@ -73,13 +83,17 @@
  mainwindow_get_mainwindow
  make_dir
  make_dir_hier
+-mkstemp
 +mh_get_class
- mkstemp
 +move_file
 +msgcache_destroy
 +prefs_common
@@ -81,7 +81,7 @@ diff -ur claws-mail-3.11.1/src/plugins/rssyl/claws.def claws-mail-3.11.1-rssyl/s
  prefs_read_config
  prefs_set_block_label
  prefs_set_default
-@@ -91,9 +106,13 @@
+@@ -91,9 +105,13 @@
  procheader_parse_file
  procmsg_get_message_file
  procmsg_msginfo_unset_flags
@@ -95,9 +95,9 @@ diff -ur claws-mail-3.11.1/src/plugins/rssyl/claws.def claws-mail-3.11.1-rssyl/s
  trim_string
 +xml_attr_new
 +xml_tag_add_attr
-diff -ur claws-mail-3.11.1/src/plugins/rssyl/libfeed/date.c claws-mail-3.11.1-rssyl/src/plugins/rssyl/libfeed/date.c
---- claws-mail-3.11.1/src/plugins/rssyl/libfeed/date.c	2014-10-27 19:58:16.000000000 +0100
-+++ claws-mail-3.11.1-rssyl/src/plugins/rssyl/libfeed/date.c	2015-05-30 19:59:01.239510677 +0200
+diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/date.c claws-mail-3.11.1/src/plugins/rssyl/libfeed/date.c
+--- claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/date.c	2015-06-17 01:23:50.038587414 +0200
++++ claws-mail-3.11.1/src/plugins/rssyl/libfeed/date.c	2015-06-17 01:31:14.522490311 +0200
 @@ -37,78 +37,6 @@
  
  #include <time.h>
@@ -207,9 +207,9 @@ diff -ur claws-mail-3.11.1/src/plugins/rssyl/libfeed/date.c claws-mail-3.11.1-rs
 -
 -	return mktime(&t);
 -}
-diff -ur claws-mail-3.11.1/src/plugins/rssyl/libfeed/date.h claws-mail-3.11.1-rssyl/src/plugins/rssyl/libfeed/date.h
---- claws-mail-3.11.1/src/plugins/rssyl/libfeed/date.h	2014-10-27 19:58:16.000000000 +0100
-+++ claws-mail-3.11.1-rssyl/src/plugins/rssyl/libfeed/date.h	2015-05-30 19:55:44.186170696 +0200
+diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/date.h claws-mail-3.11.1/src/plugins/rssyl/libfeed/date.h
+--- claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/date.h	2015-06-17 01:23:50.038587414 +0200
++++ claws-mail-3.11.1/src/plugins/rssyl/libfeed/date.h	2015-06-17 01:31:14.522490311 +0200
 @@ -4,8 +4,6 @@
  #include <time.h>
  #include <glib.h>
@@ -219,9 +219,9 @@ diff -ur claws-mail-3.11.1/src/plugins/rssyl/libfeed/date.h claws-mail-3.11.1-rs
 -time_t parseRFC822Date(gchar *date);
  
  #endif /* __DATE_H */
-diff -ur claws-mail-3.11.1/src/plugins/rssyl/libfeed/parser_atom10.c claws-mail-3.11.1-rssyl/src/plugins/rssyl/libfeed/parser_atom10.c
---- claws-mail-3.11.1/src/plugins/rssyl/libfeed/parser_atom10.c	2014-10-27 19:58:16.000000000 +0100
-+++ claws-mail-3.11.1-rssyl/src/plugins/rssyl/libfeed/parser_atom10.c	2015-05-30 19:53:04.813851388 +0200
+diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/parser_atom10.c claws-mail-3.11.1/src/plugins/rssyl/libfeed/parser_atom10.c
+--- claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/parser_atom10.c	2015-06-17 01:23:50.038587414 +0200
++++ claws-mail-3.11.1/src/plugins/rssyl/libfeed/parser_atom10.c	2015-06-17 01:31:14.522490311 +0200
 @@ -23,6 +23,8 @@
  #include <string.h>
  #include <stdio.h>
@@ -261,9 +261,9 @@ diff -ur claws-mail-3.11.1/src/plugins/rssyl/libfeed/parser_atom10.c claws-mail-
  					}
  
  					break;
-diff -ur claws-mail-3.11.1/src/plugins/rssyl/libfeed/parser_rdf.c claws-mail-3.11.1-rssyl/src/plugins/rssyl/libfeed/parser_rdf.c
---- claws-mail-3.11.1/src/plugins/rssyl/libfeed/parser_rdf.c	2014-10-27 19:58:16.000000000 +0100
-+++ claws-mail-3.11.1-rssyl/src/plugins/rssyl/libfeed/parser_rdf.c	2015-05-30 19:58:53.199292796 +0200
+diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/parser_rdf.c claws-mail-3.11.1/src/plugins/rssyl/libfeed/parser_rdf.c
+--- claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/parser_rdf.c	2015-06-17 01:23:50.038587414 +0200
++++ claws-mail-3.11.1/src/plugins/rssyl/libfeed/parser_rdf.c	2015-06-17 01:31:14.686494705 +0200
 @@ -22,6 +22,8 @@
  #include <expat.h>
  #include <string.h>
@@ -297,9 +297,9 @@ diff -ur claws-mail-3.11.1/src/plugins/rssyl/libfeed/parser_rdf.c claws-mail-3.1
  					}
  
  					break;
-diff -ur claws-mail-3.11.1/src/plugins/rssyl/libfeed/parser_rss20.c claws-mail-3.11.1-rssyl/src/plugins/rssyl/libfeed/parser_rss20.c
---- claws-mail-3.11.1/src/plugins/rssyl/libfeed/parser_rss20.c	2014-10-27 19:58:16.000000000 +0100
-+++ claws-mail-3.11.1-rssyl/src/plugins/rssyl/libfeed/parser_rss20.c	2015-05-30 19:58:44.247050199 +0200
+diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/parser_rss20.c claws-mail-3.11.1/src/plugins/rssyl/libfeed/parser_rss20.c
+--- claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/parser_rss20.c	2015-06-17 01:23:50.038587414 +0200
++++ claws-mail-3.11.1/src/plugins/rssyl/libfeed/parser_rss20.c	2015-06-17 01:31:14.686494705 +0200
 @@ -22,6 +22,8 @@
  #include <expat.h>
  #include <string.h>
@@ -333,24 +333,291 @@ diff -ur claws-mail-3.11.1/src/plugins/rssyl/libfeed/parser_rss20.c claws-mail-3
  			} else if( !strcmp(el, "dc:creator")) {
  				FILL(ctx->curitem->author)
  			}
-diff -ur claws-mail-3.11.1/src/plugins/rssyl/rssyl_update_comments.c claws-mail-3.11.1-rssyl/src/plugins/rssyl/rssyl_update_comments.c
---- claws-mail-3.11.1/src/plugins/rssyl/rssyl_update_comments.c	2014-10-27 19:58:16.000000000 +0100
-+++ claws-mail-3.11.1-rssyl/src/plugins/rssyl/rssyl_update_comments.c	2015-05-30 17:59:29.144851778 +0200
-@@ -88,7 +88,11 @@
+diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/parse822.c claws-mail-3.11.1/src/plugins/rssyl/parse822.c
+--- claws-mail-3.11.1-orig/src/plugins/rssyl/parse822.c	2015-06-17 01:23:50.038587414 +0200
++++ claws-mail-3.11.1/src/plugins/rssyl/parse822.c	2015-06-17 01:26:38.195089578 +0200
+@@ -23,7 +23,6 @@
+ #endif
+ 
+ /* Global includes */
+-#include <sys/stat.h>
+ #include <glib.h>
+ #include <pthread.h>
+ 
+@@ -241,12 +240,12 @@
+ static void rssyl_folder_read_existing_real(RFolderItem *ritem)
+ {
+ 	gchar *path = NULL, *fname = NULL;
+-	DIR *dp;
+-	struct dirent *d;
+-	struct stat st;
++	GDir *dp;
++	const gchar *d;
+ 	gint num;
+ 	FeedItem *item = NULL;
+ 	RFeedCtx *ctx;
++	GError *error;
+ 
+ 	g_return_if_fail(ritem != NULL);
+ 
+@@ -263,34 +262,29 @@
+ 	ritem->items = NULL;
+ 	ritem->last_update = 0;
+ 
+-	if( (dp = opendir(path)) == NULL ) {
+-		FILE_OP_ERROR(path, "opendir");
++	if( (dp = g_dir_open(path, 0, &error)) == NULL ) {
++		FILE_OP_ERROR(path, "g_dir_open");
++		debug_print("g_dir_open on \"%s\" failed with error %d (%s)\n",
++				path, error->code, error->message);
+ 		g_free(path);
+ 		return;
+ 	}
+ 
+-	while( (d = readdir(dp)) != NULL ) {
++	while( (d = g_dir_read_name(dp)) != NULL ) {
+ 		if( claws_is_exiting() ) {
+-			closedir(dp);
+-			g_free(path);
++			g_dir_close(dp);
  			return;
  		}
  
-+#ifdef G_OS_WIN32
-+		if( (num = to_number(d->d_name)) > 0) {
-+#else
- 		if( (num = to_number(d->d_name)) > 0 && d->d_type == DT_REG ) {
-+#endif
- 			debug_print("RSSyl: starting to parse '%s'\n", d->d_name);
+-		if( d->d_name[0] != '.' && (num = to_number(d->d_name)) > 0 ) {
+-			fname = g_strdup_printf("%s%c%s", path, G_DIR_SEPARATOR, d->d_name);
+-			if( g_stat(fname, &st) < 0 ) {
+-				debug_print("RSSyl: couldn't stat() file '%s', ignoring it\n", fname);
+-				g_free(fname);
+-				continue;
+-			}
+-
+-			if( !S_ISREG(st.st_mode)) {
++		if( d[0] != '.' && (num = to_number(d)) > 0 ) {
++			fname = g_strdup_printf("%s%c%s", path, G_DIR_SEPARATOR, d);
++			if (!g_file_test(fname, G_FILE_TEST_IS_REGULAR)) {
+ 				debug_print("RSSyl: not a regular file: '%s', ignoring it\n", fname);
+ 				g_free(fname);
+ 				continue;
+ 			}
  
- 			fname = g_strdup_printf("%s%c%s", path, G_DIR_SEPARATOR, d->d_name);
-diff -ur claws-mail-3.11.1/src/procheader.c claws-mail-3.11.1-rssyl/src/procheader.c
---- claws-mail-3.11.1/src/procheader.c	2014-10-27 19:58:13.000000000 +0100
-+++ claws-mail-3.11.1-rssyl/src/procheader.c	2015-05-30 19:53:04.813851388 +0200
+-			debug_print("RSSyl: starting to parse '%s'\n", d->d_name);
++			debug_print("RSSyl: starting to parse '%s'\n", d);
+ 			if( (item = rssyl_parse_folder_item_file(fname)) != NULL ) {
+ 				/* Find latest timestamp */
+ 				ctx = (RFeedCtx *)item->data;
+@@ -303,7 +297,7 @@
+ 		}
+ 	}
+ 
+-	closedir(dp);
++	g_dir_close(dp);
+ 	g_free(path);
+ 
+ 	ritem->items = g_slist_reverse(ritem->items);
+diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/rssyl_add_item.c claws-mail-3.11.1/src/plugins/rssyl/rssyl_add_item.c
+--- claws-mail-3.11.1-orig/src/plugins/rssyl/rssyl_add_item.c	2015-06-17 01:23:50.034587309 +0200
++++ claws-mail-3.11.1/src/plugins/rssyl/rssyl_add_item.c	2015-06-17 01:27:12.003994903 +0200
+@@ -374,7 +374,7 @@
+ 	dirname = folder_item_get_path(&ritem->item);
+ 	template = g_strconcat(dirname, G_DIR_SEPARATOR_S,
+ 			RSSYL_TMP_TEMPLATE, NULL);
+-	if ((fd = mkstemp(template)) < 0) {
++	if ((fd = g_mkstemp(template)) < 0) {
+ 		g_warning("Couldn't mkstemp('%s'), not adding message!\n", template);
+ 		g_free(template);
+ 		return;
+diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/rssyl.c claws-mail-3.11.1/src/plugins/rssyl/rssyl.c
+--- claws-mail-3.11.1-orig/src/plugins/rssyl/rssyl.c	2015-06-17 01:23:50.038587414 +0200
++++ claws-mail-3.11.1/src/plugins/rssyl/rssyl.c	2015-06-17 01:29:32.967770080 +0200
+@@ -203,8 +203,10 @@
+ static void rssyl_get_last_num(Folder *folder, FolderItem *item)
+ {
+ 	gchar *path;
+-	DIR *dp;
+-	struct dirent *d;
++	const gchar *f;
++	GDir *dp;
++	GError *gerror;
++
+ 	gint max = 0;
+ 	gint num;
+ 
+@@ -214,21 +216,24 @@
+ 	path = folder_item_get_path(item);
+ 	g_return_if_fail(path != NULL);
+ 
+-	if( (dp = opendir(path)) == NULL ) {
+-		FILE_OP_ERROR(item->path, "opendir");
++	if( (dp = g_dir_open(path, 0, &gerror)) == NULL ) {
++		debug_print("g_dir_open() failed on \"%s\", error %d (%s).\n",
++				path, gerror->code, gerror->message);
++		FILE_OP_ERROR(item->path, "g_dir_open");
+ 		g_free(path);
+ 		return;
+ 	}
+ 
+ 	g_free(path);
+ 
+-	while( (d = readdir(dp)) != NULL ) {
+-		if( (num = to_number(d->d_name)) > 0 && dirent_is_regular_file(d) ) {
++	while( (f = g_dir_read_name(dp)) != NULL) {
++		if ((num = to_number(f)) > 0 &&
++				g_file_test(f, G_FILE_TEST_IS_REGULAR)) {
+ 			if( max < num )
+ 				max = num;
+ 		}
+ 	}
+-	closedir(dp);
++	g_dir_close(dp);
+ 
+ 	debug_print("Last number in dir %s = %d\n", item->path, max);
+ 	item->last_num = max;
+@@ -489,7 +494,7 @@
+ 
+ 	name = folder_item_get_name(rssyl_get_root_folderitem(item));
+ 	path = g_strconcat(get_rc_dir(), G_DIR_SEPARATOR_S, RSSYL_DIR,
+-			G_DIR_SEPARATOR_S, name, G_DIR_SEPARATOR_S, item->path, NULL);
++			G_DIR_SEPARATOR_S, name, item->path, NULL);
+ 	g_free(name);
+ 
+ 	return path;
+@@ -612,8 +617,9 @@
+ 		MsgNumberList **list, gboolean *old_uids_valid)
+ {
+ 	gchar *path;
+-	DIR *dp;
+-	struct dirent *d;
++	GDir *dp;
++	const gchar *d;
++	GError *error;
+ 	gint num, nummsgs = 0;
+ 
+ 	g_return_val_if_fail(item != NULL, -1);
+@@ -625,22 +631,23 @@
+ 	path = folder_item_get_path(item);
+ 	g_return_val_if_fail(path != NULL, -1);
+ 
+-	if( (dp = opendir(path)) == NULL ) {
+-		FILE_OP_ERROR(item->path, "opendir");
++	if( (dp = g_dir_open(path, 0, &error)) == NULL ) {
++		FILE_OP_ERROR(item->path, "g_dir_open");
++		debug_print("g_dir_open() failed on \"%s\", error %d (%s).\n",
++				path, error->code, error->message);
+ 		g_free(path);
+ 		return -1;
+ 	}
+ 
+ 	g_free(path);
+ 
+-	while( (d = readdir(dp)) != NULL ) {
+-		if( (num = to_number(d->d_name)) > 0 ) {
++	while( (d = g_dir_read_name(dp)) != NULL ) {
++		if( (num = to_number(d)) > 0 ) {
+ 			*list = g_slist_prepend(*list, GINT_TO_POINTER(num));
+ 			nummsgs++;
+ 		}
+ 	}
+-
+-	closedir(dp);
++	g_dir_close(dp);
+ 
+ 	debug_print("RSSyl: get_num_list: returning %d\n", nummsgs);
+ 
+@@ -650,7 +657,7 @@
+ static gboolean rssyl_is_msg_changed(Folder *folder, FolderItem *item,
+ 		MsgInfo *msginfo)
+ {
+-	struct stat s;
++	GStatBuf s;
+ 	gchar *path = NULL;
+ 
+ 	g_return_val_if_fail(folder != NULL, FALSE);
+@@ -744,12 +751,10 @@
+ 		g_return_val_if_fail(destfile != NULL, -1);
+ 		debug_print("RSSyl: add_msgs: new filename is '%s'\n", destfile);
+ 
+-		if( link(fileinfo->file, destfile) < 0 ) {
+-			if( copy_file(fileinfo->file, destfile, TRUE) < 0 ) {
+-				g_warning("can't copy message %s to %s\n", fileinfo->file, destfile);
+-				g_free(destfile);
+-				return -1;
+-			}
++		if( copy_file(fileinfo->file, destfile, TRUE) < 0) {
++			g_warning("can't copy message %s to %s\n", fileinfo->file, destfile);
++			g_free(destfile);
++			return -1;
+ 		}
+ 
+ 		if( relation != NULL )
+diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/rssyl_update_comments.c claws-mail-3.11.1/src/plugins/rssyl/rssyl_update_comments.c
+--- claws-mail-3.11.1-orig/src/plugins/rssyl/rssyl_update_comments.c	2015-06-17 01:23:50.038587414 +0200
++++ claws-mail-3.11.1/src/plugins/rssyl/rssyl_update_comments.c	2015-06-17 01:30:17.940974678 +0200
+@@ -56,8 +56,9 @@
+ 	FolderItem *item = &ritem->item;
+ 	FeedItem *fi = NULL;
+ 	RFetchCtx *ctx = NULL;
+-	DIR *dp;
+-	struct dirent *d;
++	GDir *dp;
++	const gchar *d;
++	GError *error;
+ 	gint num;
+ 	gchar *path, *msg, *fname;
+ 	MainWindow *mainwin = mainwindow_get_mainwindow();
+@@ -72,26 +73,32 @@
+ 
+ 	debug_print("RSSyl: starting to parse comments, path is '%s'\n", path);
+ 
+-	if( (dp = opendir(path)) == NULL ) {
+-		FILE_OP_ERROR(item->path, "opendir");
++	if( (dp = g_dir_open(path, 0, &error)) == NULL ) {
++		FILE_OP_ERROR(item->path, "g_dir_open");
++		debug_print("g_dir_open on \"%s\" failed with error %d (%s)\n",
++				path, error->code, error->message);
++		g_error_free(error);
+ 		g_free(path);
+ 		return;
+ 	}
+ 
+ 	ritem->fetching_comments = TRUE;
+ 
+-	while( (d = readdir(dp)) != NULL ) {
++	while( (d = g_dir_read_name(dp)) != NULL ) {
+ 		if (claws_is_exiting()) {
+-			closedir(dp);
++			g_dir_close(dp);
+ 			g_free(path);
+ 			debug_print("RSSyl: bailing out, app is exiting\n");
+ 			return;
+ 		}
+ 
+-		if( (num = to_number(d->d_name)) > 0 && d->d_type == DT_REG ) {
+-			debug_print("RSSyl: starting to parse '%s'\n", d->d_name);
++		if( (num = to_number(d)) > 0) {
++			fname = g_strdup_printf("%s%c%s", path, G_DIR_SEPARATOR, d);
++			if (!g_file_test(fname, G_FILE_TEST_IS_REGULAR))
++				continue;
++
++			debug_print("RSSyl: starting to parse '%s'\n", d);
+ 
+-			fname = g_strdup_printf("%s%c%s", path, G_DIR_SEPARATOR, d->d_name);
+ 			if( (fi = rssyl_parse_folder_item_file(fname)) != NULL ) {
+ 				if( feed_item_get_comments_url(fi) && feed_item_get_id(fi) &&
+ 						(ritem->fetch_comments_max_age == -1 ||
+@@ -131,7 +138,7 @@
+ 		}
+ 	}
+ 
+-	closedir(dp);
++	g_dir_close(dp);
+ 	g_free(path);
+ 
+ 	ritem->fetching_comments = FALSE;
+Only in claws-mail-3.11.1/src/plugins/rssyl: rssyl_update_comments.c.orig
+Only in claws-mail-3.11.1/src/plugins/rssyl: rssyl_update_comments.c.rej
+diff -ur claws-mail-3.11.1-orig/src/procheader.c claws-mail-3.11.1/src/procheader.c
+--- claws-mail-3.11.1-orig/src/procheader.c	2015-06-17 01:23:49.994586240 +0200
++++ claws-mail-3.11.1/src/procheader.c	2015-06-17 01:31:14.686494705 +0200
 @@ -790,8 +790,10 @@
  {
  	gint result;
