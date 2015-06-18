@@ -36,20 +36,11 @@ EXTRA_DIST = autogen.sh \
 				patches/claws-mail-3.11.1/08-libravatar-prefs_common.patch \
 				patches/claws-mail-3.11.1/09-fancy-defs.patch \
         patches/dirmngr-1.1.1/dirmngr-pth.patch \
-        patches/glib-2.41.0/01-socket.patch \
-        patches/glib-2.41.0/03-remove-rand_s.patch \
+				patches/glib-2.45.2/01-socket.patch \
         patches/gnupg2-2.0.27/0001-Enable-wildcard-expansion-with-mingw-w64.patch \
         patches/gnupg2-2.0.27/0002-Let-wchar_to_native-convert-to-console-codepage.patch \
         patches/gnupg2-2.0.27/0003-gpgtar-Fix-extracting-files-with-size-512.patch \
         patches/gnupg2-2.0.27/0005-Fix-gpgtar-8-bit-encoding-handling-on-Win32.patch \
-        patches/gnutls-2.12.23/01-openssl-wincrypt.patch \
-        patches/gnutls-2.12.23/02-cve-2013-2116.patch \
-        patches/gnutls-2.12.23/03-cve-2014-1959.patch \
-        patches/gnutls-2.12.23/04-cve-2014-0092.patch \
-        patches/gnutls-2.12.23/05-cve-2014-3466.patch \
-        patches/gnutls-2.12.23/fix-gcrypt-private-api-usage.patch \
-        patches/gnutls-2.12.23/gnulib-mingw-w64-fix.patch \
-        patches/gnutls-2.12.23/omit-doc.patch \
 				patches/libetpan-1.6/mingw-closesocket-include.patch \
         patches/libtasn1-2.14/gnulib-mingw-w64-fix.patch \
 				patches/w32pth-2.0.5/01-def-fix.patch \
