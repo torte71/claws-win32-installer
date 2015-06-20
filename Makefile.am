@@ -29,12 +29,14 @@ EXTRA_DIST = autogen.sh \
 				patches/claws-mail-3.11.1/01-mingw.patch \
 				patches/claws-mail-3.11.1/02-ldap-opt.patch \
 				patches/claws-mail-3.11.1/03-rssyl.patch \
-				patches/claws-mail-3.11.1/04-no-link.patch \
 				patches/claws-mail-3.11.1/05-ldflags.patch \
 				patches/claws-mail-3.11.1/06-pthread.patch \
 				patches/claws-mail-3.11.1/07-g_stat.patch \
 				patches/claws-mail-3.11.1/08-libravatar-prefs_common.patch \
 				patches/claws-mail-3.11.1/09-fancy-defs.patch \
+				patches/claws-mail-3.11.1/10-no-own-opendir.patch \
+				patches/claws-mail-3.11.1/11-ldapquery-crash-fix.patch \
+				patches/claws-mail-3.11.1/12-editldap-tls.patch
         patches/dirmngr-1.1.1/dirmngr-pth.patch \
 				patches/glib-2.45.2/01-socket.patch \
         patches/gnupg2-2.0.27/0001-Enable-wildcard-expansion-with-mingw-w64.patch \
