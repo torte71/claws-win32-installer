@@ -458,30 +458,6 @@ diff -ur claws-mail-3.11.1-orig/src/plugins/perl/perl_plugin.c claws-mail-3.11.1
      tl->mtime = filestat.st_mtime;
    g_free(indexfile);
  
-diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/parse822.c claws-mail-3.11.1/src/plugins/rssyl/parse822.c
---- claws-mail-3.11.1-orig/src/plugins/rssyl/parse822.c	2015-06-06 18:01:32.954680934 +0200
-+++ claws-mail-3.11.1/src/plugins/rssyl/parse822.c	2015-06-06 18:12:43.976708537 +0200
-@@ -243,7 +243,7 @@
- 	gchar *path = NULL, *fname = NULL;
- 	DIR *dp;
- 	struct dirent *d;
--	struct stat st;
-+	GStatBuf st;
- 	gint num;
- 	FeedItem *item = NULL;
- 	RFeedCtx *ctx;
-diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/rssyl.c claws-mail-3.11.1/src/plugins/rssyl/rssyl.c
---- claws-mail-3.11.1-orig/src/plugins/rssyl/rssyl.c	2015-06-06 18:01:32.954680934 +0200
-+++ claws-mail-3.11.1/src/plugins/rssyl/rssyl.c	2015-06-06 18:12:28.396290144 +0200
-@@ -650,7 +650,7 @@
- static gboolean rssyl_is_msg_changed(Folder *folder, FolderItem *item,
- 		MsgInfo *msginfo)
- {
--	struct stat s;
-+	GStatBuf s;
- 	gchar *path = NULL;
- 
- 	g_return_val_if_fail(folder != NULL, FALSE);
 diff -ur claws-mail-3.11.1-orig/src/plugins/tnef_parse/tnef_parse.c claws-mail-3.11.1/src/plugins/tnef_parse/tnef_parse.c
 --- claws-mail-3.11.1-orig/src/plugins/tnef_parse/tnef_parse.c	2015-06-06 18:01:32.938680503 +0200
 +++ claws-mail-3.11.1/src/plugins/tnef_parse/tnef_parse.c	2015-06-06 18:13:33.406035874 +0200

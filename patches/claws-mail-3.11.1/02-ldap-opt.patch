@@ -2,19 +2,9 @@
 patch -p1 -l -f $* < $0
 exit $?
 
-Fixes missing LDAP_OPT_SUCCESS.
-
---- orig/claws-mail-3.9.0/src/ldaputil.h	2012-05-27 19:16:13.000000000 +0200
-+++ claws-mail-3.9.0/src/ldaputil.h	2013-05-02 19:58:31.275669432 +0200
-@@ -14,7 +14,7 @@
-  *
-  * You should have received a copy of the GNU General Public License
-  * along with this program. If not, see <http://www.gnu.org/licenses/>.
-- *
-+ *
-  */
-
- /*
+diff -ur claws-mail-3.11.1-orig/src/ldaputil.h claws-mail-3.11.1/src/ldaputil.h
+--- claws-mail-3.11.1-orig/src/ldaputil.h	2015-06-18 15:10:11.371528056 +0200
++++ claws-mail-3.11.1/src/ldaputil.h	2015-06-20 22:16:10.159963428 +0200
 @@ -37,6 +37,9 @@
  #define ldap_unbind_ext(ld,x,y) ldap_unbind_s(ld)
  #define LDAP_ADMINLIMIT_EXCEEDED LDAP_ADMIN_LIMIT_EXCEEDED

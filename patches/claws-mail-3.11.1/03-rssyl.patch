@@ -3,9 +3,9 @@ patch -p1 -l -f $* < $0
 exit $?
 
 diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/claws.def claws-mail-3.11.1/src/plugins/rssyl/claws.def
---- claws-mail-3.11.1-orig/src/plugins/rssyl/claws.def	2015-06-17 01:23:50.038587414 +0200
-+++ claws-mail-3.11.1/src/plugins/rssyl/claws.def	2015-06-17 01:32:42.900857918 +0200
-@@ -1,10 +1,9 @@
+--- claws-mail-3.11.1-orig/src/plugins/rssyl/claws.def	2015-06-18 15:10:11.359527733 +0200
++++ claws-mail-3.11.1/src/plugins/rssyl/claws.def	2015-06-18 23:18:59.118874089 +0200
+@@ -1,13 +1,13 @@
  LIBRARY CLAWS-MAIL.EXE
  EXPORTS
 -get_locale_dir
@@ -17,7 +17,11 @@ diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/claws.def claws-mail-3.11.1/sr
  claws_do_idle
  claws_is_exiting
  claws_is_starting
-@@ -32,13 +31,19 @@
++claws_ssl_get_cert_file
+ claws_unlink
+ cm_menu_set_sensitive_full
+ conv_encode_header_full
+@@ -32,13 +32,19 @@
  folder_item_append
  folder_item_get_identifier
  folder_item_get_msginfo
@@ -37,7 +41,7 @@ diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/claws.def claws-mail-3.11.1/sr
  folder_item_update_freeze
  folder_item_update_thaw
  folder_local_folder_destroy
-@@ -53,18 +58,23 @@
+@@ -53,18 +59,23 @@
  folderview_unregister_popup
  folderview_unselect
  folder_write_list
@@ -62,7 +66,7 @@ diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/claws.def claws-mail-3.11.1/sr
  log_error
  log_print
  log_warning
-@@ -73,13 +83,17 @@
+@@ -73,13 +84,17 @@
  mainwindow_get_mainwindow
  make_dir
  make_dir_hier
@@ -81,7 +85,7 @@ diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/claws.def claws-mail-3.11.1/sr
  prefs_read_config
  prefs_set_block_label
  prefs_set_default
-@@ -91,9 +105,13 @@
+@@ -91,9 +106,13 @@
  procheader_parse_file
  procmsg_get_message_file
  procmsg_msginfo_unset_flags
@@ -96,8 +100,8 @@ diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/claws.def claws-mail-3.11.1/sr
 +xml_attr_new
 +xml_tag_add_attr
 diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/date.c claws-mail-3.11.1/src/plugins/rssyl/libfeed/date.c
---- claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/date.c	2015-06-17 01:23:50.038587414 +0200
-+++ claws-mail-3.11.1/src/plugins/rssyl/libfeed/date.c	2015-06-17 01:31:14.522490311 +0200
+--- claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/date.c	2015-06-18 15:10:11.359527733 +0200
++++ claws-mail-3.11.1/src/plugins/rssyl/libfeed/date.c	2015-06-18 22:19:51.975709663 +0200
 @@ -37,78 +37,6 @@
  
  #include <time.h>
@@ -208,8 +212,8 @@ diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/date.c claws-mail-3.11
 -	return mktime(&t);
 -}
 diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/date.h claws-mail-3.11.1/src/plugins/rssyl/libfeed/date.h
---- claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/date.h	2015-06-17 01:23:50.038587414 +0200
-+++ claws-mail-3.11.1/src/plugins/rssyl/libfeed/date.h	2015-06-17 01:31:14.522490311 +0200
+--- claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/date.h	2015-06-18 15:10:11.359527733 +0200
++++ claws-mail-3.11.1/src/plugins/rssyl/libfeed/date.h	2015-06-18 22:19:51.975709663 +0200
 @@ -4,8 +4,6 @@
  #include <time.h>
  #include <glib.h>
@@ -219,9 +223,65 @@ diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/date.h claws-mail-3.11
 -time_t parseRFC822Date(gchar *date);
  
  #endif /* __DATE_H */
+diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/feed.c claws-mail-3.11.1/src/plugins/rssyl/libfeed/feed.c
+--- claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/feed.c	2015-06-18 15:10:11.359527733 +0200
++++ claws-mail-3.11.1/src/plugins/rssyl/libfeed/feed.c	2015-06-18 23:14:08.015082287 +0200
+@@ -267,6 +267,9 @@
+ 	}
+ #endif
+ 
++	if(feed->cacert_file != NULL)
++		curl_easy_setopt(eh, CURLOPT_CAINFO, feed->cacert_file);
++
+ 	if(feed->cookies_path != NULL)
+ 		curl_easy_setopt(eh, CURLOPT_COOKIEFILE, feed->cookies_path);
+ 
+@@ -355,3 +358,21 @@
+ 	g_return_if_fail(feed != NULL);
+ 	feed->ssl_verify_peer = ssl_verify_peer;
+ }
++
++gchar *feed_get_cacert_file(Feed *feed)
++{
++	g_return_val_if_fail(feed != NULL, NULL);
++	return feed->cacert_file;
++}
++
++void feed_set_cacert_file(Feed *feed, const gchar *path)
++{
++	g_return_if_fail(feed != NULL);
++
++	if( feed->cacert_file != NULL ) {
++		g_free(feed->cacert_file);
++		feed->cacert_file = NULL;
++	}
++
++	feed->cacert_file = (path != NULL ? g_strdup(path) : NULL);
++}
+diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/feed.h claws-mail-3.11.1/src/plugins/rssyl/libfeed/feed.h
+--- claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/feed.h	2015-06-18 15:10:11.359527733 +0200
++++ claws-mail-3.11.1/src/plugins/rssyl/libfeed/feed.h	2015-06-18 23:07:39.336684751 +0200
+@@ -44,6 +44,7 @@
+ 	gchar *fetcherr;
+ 	gchar *cookies_path;
+ 	gboolean ssl_verify_peer;
++	gchar *cacert_file;
+ 
+ 	GSList *items;
+ };
+@@ -96,6 +97,9 @@
+ gboolean feed_get_ssl_verify_peer(Feed *feed);
+ void feed_set_ssl_verify_peer(Feed *feed, gboolean ssl_verify_peer);
+ 
++gchar *feed_get_cacert_file(Feed *feed);
++void feed_set_cacert_file(Feed *feed, const gchar *path);
++
+ gint feed_n_items(Feed *feed);
+ FeedItem *feed_nth_item(Feed *feed, guint n);
+ 
 diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/parser_atom10.c claws-mail-3.11.1/src/plugins/rssyl/libfeed/parser_atom10.c
---- claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/parser_atom10.c	2015-06-17 01:23:50.038587414 +0200
-+++ claws-mail-3.11.1/src/plugins/rssyl/libfeed/parser_atom10.c	2015-06-17 01:31:14.522490311 +0200
+--- claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/parser_atom10.c	2015-06-18 15:10:11.359527733 +0200
++++ claws-mail-3.11.1/src/plugins/rssyl/libfeed/parser_atom10.c	2015-06-18 22:19:51.975709663 +0200
 @@ -23,6 +23,8 @@
  #include <string.h>
  #include <stdio.h>
@@ -262,8 +322,8 @@ diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/parser_atom10.c claws-
  
  					break;
 diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/parser_rdf.c claws-mail-3.11.1/src/plugins/rssyl/libfeed/parser_rdf.c
---- claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/parser_rdf.c	2015-06-17 01:23:50.038587414 +0200
-+++ claws-mail-3.11.1/src/plugins/rssyl/libfeed/parser_rdf.c	2015-06-17 01:31:14.686494705 +0200
+--- claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/parser_rdf.c	2015-06-18 15:10:11.359527733 +0200
++++ claws-mail-3.11.1/src/plugins/rssyl/libfeed/parser_rdf.c	2015-06-18 22:19:51.975709663 +0200
 @@ -22,6 +22,8 @@
  #include <expat.h>
  #include <string.h>
@@ -298,8 +358,8 @@ diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/parser_rdf.c claws-mai
  
  					break;
 diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/parser_rss20.c claws-mail-3.11.1/src/plugins/rssyl/libfeed/parser_rss20.c
---- claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/parser_rss20.c	2015-06-17 01:23:50.038587414 +0200
-+++ claws-mail-3.11.1/src/plugins/rssyl/libfeed/parser_rss20.c	2015-06-17 01:31:14.686494705 +0200
+--- claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/parser_rss20.c	2015-06-18 15:10:11.359527733 +0200
++++ claws-mail-3.11.1/src/plugins/rssyl/libfeed/parser_rss20.c	2015-06-18 22:19:51.975709663 +0200
 @@ -22,6 +22,8 @@
  #include <expat.h>
  #include <string.h>
@@ -334,8 +394,8 @@ diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/libfeed/parser_rss20.c claws-m
  				FILL(ctx->curitem->author)
  			}
 diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/parse822.c claws-mail-3.11.1/src/plugins/rssyl/parse822.c
---- claws-mail-3.11.1-orig/src/plugins/rssyl/parse822.c	2015-06-17 01:23:50.038587414 +0200
-+++ claws-mail-3.11.1/src/plugins/rssyl/parse822.c	2015-06-17 01:26:38.195089578 +0200
+--- claws-mail-3.11.1-orig/src/plugins/rssyl/parse822.c	2015-06-18 15:10:11.359527733 +0200
++++ claws-mail-3.11.1/src/plugins/rssyl/parse822.c	2015-06-18 22:19:51.979709771 +0200
 @@ -23,7 +23,6 @@
  #endif
  
@@ -415,8 +475,8 @@ diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/parse822.c claws-mail-3.11.1/s
  
  	ritem->items = g_slist_reverse(ritem->items);
 diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/rssyl_add_item.c claws-mail-3.11.1/src/plugins/rssyl/rssyl_add_item.c
---- claws-mail-3.11.1-orig/src/plugins/rssyl/rssyl_add_item.c	2015-06-17 01:23:50.034587309 +0200
-+++ claws-mail-3.11.1/src/plugins/rssyl/rssyl_add_item.c	2015-06-17 01:27:12.003994903 +0200
+--- claws-mail-3.11.1-orig/src/plugins/rssyl/rssyl_add_item.c	2015-06-18 15:10:11.359527733 +0200
++++ claws-mail-3.11.1/src/plugins/rssyl/rssyl_add_item.c	2015-06-18 22:19:51.979709771 +0200
 @@ -374,7 +374,7 @@
  	dirname = folder_item_get_path(&ritem->item);
  	template = g_strconcat(dirname, G_DIR_SEPARATOR_S,
@@ -427,8 +487,8 @@ diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/rssyl_add_item.c claws-mail-3.
  		g_free(template);
  		return;
 diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/rssyl.c claws-mail-3.11.1/src/plugins/rssyl/rssyl.c
---- claws-mail-3.11.1-orig/src/plugins/rssyl/rssyl.c	2015-06-17 01:23:50.038587414 +0200
-+++ claws-mail-3.11.1/src/plugins/rssyl/rssyl.c	2015-06-17 01:29:32.967770080 +0200
+--- claws-mail-3.11.1-orig/src/plugins/rssyl/rssyl.c	2015-06-18 15:10:11.359527733 +0200
++++ claws-mail-3.11.1/src/plugins/rssyl/rssyl.c	2015-06-18 22:19:51.979709771 +0200
 @@ -203,8 +203,10 @@
  static void rssyl_get_last_num(Folder *folder, FolderItem *item)
  {
@@ -550,8 +610,8 @@ diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/rssyl.c claws-mail-3.11.1/src/
  
  		if( relation != NULL )
 diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/rssyl_update_comments.c claws-mail-3.11.1/src/plugins/rssyl/rssyl_update_comments.c
---- claws-mail-3.11.1-orig/src/plugins/rssyl/rssyl_update_comments.c	2015-06-17 01:23:50.038587414 +0200
-+++ claws-mail-3.11.1/src/plugins/rssyl/rssyl_update_comments.c	2015-06-17 01:30:17.940974678 +0200
+--- claws-mail-3.11.1-orig/src/plugins/rssyl/rssyl_update_comments.c	2015-06-18 15:10:11.359527733 +0200
++++ claws-mail-3.11.1/src/plugins/rssyl/rssyl_update_comments.c	2015-06-18 22:19:51.979709771 +0200
 @@ -56,8 +56,9 @@
  	FolderItem *item = &ritem->item;
  	FeedItem *fi = NULL;
@@ -613,11 +673,38 @@ diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/rssyl_update_comments.c claws-
  	g_free(path);
  
  	ritem->fetching_comments = FALSE;
-Only in claws-mail-3.11.1/src/plugins/rssyl: rssyl_update_comments.c.orig
-Only in claws-mail-3.11.1/src/plugins/rssyl: rssyl_update_comments.c.rej
+diff -ur claws-mail-3.11.1-orig/src/plugins/rssyl/rssyl_update_feed.c claws-mail-3.11.1/src/plugins/rssyl/rssyl_update_feed.c
+--- claws-mail-3.11.1-orig/src/plugins/rssyl/rssyl_update_feed.c	2015-06-18 15:10:11.359527733 +0200
++++ claws-mail-3.11.1/src/plugins/rssyl/rssyl_update_feed.c	2015-06-18 23:44:58.012500049 +0200
+@@ -165,6 +165,12 @@
+ 	feed_set_timeout(ctx->feed, prefs_common.io_timeout_secs);
+ 	feed_set_cookies_path(ctx->feed, rssyl_prefs_get()->cookies_path);
+ 	feed_set_ssl_verify_peer(ctx->feed, ritem->ssl_verify_peer);
++#ifdef G_OS_WIN32
++	if (!g_ascii_strncasecmp(ritem->url, "https", 5)) {
++		feed_set_cacert_file(ctx->feed, claws_ssl_get_cert_file());
++		debug_print("RSSyl: using cert file '%s'\n", feed_get_cacert_file(ctx->feed));
++	}
++#endif
+ 
+ 	return ctx;
+ }
+@@ -184,6 +190,12 @@
+ 	feed_set_timeout(ctx->feed, prefs_common.io_timeout_secs);
+ 	feed_set_cookies_path(ctx->feed, rssyl_prefs_get()->cookies_path);
+ 	feed_set_ssl_verify_peer(ctx->feed, rssyl_prefs_get()->ssl_verify_peer);
++#ifdef G_OS_WIN32
++	if (!g_ascii_strncasecmp(url, "https", 5)) {
++		feed_set_cacert_file(ctx->feed, claws_ssl_get_cert_file());
++		debug_print("RSSyl: using cert file '%s'\n", feed_get_cacert_file(ctx->feed));
++	}
++#endif
+ 
+ 	return ctx;
+ }
 diff -ur claws-mail-3.11.1-orig/src/procheader.c claws-mail-3.11.1/src/procheader.c
---- claws-mail-3.11.1-orig/src/procheader.c	2015-06-17 01:23:49.994586240 +0200
-+++ claws-mail-3.11.1/src/procheader.c	2015-06-17 01:31:14.686494705 +0200
+--- claws-mail-3.11.1-orig/src/procheader.c	2015-06-18 15:10:11.375528164 +0200
++++ claws-mail-3.11.1/src/procheader.c	2015-06-18 22:19:51.979709771 +0200
 @@ -790,8 +790,10 @@
  {
  	gint result;
