@@ -423,7 +423,6 @@ Function PrintCloseOtherApps
     IfFileExists $INSTDIR\dirmngr.exe print_warning
     Return
    print_warning:
-    MessageBox MB_OK|MB_ICONEXCLAMATION "$(T_CloseOtherApps)"
     IfFileExists $INSTDIR\winpt.exe 0 +3
       MessageBox MB_OK "$(T_ShuttingDownWinPT)"
       ExecWait '"$INSTDIR\winpt.exe" --stop'
@@ -531,11 +530,6 @@ LangString T_AdminNeeded ${LANG_ENGLISH} \
    "Warning: Administrator permissions required for a successful installation"
 
 # From Function PrintCloseOtherApps
-LangString T_CloseOtherApps ${LANG_ENGLISH} \
-   "Please make sure that other applications are not running. \
-    In particular you should close Outlook and all Explorer \
-    windows.  Claws Mail will try to install anyway but a reboot \
-    will be required then."
 LangString T_ShuttingDownWinPT ${LANG_ENGLISH} \
    "Trying to shutdown a possible running instance of WinPT."
 LangString T_ShuttingDownDirMngr ${LANG_ENGLISH} \
