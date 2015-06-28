@@ -156,6 +156,11 @@
 !define gpg4win_pkg_libsoup @gpg4win_pkg_libsoup@
 !define gpg4win_pkg_libsoup_version @gpg4win_pkg_libsoup_version@
 
+@HAVE_PKG_BSFILTER@
+!define gpg4win_pkg_bsfilter @gpg4win_pkg_bsfilter@
+!define gpg4win_pkg_bsfilter_version @gpg4win_pkg_bsfilter_version@
+!define gpg4win_pkg_bsfilter_src @gpg4win_pkg_bsfilter_src@
+
 @HAVE_PKG_ZLIB@
 !define gpg4win_pkg_zlib @gpg4win_pkg_zlib@
 !define gpg4win_pkg_zlib_version @gpg4win_pkg_zlib_version@

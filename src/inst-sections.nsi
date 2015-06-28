@@ -56,6 +56,9 @@
 !ifdef HAVE_PKG_ZLIB
 !include "inst-zlib.nsi"
 !endif
+!ifdef HAVE_PKG_BSFILTER
+!include "inst-bsfilter.nsi"
+!endif
 !ifdef HAVE_PKG_GETTEXT
 !include "inst-gettext.nsi"
 !endif
@@ -262,6 +265,9 @@
 !endif
 !ifdef HAVE_PKG_GETTEXT
 !include "uninst-gettext.nsi"
+!endif
+!ifdef HAVE_PKG_BSFILTER
+!include "uninst-bsfilter.nsi"
 !endif
 !ifdef HAVE_PKG_ZLIB
 !include "uninst-zlib.nsi"
@@ -482,6 +488,7 @@ Function CalcDepends
   !insertmacro SelectSection ${SEC_gtk_}
   !insertmacro SelectSection ${SEC_libpng}
   !insertmacro SelectSection ${SEC_glib}
+	!insertmacro SelectSection ${SEC_bsfilter}
   skip_gnupg2:
 !endif
 

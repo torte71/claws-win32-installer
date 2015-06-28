@@ -63,6 +63,7 @@ EXTRA_DIST = pkg-config gpg4win.nsi gpg4win-src.nsi \
         inst-regex.nsi		   uninst-regex.nsi	      \
         inst-w32pth.nsi		   uninst-w32pth.nsi	      \
         inst-zlib.nsi        	   uninst-zlib.nsi            \
+        inst-bsfilter.nsi        	   uninst-bsfilter.nsi            \
 	inst-bzip2.nsi             uninst-bzip2.nsi           \
 	inst-jpeg.nsi     uninst-jpeg.nsi         \
 	inst-webkit.nsi     uninst-webkit.nsi         \
@@ -402,7 +403,7 @@ gpg4win_pkg_zlib_make_args_inst = -fwin32/Makefile.gcc install \
 
 # Supported binary packages.
 gpg4win_bpkgs = pkgconfig pango freetype fontconfig \
-                cairo atk
+                cairo atk bsfilter
 
 # libiconv needs some special magic to generate a usable import
 # library.

@@ -268,6 +268,7 @@ GPG4WIN_SPKG([webkit], [jpeg libpng glib gtk+ libsoup libxml2])
 GPG4WIN_SPKG([gpa], [libiconv gettext zlib gtk+ libpng glib gpgme])
 GPG4WIN_SPKG([curl], [zlib gnutls])
 GPG4WIN_SPKG([libetpan], [gnutls])
+GPG4WIN_BPKG_GNUWIN32([bsfilter])
 GPG4WIN_SPKG([claws-mail], [libiconv gettext zlib gtk+ libpng enchant glib dnl
                             gpgme crypt regex libetpan gnutls dnl
                             libxml2 expat webkit curl])
