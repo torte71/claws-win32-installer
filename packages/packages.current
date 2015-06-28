@@ -66,8 +66,8 @@ chk  1836601393522124787e029466935408e22dd204
 # gnutls
 server ftp://ftp.gnutls.org/gcrypt
 
-file gnutls/v3.4/gnutls-3.4.1.tar.xz
-chk 64b9c58e087df3fcbe464d2ceef18a8416c364d4
+file gnutls/v3.4/gnutls-3.4.2.tar.xz
+chk  f29b4d763aee89c860aa5c54574778537239da08
 
 
 #
@@ -362,9 +362,9 @@ chk  7cf0545955ce414044bb99b871d324753dd7b2e5
 
 # last changed: 2015-02-18
 # by: ah
-name gnupg2-2.0.27.tar.bz2
-file gnupg/gnupg-2.0.27.tar.bz2
-chk  d065be185f5bac8ea07b210ab7756e79b83b63d4
+name gnupg2-2.0.28.tar.bz2
+file gnupg/gnupg-2.0.28.tar.bz2
+chk  9a1050f72b6c9afe2b4a0a3f2e9dca2abba8e4ef
 
 # checked: 2014-07-16 ah
 file dirmngr/dirmngr-1.1.1.tar.bz2

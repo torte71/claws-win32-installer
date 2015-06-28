@@ -39,10 +39,9 @@ EXTRA_DIST = autogen.sh \
 				patches/claws-mail-3.11.1/12-editldap-tls.patch \
         patches/dirmngr-1.1.1/dirmngr-pth.patch \
 				patches/glib-2.45.2/01-socket.patch \
-        patches/gnupg2-2.0.27/0001-Enable-wildcard-expansion-with-mingw-w64.patch \
-        patches/gnupg2-2.0.27/0002-Let-wchar_to_native-convert-to-console-codepage.patch \
-        patches/gnupg2-2.0.27/0003-gpgtar-Fix-extracting-files-with-size-512.patch \
-        patches/gnupg2-2.0.27/0005-Fix-gpgtar-8-bit-encoding-handling-on-Win32.patch \
+        patches/gnupg2-2.0.28/0001-Enable-wildcard-expansion-with-mingw-w64.patch \
+        patches/gnupg2-2.0.28/0002-Let-wchar_to_native-convert-to-console-codepage.patch \
+        patches/gnupg2-2.0.28/0005-Fix-gpgtar-8-bit-encoding-handling-on-Win32.patch \
 				patches/libetpan-1.6/mingw-closesocket-include.patch \
         patches/libtasn1-2.14/gnulib-mingw-w64-fix.patch \
 				patches/w32pth-2.0.5/01-def-fix.patch \
