@@ -20,13 +20,13 @@
 !ifdef prefix
 !undef prefix
 !endif
-!define prefix ${ipdir}/glib-networking-${gpg4win_pkg_glib-networking_version}
+!define prefix ${ipdir}/glib-networking-${gpg4win_pkg_glib_networking_version}
 
 
 ; Uninstaller section.
 Section "-un.glib-networking"
 !ifdef SOURCES
-  Push "${gpg4win_pkg_glib-networking}"
+  Push "${gpg4win_pkg_glib_networking}"
   Call un.SourceDelete
 !else
 
