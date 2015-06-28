@@ -26,7 +26,7 @@
 ; Uninstaller section.
 Section "-un.gdk_pixbuf"
 !ifdef SOURCES
-  Push "${gpg4win_pkg_gdk_pixbufib}"
+  Push "${gpg4win_pkg_gdk_pixbuf}"
   Call un.SourceDelete
 !else
 
