@@ -234,21 +234,16 @@ chk  49ae12458f2e29c27ed9d1390d95db18fd4a49ac
 server http://cairographics.org/releases
 
 # checked: 2013-04-29 wk - 1.10.2 is the latest in the 1.10 series.
-file cairo-1.10.2.tar.gz
-chk  ccce5ae03f99c505db97c286a0c9a90a926d3c6e
+file cairo-1.14.2.tar.xz
+chk  c8da68aa66ca0855b5d0ff552766d3e8679e1d24
+
+file pixman-0.32.6.tar.gz
+chk  8791343cbf6d99451f4d08e8209d6ac11bf96df2
 
 server http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies
 # checked: 2013-07-16 ah most recent package on that server is from
 # 2012-09-27 TODO -> Move to another source / source build of those
 # dependencies
-
-# checked: 2013-04-29 wk
-name cairo-1.10.2.zip
-file cairo_1.10.2-2_win32.zip
-chk  d44cd66a9f4d7d29a8f2c28d1c1c5f9b0525ba44
-name cairo-dev-1.10.2.zip
-file cairo-dev_1.10.2-2_win32.zip
-chk  45cae1fac45a6c6f33498c37c0cdc47722614d92
 
 # checked: 2013-04-29 wk
 file freetype-2.4.2.tar.bz2

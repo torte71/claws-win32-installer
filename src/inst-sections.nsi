@@ -98,6 +98,9 @@
 !ifdef HAVE_PKG_FONTCONFIG
 !include "inst-fontconfig.nsi"
 !endif
+!ifdef HAVE_PKG_PIXMAN
+!include "inst-pixman.nsi"
+!endif
 !ifdef HAVE_PKG_CAIRO
 !include "inst-cairo.nsi"
 !endif
@@ -226,6 +229,9 @@
 !endif
 !ifdef HAVE_PKG_CAIRO
 !include "uninst-cairo.nsi"
+!endif
+!ifdef HAVE_PKG_PIXMAN
+!include "uninst-pixman.nsi"
 !endif
 !ifdef HAVE_PKG_FONTCONFIG
 !include "uninst-fontconfig.nsi"

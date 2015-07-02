@@ -29,6 +29,7 @@ EXTRA_DIST = pkg-config gpg4win.nsi gpg4win-src.nsi \
         inst-expat.nsi		   uninst-expat.nsi	      \
         inst-freetype.nsi	   uninst-freetype.nsi	      \
         inst-fontconfig.nsi	   uninst-fontconfig.nsi      \
+        inst-pixman.nsi		   uninst-pixman.nsi	      \
         inst-cairo.nsi		   uninst-cairo.nsi	      \
         inst-libgsasl.nsi	   uninst-libgsasl.nsi        \
         inst-libtasn1.nsi	   uninst-libtasn1.nsi        \
@@ -90,7 +91,7 @@ gpg4win_spkgs = glib libffi gdk-pixbuf gtk+ expat \
                 libgpg-error gpgme libpng enchant \
 		gpa libgsasl libtasn1 opencdk gnutls curl libxml2 \
 		jpeg glib-networking libsoup webkit gmp nettle \
-                libetpan claws-mail \
+		pixman cairo libetpan claws-mail \
 		gnupg2 pinentry libassuan libksba libgcrypt \
 		adns dirmngr w32pth regex libiconv gettext
 
@@ -128,6 +129,8 @@ gpg4win_pkg_libsoup_make_args = -j$(NUMPROC)
 gpg4win_pkg_webkit_make_args = -j$(NUMPROC)
 gpg4win_pkg_gmp_make_args = -j$(NUMPROC)
 gpg4win_pkg_nettle_make_args = -j$(NUMPROC)
+gpg4win_pkg_pixman_make_args = -j$(NUMPROC)
+gpg4win_pkg_cairo_make_args = -j$(NUMPROC)
 
 
 
@@ -179,6 +182,17 @@ define gpg4win_pkg_gnupg2_post_install
               $$$${pkgidir}/share/locale/$$$${i}/LC_MESSAGES/gnupg2.mo; \
  done)
 endef
+
+gpg4win_pkg_pixman_configure = \
+	--enable-libpng --disable-gtk \
+	CPPFLAGS=\"-I$(idir)/include\" \
+	LDFLAGS=\"-L$(idir)/lib\"
+
+gpg4win_pkg_cairo_configure = \
+	--enable-win32=yes --enable-win32-font=yes \
+	--disable-gtk-doc-html \
+	CPPFLAGS=\"-I$(idir)/include\" \
+	LDFLAGS=\"-L$(idir)/lib\"
 
 # We would like to use --with-libiconv-prefix and
 # --with-libintl-prefix, but these don't work with the cheesy
@@ -403,7 +417,7 @@ gpg4win_pkg_zlib_make_args_inst = -fwin32/Makefile.gcc install \
 
 # Supported binary packages.
 gpg4win_bpkgs = pkgconfig pango freetype fontconfig \
-                cairo atk bsfilter
+                atk bsfilter
 
 # libiconv needs some special magic to generate a usable import
 # library.

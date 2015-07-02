@@ -112,6 +112,14 @@
 !define gpg4win_pkg_nettle @gpg4win_pkg_nettle@
 !define gpg4win_pkg_nettle_version @gpg4win_pkg_nettle_version@
 
+@HAVE_PKG_PIXMAN@
+!define gpg4win_pkg_pixman @gpg4win_pkg_pixman@
+!define gpg4win_pkg_pixman_version @gpg4win_pkg_pixman_version@
+
+@HAVE_PKG_CAIRO@
+!define gpg4win_pkg_cairo @gpg4win_pkg_cairo@
+!define gpg4win_pkg_cairo_version @gpg4win_pkg_cairo_version@
+
 @HAVE_PKG_GNUTLS@
 !define gpg4win_pkg_gnutls @gpg4win_pkg_gnutls@
 !define gpg4win_pkg_gnutls_version @gpg4win_pkg_gnutls_version@
@@ -217,12 +225,6 @@
 !define gpg4win_pkg_fontconfig_version @gpg4win_pkg_fontconfig_version@
 !define gpg4win_pkg_fontconfig_dev @gpg4win_pkg_fontconfig_dev@
 !define gpg4win_pkg_fontconfig_src @gpg4win_pkg_fontconfig_src@
-
-@HAVE_PKG_CAIRO@
-!define gpg4win_pkg_cairo @gpg4win_pkg_cairo@
-!define gpg4win_pkg_cairo_version @gpg4win_pkg_cairo_version@
-!define gpg4win_pkg_cairo_dev @gpg4win_pkg_cairo_dev@
-!define gpg4win_pkg_cairo_src @gpg4win_pkg_cairo_src@
 
 @HAVE_PKG_PANGO@
 !define gpg4win_pkg_pango @gpg4win_pkg_pango@
