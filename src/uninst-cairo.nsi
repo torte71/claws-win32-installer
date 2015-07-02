@@ -27,7 +27,7 @@
 ; Uninstaller section.
 Section "-un.cairo"
 !ifdef SOURCES
-  Push "${gpg4win_pkg_cairo_src}"
+  Push "${gpg4win_pkg_cairo}"
   Call un.SourceDelete
 !else
   Delete /REBOOTOK "$INSTDIR\libcairo-2.dll"

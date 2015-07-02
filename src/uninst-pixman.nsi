@@ -1,4 +1,4 @@
-# inst-cairo.nsi - Installer snippet for Cairo.     -*- coding: latin-1; -*-
+# uninst-pixman.nsi - Installer snippet for pixman.   -*- coding: latin-1; -*-
 # Copyright (C) 2007 g10 Code GmbH
 #
 # This file is part of Gpg4win.
@@ -21,21 +21,16 @@
 !ifdef prefix
 !undef prefix
 !endif
-!define prefix ${ipdir}/cairo-${gpg4win_pkg_cairo_version}
+!define prefix ${ipdir}/pixman-${gpg4win_pkg_pixman_version}
 
-!ifdef DEBUG
-Section "cairo" SEC_cairo
-!else
-Section "-cairo" SEC_cairo
-!endif
-  SetOutPath "$INSTDIR"
+
+; Uninstaller section.
+Section "-un.pixman"
 !ifdef SOURCES
-  File "${gpg4win_pkg_cairo}"
+  Push "${gpg4win_pkg_pixman}"
+  Call un.SourceDelete
 !else
-
-  File ${prefix}/bin/libcairo-2.dll
-  File ${prefix}/bin/libcairo-gobject-2.dll
-  File ${prefix}/bin/libcairo-script-interpreter-2.dll
+  Delete /REBOOTOK "$INSTDIR\libpixman-1-0.dll"
 
 !endif
 SectionEnd
