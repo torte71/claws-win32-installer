@@ -60,6 +60,7 @@ ${MementoSection} "Claws-Mail" SEC_claws_mail
   File ${prefix}/lib/claws-mail/plugins/rssyl.dll
   File ${prefix}/lib/claws-mail/plugins/spamreport.dll
   File ${prefix}/lib/claws-mail/plugins/vcalendar.dll
+  File ${prefix}/lib/claws-mail/plugins/managesieve.dll
 
   SetOutPath "$INSTDIR\share\locale\pt_BR\LC_MESSAGES"
   File ${prefix}/share/locale/pt_BR/LC_MESSAGES/claws-mail.mo

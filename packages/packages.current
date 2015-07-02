@@ -80,11 +80,16 @@ server http://www.claws-mail.org/win32/
 file   libetpan-1.6.tar.gz
 chk    54d0c6d612e3981cc71e52e3c9e04d5805d9917f
 
-file   claws-mail-3.11.1.tar.xz
-chk    b0c07906043f7a3ec726c7a96d6dcfc3c148b9cc
+#file   claws-mail-3.11.1git179.tar.xz
+#chk    b47a70429e7f67067bb5060ecf4a9400baa9b050
 
 file   expat-2.1.0.tar.gz
 chk    b08197d146930a5543a7b99e871cba3da614f6f0
+
+# Temporary storage for beta purposes
+server http://ticho.kacian.sk/~ticho/
+file   claws-mail-3.11.1git179.tar.xz
+chk    b47a70429e7f67067bb5060ecf4a9400baa9b050
 
 #
 # curl for Claws plugins

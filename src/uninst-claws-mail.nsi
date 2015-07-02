@@ -58,6 +58,7 @@ Section "-un.claws-mail"
   Delete "$INSTDIR\lib\claws-mail\plugins\rssyl.dll"
   Delete "$INSTDIR\lib\claws-mail\plugins\spamreport.dll"
   Delete "$INSTDIR\lib\claws-mail\plugins\vcalendar.dll"
+  Delete "$INSTDIR\lib\claws-mail\plugins\managesieve.dll"
 
   RMDir "$INSTDIR\lib\claws-mail\plugins"
   RMDir "$INSTDIR\lib\claws-mail"
