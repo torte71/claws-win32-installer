@@ -1,0 +1,48 @@
+#! /bin/sh
+patch -p1 -l -f $* < $0
+exit $?
+
+diff --git a/src/plugins/managesieve/sieve_prefs.c b/src/plugins/managesieve/sieve_prefs.c
+index 69d8aa4..875ee55 100644
+--- a/src/plugins/managesieve/sieve_prefs.c
++++ b/src/plugins/managesieve/sieve_prefs.c
+@@ -419,6 +419,9 @@ struct SieveAccountConfig *sieve_prefs_account_get_config(
+ 	gchar enc_userid[256], enc_passwd[256];
+ 	gchar enable, use_host, use_port;
+ 	gsize len;
++#ifdef G_OS_WIN32
++	gchar tmphost[256];
++#endif
+ 
+ 	config = g_new0(SieveAccountConfig, 1);
+ 
+@@ -437,10 +440,17 @@ struct SieveAccountConfig *sieve_prefs_account_get_config(
+ 	if (confstr == NULL)
+ 		return config;
+ 
+-
++#ifdef G_OS_WIN32
++	sscanf(confstr, "%c%c %255s %c%hu %hhu %hhu %hhu %256s %256s",
++#else
+ 	sscanf(confstr, "%c%c %ms %c%hu %hhu %hhu %hhu %256s %256s",
++#endif
+ 			&enable, &use_host,
++#ifdef G_OS_WIN32
++			tmphost,
++#else
+ 			&config->host,
++#endif
+ 			&use_port, &config->port,
+ 			(char *)&config->tls_type,
+ 			(char *)&config->auth,
+@@ -448,6 +458,10 @@ struct SieveAccountConfig *sieve_prefs_account_get_config(
+ 			enc_userid,
+ 			enc_passwd);
+ 
++#ifdef G_OS_WIN32
++	config->host = g_strndup(tmphost, 255);
++#endif
++
+ 	config->enable = enable == 'y';
+ 	config->use_host = use_host == 'y';
+ 	config->use_port = use_port == 'y';

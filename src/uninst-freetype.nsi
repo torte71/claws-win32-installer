@@ -27,9 +27,9 @@
 ; Uninstaller section.
 Section "-un.freetype"
 !ifdef SOURCES
-  Push "${gpg4win_pkg_freetype_src}"
+  Push "${gpg4win_pkg_freetype}"
   Call un.SourceDelete
 !else
-  Delete /REBOOTOK "$INSTDIR\freetype6.dll"
+  Delete /REBOOTOK "$INSTDIR\libfreetype-6.dll"
 !endif
 SectionEnd

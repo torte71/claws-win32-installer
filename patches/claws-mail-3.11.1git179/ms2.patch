@@ -1,0 +1,43 @@
+#! /bin/sh
+patch -p1 -l -f $* < $0
+exit $?
+
+commit 198db03ee8b70159f27f1b3033b2ad1802a138ed
+Author: Andrej Kacian <ticho@claws-mail.org>
+Date:   Wed Jul 1 12:25:32 2015 +0200
+
+    Managesieve: use accessor for common preferences
+    
+    Fixes crash on Windows when opening the script editor window.
+
+diff --git a/src/plugins/managesieve/claws.def b/src/plugins/managesieve/claws.def
+index 43b1e89..cb8ffc2 100644
+--- a/src/plugins/managesieve/claws.def
++++ b/src/plugins/managesieve/claws.def
+@@ -39,7 +39,7 @@ prefs_account_register_page
+ prefs_account_set_privacy_prefs
+ prefs_account_unregister_page
+ prefs_button_toggled
+-prefs_common
++prefs_common_get_prefs
+ session_connect
+ session_destroy
+ session_disconnect
+diff --git a/src/plugins/managesieve/sieve_editor.c b/src/plugins/managesieve/sieve_editor.c
+index 28f75f5..7dc9577 100644
+--- a/src/plugins/managesieve/sieve_editor.c
++++ b/src/plugins/managesieve/sieve_editor.c
+@@ -578,11 +578,11 @@ MENUITEM_ADDUI_MANAGER(ui_manager, "/Menu/Filter", "Revert", "Filter/Revert", GT
+ 			 G_CALLBACK(sieve_editor_changed_cb), page);
+ 
+ 	/* set text font */
+-	if (prefs_common.textfont) {
++	if (prefs_common_get_prefs()->textfont) {
+ 		PangoFontDescription *font_desc;
+ 
+ 		font_desc = pango_font_description_from_string
+-			(prefs_common.textfont);
++			(prefs_common_get_prefs()->textfont);
+ 		if (font_desc) {
+ 			gtk_widget_modify_font(text, font_desc);
+ 			pango_font_description_free(font_desc);

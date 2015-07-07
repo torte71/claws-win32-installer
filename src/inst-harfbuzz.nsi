@@ -1,5 +1,5 @@
-# inst-pango.nsi - Installer snippet for pango.     -*- coding: latin-1; -*-
-# Copyright (C) 2005 g10 Code GmbH
+# inst-harfbuzz.nsi - Installer snippet for harfbuzz.        -*- coding: latin-1; -*-
+# Copyright (C) 2005, 2007, 2008 g10 Code GmbH
 # 
 # This file is part of GPG4Win.
 # 
@@ -20,25 +20,21 @@
 !ifdef prefix
 !undef prefix
 !endif
-!define prefix ${ipdir}/pango-${gpg4win_pkg_pango_version}
+!define prefix ${ipdir}/harfbuzz-${gpg4win_pkg_harfbuzz_version}
+
+################ THIS IS JUST A PLACEHOLDER FILE, WILL NEED ACTUAL CONTENT
 
 !ifdef DEBUG
-Section "pango" SEC_pango
+Section "harfbuzz" SEC_harfbuzz
 !else
-Section "-pango" SEC_pango
+Section "-harfbuzz" SEC_harfbuzz
 !endif
   SetOutPath "$INSTDIR"
 !ifdef SOURCES
-  File "${gpg4win_pkg_pango}"
+  File ${gpg4win_pkg_harfbuzz}
 !else
-  File ${prefix}/bin/libpango-1.0-0.dll
-  File ${prefix}/bin/libpangoft2-1.0-0.dll
-  File ${prefix}/bin/libpangowin32-1.0-0.dll
-  File ${prefix}/bin/libpangocairo-1.0-0.dll
 
-#  SetOutPath "$INSTDIR\etc\pango"
-#  File ${prefix}/etc/pango/pango.aliases
-#  File ${prefix}/etc/pango/pango.modules
+  File ${prefix}/bin/libharfbuzz-0.dll
 
 !endif
 SectionEnd

@@ -88,10 +88,10 @@ CLEANFILES = g4wihelp.dll versioninfo.txt \
 
 # Supported source packages.
 gpg4win_spkgs = glib libffi gdk-pixbuf gtk+ expat \
-                libgpg-error gpgme libpng enchant \
+		libgpg-error gpgme libpng enchant atk fontconfig freetype \
 		gpa libgsasl libtasn1 opencdk gnutls curl libxml2 \
 		jpeg glib-networking libsoup webkit gmp nettle \
-		pixman cairo libetpan claws-mail \
+		harfbuzz pango pixman cairo libetpan claws-mail \
 		gnupg2 pinentry libassuan libksba libgcrypt \
 		adns dirmngr w32pth regex libiconv gettext
 
@@ -101,7 +101,14 @@ gpg4win_expkgs = libgpg-error libassuan libiconv gettext w32pth
 # Extra options to configure for individual packages.
 # We can use $(idir) here for the installation prefix.
 
+gpg4win_pkg_harfbuzz_make_args = -j$(NUMPROC)
+gpg4win_pkg_freetype_make_args = -j$(NUMPROC)
+gpg4win_pkg_fontconfig_make_args = -j$(NUMPROC)
+gpg4win_pkg_pango_make_args = -j$(NUMPROC)
+gpg4win_pkg_atk_make_args = -j$(NUMPROC)
+gpg4win_pkg_gdk_pixbuf_make_args = -j$(NUMPROC)
 gpg4win_pkg_glib_make_args = -j$(NUMPROC)
+gpg4win_pkg_gtk__make_args = -j$(NUMPROC)
 gpg4win_pkg_libgpg_error_make_args = -j$(NUMPROC)
 gpg4win_pkg_gpgme_make_args = -j$(NUMPROC)
 gpg4win_pkg_expat_make_args = -j$(NUMPROC)
@@ -139,11 +146,11 @@ gpg4win_pkg_libiconv_ex_configure = \
 
 gpg4win_pkg_gettext_configure = \
   --with-lib-prefix=$(idir) --with-libiconv-prefix=$(idir) \
-  CPPFLAGS=-I$(idir)/include CFLAGS=-O2 LDFLAGS=-L$(idir)/lib
+  CPPFLAGS=-I$(idir)/include CFLAGS=-O2 LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
 
 gpg4win_pkg_gettext_ex_configure = \
   --with-lib-prefix=$(ex_idir) --with-libiconv-prefix=$(ex_idir) \
-  CPPFLAGS=-I$(ex_idir)/include CFLAGS=-O2 LDFLAGS=-L$(ex_idir)/lib
+  CPPFLAGS=-I$(ex_idir)/include CFLAGS=-O2 LDFLAGS=\"-Wl,--enable-auto-image-base -L$(ex_idir)/lib\"
 
 # We only need gettext-runtime and there is sadly no top level
 # configure option for this
@@ -155,16 +162,26 @@ gpg4win_pkg_gettext_ex_make_dir_inst = gettext-runtime
 gpg4win_pkg_glib_configure = \
   --disable-modular-tests \
   --with-lib-prefix=$(idir) --with-libiconv-prefix=$(idir) \
-  CPPFLAGS=-I$(idir)/include LDFLAGS=-L$(idir)/lib CCC=$(host)-g++
+  CPPFLAGS=-I$(idir)/include LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\" CCC=$(host)-g++
 gpg4win_pkg_glib_extracflags = -march=i486
 
 gpg4win_pkg_gdk_pixbuf_configure = \
   --with-lib-prefix=$(idir) --with-libiconv-prefix=$(idir) \
   --with-included-loaders=yes \
-  CPPFLAGS=-I$(idir)/include LDFLAGS=-L$(idir)/lib
+	--with-gdiplus \
+	--without-libjasper \
+	--disable-gtk-doc-html \
+	--disable-glibtest \
+  CPPFLAGS=-I$(idir)/include LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
 
 gpg4win_pkg_gtk__configure = \
-  CPPFLAGS=-I$(idir)/include LDFLAGS=-L$(idir)/lib --disable-cups
+	--with-gdktarget=win32 \
+	--with-included-immodules \
+	--disable-cups \
+	--disable-gtk-doc \
+	--disable-static \
+	--disable-glibtest \
+  CPPFLAGS=-I$(idir)/include LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
 
 # The GnuPG package provides man pages which we have to convert.
 # We also create the MO files here.
@@ -183,16 +200,49 @@ define gpg4win_pkg_gnupg2_post_install
  done)
 endef
 
+gpg4win_pkg_harfbuzz_configure = \
+	--disable-gtk-doc-html \
+	--with-glib \
+	--with-gobject \
+	--with-fontconfig \
+	--with-freetype \
+	--with-cairo \
+	CPPFLAGS=\"-I$(idir)/include\" \
+	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
+
+gpg4win_pkg_freetype_configure = \
+	--host=i686-w64-mingw32 \
+	--build=x86_64-linux-gnu \
+	--with-png --without-bzip2 --with-zlib \
+	CPPFLAGS=\"-I$(idir)/include\" \
+	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
+
+gpg4win_pkg_fontconfig_configure = \
+	--enable-iconv --disable-docs \
+	CPPFLAGS=\"-I$(idir)/include\" \
+	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
+
+gpg4win_pkg_pango_configure = \
+	--disable-gtk-doc-html --disable-glibtest --disable-doc-cross-references \
+	--with-included-modules=yes \
+	CPPFLAGS=\"-I$(idir)/include\" \
+	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
+
+gpg4win_pkg_atk_configure = \
+	--disable-gtk-doc-html --disable-glibtest \
+	CPPFLAGS=\"-I$(idir)/include\" \
+	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
+
 gpg4win_pkg_pixman_configure = \
 	--enable-libpng --disable-gtk \
 	CPPFLAGS=\"-I$(idir)/include\" \
-	LDFLAGS=\"-L$(idir)/lib\"
+	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
 
 gpg4win_pkg_cairo_configure = \
-	--enable-win32=yes --enable-win32-font=yes \
-	--disable-gtk-doc-html \
+	--enable-win32 --enable-win32-font \
+	--enable-ft --enable-fc \
 	CPPFLAGS=\"-I$(idir)/include\" \
-	LDFLAGS=\"-L$(idir)/lib\"
+	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
 
 # We would like to use --with-libiconv-prefix and
 # --with-libintl-prefix, but these don't work with the cheesy
@@ -200,11 +250,11 @@ gpg4win_pkg_cairo_configure = \
 #gpg4win_pkg_libgpg_error_configure = \
 #  --with-libiconv-prefix=$(idir) --with-libintl-prefix=$(idir)
 gpg4win_pkg_libgpg_error_configure = --silent \
-  CPPFLAGS=-I$(idir)/include LDFLAGS=-L$(idir)/lib \
-  --enable-static
+  --enable-static \
+  CPPFLAGS=-I$(idir)/include LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
 
 gpg4win_pkg_libgpg_error_ex_configure = --silent \
-  CPPFLAGS=-I$(idir)/include LDFLAGS=-L$(idir)/lib \
+  CPPFLAGS=-I$(idir)/include LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\" \
   --enable-static
 
 # We convert the PO files to UTF-8.  FIXME: This should be done in
@@ -235,9 +285,9 @@ gpg4win_pkg_libgcrypt_configure = --silent \
 
 gpg4win_pkg_adns_configure = --silent
 
-gpg4win_pkg_libpng_configure = HAVE_SOLARIS_LD_FALSE=yes CPPFLAGS=\"-I$(idir)/include -DPNG_BUILD_DLL\" LDFLAGS=\"-L$(idir)/lib\" LIBPNG_DEFINES=\"-DPNG_BUILD_DLL\"
+gpg4win_pkg_libpng_configure = HAVE_SOLARIS_LD_FALSE=yes CPPFLAGS=\"-I$(idir)/include -DPNG_BUILD_DLL\" LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\" LIBPNG_DEFINES=\"-DPNG_BUILD_DLL\"
 
-gpg4win_pkg_enchant_configure = CPPFLAGS=\"-I$(idir)/include -UENCHANT_GLOBAL_MODULE_DIR -UENCHANT_GLOBAL_ORDERING -UENCHANT_MYSPELL_DICT_DIR -UENCHANT_USPELL_DICT_DIR\" LDFLAGS=\"-L$(idir)/lib\"
+gpg4win_pkg_enchant_configure = CPPFLAGS=\"-I$(idir)/include -UENCHANT_GLOBAL_MODULE_DIR -UENCHANT_GLOBAL_ORDERING -UENCHANT_MYSPELL_DICT_DIR -UENCHANT_USPELL_DICT_DIR\" LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
 
 gpg4win_pkg_dirmngr_configure = \
   --with-gpg-error-prefix=$(idir) \
@@ -263,7 +313,7 @@ gpg4win_pkg_pinentry_configure = \
   --disable-pinentry-gtk \
   --enable-pinentry-gtk2 \
   --with-glib-prefix=$(idir) --with-gtk-prefix=$(idir) \
-  CPPFLAGS=-I$(idir)/include LDFLAGS=-L$(idir)/lib \
+  CPPFLAGS=-I$(idir)/include LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\" \
   CXXFLAGS=-static-libstdc++
 #  --with-libiconv-prefix=$(idir) --with-libintl-prefix=$(idir)
 
@@ -271,7 +321,7 @@ gpg4win_pkg_pinentry_configure = \
 gpg4win_pkg_gpgme_configure = --silent \
   --with-gpg-error-prefix=$(idir) --enable-static \
   `test -n "@HAVE_PKG_GLIB@" && echo "--enable-w32-glib"` \
-  --disable-w32-qt LDFLAGS=-L$(idir)/lib
+  --disable-w32-qt LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
 
 gpg4win_pkg_gpa_configure = --silent \
   --with-libiconv-prefix=$(idir) --with-libintl-prefix=$(idir) \
@@ -287,7 +337,7 @@ gpg4win_pkg_gnutls_configure = \
 	--disable-gtk-doc-html \
   --with-libtasn1-prefix=$(idir) \
   --with-libgcrypt-prefix=$(idir) \
-	CPPFLAGS=\"-I$(idir)/include\" LDFLAGS=\"-L$(idir)/lib\"
+	CPPFLAGS=\"-I$(idir)/include\" LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
 
 gpg4win_pkg_gmp_configure = \
   --disable-static \
@@ -297,7 +347,7 @@ gpg4win_pkg_gmp_configure = \
 gpg4win_pkg_nettle_configure = \
   --enable-public-key \
 	CPPFLAGS=\"-I$(idir)/include\" \
-	LDFLAGS=\"-L$(idir)/lib\"
+	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
 
 # In 2.12.21 gnutls_openssl is not linked to libtasn1, thus we use
 # this hack to here.  (Using the included minitasn does work either
@@ -315,7 +365,7 @@ gpg4win_pkg_libxml2_configure = \
 
 gpg4win_pkg_libetpan_configure = --with-gnutls --enable-threads \
   CPPFLAGS=\"-I$(idir)/include\" \
-  LDFLAGS=\"-L$(idir)/lib\" LIBS=\"-lpthread\"
+  LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\" LIBS=\"-lpthread\"
 
 gpg4win_pkg_claws_mail_configure = \
   --with-lib-prefix=$(idir) --with-libiconv-prefix=$(idir) \
@@ -331,7 +381,7 @@ gpg4win_pkg_claws_mail_configure = \
   --disable-newmail-plugin --disable-mailmbox-plugin \
 	CFLAGS=\"-g -O2 \" \
 	CPPFLAGS=\"-g -O2 -I$(idir)/include\" \
-	LDFLAGS=\"-L$(idir)/lib\" LIBS=\"-lexpat\"
+	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\" LIBS=\"-lexpat\"
 
 gpg4win_pkg_jpeg_configure = \
 							--with-libiconv-prefix=$(idir)
@@ -342,7 +392,7 @@ gpg4win_pkg_glib_networking_configure = \
 	--without-gnome-proxy \
 	--with-gnutls \
 	--without-pkcs11 \
-	LDFLAGS=\"-L$(idir)/lib\" \
+	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\" \
 	CPPFLAGS=\"-I$(idir)/include\"
 
 gpg4win_pkg_libsoup_configure = \
@@ -370,6 +420,7 @@ gpg4win_pkg_webkit_configure = \
                 --disable-database \
 								--with-unicode-backend=glib \
                 --with-target=win32 \
+								--with-font-backend=pango \
 								--disable-indexed-database \
 								--disable-glibtest \
 								--disable-javascript-debugger \
@@ -416,8 +467,7 @@ gpg4win_pkg_zlib_make_args_inst = -fwin32/Makefile.gcc install \
 	LIBRARY_PATH=$$$${pkgidir}/lib SHARED_MODE=1 IMPLIB=libz.dll.a
 
 # Supported binary packages.
-gpg4win_bpkgs = pkgconfig pango freetype fontconfig \
-                atk bsfilter
+gpg4win_bpkgs = pkgconfig bsfilter
 
 # libiconv needs some special magic to generate a usable import
 # library.

@@ -1,5 +1,5 @@
-# inst-pango.nsi - Installer snippet for pango.     -*- coding: latin-1; -*-
-# Copyright (C) 2005 g10 Code GmbH
+# uninst-harfbuzz.nsi - Installer snippet for harfbuzz.-*- coding: latin-1; -*-
+# Copyright (C) 2005, 2007 g10 Code GmbH
 # 
 # This file is part of GPG4Win.
 # 
@@ -20,25 +20,19 @@
 !ifdef prefix
 !undef prefix
 !endif
-!define prefix ${ipdir}/pango-${gpg4win_pkg_pango_version}
+!define prefix ${ipdir}/harfbuzz-${gpg4win_pkg_harfbuzz_version}
 
-!ifdef DEBUG
-Section "pango" SEC_pango
-!else
-Section "-pango" SEC_pango
-!endif
-  SetOutPath "$INSTDIR"
+################ THIS IS JUST A PLACEHOLDER FILE, WILL NEED ACTUAL CONTENT
+
+; Uninstaller section.
+Section "-un.harfbuzz"
 !ifdef SOURCES
-  File "${gpg4win_pkg_pango}"
+  Push "${gpg4win_pkg_harfbuzz}"
+  Call un.SourceDelete
 !else
-  File ${prefix}/bin/libpango-1.0-0.dll
-  File ${prefix}/bin/libpangoft2-1.0-0.dll
-  File ${prefix}/bin/libpangowin32-1.0-0.dll
-  File ${prefix}/bin/libpangocairo-1.0-0.dll
 
-#  SetOutPath "$INSTDIR\etc\pango"
-#  File ${prefix}/etc/pango/pango.aliases
-#  File ${prefix}/etc/pango/pango.modules
+  Delete "$INSTDIR\libharfbuzz-0.dll"
+  RMDir "$INSTDIR"
 
 !endif
 SectionEnd

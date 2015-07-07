@@ -27,7 +27,7 @@
 ; Uninstaller section.
 Section "-un.atk"
 !ifdef SOURCES
-  Push "${gpg4win_pkg_atk_src}"
+  Push "${gpg4win_pkg_atk}"
   Call un.SourceDelete
 !else
   # Old stuff.

@@ -26,21 +26,20 @@
 ; Uninstaller section.
 Section "-un.pango"
 !ifdef SOURCES
-  Push "${gpg4win_pkg_pango_src}"
+  Push "${gpg4win_pkg_pango}"
   Call un.SourceDelete
 !else
-  Delete "$INSTDIR\pango-querymodules.exe"
   Delete /REBOOTOK "$INSTDIR\libpango-1.0-0.dll"
   Delete /REBOOTOK "$INSTDIR\libpangoft2-1.0-0.dll"
   Delete /REBOOTOK "$INSTDIR\libpangowin32-1.0-0.dll"
   Delete /REBOOTOK "$INSTDIR\libpangocairo-1.0-0.dll"
 
-
+# Remove stuff from old Pango versions.
   Delete "$INSTDIR\etc\pango\pango.modules"
+  Delete "$INSTDIR\etc\pango\pango.aliases"
   RMDir "$INSTDIR\etc\pango"
   RMDir "$INSTDIR\etc"
 
-# Remove stuff from old Pango versions.
   Delete "$INSTDIR\lib\pango\1.4.0\modules\pango-arabic-fc.dll"
   Delete "$INSTDIR\lib\pango\1.4.0\modules\pango-basic-fc.dll"
   Delete "$INSTDIR\lib\pango\1.4.0\modules\pango-basic-win32.dll"
@@ -55,9 +54,6 @@ Section "-un.pango"
   RMDir "$INSTDIR\lib\pango\1.4.0"
   RMDir "$INSTDIR\lib\pango"
   RMDir "$INSTDIR\lib"
-
-  Delete "$INSTDIR\etc\pango\pango.aliases"
-  RMDir "$INSTDIR\etc\pango"
 
 !endif
 SectionEnd

@@ -104,6 +104,9 @@
 !ifdef HAVE_PKG_CAIRO
 !include "inst-cairo.nsi"
 !endif
+!ifdef HAVE_PKG_HARFBUZZ
+!include "inst-harfbuzz.nsi"
+!endif
 !ifdef HAVE_PKG_PANGO
 !include "inst-pango.nsi"
 !endif
@@ -226,6 +229,9 @@
 !endif
 !ifdef HAVE_PKG_PANGO
 !include "uninst-pango.nsi"
+!endif
+!ifdef HAVE_PKG_HARFBUZZ
+!include "uninst-harfbuzz.nsi"
 !endif
 !ifdef HAVE_PKG_CAIRO
 !include "uninst-cairo.nsi"

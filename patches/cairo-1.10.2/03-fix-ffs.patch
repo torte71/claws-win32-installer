@@ -1,0 +1,32 @@
+#! /bin/sh
+patch -p1 -l -f $* < $0
+exit $?
+
+diff -ruN a/src/cairo-compiler-private.h b/src/cairo-compiler-private.h
+--- a/src/cairo-compiler-private.h	2010-06-18 13:47:12.000000000 +0200
++++ b/src/cairo-compiler-private.h	2015-07-06 17:44:55.938265259 +0200
+@@ -209,14 +209,13 @@
+ #define hypot _hypot
+ #endif
+ 
+-#ifdef _MSC_VER
+ #undef inline
+ #define inline __inline
+ 
+ /* Add a definition of ffs */
+ #include <intrin.h>
+ #pragma intrinsic(_BitScanForward)
+-static __forceinline int
++static inline int
+ ffs (int x)
+ {
+     unsigned long i;
+@@ -227,8 +226,6 @@
+     return 0;
+ }
+ 
+-#endif
+-
+ #if defined(_MSC_VER) && defined(_M_IX86)
+ /* When compiling with /Gy and /OPT:ICF identical functions will be folded in together.
+    The CAIRO_ENSURE_UNIQUE macro ensures that a function is always unique and

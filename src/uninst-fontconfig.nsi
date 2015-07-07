@@ -27,7 +27,7 @@
 ; Uninstaller section.
 Section "-un.fontconfig"
 !ifdef SOURCES
-  Push "${gpg4win_pkg_fontconfig_src}"
+  Push "${gpg4win_pkg_fontconfig}"
   Call un.SourceDelete
 !else
   Delete /REBOOTOK "$INSTDIR\libfontconfig-1.dll"

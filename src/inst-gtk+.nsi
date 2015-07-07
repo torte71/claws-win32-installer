@@ -47,18 +47,18 @@ Section "-gtk+" SEC_gtk_
   File ${prefix}/lib/gtk-2.0/2.10.0/engines/libpixmap.dll
   File ${prefix}/lib/gtk-2.0/2.10.0/engines/libwimp.dll
 
-  SetOutPath "$INSTDIR\lib\gtk-2.0\2.10.0\immodules"
-  File ${prefix}/lib/gtk-2.0/2.10.0/immodules/im-am-et.dll
-  File ${prefix}/lib/gtk-2.0/2.10.0/immodules/im-thai.dll
-  File ${prefix}/lib/gtk-2.0/2.10.0/immodules/im-multipress.dll
-  File ${prefix}/lib/gtk-2.0/2.10.0/immodules/im-ti-er.dll
-  File ${prefix}/lib/gtk-2.0/2.10.0/immodules/im-cedilla.dll
-  File ${prefix}/lib/gtk-2.0/2.10.0/immodules/im-ti-et.dll
-  File ${prefix}/lib/gtk-2.0/2.10.0/immodules/im-ime.dll
-  File ${prefix}/lib/gtk-2.0/2.10.0/immodules/im-inuktitut.dll
-  File ${prefix}/lib/gtk-2.0/2.10.0/immodules/im-ipa.dll
-  File ${prefix}/lib/gtk-2.0/2.10.0/immodules/im-viqr.dll
-  File ${prefix}/lib/gtk-2.0/2.10.0/immodules/im-cyrillic-translit.dll
+#  SetOutPath "$INSTDIR\lib\gtk-2.0\2.10.0\immodules"
+#  File ${prefix}/lib/gtk-2.0/2.10.0/immodules/im-am-et.dll
+#  File ${prefix}/lib/gtk-2.0/2.10.0/immodules/im-thai.dll
+#  File ${prefix}/lib/gtk-2.0/2.10.0/immodules/im-multipress.dll
+#  File ${prefix}/lib/gtk-2.0/2.10.0/immodules/im-ti-er.dll
+#  File ${prefix}/lib/gtk-2.0/2.10.0/immodules/im-cedilla.dll
+#  File ${prefix}/lib/gtk-2.0/2.10.0/immodules/im-ti-et.dll
+#  File ${prefix}/lib/gtk-2.0/2.10.0/immodules/im-ime.dll
+#  File ${prefix}/lib/gtk-2.0/2.10.0/immodules/im-inuktitut.dll
+#  File ${prefix}/lib/gtk-2.0/2.10.0/immodules/im-ipa.dll
+#  File ${prefix}/lib/gtk-2.0/2.10.0/immodules/im-viqr.dll
+#  File ${prefix}/lib/gtk-2.0/2.10.0/immodules/im-cyrillic-translit.dll
 
   SetOutPath "$INSTDIR\lib\gtk-2.0\modules"
   File ${prefix}/lib/gtk-2.0/modules/libgail.dll

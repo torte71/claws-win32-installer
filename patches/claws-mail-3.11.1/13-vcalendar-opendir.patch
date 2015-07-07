@@ -1,0 +1,76 @@
+#! /bin/sh
+patch -p1 -l -f $* < $0
+exit $?
+
+diff -ruN claws-mail-3.11.1-orig/src/plugins/vcalendar/vcal_folder.c claws-mail-3.11.1/src/plugins/vcalendar/vcal_folder.c
+--- claws-mail-3.11.1-orig/src/plugins/vcalendar/vcal_folder.c	2015-06-29 10:26:24.599442014 +0200
++++ claws-mail-3.11.1/src/plugins/vcalendar/vcal_folder.c	2015-06-29 10:29:41.956743170 +0200
+@@ -706,9 +706,10 @@
+ 
+ GSList *vcal_get_events_list(FolderItem *item)
+ {
+-	DIR *dp;
+-	struct dirent *d;
++	GDir *dp;
++	gchar *d;
+ 	GSList *events = NULL;
++	GError *error;
+ 
+ 	if (item != item->folder->inbox) {
+ 		GSList *subs = vcal_folder_get_webcal_events_for_folder(item);
+@@ -725,27 +726,28 @@
+ 		return events;
+ 	}
+ 
+-	dp = opendir(vcal_manager_get_event_path());
++	dp = g_dir_open(vcal_manager_get_event_path(), 0, &error);
+ 	
+ 	if (!dp) {
+-		FILE_OP_ERROR(vcal_manager_get_event_path(), "opendir");
++		debug_print("couldn't open dir: %s (%d)\n", error->message, error->code);
++		g_error_free(error);
+ 		return 0;
+ 	}
+ 
+-	while ((d = readdir(dp)) != NULL) {
++	while ((d = g_dir_read_name(dp)) != NULL) {
+ 		VCalEvent *event = NULL;
+-		if (d->d_name[0] == '.' || strstr(d->d_name, ".bak")
+-		||  !strcmp(d->d_name, "internal.ics")
+-		||  !strcmp(d->d_name, "internal.ifb")
+-		||  !strcmp(d->d_name, "multisync")) 
++		if (d[0] == '.' || strstr(d, ".bak")
++		||  !strcmp(d, "internal.ics")
++		||  !strcmp(d, "internal.ifb")
++		||  !strcmp(d, "multisync")) 
+ 			continue;
+ 
+-		event = vcal_manager_load_event(d->d_name);
++		event = vcal_manager_load_event(d);
+ 		if (!event)
+ 			continue;
+ 		if (event->rec_occurence) {
+ 			vcal_manager_free_event(event);
+-			claws_unlink(d->d_name);
++			claws_unlink(d);
+ 			continue;
+ 		}
+ 
+@@ -771,7 +773,7 @@
+ 				struct icaldurationtype ical_dur;
+ 				int i = 0;
+ 
+-				debug_print("dumping recurring events from main event %s\n", d->d_name);
++				debug_print("dumping recurring events from main event %s\n", d);
+         			recur = icalrecurrencetype_from_string(event->recur);
+ 				dtstart = icaltime_from_string(event->dtstart);
+ 
+@@ -822,7 +824,7 @@
+ 			vcal_manager_free_event(event);
+ 		}
+ 	}
+-	closedir(dp);
++	g_dir_close(dp);
+ 	return g_slist_reverse(events);
+ }
+ 

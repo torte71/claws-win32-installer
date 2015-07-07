@@ -30,7 +30,7 @@ Section "-atk" SEC_atk
 !endif
   SetOutPath "$INSTDIR"
 !ifdef SOURCES
-  File ${gpg4win_pkg_atk_src}
+  File ${gpg4win_pkg_atk}
 !else
   File ${prefix}/bin/libatk-1.0-0.dll
 

@@ -30,10 +30,10 @@ Section "-freetype" SEC_freetype
 !endif
   SetOutPath "$INSTDIR"
 !ifdef SOURCES
-  File "${gpg4win_pkg_freetype_src}"
+  File "${gpg4win_pkg_freetype}"
 !else
 
-  File ${prefix}/bin/freetype6.dll
+  File ${prefix}/bin/libfreetype-6.dll
 
 !endif
 SectionEnd

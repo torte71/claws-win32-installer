@@ -30,7 +30,7 @@ Section "-fontconfig" SEC_fontconfig
 !endif
   SetOutPath "$INSTDIR"
 !ifdef SOURCES
-  File "${gpg4win_pkg_fontconfig_src}"
+  File "${gpg4win_pkg_fontconfig}"
 !else
 
   File ${prefix}/bin/libfontconfig-1.dll

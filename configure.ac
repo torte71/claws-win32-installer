@@ -27,7 +27,7 @@ min_automake_version="1.9.3"
 # commit and push so that the git magic is able to work.
 #
 # After a release the make target "copy-news" is to be called as well!
-m4_define([my_version], [3.11.1-beta10])
+m4_define([my_version], [3.11.1-beta15])
 
 AC_INIT([claws-mail],
 				[my_version],[ticho@claws-mail.org])
@@ -238,11 +238,12 @@ GPG4WIN_SPKG([libffi], [pkgconfig])
 GPG4WIN_SPKG([glib], [libiconv gettext pkgconfig libffi zlib])
 GPG4WIN_SPKG([expat])
 GPG4WIN_SPKG([pixman], [libpng pkgconfig])
-GPG4WIN_SPKG([cairo], [zlib libpng freetype glib pkgconfig])
-GPG4WIN_BPKG_GTK_DEV([atk], [glib pkgconfig])
-GPG4WIN_BPKG_GTK_DEV([pango], [glib pkgconfig])
-GPG4WIN_BPKG_GTK_DEV([freetype], [pkgconfig zlib])
-GPG4WIN_BPKG_GTK_DEV([fontconfig], [pkgconfig zlib expat])
+GPG4WIN_SPKG([cairo], [zlib libpng glib pkgconfig])
+GPG4WIN_SPKG([atk], [glib pkgconfig])
+GPG4WIN_SPKG([fontconfig], [pkgconfig zlib expat freetype libiconv])
+GPG4WIN_SPKG([harfbuzz], [glib cairo])
+GPG4WIN_SPKG([freetype], [pkgconfig zlib bzip2])
+GPG4WIN_SPKG([pango], [harfbuzz fontconfig glib pkgconfig])
 GPG4WIN_SPKG([gdk-pixbuf], [glib])
 GPG4WIN_SPKG([gtk+], [libiconv gettext pkgconfig atk pango dnl
                       glib gdk-pixbuf cairo])
