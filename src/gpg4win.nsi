@@ -33,7 +33,7 @@
 !define PRETTY_PACKAGE "Claws Mail"
 !define PRETTY_PACKAGE_SHORT "ClawsMail"
 !define VERSION "${_VERSION}"
-!define PROD_VERSION "${_BUILD_FILEVERSION}"
+!define PROD_VERSION "${_BUILD_FILEVERSION}.${_REL}"
 !define COMPANY "claws-mail.org"
 !define WEBSITE "http://www.claws-mail.org"
 !define COPYRIGHT "Copyright (C) 1999-2015 Hiroyuki Yamamoto and the Claws Mail team"

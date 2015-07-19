@@ -57,7 +57,7 @@
 Name "${PRETTY_PACKAGE}"
 
 
-OutFile "${PACKAGE}-${VERSION}.exe"
+OutFile "${PACKAGE}-${VERSION}-${_REL}.exe"
 
 # Set the installation directory.
 !ifndef INSTALL_DIR
@@ -71,7 +71,7 @@ InstallDirRegKey HKLM "Software\GNU\${PRETTY_PACKAGE_SHORT}" \
 
 
 # Add version information to the file properties.
-VIProductVersion "${PROD_VERSION}"
+VIProductVersion "${PROD_VERSION}.${REL}"
 VIAddVersionKey "ProductName" "${PRETTY_PACKAGE_SHORT} (${VERSION})"
 !ifdef LICENSE_GPL
 VIAddVersionKey "Comments" \

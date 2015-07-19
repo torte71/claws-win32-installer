@@ -27,13 +27,15 @@ min_automake_version="1.9.3"
 # commit and push so that the git magic is able to work.
 #
 # After a release the make target "copy-news" is to be called as well!
-m4_define([my_version], [3.11.1-beta15])
+m4_define([my_version], [3.12.0])
+m4_define([my_release], [1])
 
 AC_INIT([claws-mail],
 				[my_version],[ticho@claws-mail.org])
 
 PACKAGE=$PACKAGE_NAME
 VERSION=$PACKAGE_VERSION
+REL=my_release
 GIT_REVISION=git_revision
 GIT_REVISION_DEC=git_revision_dec
 
@@ -52,6 +54,7 @@ AM_PO_SUBDIRS
 
 AC_SUBST(PACKAGE)
 AC_SUBST(VERSION)
+AC_SUBST(REL)
 if echo "${PACKAGE_VERSION}" | egrep 'svn|rc|beta|git' >/dev/null ; then
   IS_BETA_BUILD=yes
 else

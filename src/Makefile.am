@@ -160,10 +160,11 @@ gpg4win_pkg_gettext_ex_make_dir = gettext-runtime
 gpg4win_pkg_gettext_ex_make_dir_inst = gettext-runtime
 
 gpg4win_pkg_glib_configure = \
-  --disable-modular-tests \
-  --with-lib-prefix=$(idir) --with-libiconv-prefix=$(idir) \
-  CPPFLAGS=-I$(idir)/include LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\" CCC=$(host)-g++
-gpg4win_pkg_glib_extracflags = -march=i486
+	--disable-gtk-doc-html \
+  CPPFLAGS=-I$(idir)/include \
+	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\" \
+	CCC=$(host)-g++
+#gpg4win_pkg_glib_extracflags = -march=i486
 
 gpg4win_pkg_gdk_pixbuf_configure = \
   --with-lib-prefix=$(idir) --with-libiconv-prefix=$(idir) \
@@ -646,14 +647,14 @@ installer-options.ini : $(top_srcdir)/src/installer-options.ini.in
 # For some nut-crazy reason someone thought it would be a great idea
 # if makensis changed to the directory of the source file at startup.
 # So we have to pull a couple of strings to correct this.
-claws-mail-$(VERSION).exe: gpg4win.nsi $(common_nsi) stamps/stamp-final \
+claws-mail-$(VERSION)-${REL}.exe: gpg4win.nsi $(common_nsi) stamps/stamp-final \
                         g4wihelp.dll gpgwrap.exe gpgwrap-2.exe \
 		        $(foosum_exe) \
 	                license.blurb installer-options.ini versioninfo.txt
 	$(MAKENSIS) -V3 -DBUILD_DIR=`pwd` -DTOP_SRCDIR=$(top_srcdir) \
            -DSRCDIR=$(srcdir) $(EXTRA_MAKENSIS_FLAGS) $(srcdir)/gpg4win.nsi
 
-claws-mail-$(VERSION).wix: gpg4win.nsi $(common_nsi) stamps/stamp-final \
+claws-mail-$(VERSION)-${REL}.wix: gpg4win.nsi $(common_nsi) stamps/stamp-final \
 			gpgwrap.exe gpgwrap-2.exe \
 		        $(foosum_exe) \
 			versioninfo.txt
@@ -663,14 +664,14 @@ claws-mail-$(VERSION).wix: gpg4win.nsi $(common_nsi) stamps/stamp-final \
 		-DSRCDIR=$(srcdir) $(srcdir)/gpg4win.nsi > $@
 
 .PHONY: msi
-msi: claws-mail-$(VERSION).wix
+msi: claws-mail-$(VERSION)-${REL}.wix
 
 
 stamps/stamp-dist-self: versioninfo.txt
 	(set -e; cd ..; make dist-bzip2)
 	touch stamps/stamp-dist-self
 
-claws-mail-src-$(VERSION).exe: gpg4win-src.nsi $(common_nsi) \
+claws-mail-src-$(VERSION)-${REL}.exe: gpg4win-src.nsi $(common_nsi) \
 	stamps/stamp-final \
 	stamps/stamp-dist-self installer-options.ini \
 	license.blurb
@@ -711,14 +712,14 @@ mkportable.exe: mkportable.c mkportable-full.h
 	$(STRIP) $@
 
 if BUILD_SOURCE_INSTALLER
-all_src = claws-mail-src-$(VERSION).exe
+all_src = claws-mail-src-$(VERSION)-${REL}.exe
 else
 all_src =
 endif
 
-all_full = claws-mail-$(VERSION).exe
+all_full = claws-mail-$(VERSION)-${REL}.exe
 
 all-local: $(all_full) $(all_src)
 
 clean-local:
-	rm -f claws-mail-$(VERSION).exe claws-mail-src-$(VERSION).exe
+	rm -f claws-mail-$(VERSION)-${REL}.exe claws-mail-src-$(VERSION)-${REL}.exe
