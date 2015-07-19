@@ -26,23 +26,18 @@ SUBDIRS = doc packages po src
 
 EXTRA_DIST = autogen.sh \
         doc/license-page doc/GPLv3 \
-				patches/claws-mail-3.11.1/01-mingw.patch \
-				patches/claws-mail-3.11.1/02-ldap-opt.patch \
-				patches/claws-mail-3.11.1/03-rssyl.patch \
-				patches/claws-mail-3.11.1/05-ldflags.patch \
-				patches/claws-mail-3.11.1/06-pthread.patch \
-				patches/claws-mail-3.11.1/07-g_stat.patch \
-				patches/claws-mail-3.11.1/08-libravatar-prefs_common.patch \
-				patches/claws-mail-3.11.1/09-fancy-defs.patch \
-				patches/claws-mail-3.11.1/10-no-own-opendir.patch \
-				patches/claws-mail-3.11.1/11-ldapquery-crash-fix.patch \
-				patches/claws-mail-3.11.1/12-editldap-tls.patch \
-        patches/dirmngr-1.1.1/dirmngr-pth.patch \
-				patches/glib-2.45.2/01-socket.patch \
-        patches/gnupg2-2.0.28/0001-Enable-wildcard-expansion-with-mingw-w64.patch \
-        patches/gnupg2-2.0.28/0002-Let-wchar_to_native-convert-to-console-codepage.patch \
-        patches/gnupg2-2.0.28/0005-Fix-gpgtar-8-bit-encoding-handling-on-Win32.patch \
 				patches/libetpan-1.6/mingw-closesocket-include.patch \
-        patches/libtasn1-2.14/gnulib-mingw-w64-fix.patch \
+				patches/libtasn1-2.14/gnulib-mingw-w64-fix.patch \
 				patches/w32pth-2.0.5/01-def-fix.patch \
-				patches/webkit-1.3.10/01-fixes.patch
+				patches/dirmngr-1.1.1/dirmngr-pth.patch \
+				patches/webkit-1.3.10/01-fixes.patch \
+				patches/glib-2.45.2/01-socket.patch \
+				patches/glib-2.45.2/02-folder-icons.patch \
+				patches/gnupg2-2.0.28/0001-Enable-wildcard-expansion-with-mingw-w64.patch \
+				patches/gnupg2-2.0.28/0002-Let-wchar_to_native-convert-to-console-codepage.patch \
+				patches/gnupg2-2.0.28/0005-Fix-gpgtar-8-bit-encoding-handling-on-Win32.patch \
+				patches/glib-networking-2.45.1/01-giomoduledir.patch \
+				patches/cairo-1.10.2/01-fix-A1-surfaces.patch \
+				patches/cairo-1.10.2/02-reset-clip-region.patch \
+				patches/cairo-1.10.2/03-fix-ffs.patch \
+				patches/claws-mail-3.12.0/managesieve-defs.patch
