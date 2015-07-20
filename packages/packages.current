@@ -228,8 +228,8 @@ chk  08565feea5a4e6375f9d8a7435dac04e52620ff2
 #
 server http://ftp.gnome.org/pub/gnome/sources/gtk+/2.24
 
-file gtk+-2.24.27.tar.xz
-chk  dae8cbb37f318c9e7a299d4a8dfccaf13edd8e27
+file gtk+-2.24.28.tar.xz
+chk  f3c2f1a3728ed51d08054f6b4c7384fbf99477c0
 
 #
 # GIMP stuff for W32
