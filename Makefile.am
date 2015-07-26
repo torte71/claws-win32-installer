@@ -31,6 +31,7 @@ EXTRA_DIST = autogen.sh \
 				patches/w32pth-2.0.5/01-def-fix.patch \
 				patches/dirmngr-1.1.1/dirmngr-pth.patch \
 				patches/webkit-1.3.10/01-fixes.patch \
+				patches/webkit-1.3.10/02-print-size.patch \
 				patches/glib-2.45.2/01-socket.patch \
 				patches/glib-2.45.2/02-folder-icons.patch \
 				patches/gnupg2-2.0.28/0001-Enable-wildcard-expansion-with-mingw-w64.patch \
