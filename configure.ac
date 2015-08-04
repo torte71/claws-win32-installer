@@ -28,7 +28,7 @@ min_automake_version="1.9.3"
 #
 # After a release the make target "copy-news" is to be called as well!
 m4_define([my_version], [3.12.0])
-m4_define([my_release], [1])
+m4_define([my_release], [2])
 
 AC_INIT([claws-mail],
 				[my_version],[ticho@claws-mail.org])

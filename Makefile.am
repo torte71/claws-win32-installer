@@ -41,4 +41,8 @@ EXTRA_DIST = autogen.sh \
 				patches/cairo-1.10.2/01-fix-A1-surfaces.patch \
 				patches/cairo-1.10.2/02-reset-clip-region.patch \
 				patches/cairo-1.10.2/03-fix-ffs.patch \
-				patches/claws-mail-3.12.0/managesieve-defs.patch
+				patches/claws-mail-3.12.0/managesieve-defs.patch \
+				patches/claws-mail-3.12.0/01-bug3475-dragndrop.patch \
+				patches/claws-mail-3.12.0/02-bug2115-dragndrop-percent.patch \
+				patches/claws-mail-3.12.0/03-bug3454-glib-funcs.patch
+

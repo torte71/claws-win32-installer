@@ -142,7 +142,8 @@ gpg4win_pkg_cairo_make_args = -j$(NUMPROC)
 
 
 gpg4win_pkg_libiconv_ex_configure = \
-	--enable-shared=no --enable-static=yes
+	--enable-shared=no --enable-static=yes \
+	--enable-extra-encodings
 
 gpg4win_pkg_gettext_configure = \
   --with-lib-prefix=$(idir) --with-libiconv-prefix=$(idir) \
