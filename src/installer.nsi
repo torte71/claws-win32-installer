@@ -66,10 +66,6 @@ OutFile "${PACKAGE}-${VERSION}-${_REL}.exe"
 InstallDir "$PROGRAMFILES\GNU\${INSTALL_DIR}"
 
 
-InstallDirRegKey HKLM "Software\GNU\${PRETTY_PACKAGE_SHORT}" \
-	"Install Directory"
-
-
 # Add version information to the file properties.
 VIProductVersion "${PROD_VERSION}.${REL}"
 VIAddVersionKey "ProductName" "${PRETTY_PACKAGE_SHORT} (${VERSION})"
@@ -95,9 +91,6 @@ VIAddVersionKey "LegalTrademarks" ""
 VIAddVersionKey "LegalCopyright" "${COPYRIGHT}"
 VIAddVersionKey "FileDescription" "${DESCRIPTION}"
 VIAddVersionKey "FileVersion" "${PROD_VERSION}"
-
-# Set to the name of another GnuPG installation if one has been detected
-Var OtherGnuPGDetected
 
 # Interface Settings
 
@@ -160,9 +153,7 @@ Var STARTMENU_FOLDER
 
 !endif
 
-!define MUI_PAGE_CUSTOMFUNCTION_PRE PrintCloseOtherApps
 !insertmacro MUI_PAGE_INSTFILES
-!define MUI_PAGE_CUSTOMFUNCTION_PRE ShowFinalWarnings
 
 # Finish page
 #!define MUI_FINISHPAGE_RUN
@@ -205,12 +196,8 @@ Var STARTMENU_FOLDER
 !include "../po/catalogs.nsi"
 !undef PO_HEADER
 
-!insertmacro MUI_RESERVEFILE_LANGDLL
-!insertmacro MUI_RESERVEFILE_INSTALLOPTIONS
-ReserveFile "${BUILD_DIR}\g4wihelp.dll"
 !ifdef SOURCES
 ReserveFile "${TOP_SRCDIR}\doc\logo\gpg4win-logo-400px.bmp"
-ReserveFile "${TOP_SRCDIR}\src\gpg4win-splash.wav"
 !endif
 ReserveFile "${TOP_SRCDIR}\COPYING"
 ReserveFile "installer-options.ini"
@@ -255,9 +242,6 @@ LangString DESC_Desktop_manuals ${LANG_ENGLISH} \
 
 # Functions
 
-# Custom functions and macros for gpg4win.
-!include "g4wihelp.nsi"
-
 #
 # Control function for the Custom page to select special
 # install options.
@@ -278,70 +262,6 @@ Function CustomPageOptions
 	"Field 5" "Text"  "$(T_InstOptLabelB)"
 
   !insertmacro MUI_INSTALLOPTIONS_DISPLAY "installer-options.ini"
-FunctionEnd
-
-# Display a warning if GnuPP has been detected and allow the user to abort
-# the installation.
-Function PrintGnuPPWarning
-   MessageBox MB_YESNO "$(T_FoundOldGnuPP)" IDYES cont
-     Abort
- cont:
-   StrCpy $OtherGnuPGDetected "GnuPP"
-FunctionEnd
-
-# Display a warning if GnuPT has been detected and allow the user to abort
-# the installation.
-Function PrintGnuPTWarning
-   MessageBox MB_YESNO "$(T_FoundOldGnuPT)" IDYES cont
-     Abort
- cont:
-   StrCpy $OtherGnuPGDetected "GnuPT"
-FunctionEnd
-
-# Display a warning if the Sourceforge WinPT has been detected and
-# allow the user to abort the installation.
-Function PrintWinPTSFWarning
-   MessageBox MB_YESNO "$(T_FoundOldWinPTSF)" IDYES cont
-     Abort
- cont:
-   StrCpy $OtherGnuPGDetected "WinPT-SF"
-FunctionEnd
-
-# Display a warning if GnuPG Pack has been detected and abort the
-# the installation.  This one clobbers our own Registry space.
-Function PrintGnuPackWarning
-   MessageBox MB_OK "$(T_FoundOldGnuPack)"
-   Abort
-FunctionEnd
-
-
-# Check whether one of the other GnuPG systems has already been
-# installed.  We do this by looking at the registry.
-Function CheckOtherGnuPGApps
-  StrCpy $OtherGnuPGDetected ""
-  ClearErrors
-  ReadRegStr $0 HKLM "Software\GNU\GnuPP\Settings" "Path"
-  IfErrors +2 0
-    Call PrintGnuPPWarning
-
-  EnumRegKey $0 HKCU "Software\Microsoft\Windows\CurrentVersion\Explorer\MenuOrder\Start Menu\Programs\GnuPT" 0
-  StrCmp $0 "" +2
-    Call PrintGnuPTWarning
-
-  ClearErrors
-  ReadRegStr $0 HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Windows Privacy Tools" "DisplayVersion"
-  IfErrors +2 0
-    Call PrintWinPTSFWarning
-
-  ReadRegStr $0 HKLM "Software\GNU\GnuPG" "Install Directory"
-  Push $0
-  Push "GnuPG-Pack"
-  Call StrStr
-  Pop $0
-  StrCmp $0 "" +2
-    Call PrintGnuPackWarning
-
-
 FunctionEnd
 
 # Check whether gpg4win has already been installed.  This is called as
@@ -371,7 +291,7 @@ Function CheckExistingVersion
 
  nexttest:
   ClearErrors
-  ReadRegStr $0 HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\GPG4Win" "DisplayVersion"
+  ReadRegStr $0 HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRETTY_PACKAGE_SHORT}" "DisplayVersion"
   IfErrors leave 0
      MessageBox MB_YESNO "$(T_FoundExistingVersionB)" IDYES leave
      Abort
@@ -379,16 +299,12 @@ Function CheckExistingVersion
  leave:
 FunctionEnd
 
-
-
 # PrintNonAdminWarning
 
 # Check whether the current user is in the Administrator group or an
 # OS version without the need for an Administrator is in use.  Print a
 # diagnostic if this is not the case and abort installation.
 Function PrintNonAdminWarning
-
-  #Call PrintBetaWarning
 
   ClearErrors
   UserInfo::GetName
@@ -413,31 +329,6 @@ Function CheckIfStartMenuWanted
     Abort
 FunctionEnd
 
-
-# Check whether this is a reinstall and popup a message box to explain
-# that it is better to close other apps before continuing
-Function PrintCloseOtherApps
-    IfFileExists $INSTDIR\gnupg.exe print_warning
-    IfFileExists $INSTDIR\winpt.exe print_warning
-    IfFileExists $INSTDIR\gpa.exe   print_warning
-    IfFileExists $INSTDIR\dirmngr.exe print_warning
-    Return
-   print_warning:
-    IfFileExists $INSTDIR\winpt.exe 0 +3
-      MessageBox MB_OK "$(T_ShuttingDownWinPT)"
-      ExecWait '"$INSTDIR\winpt.exe" --stop'
-    IfFileExists $INSTDIR\dirmngr.exe 0 +3
-      MessageBox MB_OK "$(T_ShuttingDownDirMngr)"
-      g4wihelp::service_stop "DirMngr"
-   leave:
-FunctionEnd
-
-# Called right before the final page to show more warnings.
-Function ShowFinalWarnings
-   StrCmp $OtherGnupgDetected "" +2
-     MessageBox MB_OK "$(T_FoundOldSeeManual)"
-   leave:
-FunctionEnd
 
 #-----------------------------------------------
 # Strings pertaining to the install options page
@@ -486,55 +377,10 @@ LangString T_FoundExistingVersionB ${LANG_ENGLISH} \
 #---------------------------------------------
 # From the old installation checking functions
 #---------------------------------------------
-LangString T_FoundOldSeeManual ${LANG_ENGLISH} \
-     "Please see the Claws Mail user manual to learn how to migrate existing \
-      keys from other GnuPG based installations."
-
-#---------
-LangString T_FoundOldGnuPP ${LANG_ENGLISH} \
-     "An old installation of GnuPP (GNU Privacy Project) has been been \
-      detected.  That software is not maintained anymore and thus should \
-      be removed. $\r$\n\
-          $\r$\n\
-      Do you want to continue installing Claws Mail and take care of the old \
-      installation later?"
-
-#---------
-LangString T_FoundOldGnuPT ${LANG_ENGLISH} \
-     "An installation of GnuPT has been been detected.  This may cause \
-      problems when used along with GnuPG from Claws Mail. $\r$\n\
-          $\r$\n\
-      Do you want to continue installing Claws Mail?"
-
-#---------
-LangString T_FoundOldWinPTSF ${LANG_ENGLISH} \
-     "An old installation of the Sourceforge hosted WinPT has been been \
-      detected.  That software is not maintained anymore and should \
-      be removed. $\r$\n\
-          $\r$\n\
-      Do you want to continue installing Claws Mail and take care of the old \
-      installation later?"
-
-
-#--------
-LangString T_FoundOldGnuPack ${LANG_ENGLISH} \
-     "An installation of GnuPG-Pack has been been detected. You need to \
-      uninstall it before you can continue with Claws Mail installation. $\r$\n\
-        $\r$\n\
-      The installation will be aborted now!"
-
-
 
 # From Function PrintNonAdminWarning
 LangString T_AdminNeeded ${LANG_ENGLISH} \
    "Warning: Administrator permissions required for a successful installation"
-
-# From Function PrintCloseOtherApps
-LangString T_ShuttingDownWinPT ${LANG_ENGLISH} \
-   "Trying to shutdown a possible running instance of WinPT."
-LangString T_ShuttingDownDirMngr ${LANG_ENGLISH} \
-   "Trying to shutdown a possible running instance of DirMngr."
-
 
 # FIXME: The GetAfterChar function comes from the NSIS wiki.
 Function un.GetAfterChar
@@ -643,17 +489,6 @@ Function TrimNewlines
    Exch $R0
 FunctionEnd
 
-
-# AddToPath - Adds the given dir to the search path.
-#        Input - head of the stack
-Function AddToPath
-  Exch $0
-  g4wihelp::path_add "$0"
-  StrCmp $R5 "0" add_to_path_done
-  SendMessage ${HWND_BROADCAST} ${WM_WININICHANGE} 0 "STR:Environment" /TIMEOUT=5000
-  add_to_path_done:
-  Pop $0
-FunctionEnd
 
 # RemoveFromPath - Remove a given dir from the path
 #     Input: head of the stack

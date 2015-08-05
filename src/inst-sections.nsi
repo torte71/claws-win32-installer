@@ -26,9 +26,6 @@
 # gpg4win_build_list in config.nsi.  The order determines also the
 # order in the packages selection dialog.
 
-!ifdef HAVE_PKG_ADNS
-!include "inst-adns.nsi"
-!endif
 !ifdef HAVE_PKG_BZIP2
 !include "inst-bzip2.nsi"
 !endif
@@ -83,9 +80,6 @@
 !ifdef HAVE_PKG_GLIB
 !include "inst-glib.nsi"
 !endif
-!ifdef HAVE_PKG_LIBKSBA
-!include "inst-libksba.nsi"
-!endif
 !ifdef HAVE_PKG_LIBGCRYPT
 !include "inst-libgcrypt.nsi"
 !endif
@@ -113,9 +107,6 @@
 !ifdef HAVE_PKG_ATK
 !include "inst-atk.nsi"
 !endif
-!ifdef HAVE_PKG_DIRMNGR
-!include "inst-dirmngr.nsi"
-!endif
 !ifdef HAVE_PKG_GDK_PIXBUF
 !include "inst-gdk-pixbuf.nsi"
 !endif
@@ -130,9 +121,6 @@
 !endif
 !ifdef HAVE_PKG_LIBXML2
 !include "inst-libxml2.nsi"
-!endif
-!ifdef HAVE_PKG_PINENTRY
-!include "inst-pinentry.nsi"
 !endif
 !ifdef HAVE_PKG_GPGME
 !include "inst-gpgme.nsi"
@@ -161,23 +149,11 @@
 !ifdef HAVE_PKG_CLAWS_MAIL
 !include "inst-claws-mail.nsi"
 !endif
-!ifdef HAVE_PKG_GNUPG2
-!include "inst-gnupg2.nsi"
-!endif
-!ifdef HAVE_PKG_GPA
-!include "inst-gpa.nsi"
-!endif
 
 !include "inst-final.nsi"
 
 # We have to invoke the uninstallers in reverse order!
 
-!ifdef HAVE_PKG_GPA
-!include "uninst-gpa.nsi"
-!endif
-!ifdef HAVE_PKG_GNUPG2
-!include "uninst-gnupg2.nsi"
-!endif
 !ifdef HAVE_PKG_CLAWS_MAIL
 !include "uninst-claws-mail.nsi"
 !endif
@@ -203,9 +179,6 @@
 !ifdef HAVE_PKG_GPGME
 !include "uninst-gpgme.nsi"
 !endif
-!ifdef HAVE_PKG_PINENTRY
-!include "uninst-pinentry.nsi"
-!endif
 !ifdef HAVE_PKG_LIBXML2
 !include "uninst-libxml2.nsi"
 !endif
@@ -220,9 +193,6 @@
 !endif
 !ifdef HAVE_PKG_GDK_PIXBUF
 !include "uninst-gdk-pixbuf.nsi"
-!endif
-!ifdef HAVE_PKG_DIRMNGR
-!include "uninst-dirmngr.nsi"
 !endif
 !ifdef HAVE_PKG_ATK
 !include "uninst-atk.nsi"
@@ -251,20 +221,17 @@
 !ifdef HAVE_PKG_LIBGCRYPT
 !include "uninst-libgcrypt.nsi"
 !endif
-!ifdef HAVE_PKG_LIBKSBA
-!include "uninst-libksba.nsi"
-!endif
 !ifdef HAVE_PKG_GLIB
 !include "uninst-glib.nsi"
 !endif
 !ifdef HAVE_PKG_LIBFFI
 !include "uninst-libffi.nsi"
 !endif
-!ifdef HAVE_PKG_LIBGPG_ERROR
-!include "uninst-libgpg-error.nsi"
-!endif
 !ifdef HAVE_PKG_LIBASSUAN
 !include "uninst-libassuan.nsi"
+!endif
+!ifdef HAVE_PKG_LIBGPG_ERROR
+!include "uninst-libgpg-error.nsi"
 !endif
 !ifdef HAVE_PKG_LIBETPAN
 !include "uninst-libetpan.nsi"
@@ -308,9 +275,6 @@
 !ifdef HAVE_PKG_BZIP2
 !include "uninst-bzip2.nsi"
 !endif
-!ifdef HAVE_PKG_ADNS
-!include "uninst-adns.nsi"
-!endif
 
 !include "uninst-gpg4win.nsi"
 
@@ -341,17 +305,6 @@ StrCmp $R0 "" +2
 	"Field 4" "State" $R0
 
 
-
-!ifdef HAVE_PKG_GPA
-  g4wihelp::config_fetch_bool "inst_gpa"
-  StrCmp $R0 "1" 0 calc_defaults_gpa_not_one
-   !insertmacro SelectSection ${SEC_gpa}
-   Goto calc_defaults_gpa_done
-  calc_defaults_gpa_not_one:
-  StrCmp $R0 "0" 0 calc_defaults_gpa_done
-   !insertmacro UnselectSection ${SEC_gpa}
-calc_defaults_gpa_done:
-!endif
 
 !ifdef HAVE_PKG_CLAWS_MAIL
   g4wihelp::config_fetch_bool "inst_claws_mail"
@@ -424,29 +377,17 @@ Function CalcDepends
 !ifdef HAVE_PKG_BZIP2
   !insertmacro UnselectSection ${SEC_bzip2}
 !endif
-!ifdef HAVE_PKG_ADNS
-  !insertmacro UnselectSection ${SEC_adns}
-!endif
 !ifdef HAVE_PKG_LIBGPG_ERROR
   !insertmacro UnselectSection ${SEC_libgpg_error}
 !endif
 !ifdef HAVE_PKG_LIBGCRYPT
   !insertmacro UnselectSection ${SEC_libgcrypt}
 !endif
-!ifdef HAVE_PKG_LIBKSBA
-  !insertmacro UnselectSection ${SEC_libksba}
-!endif
 !ifdef HAVE_PKG_W32PTH
   !insertmacro UnselectSection ${SEC_w32pth}
 !endif
 !ifdef HAVE_PKG_LIBASSUAN
   !insertmacro UnselectSection ${SEC_libassuan}
-!endif
-!ifdef HAVE_PKG_DIRMNGR
-  !insertmacro UnselectSection ${SEC_dirmngr}
-!endif
-!ifdef HAVE_PKG_PINENTRY
-  !insertmacro UnselectSection ${SEC_pinentry}
 !endif
 !ifdef HAVE_PKG_GPGME
   !insertmacro UnselectSection ${SEC_gpgme}
@@ -467,55 +408,17 @@ Function CalcDepends
   !insertmacro UnselectSection ${SEC_libxml2}
 !endif
 
-  # Always install gnupg2.  This is also ensured by putting
-  # these packages in the RO section and enabling them by default, but
+  # Always install Claws Mail.  This is also ensured by putting
+  # the package in the RO section and enabling it by default, but
   # it doesn't harm to add it explicitely here as well.
 
   !insertmacro SelectSection ${SEC_claws_mail}
-  !insertmacro SelectSection ${SEC_gnupg2}
-  !insertmacro SelectSection ${SEC_gpa}
 
   # Then enable all dependencies, mostly in reverse build list order!
   # An exception are the claws plugins, which are build after claws,
   # but are installed as a dependency of claws.
 
   # First the explicitely installed packages.
-
-!ifdef HAVE_PKG_GNUPG2
-  !insertmacro SectionFlagIsSet ${SEC_gnupg2} ${SF_SELECTED} have_gnupg2 skip_gnupg2
-  have_gnupg2:
-  !insertmacro SelectSection ${SEC_libiconv}
-  !insertmacro SelectSection ${SEC_libgcrypt}
-  !insertmacro SelectSection ${SEC_libksba}
-  !insertmacro SelectSection ${SEC_libassuan}
-  !insertmacro SelectSection ${SEC_libgpg_error}
-  !insertmacro SelectSection ${SEC_w32pth}
-  !insertmacro SelectSection ${SEC_zlib}
-  !insertmacro SelectSection ${SEC_adns}
-  !insertmacro SelectSection ${SEC_pinentry}
-  !insertmacro SelectSection ${SEC_curl}
-  !insertmacro SelectSection ${SEC_dirmngr}
-  # Because we need pinentry, we also need to install GTK+
-  !insertmacro SelectSection ${SEC_zlib}
-  !insertmacro SelectSection ${SEC_gtk_}
-  !insertmacro SelectSection ${SEC_libpng}
-  !insertmacro SelectSection ${SEC_glib}
-	!insertmacro SelectSection ${SEC_bsfilter}
-  skip_gnupg2:
-!endif
-
-!ifdef HAVE_PKG_GPA
-  !insertmacro SectionFlagIsSet ${SEC_gpa} ${SF_SELECTED} have_gpa skip_gpa
-  have_gpa:
-  !insertmacro SelectSection ${SEC_libiconv}
-  !insertmacro SelectSection ${SEC_gettext}
-  !insertmacro SelectSection ${SEC_zlib}
-  !insertmacro SelectSection ${SEC_gtk_}
-  !insertmacro SelectSection ${SEC_libpng}
-  !insertmacro SelectSection ${SEC_glib}
-  !insertmacro SelectSection ${SEC_gpgme}
-  skip_gpa:
-!endif
 
 !ifdef HAVE_PKG_CLAWS_MAIL
   !insertmacro SectionFlagIsSet ${SEC_claws_mail} ${SF_SELECTED} have_claws_mail skip_claws_mail
@@ -577,30 +480,9 @@ Function CalcDepends
   !insertmacro SectionFlagIsSet ${SEC_gpgme} \
 		${SF_SELECTED} have_gpgme skip_gpgme
   have_gpgme:
-  # GPGME does not depend on gnupg2.  Do this in the
-  # actual application instead.
   !insertmacro SelectSection ${SEC_libgpg_error}
-   skip_gpgme:
-!endif
-
-!ifdef HAVE_PKG_PINENTRY
-  !insertmacro SectionFlagIsSet ${SEC_pinentry} \
-		${SF_SELECTED} have_pinentry skip_pinentry
-  have_pinentry:
-  !insertmacro SelectSection ${SEC_libiconv}
-  !insertmacro SelectSection ${SEC_gtk_}
-   skip_pinentry:
-!endif
-
-!ifdef HAVE_PKG_DIRMNGR
-  !insertmacro SectionFlagIsSet ${SEC_dirmngr} ${SF_SELECTED} have_dirmngr skip_dirmngr
-  have_dirmngr:
-  !insertmacro SelectSection ${SEC_libgpg_error}
-  !insertmacro SelectSection ${SEC_libgcrypt}
   !insertmacro SelectSection ${SEC_libassuan}
-  !insertmacro SelectSection ${SEC_libksba}
-  !insertmacro SelectSection ${SEC_w32pth}
-  skip_dirmngr:
+   skip_gpgme:
 !endif
 
 !ifdef HAVE_PKG_LIBASSUAN
@@ -613,13 +495,6 @@ Function CalcDepends
 
   # Package "w32pth" has no dependencies.
 
-!ifdef HAVE_PKG_LIBKSBA
-  !insertmacro SectionFlagIsSet ${SEC_libksba} ${SF_SELECTED} have_libksba skip_libksba
-  have_libksba:
-  !insertmacro SelectSection ${SEC_libgpg_error}
-  skip_libksba:
-!endif
-
 !ifdef HAVE_PKG_LIBGPG_ERROR
   !insertmacro SectionFlagIsSet ${SEC_libgpg_error} ${SF_SELECTED} have_libgpg_error skip_libgpg_error
   have_libgpg_error:
@@ -628,7 +503,6 @@ Function CalcDepends
   skip_libgpg_error:
 !endif
 
-  # Package "adns" has no dependencies.
   # Package "bzip2" has no dependencies.
 
 !ifdef HAVE_PKG_GTK_
@@ -741,13 +615,9 @@ FunctionEnd
 
 
 Function .onInit
-  Call G4wRunOnce
-
   SetOutPath $TEMP
 !ifdef SOURCES
   File /oname=gpgspltmp.bmp "${TOP_SRCDIR}/doc/logo/gpg4win-logo-400px.bmp"
-  # We play the tune only for the source installer
-  File /oname=gpgspltmp.wav "${TOP_SRCDIR}/src/gpg4win-splash.wav"
   g4wihelp::playsound $TEMP\gpgspltmp.wav
   g4wihelp::showsplash 2500 $TEMP\gpgspltmp.bmp
 
@@ -772,7 +642,6 @@ Function .onInit
   ${MementoSectionRestore}
   Call CalcDefaults
   Call CalcDepends
-  Call CheckOtherGnuPGApps
 FunctionEnd
 
 
@@ -799,12 +668,6 @@ FunctionEnd
 # This must be in a central place.  Urgs.
 
 !insertmacro MUI_FUNCTION_DESCRIPTION_BEGIN
-!ifdef HAVE_PKG_GNUPG2
-  !insertmacro MUI_DESCRIPTION_TEXT ${SEC_gnupg2} $(DESC_SEC_gnupg2)
-!endif
-!ifdef HAVE_PKG_GPA
-  !insertmacro MUI_DESCRIPTION_TEXT ${SEC_gpa} $(DESC_SEC_gpa)
-!endif
 !ifdef HAVE_PKG_CLAWS_MAIL
   !insertmacro MUI_DESCRIPTION_TEXT ${SEC_claws_mail} $(DESC_SEC_claws_mail)
 !endif
@@ -836,16 +699,6 @@ Section "-startmenu"
 
     CreateDirectory "$SMPROGRAMS\$STARTMENU_FOLDER"
 
-!ifdef HAVE_PKG_GPA
-    SectionGetFlags ${SEC_gpa} $R0
-    IntOp $R0 $R0 & ${SF_SELECTED}
-    IntCmp $R0 ${SF_SELECTED} 0 no_gpa_menu
-    CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\GPA.lnk" \
-	"$INSTDIR\gpa.exe" \
-        "" "" "" SW_SHOWNORMAL "" $(DESC_Menu_gpa)
-  no_gpa_menu:
-!endif
-
 !ifdef HAVE_PKG_CLAWS_MAIL
     SectionGetFlags ${SEC_claws_mail} $R0
     IntOp $R0 $R0 & ${SF_SELECTED}
@@ -876,28 +729,11 @@ Section "-startmenu"
   IntCmp $R0 0 no_desktop
 
   # Delete the old stuff, also old names of previous versions.
-  Delete "$DESKTOP\WinPT.lnk"
-  Delete "$DESKTOP\GPA.lnk"
   Delete "$DESKTOP\Claws-Mail.lnk"
   Delete "$DESKTOP\Claws-Mail Manual.lnk"
-  Delete "$DESKTOP\GPGee Manual.lnk"
-  Delete "$DESKTOP\GnuPG FAQ.lnk"
-  Delete "$DESKTOP\Gpg4Win README.lnk"
   Delete "$DESKTOP\$(DESC_Desktop_manuals)\Claws-Mail Manual.lnk"
-  Delete "$DESKTOP\$(DESC_Desktop_manuals)\GPGee Manual.lnk"
-  Delete "$DESKTOP\$(DESC_Desktop_manuals)\GnuPG FAQ.lnk"
 
   CreateDirectory "$DESKTOP\$(DESC_Desktop_manuals)"
-
-!ifdef HAVE_PKG_GPA
-    SectionGetFlags ${SEC_gpa} $R0
-    IntOp $R0 $R0 & ${SF_SELECTED}
-    IntCmp $R0 ${SF_SELECTED} 0 no_gpa_desktop
-    CreateShortCut "$DESKTOP\GPA.lnk" \
-	"$INSTDIR\gpa.exe" \
-        "" "" "" SW_SHOWNORMAL "" $(DESC_Menu_gpa)
-  no_gpa_desktop:
-!endif
 
 !ifdef HAVE_PKG_CLAWS_MAIL
     SectionGetFlags ${SEC_claws_mail} $R0
@@ -923,22 +759,7 @@ no_desktop:
   StrCmp $QUICKLAUNCH $TEMP no_quick_launch
 
   # Delete old Quick Launch Bar links.
-  Delete "$QUICKLAUNCH\WinPT.lnk"
-  Delete "$QUICKLAUNCH\GPA.lnk"
   Delete "$QUICKLAUNCH\Claws-Mail.lnk"
-  Delete "$QUICKLAUNCH\GPGee Manual.lnk"
-  Delete "$QUICKLAUNCH\GnuPG FAQ.lnk"
-  Delete "$QUICKLAUNCH\Gpg4Win README.lnk"
-
-!ifdef HAVE_PKG_GPA
-    SectionGetFlags ${SEC_gpa} $R0
-    IntOp $R0 $R0 & ${SF_SELECTED}
-    IntCmp $R0 ${SF_SELECTED} 0 no_gpa_quicklaunch
-    CreateShortCut "$QUICKLAUNCH\GPA.lnk" \
-	"$INSTDIR\gpa.exe" \
-        "" "" "" SW_SHOWNORMAL "" $(DESC_Menu_gpa)
-  no_gpa_quicklaunch:
-!endif
 
 !ifdef HAVE_PKG_CLAWS_MAIL
     SectionGetFlags ${SEC_claws_mail} $R0

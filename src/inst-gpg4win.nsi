@@ -36,14 +36,6 @@ Section "-gpg4win" SEC_gpg4win
   FileClose $0
   DetailPrint "VERSION closed"
 
-  # Register the install directory for the GnuPG suite.
-  WriteRegStr HKLM "Software\GNU\Claws Mail" "Install Directory" $INSTDIR
-  DetailPrint "Saved install directory in the registry"
-
-  # Also write it to be recalled on new installation.  Currently
-  # disabled.
-  # WriteRegStr HKLM "Software\GNU\${PRETTY_PACKAGE_SHORT}" "Install Directory" $INSTDIR
-
   # We used to determine the language using a Registry entry.
   # Although we don't want to delete the user's Lang Registry Setting
   # because he might have have selected a different language than his
@@ -51,28 +43,10 @@ Section "-gpg4win" SEC_gpg4win
   DeleteRegValue HKLM "Software\GNU\Claws Mail" "Lang"
   DetailPrint "Deleted obsolete Lang entry"
 
-  # This old key is required for GPGee.  Please do not use in new
-  # applications.
-  # Note: We don't use it anymore so that gpgme decides what gpg to use
-  #       For the new gpg4win we actually use gpg2.exe.
-  #       To cope with old installations we actually remove this value.
-  #       However we can only remove the HKLM version not those set by
-  #       the user under HKCU.
-  #WriteRegStr HKLM "Software\GNU\Claws Mail" "gpgProgram" "$INSTDIR\gpg.exe"
-  DeleteRegValue HKLM "Software\GNU\Claws Mail" "gpgProgram"
-  DetailPrint "Deleted obsolete gpgProgram value"
-
   # Add the public directory to the PATH
   Push "$INSTDIR\pub"
   Call AddToPath
   DetailPrint "Added pub directory to PATH"
-
-  # Install gpg4win included tools
-  SetOutPath "$INSTDIR"
-  File "${BUILD_DIR}/sha1sum.exe"
-  File "${BUILD_DIR}/sha256sum.exe"
-  File "${BUILD_DIR}/md5sum.exe"
-  File "${BUILD_DIR}/mkportable.exe"
 
   SetOutPath "$INSTDIR\pub"
   # Install the mingw32 runtime libraries.  They are stored in the

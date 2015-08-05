@@ -90,41 +90,17 @@ Section Uninstall
 
 
   # Delete Desktop links.
-!ifdef HAVE_PKG_WINPT
-  Delete "$DESKTOP\WinPT.lnk"
-!endif
-!ifdef HAVE_PKG_GPA
-  Delete "$DESKTOP\GPA.lnk"
-!endif
 !ifdef HAVE_PKG_CLAWS_MAIL
   Delete "$DESKTOP\Claws-Mail.lnk"
   Delete "$DESKTOP\$(DESC_Desktop_manuals)\Claws-Mail Manual.lnk"
 !endif
-!ifdef HAVE_PKG_GPGEE
-  Delete "$DESKTOP\$(DESC_Desktop_manuals)\GPGee Manual.lnk"
-!endif
-  Delete "$DESKTOP\$(DESC_Desktop_manuals)\GnuPG FAQ.lnk"
-  Delete "$DESKTOP\$(DESC_Desktop_manuals)\Gpg4Win README.lnk"
-  Delete "$DESKTOP\$(DESC_Desktop_manuals)\Gpg4win README.lnk"
-  Delete "$DESKTOP\$(DESC_Desktop_manuals)\Gpg4win HOWTO SMIME.lnk"
   RMDir "$DESKTOP\$(DESC_Desktop_manuals)"
 
   # Delete Quick Launch Bar links.
   StrCmp $QUICKLAUNCH $TEMP no_quick_launch_uninstall
-!ifdef HAVE_PKG_WINPT
-  Delete "$QUICKLAUNCH\WinPT.lnk"
-!endif
-!ifdef HAVE_PKG_GPA
-  Delete "$QUICKLAUNCH\GPA.lnk"
-!endif
 !ifdef HAVE_PKG_CLAWS_MAIL
   Delete "$QUICKLAUNCH\Claws-Mail.lnk"
 !endif
-!ifdef HAVE_PKG_GPGEE
-  Delete "$QUICKLAUNCH\GPGee Manual.lnk"
-!endif
-  Delete "$QUICKLAUNCH\GnuPG FAQ.lnk"
-  Delete "$QUICKLAUNCH\Gpg4Win README.lnk"
 no_quick_launch_uninstall:
 
 !endif
@@ -144,7 +120,6 @@ no_quick_launch_uninstall:
   DeleteRegValue HKLM "Software\GNU\${PRETTY_PACKAGE_SHORT}" \
         "Install Directory"
   DeleteRegKey /ifempty HKLM "Software\GNU\${PRETTY_PACKAGE_SHORT}"
-  DeleteRegKey /ifempty HKLM "Software\GNU\GnuPG"
   DeleteRegKey /ifempty HKLM "Software\GNU"
 
   # Remove Windows Add/Remove Programs support.

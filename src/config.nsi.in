@@ -69,33 +69,9 @@
 !define gpg4win_pkg_libgcrypt @gpg4win_pkg_libgcrypt@
 !define gpg4win_pkg_libgcrypt_version @gpg4win_pkg_libgcrypt_version@
 
-@HAVE_PKG_LIBKSBA@
-!define gpg4win_pkg_libksba @gpg4win_pkg_libksba@
-!define gpg4win_pkg_libksba_version @gpg4win_pkg_libksba_version@
-
-@HAVE_PKG_DIRMNGR@
-!define gpg4win_pkg_dirmngr @gpg4win_pkg_dirmngr@
-!define gpg4win_pkg_dirmngr_version @gpg4win_pkg_dirmngr_version@
-
 @HAVE_PKG_GPGME@
 !define gpg4win_pkg_gpgme @gpg4win_pkg_gpgme@
 !define gpg4win_pkg_gpgme_version @gpg4win_pkg_gpgme_version@
-
-@HAVE_PKG_ADNS@
-!define gpg4win_pkg_adns @gpg4win_pkg_adns@
-!define gpg4win_pkg_adns_version @gpg4win_pkg_adns_version@
-
-@HAVE_PKG_GNUPG2@
-!define gpg4win_pkg_gnupg2 @gpg4win_pkg_gnupg2@
-!define gpg4win_pkg_gnupg2_version @gpg4win_pkg_gnupg2_version@
-
-@HAVE_PKG_PINENTRY@
-!define gpg4win_pkg_pinentry @gpg4win_pkg_pinentry@
-!define gpg4win_pkg_pinentry_version @gpg4win_pkg_pinentry_version@
-
-@HAVE_PKG_GPA@
-!define gpg4win_pkg_gpa @gpg4win_pkg_gpa@
-!define gpg4win_pkg_gpa_version @gpg4win_pkg_gpa_version@
 
 @HAVE_PKG_LIBGSASL@
 !define gpg4win_pkg_libgsasl @gpg4win_pkg_libgsasl@
@@ -194,8 +170,6 @@
 @HAVE_PKG_GLIB@
 !define gpg4win_pkg_glib @gpg4win_pkg_glib@
 !define gpg4win_pkg_glib_version @gpg4win_pkg_glib_version@
-#!define gpg4win_pkg_glib_dev @gpg4win_pkg_glib_dev@
-#!define gpg4win_pkg_glib_src @gpg4win_pkg_glib_src@
 
 @HAVE_PKG_GDK_PIXBUF@
 !define gpg4win_pkg_gdk_pixbuf @gpg4win_pkg_gdk_pixbuf@

@@ -24,18 +24,6 @@ Section "-un.gpg4win"
   Delete "claws-mail-${VERSION}.tar.bz2"
 !else
 
-  DeleteRegValue HKLM "Software\GNU\GnuPG" "Install Directory"
-
-  # Remove the public directory from the PATH
-  Push "$INSTDIR\pub"
-  Call un.RemoveFromPath
-
-  # Delete gpg4win included tools
-  Delete "$INSTDIR\sha1sum.exe"
-  Delete "$INSTDIR\sha256sum.exe"
-  Delete "$INSTDIR\md5sum.exe"
-  Delete "$INSTDIR\mkportable.exe"
-
   # Delete the runtime libarries
   Delete "$INSTDIR\pub\libstdc++-6.dll"
   Delete "$INSTDIR\pub\libgcc_s_sjlj-1.dll"
