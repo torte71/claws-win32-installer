@@ -1,0 +1,72 @@
+#! /bin/sh
+patch -p1 -f $* < $0
+exit $?
+
+--- libetpan-1.6-orig/configure	2015-09-08 13:32:43.989201138 +0200
++++ libetpan-1.6/configure	2015-09-10 22:48:14.941884705 +0200
+@@ -17347,15 +17347,13 @@
+ if test "x$enable_ipv6" != "xno"; then
+     { $as_echo "$as_me:${as_lineno-$LINENO}: checking for IPv6 support" >&5
+ $as_echo_n "checking for IPv6 support... " >&6; }
+-  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
++	cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+-#define INET6
+-            #include <sys/types.h>
+-            #include <netinet/in.h>
++#include <ws2tcpip.h>
+ int
+ main ()
+ {
+-int x = IPPROTO_IPV6; struct in6_addr a;
++struct in6_addr a;
+   ;
+   return 0;
+ }
+@@ -17378,34 +17376,18 @@
+ $as_echo "#define HAVE_IPV6 1" >>confdefs.h
+ 
+ 
+-        for func in "getaddrinfo" "freeaddrinfo"; do
+-      { $as_echo "$as_me:${as_lineno-$LINENO}: checking for $func" >&5
+-$as_echo_n "checking for $func... " >&6; }
+-      cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+-/* end confdefs.h.  */
+-
+-int
+-main ()
+-{
+-$func();
+-  ;
+-  return 0;
+-}
+-_ACEOF
+-if ac_fn_c_try_link "$LINENO"; then :
+-  func_present=yes
+-else
+-  func_present=no
+-fi
+-rm -f core conftest.err conftest.$ac_objext \
+-    conftest$ac_exeext conftest.$ac_ext
+-      { $as_echo "$as_me:${as_lineno-$LINENO}: result: $func_present" >&5
+-$as_echo "$func_present" >&6; }
+-
+-      if test "x$func_present" = "xno"; then
+-        as_fn_error $? "$func function required for IPv6 support" "$LINENO" 5
+-      fi
+-    done
++#    dnl check for getaddrinfo and freeaddrinfo function presence
++#    for func in "getaddrinfo" "freeaddrinfo"; do
++#      AC_MSG_CHECKING([for $func])
++#      AC_TRY_LINK([#include <ws2tcpip.h>], [$func();],
++#                      [func_present=yes],
++#                      [func_present=no])
++#      AC_MSG_RESULT($func_present)
++#
++#      if test "x$func_present" = "xno"; then
++#        AC_MSG_ERROR([$func function required for IPv6 support])
++#      fi
++#    done
+   fi
+ fi
+ 

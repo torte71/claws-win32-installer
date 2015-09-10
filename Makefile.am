@@ -27,6 +27,8 @@ SUBDIRS = doc packages po src
 EXTRA_DIST = autogen.sh \
         doc/license-page doc/GPLv3 \
 				patches/libetpan-1.6/mingw-closesocket-include.patch \
+				patches/libetpan-1.6/ipv6.patch \
+				patches/libetpan-1.6/ipv6-wsock.patch \
 				patches/libtasn1-2.14/gnulib-mingw-w64-fix.patch \
 				patches/w32pth-2.0.5/01-def-fix.patch \
 				patches/dirmngr-1.1.1/dirmngr-pth.patch \
@@ -44,5 +46,8 @@ EXTRA_DIST = autogen.sh \
 				patches/claws-mail-3.12.0/managesieve-defs.patch \
 				patches/claws-mail-3.12.0/01-bug3475-dragndrop.patch \
 				patches/claws-mail-3.12.0/02-bug2115-dragndrop-percent.patch \
-				patches/claws-mail-3.12.0/03-bug3454-glib-funcs.patch
+				patches/claws-mail-3.12.0/03-bug3454-glib-funcs.patch \
+				patches/claws-mail-3.12.0/v6.patch \
+				patches/claws-mail-3.12.0/v6-configure.patch \
+				patches/ipv6-imap-cachedir.patch
 

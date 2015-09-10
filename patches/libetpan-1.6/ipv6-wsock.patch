@@ -1,0 +1,16 @@
+#! /bin/sh
+patch -p1 -f $* < $0
+exit $?
+
+diff -ruN libetpan-1.6-orig/src/windows/win_init.cpp libetpan-1.6/src/windows/win_init.cpp
+--- libetpan-1.6-orig/src/windows/win_init.cpp	2015-09-08 13:32:43.957200426 +0200
++++ libetpan-1.6/src/windows/win_init.cpp	2015-09-10 22:35:42.825721492 +0200
+@@ -73,7 +73,7 @@
+     WSADATA winsockData;
+ 
+ 	void wsocket_init() {
+-	    int success = WSAStartup((WORD)0x0101, &winsockData);
++	    int success = WSAStartup(MAKEWORD(2, 2), &winsockData);
+ 		if (success != 0)
+ 		{
+ 			throw "Cannot startup windows sockets api.";

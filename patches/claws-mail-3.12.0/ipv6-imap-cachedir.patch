@@ -1,0 +1,87 @@
+#! /bin/sh
+patch -p1 -l -f $* < $0
+exit $?
+
+diff --git a/configure.ac b/configure.ac
+index 2dbb4d6..8780fa0 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -448,13 +448,20 @@ AC_MSG_CHECKING([whether to use IPv6])
+ if test x"$enable_ipv6" = xyes; then
+ 	AC_MSG_RESULT(yes)
+ 	AC_MSG_CHECKING([for IPv6 support])
+-	AC_CACHE_VAL(ac_cv_ipv6,[
+-		AC_TRY_COMPILE([#define INET6
+-				#include <sys/types.h>
+-				#include <netinet/in.h>],
+-			[int x = IPPROTO_IPV6; struct in6_addr a;],
+-			ac_cv_ipv6=yes, ac_cv_ipv6=no)
+-	])
++	if test x"$platfor_win32" = xyes; then
++		AC_CACHE_VAL(ac_cv_ipv6,[
++			AC_TRY_COMPILE([#include <ws2tcpip.h>],
++				[struct in6_addr a;],
++				ac_cv_ipv6=yes, ac_cv_ipv6=no)
++		])
++	else
++		AC_CACHE_VAL(ac_cv_ipv6,[
++			AC_TRY_COMPILE([#define INET6
++					#include <sys/types.h>
++					#include <netinet/in.h>],
++				[int x = IPPROTO_IPV6; struct in6_addr a;],
++				ac_cv_ipv6=yes, ac_cv_ipv6=no)
++		])
+ 	AC_MSG_RESULT($ac_cv_ipv6)
+ 	if test $ac_cv_ipv6 = yes; then
+ 		AC_DEFINE(INET6, 1, Define if you want IPv6 support.)
+diff --git a/src/common/socket.c b/src/common/socket.c
+index 99a9774..26f5a06 100644
+--- a/src/common/socket.c
++++ b/src/common/socket.c
+@@ -26,13 +26,15 @@
+ #define _BSD_SOURCE
+ #endif
+ 
++/* This can probably be handled better, e.g. define it in config.h. */
++#define _WIN32_WINNT _WIN32_WINNT_WIN6
+ #include <glib.h>
+ #include <glib/gi18n.h>
+ 
+ #include <sys/time.h>
+ #include <sys/types.h>
+ #ifdef G_OS_WIN32
+-#  include <winsock2.h>
++#  include <ws2tcpip.h>
+ #  ifndef EINPROGRESS
+ #    define EINPROGRESS WSAEINPROGRESS
+ #  endif
+diff --git a/src/imap.c b/src/imap.c
+index 9f53354..22be043 100644
+--- a/src/imap.c
++++ b/src/imap.c
+@@ -3008,13 +3008,25 @@ static gchar *imap_folder_get_path(Folder *folder)
+ 	g_return_val_if_fail(folder != NULL, NULL);
+         g_return_val_if_fail(folder->account != NULL, NULL);
+ 
++#ifdef G_OS_WIN32
++	gchar *sanitized_dirname = g_strdup(folder->account->recv_server);
++	g_strdelimit(sanitized_dirname, ":", ',');
++#endif
++
+         folder_path = g_strconcat(get_imap_cache_dir(),
+                                   G_DIR_SEPARATOR_S,
++#ifdef G_OS_WIN32
++																	sanitized_dirname,
++#else
+                                   folder->account->recv_server,
++#endif
+                                   G_DIR_SEPARATOR_S,
+                                   folder->account->userid,
+                                   NULL);
+ 
++#ifdef G_OS_WIN32
++	g_free(sanitized_dirname);
++#endif
+ 	return folder_path;
+ }
+ 

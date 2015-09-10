@@ -293,6 +293,7 @@ gpg4win_pkg_libxml2_configure = \
   --enable-shared --without-python --with-iconv=$(idir)
 
 gpg4win_pkg_libetpan_configure = --with-gnutls --enable-threads \
+	--enable-ipv6 \
   CPPFLAGS=\"-I$(idir)/include\" \
   LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\" LIBS=\"-lpthread\"
 
@@ -300,7 +301,7 @@ gpg4win_pkg_claws_mail_configure = \
   --with-lib-prefix=$(idir) --with-libiconv-prefix=$(idir) \
   --with-gpg-error-prefix=$(idir) --with-gpgme-prefix=$(idir) \
   --with-config-dir="Claws-mail" --enable-pthread --enable-gnutls \
-  --enable-libetpan --disable-dbus --disable-valgrind --disable-ipv6 \
+  --enable-libetpan --disable-dbus --disable-valgrind --enable-ipv6 \
   --disable-jpilot --disable-startup-notification \
   --disable-spamassassin-plugin --disable-bogofilter-plugin \
   --enable-fancy-plugin --disable-geolocation-plugin \

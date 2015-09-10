@@ -1,0 +1,60 @@
+#! /bin/sh
+patch -p1 -l -f $* < $0
+exit $?
+
+--- claws-mail-3.12.0-orig/configure	2015-09-10 18:14:18.417902925 +0200
++++ claws-mail-3.12.0/configure	2015-09-10 21:02:13.605879249 +0200
+@@ -17953,15 +17953,41 @@
+ $as_echo "yes" >&6; }
+ 	{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for IPv6 support" >&5
+ $as_echo_n "checking for IPv6 support... " >&6; }
+-	if ${ac_cv_ipv6+:} false; then :
++	if test x"$platform_win32" = xyes; then
++		if ${ac_cv_ipv6+:} false; then :
+   $as_echo_n "(cached) " >&6
+ else
+ 
+-		cat confdefs.h - <<_ACEOF >conftest.$ac_ext
++			cat confdefs.h - <<_ACEOF >conftest.$ac_ext
++/* end confdefs.h.  */
++#include <ws2tcpip.h>
++int
++main ()
++{
++struct in6_addr a;
++  ;
++  return 0;
++}
++_ACEOF
++if ac_fn_c_try_compile "$LINENO"; then :
++  ac_cv_ipv6=yes
++else
++  ac_cv_ipv6=no
++fi
++rm -f core conftest.err conftest.$ac_objext conftest.$ac_ext
++
++fi
++
++	else
++		if ${ac_cv_ipv6+:} false; then :
++  $as_echo_n "(cached) " >&6
++else
++
++			cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ #define INET6
+-				#include <sys/types.h>
+-				#include <netinet/in.h>
++					#include <sys/types.h>
++					#include <netinet/in.h>
+ int
+ main ()
+ {
+@@ -17979,6 +18005,7 @@
+ 
+ fi
+ 
++	fi
+ 	{ $as_echo "$as_me:${as_lineno-$LINENO}: result: $ac_cv_ipv6" >&5
+ $as_echo "$ac_cv_ipv6" >&6; }
+ 	if test $ac_cv_ipv6 = yes; then
