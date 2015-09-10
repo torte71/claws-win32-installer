@@ -1,10 +1,6 @@
-commit 3b14f476066860518abe501187f600125832f2ad
-Author: Andrej Kacian <ticho@claws-mail.org>
-Date:   Sat Jul 25 14:02:33 2015 +0200
-
-    Fixed handling of drag&drop onto compose text area on Windows.
-    
-    Fixes bug #3475.
+#! /bin/sh
+patch -p1 -l -f $* < $0
+exit $?
 
 diff --git a/src/compose.c b/src/compose.c
 index 959f6fc..13a7def 100644
