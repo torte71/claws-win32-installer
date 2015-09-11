@@ -19,7 +19,7 @@
 
 EXTRA_DIST = pkg-config gpg4win.nsi gpg4win-src.nsi \
 	config.site config.nsi.in \
-        installer-options.ini.in libiconv.def libintl.def loreley.mid \
+        installer-options.ini.in libiconv.def libintl.def \
         inst-sections.nsi installer.nsi installer-finish.nsi  \
         potomo Memento.nsh \
         inst-gpg4win.nsi	   uninst-gpg4win.nsi	      \
