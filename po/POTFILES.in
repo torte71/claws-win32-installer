@@ -1,6 +1,2 @@
 # List of source files which contain translatable strings.
-src/gpg4win.nsi
-src/gpg4win-src.nsi
-src/installer.nsi
-src/inst-claws-mail.nsi
-src/inst-gpg4win.nsi
+src/strings.nsi

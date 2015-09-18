@@ -40,181 +40,138 @@
 
 !define DOSLF "\r\n"
 
-# If debugging is desired.
-@GPG4WIN_DEBUG@
-
 # The package build list, in order.
-!define gpg4win_build_list "@gpg4win_build_list@"
+!define cm_build_list "@cm_build_list@"
 
 
 # The default packages source directory.
-!define gpg4win_packages @gpg4win_packages@
+!define cm_packages @cm_packages@
 
 
 # The path of each package.
 
-@HAVE_PKG_LIBGPG_ERROR@
-!define gpg4win_pkg_libgpg_error @gpg4win_pkg_libgpg_error@
-!define gpg4win_pkg_libgpg_error_version @gpg4win_pkg_libgpg_error_version@
+!define cm_pkg_libgpg_error @cm_pkg_libgpg_error@
+!define cm_pkg_libgpg_error_version @cm_pkg_libgpg_error_version@
 
-@HAVE_PKG_W32PTH@
-!define gpg4win_pkg_w32pth @gpg4win_pkg_w32pth@
-!define gpg4win_pkg_w32pth_version @gpg4win_pkg_w32pth_version@
+!define cm_pkg_w32pth @cm_pkg_w32pth@
+!define cm_pkg_w32pth_version @cm_pkg_w32pth_version@
 
-@HAVE_PKG_LIBASSUAN@
-!define gpg4win_pkg_libassuan @gpg4win_pkg_libassuan@
-!define gpg4win_pkg_libassuan_version @gpg4win_pkg_libassuan_version@
+!define cm_pkg_libassuan @cm_pkg_libassuan@
+!define cm_pkg_libassuan_version @cm_pkg_libassuan_version@
 
-@HAVE_PKG_LIBGCRYPT@
-!define gpg4win_pkg_libgcrypt @gpg4win_pkg_libgcrypt@
-!define gpg4win_pkg_libgcrypt_version @gpg4win_pkg_libgcrypt_version@
+!define cm_pkg_libgcrypt @cm_pkg_libgcrypt@
+!define cm_pkg_libgcrypt_version @cm_pkg_libgcrypt_version@
 
-@HAVE_PKG_GPGME@
-!define gpg4win_pkg_gpgme @gpg4win_pkg_gpgme@
-!define gpg4win_pkg_gpgme_version @gpg4win_pkg_gpgme_version@
+!define cm_pkg_gpgme @cm_pkg_gpgme@
+!define cm_pkg_gpgme_version @cm_pkg_gpgme_version@
 
-@HAVE_PKG_LIBGSASL@
-!define gpg4win_pkg_libgsasl @gpg4win_pkg_libgsasl@
-!define gpg4win_pkg_libgsasl_version @gpg4win_pkg_libgsasl_version@
+!define cm_pkg_libgsasl @cm_pkg_libgsasl@
+!define cm_pkg_libgsasl_version @cm_pkg_libgsasl_version@
 
-@HAVE_PKG_LIBTASN1@
-!define gpg4win_pkg_libtasn1 @gpg4win_pkg_libtasn1@
-!define gpg4win_pkg_libtasn1_version @gpg4win_pkg_libtasn1_version@
+!define cm_pkg_libtasn1 @cm_pkg_libtasn1@
+!define cm_pkg_libtasn1_version @cm_pkg_libtasn1_version@
 
-@HAVE_PKG_GMP@
-!define gpg4win_pkg_gmp @gpg4win_pkg_gmp@
-!define gpg4win_pkg_gmp_version @gpg4win_pkg_gmp_version@
+!define cm_pkg_gmp @cm_pkg_gmp@
+!define cm_pkg_gmp_version @cm_pkg_gmp_version@
 
-@HAVE_PKG_NETTLE@
-!define gpg4win_pkg_nettle @gpg4win_pkg_nettle@
-!define gpg4win_pkg_nettle_version @gpg4win_pkg_nettle_version@
+!define cm_pkg_nettle @cm_pkg_nettle@
+!define cm_pkg_nettle_version @cm_pkg_nettle_version@
 
-@HAVE_PKG_PIXMAN@
-!define gpg4win_pkg_pixman @gpg4win_pkg_pixman@
-!define gpg4win_pkg_pixman_version @gpg4win_pkg_pixman_version@
+!define cm_pkg_pixman @cm_pkg_pixman@
+!define cm_pkg_pixman_version @cm_pkg_pixman_version@
 
-@HAVE_PKG_CAIRO@
-!define gpg4win_pkg_cairo @gpg4win_pkg_cairo@
-!define gpg4win_pkg_cairo_version @gpg4win_pkg_cairo_version@
+!define cm_pkg_cairo @cm_pkg_cairo@
+!define cm_pkg_cairo_version @cm_pkg_cairo_version@
 
-@HAVE_PKG_GNUTLS@
-!define gpg4win_pkg_gnutls @gpg4win_pkg_gnutls@
-!define gpg4win_pkg_gnutls_version @gpg4win_pkg_gnutls_version@
+!define cm_pkg_gnutls @cm_pkg_gnutls@
+!define cm_pkg_gnutls_version @cm_pkg_gnutls_version@
 
-@HAVE_PKG_CURL@
-!define gpg4win_pkg_curl @gpg4win_pkg_curl@
-!define gpg4win_pkg_curl_version @gpg4win_pkg_curl_version@
+!define cm_pkg_curl @cm_pkg_curl@
+!define cm_pkg_curl_version @cm_pkg_curl_version@
 
-@HAVE_PKG_LIBXML2@
-!define gpg4win_pkg_libxml2 @gpg4win_pkg_libxml2@
-!define gpg4win_pkg_libxml2_version @gpg4win_pkg_libxml2_version@
+!define cm_pkg_libxml2 @cm_pkg_libxml2@
+!define cm_pkg_libxml2_version @cm_pkg_libxml2_version@
 
-@HAVE_PKG_LIBETPAN@
-!define gpg4win_pkg_libetpan @gpg4win_pkg_libetpan@
-!define gpg4win_pkg_libetpan_version @gpg4win_pkg_libetpan_version@
+!define cm_pkg_libetpan @cm_pkg_libetpan@
+!define cm_pkg_libetpan_version @cm_pkg_libetpan_version@
 
-@HAVE_PKG_REGEX@
-!define gpg4win_pkg_regex @gpg4win_pkg_regex@
-!define gpg4win_pkg_regex_version @gpg4win_pkg_regex_version@
+!define cm_pkg_regex @cm_pkg_regex@
+!define cm_pkg_regex_version @cm_pkg_regex_version@
 
-@HAVE_PKG_CRYPT@
-!define gpg4win_pkg_crypt @gpg4win_pkg_crypt@
-!define gpg4win_pkg_crypt_version @gpg4win_pkg_crypt_version@
+!define cm_pkg_crypt @cm_pkg_crypt@
+!define cm_pkg_crypt_version @cm_pkg_crypt_version@
 
-@HAVE_PKG_CLAWS_MAIL@
-!define gpg4win_pkg_claws_mail @gpg4win_pkg_claws_mail@
-!define gpg4win_pkg_claws_mail_version @gpg4win_pkg_claws_mail_version@
+!define cm_pkg_claws_mail @cm_pkg_claws_mail@
+!define cm_pkg_claws_mail_version @cm_pkg_claws_mail_version@
 
-@HAVE_PKG_WEBKIT@
-!define gpg4win_pkg_webkit @gpg4win_pkg_webkit@
-!define gpg4win_pkg_webkit_version @gpg4win_pkg_webkit_version@
+!define cm_pkg_webkit @cm_pkg_webkit@
+!define cm_pkg_webkit_version @cm_pkg_webkit_version@
 
-@HAVE_PKG_JPEG@
-!define gpg4win_pkg_jpeg @gpg4win_pkg_jpeg@
-!define gpg4win_pkg_jpeg_version @gpg4win_pkg_jpeg_version@
+!define cm_pkg_jpeg @cm_pkg_jpeg@
+!define cm_pkg_jpeg_version @cm_pkg_jpeg_version@
 
-@HAVE_PKG_GLIB_NETWORKING@
-!define gpg4win_pkg_glib_networking @gpg4win_pkg_glib_networking@
-!define gpg4win_pkg_glib_networking_version @gpg4win_pkg_glib_networking_version@
+!define cm_pkg_glib_networking @cm_pkg_glib_networking@
+!define cm_pkg_glib_networking_version @cm_pkg_glib_networking_version@
 
-@HAVE_PKG_LIBSOUP@
-!define gpg4win_pkg_libsoup @gpg4win_pkg_libsoup@
-!define gpg4win_pkg_libsoup_version @gpg4win_pkg_libsoup_version@
+!define cm_pkg_libsoup @cm_pkg_libsoup@
+!define cm_pkg_libsoup_version @cm_pkg_libsoup_version@
 
-@HAVE_PKG_BSFILTER@
-!define gpg4win_pkg_bsfilter @gpg4win_pkg_bsfilter@
-!define gpg4win_pkg_bsfilter_version @gpg4win_pkg_bsfilter_version@
-!define gpg4win_pkg_bsfilter_src @gpg4win_pkg_bsfilter_src@
+!define cm_pkg_bsfilter @cm_pkg_bsfilter@
+!define cm_pkg_bsfilter_version @cm_pkg_bsfilter_version@
+!define cm_pkg_bsfilter_src @cm_pkg_bsfilter_src@
 
-@HAVE_PKG_ZLIB@
-!define gpg4win_pkg_zlib @gpg4win_pkg_zlib@
-!define gpg4win_pkg_zlib_version @gpg4win_pkg_zlib_version@
+!define cm_pkg_zlib @cm_pkg_zlib@
+!define cm_pkg_zlib_version @cm_pkg_zlib_version@
 
-@HAVE_PKG_BZIP2@
-!define gpg4win_pkg_bzip2 @gpg4win_pkg_bzip2@
-!define gpg4win_pkg_bzip2_version @gpg4win_pkg_bzip2_version@
+!define cm_pkg_bzip2 @cm_pkg_bzip2@
+!define cm_pkg_bzip2_version @cm_pkg_bzip2_version@
 
-@HAVE_PKG_LIBPNG@
-!define gpg4win_pkg_libpng @gpg4win_pkg_libpng@
-!define gpg4win_pkg_libpng_version @gpg4win_pkg_libpng_version@
+!define cm_pkg_libpng @cm_pkg_libpng@
+!define cm_pkg_libpng_version @cm_pkg_libpng_version@
 
-@HAVE_PKG_ENCHANT@
-!define gpg4win_pkg_enchant @gpg4win_pkg_enchant@
-!define gpg4win_pkg_enchant_version @gpg4win_pkg_enchant_version@
+!define cm_pkg_enchant @cm_pkg_enchant@
+!define cm_pkg_enchant_version @cm_pkg_enchant_version@
 
-@HAVE_PKG_PKGCONFIG@
-!define gpg4win_pkg_pkgconfig @gpg4win_pkg_pkgconfig@
-!define gpg4win_pkg_pkgconfig_version @gpg4win_pkg_pkgconfig_version@
-!define gpg4win_pkg_pkgconfig_src @gpg4win_pkg_pkgconfig_src@
+!define cm_pkg_pkgconfig @cm_pkg_pkgconfig@
+!define cm_pkg_pkgconfig_version @cm_pkg_pkgconfig_version@
+!define cm_pkg_pkgconfig_src @cm_pkg_pkgconfig_src@
 
-@HAVE_PKG_GLIB@
-!define gpg4win_pkg_glib @gpg4win_pkg_glib@
-!define gpg4win_pkg_glib_version @gpg4win_pkg_glib_version@
+!define cm_pkg_glib @cm_pkg_glib@
+!define cm_pkg_glib_version @cm_pkg_glib_version@
 
-@HAVE_PKG_GDK_PIXBUF@
-!define gpg4win_pkg_gdk_pixbuf @gpg4win_pkg_gdk_pixbuf@
-!define gpg4win_pkg_gdk_pixbuf_version @gpg4win_pkg_gdk_pixbuf_version@
+!define cm_pkg_gdk_pixbuf @cm_pkg_gdk_pixbuf@
+!define cm_pkg_gdk_pixbuf_version @cm_pkg_gdk_pixbuf_version@
 
-@HAVE_PKG_LIBFFI@
-!define gpg4win_pkg_libffi @gpg4win_pkg_libffi@
-!define gpg4win_pkg_libffi_version @gpg4win_pkg_libffi_version@
+!define cm_pkg_libffi @cm_pkg_libffi@
+!define cm_pkg_libffi_version @cm_pkg_libffi_version@
 
-@HAVE_PKG_EXPAT@
-!define gpg4win_pkg_expat @gpg4win_pkg_expat@
-!define gpg4win_pkg_expat_version @gpg4win_pkg_expat_version@
+!define cm_pkg_expat @cm_pkg_expat@
+!define cm_pkg_expat_version @cm_pkg_expat_version@
 
-@HAVE_PKG_HARFBUZZ@
-!define gpg4win_pkg_harfbuzz @gpg4win_pkg_harfbuzz@
-!define gpg4win_pkg_harfbuzz_version @gpg4win_pkg_harfbuzz_version@
+!define cm_pkg_harfbuzz @cm_pkg_harfbuzz@
+!define cm_pkg_harfbuzz_version @cm_pkg_harfbuzz_version@
 
-@HAVE_PKG_ATK@
-!define gpg4win_pkg_atk @gpg4win_pkg_atk@
-!define gpg4win_pkg_atk_version @gpg4win_pkg_atk_version@
+!define cm_pkg_atk @cm_pkg_atk@
+!define cm_pkg_atk_version @cm_pkg_atk_version@
 
-@HAVE_PKG_FREETYPE@
-!define gpg4win_pkg_freetype @gpg4win_pkg_freetype@
-!define gpg4win_pkg_freetype_version @gpg4win_pkg_freetype_version@
+!define cm_pkg_freetype @cm_pkg_freetype@
+!define cm_pkg_freetype_version @cm_pkg_freetype_version@
 
-@HAVE_PKG_FONTCONFIG@
-!define gpg4win_pkg_fontconfig @gpg4win_pkg_fontconfig@
-!define gpg4win_pkg_fontconfig_version @gpg4win_pkg_fontconfig_version@
+!define cm_pkg_fontconfig @cm_pkg_fontconfig@
+!define cm_pkg_fontconfig_version @cm_pkg_fontconfig_version@
 
-@HAVE_PKG_PANGO@
-!define gpg4win_pkg_pango @gpg4win_pkg_pango@
-!define gpg4win_pkg_pango_version @gpg4win_pkg_pango_version@
+!define cm_pkg_pango @cm_pkg_pango@
+!define cm_pkg_pango_version @cm_pkg_pango_version@
 
-@HAVE_PKG_GTK_@
-!define gpg4win_pkg_gtk_ @gpg4win_pkg_gtk_@
-!define gpg4win_pkg_gtk__version @gpg4win_pkg_gtk__version@
-!define gpg4win_pkg_gtk__dev @gpg4win_pkg_gtk__dev@
-!define gpg4win_pkg_gtk__src @gpg4win_pkg_gtk__src@
+!define cm_pkg_gtk_ @cm_pkg_gtk_@
+!define cm_pkg_gtk__version @cm_pkg_gtk__version@
+!define cm_pkg_gtk__dev @cm_pkg_gtk__dev@
+!define cm_pkg_gtk__src @cm_pkg_gtk__src@
 
-@HAVE_PKG_LIBICONV@
-!define gpg4win_pkg_libiconv @gpg4win_pkg_libiconv@
-!define gpg4win_pkg_libiconv_version @gpg4win_pkg_libiconv_version@
-!define gpg4win_pkg_libiconv_src @gpg4win_pkg_libiconv_src@
+!define cm_pkg_libiconv @cm_pkg_libiconv@
+!define cm_pkg_libiconv_version @cm_pkg_libiconv_version@
+!define cm_pkg_libiconv_src @cm_pkg_libiconv_src@
 
-@HAVE_PKG_GETTEXT@
-!define gpg4win_pkg_gettext @gpg4win_pkg_gettext@
-!define gpg4win_pkg_gettext_version @gpg4win_pkg_gettext_version@
-!define gpg4win_pkg_gettext_src @gpg4win_pkg_gettext_src@
+!define cm_pkg_gettext @cm_pkg_gettext@
+!define cm_pkg_gettext_version @cm_pkg_gettext_version@
+!define cm_pkg_gettext_src @cm_pkg_gettext_src@

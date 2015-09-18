@@ -254,5 +254,4 @@ $AUTOMAKE --gnu -Wno-portability;
 echo "Running autoconf${FORCE} ..."
 $AUTOCONF${FORCE}
 
-#echo "You may now run \"./configure --host=i586-mingw32msvc && make\"."
 echo "You may now run \"./autogen.sh --build-w32 && make\"."

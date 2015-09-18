@@ -21,12 +21,6 @@
 AC_PREREQ(2.59)
 min_automake_version="1.9.3"
 
-# To build a release you need to create a tag with the version number
-# (git tag -s gpg4win-2.x.y) and run "./autogen.sh --force".  Please
-# bump the version number immediately after the release and do another
-# commit and push so that the git magic is able to work.
-#
-# After a release the make target "copy-news" is to be called as well!
 m4_define([my_version], [3.12.0])
 m4_define([my_release], [2])
 
@@ -220,66 +214,66 @@ AC_CHECK_PROGS(WGET, wget)
 
 
 # Packages.
-gpg4win_dup_sources=""
+cm_dup_sources=""
 
 
-GPG4WIN_SPKG([zlib])
-GPG4WIN_SPKG([bzip2])
-#GPG4WIN_SPKG([adns])
-GPG4WIN_SPKG([w32pth])
-GPG4WIN_SPKG([jpeg])
-GPG4WIN_SPKG([gmp])
-GPG4WIN_SPKG([regex])
-GPG4WIN_SPKG([crypt])
+CM_SPKG([zlib])
+CM_SPKG([bzip2])
+#CM_SPKG([adns])
+CM_SPKG([w32pth])
+CM_SPKG([jpeg])
+CM_SPKG([gmp])
+CM_SPKG([regex])
+CM_SPKG([crypt])
 
-GPG4WIN_BPKG_GTK([pkgconfig])
+CM_BPKG_GTK([pkgconfig])
 
-GPG4WIN_SPKG([libiconv])
-GPG4WIN_SPKG([gettext], [libiconv])
+CM_SPKG([libiconv])
+CM_SPKG([gettext], [libiconv])
 
-GPG4WIN_SPKG([libffi], [pkgconfig])
-GPG4WIN_SPKG([glib], [libiconv gettext pkgconfig libffi zlib])
-GPG4WIN_SPKG([expat])
-GPG4WIN_SPKG([pixman], [libpng pkgconfig])
-GPG4WIN_SPKG([cairo], [zlib libpng glib pkgconfig])
-GPG4WIN_SPKG([atk], [glib pkgconfig])
-GPG4WIN_SPKG([fontconfig], [pkgconfig zlib expat freetype libiconv])
-GPG4WIN_SPKG([harfbuzz], [glib cairo])
-GPG4WIN_SPKG([freetype], [pkgconfig zlib bzip2])
-GPG4WIN_SPKG([pango], [harfbuzz fontconfig glib pkgconfig])
-GPG4WIN_SPKG([gdk-pixbuf], [glib])
-GPG4WIN_SPKG([gtk+], [libiconv gettext pkgconfig atk pango dnl
+CM_SPKG([libffi], [pkgconfig])
+CM_SPKG([glib], [libiconv gettext pkgconfig libffi zlib])
+CM_SPKG([expat])
+CM_SPKG([pixman], [libpng pkgconfig])
+CM_SPKG([cairo], [zlib libpng glib pkgconfig])
+CM_SPKG([atk], [glib pkgconfig])
+CM_SPKG([fontconfig], [pkgconfig zlib expat freetype libiconv])
+CM_SPKG([harfbuzz], [glib cairo])
+CM_SPKG([freetype], [pkgconfig zlib bzip2])
+CM_SPKG([pango], [harfbuzz fontconfig glib pkgconfig])
+CM_SPKG([gdk-pixbuf], [glib])
+CM_SPKG([gtk+], [libiconv gettext pkgconfig atk pango dnl
                       glib gdk-pixbuf cairo])
-GPG4WIN_SPKG([libpng], [pkgconfig])
-GPG4WIN_SPKG([enchant], [pkgconfig glib])
+CM_SPKG([libpng], [pkgconfig])
+CM_SPKG([enchant], [pkgconfig glib])
 
-GPG4WIN_SPKG([libgpg-error], [libiconv gettext])
-GPG4WIN_SPKG([libgcrypt], [libgpg-error])
-#GPG4WIN_SPKG([libksba], [libgpg-error])
-GPG4WIN_SPKG([libassuan], [libgpg-error w32pth])
-#GPG4WIN_SPKG([dirmngr], [libgpg-error libgcrypt libassuan libksba w32pth])
-#GPG4WIN_SPKG([pinentry], [libiconv gtk+])
-GPG4WIN_SPKG([gpgme], [libgpg-error libassuan glib])
-#GPG4WIN_SPKG([gnupg2], [libiconv libgcrypt libksba libassuan libgpg-error dnl
+CM_SPKG([libgpg-error], [libiconv gettext])
+CM_SPKG([libgcrypt], [libgpg-error])
+#CM_SPKG([libksba], [libgpg-error])
+CM_SPKG([libassuan], [libgpg-error w32pth])
+#CM_SPKG([dirmngr], [libgpg-error libgcrypt libassuan libksba w32pth])
+#CM_SPKG([pinentry], [libiconv gtk+])
+CM_SPKG([gpgme], [libgpg-error libassuan glib])
+#CM_SPKG([gnupg2], [libiconv libgcrypt libksba libassuan libgpg-error dnl
 #                        w32pth zlib bzip2 adns pinentry])
-GPG4WIN_SPKG([libxml2], [zlib])
-GPG4WIN_SPKG([libgsasl])
-GPG4WIN_SPKG([libtasn1])
-GPG4WIN_SPKG([nettle], [gmp])
-GPG4WIN_SPKG([gnutls], [gmp nettle libgsasl libtasn1 libgcrypt])
-GPG4WIN_SPKG([glib-networking], [glib gnutls])
-GPG4WIN_SPKG([libsoup], [gnutls libxml2 glib-networking])
-GPG4WIN_SPKG([webkit], [jpeg libpng glib gtk+ libsoup libxml2])
-#GPG4WIN_SPKG([gpa], [libiconv gettext zlib gtk+ libpng glib gpgme])
-GPG4WIN_SPKG([curl], [zlib gnutls])
-GPG4WIN_SPKG([libetpan], [gnutls])
-GPG4WIN_BPKG_GNUWIN32([bsfilter])
-GPG4WIN_SPKG([claws-mail], [libiconv gettext zlib gtk+ libpng enchant glib dnl
+CM_SPKG([libxml2], [zlib])
+CM_SPKG([libgsasl])
+CM_SPKG([libtasn1])
+CM_SPKG([nettle], [gmp])
+CM_SPKG([gnutls], [gmp nettle libgsasl libtasn1 libgcrypt])
+CM_SPKG([glib-networking], [glib gnutls])
+CM_SPKG([libsoup], [gnutls libxml2 glib-networking])
+CM_SPKG([webkit], [jpeg libpng glib gtk+ libsoup libxml2])
+#CM_SPKG([gpa], [libiconv gettext zlib gtk+ libpng glib gpgme])
+CM_SPKG([curl], [zlib gnutls])
+CM_SPKG([libetpan], [gnutls])
+CM_BPKG_GNUWIN32([bsfilter])
+CM_SPKG([claws-mail], [libiconv gettext zlib gtk+ libpng enchant glib dnl
                             gpgme crypt regex libetpan gnutls dnl
                             libxml2 expat webkit curl])
 
 
-GPG4WIN_FINALIZE
+CM_FINALIZE
 
 # Throw an error if required tools are missing
 if test -n "$missing_tools"; then
@@ -294,9 +288,9 @@ if test -n "$missing_tools"; then
 fi
 
 # Throw an error if any duplicate source packages have been found
-if test -n "$gpg4win_dup_sources"; then
+if test -n "$cm_dup_sources"; then
     tmp=
-    for i in $gpg4win_dup_sources; do
+    for i in $cm_dup_sources; do
       tmp="$tmp
 $i"
     done
@@ -309,7 +303,7 @@ fi
 AC_CONFIG_FILES(Makefile)
 AC_CONFIG_FILES(packages/Makefile src/Makefile po/Makefile.in)
 AC_CONFIG_FILES(po/build-cc)
-AC_CONFIG_FILES(src/config.nsi src/gpg4win.mk)
+AC_CONFIG_FILES(src/config.nsi src/claws-mail.mk)
 AC_CONFIG_FILES(doc/Makefile)
 AC_CONFIG_FILES(doc/logo/Makefile)
 AC_CONFIG_FILES(src/dictionaries/Makefile)

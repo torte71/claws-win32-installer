@@ -17,58 +17,54 @@
 # along with this program; if not, see <http://www.gnu.org/licenses/>.
 
 
-EXTRA_DIST = pkg-config gpg4win.nsi gpg4win-src.nsi \
-	config.site config.nsi.in \
+EXTRA_DIST = pkg-config claws-mail.nsi gpg4win-src.nsi \
+				config.site config.nsi.in \
+				functions.nsi strings.nsi \
+				reg-inst.nsi reg-uninst.nsi \
         installer-options.ini.in libiconv.def libintl.def \
-        inst-sections.nsi installer.nsi installer-finish.nsi  \
         potomo Memento.nsh \
-        inst-gpg4win.nsi	   uninst-gpg4win.nsi	      \
-        inst-atk.nsi               uninst-atk.nsi	      \
-        inst-expat.nsi		   uninst-expat.nsi	      \
-        inst-freetype.nsi	   uninst-freetype.nsi	      \
-        inst-fontconfig.nsi	   uninst-fontconfig.nsi      \
-        inst-pixman.nsi		   uninst-pixman.nsi	      \
-        inst-cairo.nsi		   uninst-cairo.nsi	      \
-        inst-libgsasl.nsi	   uninst-libgsasl.nsi        \
-        inst-libtasn1.nsi	   uninst-libtasn1.nsi        \
-        inst-gnutls.nsi		   uninst-gnutls.nsi	      \
-        inst-gmp.nsi		   uninst-gmp.nsi	      \
-        inst-nettle.nsi		   uninst-nettle.nsi	      \
-        inst-curl.nsi		   uninst-curl.nsi	      \
-        inst-libxml2.nsi	   uninst-libxml2.nsi	      \
-        inst-libetpan.nsi	   uninst-libetpan.nsi        \
-        inst-claws-mail.nsi	   uninst-claws-mail.nsi      \
-        inst-crypt.nsi		   uninst-crypt.nsi	      \
-        inst-gettext.nsi	   uninst-gettext.nsi	      \
-        inst-libffi.nsi		   uninst-libffi.nsi	      \
-        inst-glib.nsi		   uninst-glib.nsi	      \
-        inst-gpgme.nsi		   uninst-gpgme.nsi	      \
-        inst-gdk-pixbuf.nsi        uninst-gdk-pixbuf.nsi      \
-        inst-gtk+.nsi		   uninst-gtk+.nsi	      \
-				inst-libassuan.nsi	   uninst-libassuan.nsi 	    \
-        inst-libgcrypt.nsi	   uninst-libgcrypt.nsi	      \
-        inst-libgpg-error.nsi	   uninst-libgpg-error.nsi    \
-        inst-libiconv.nsi	   uninst-libiconv.nsi	      \
-        inst-libpng.nsi		   uninst-libpng.nsi	      \
-        inst-enchant.nsi	   uninst-enchant.nsi	      \
-        inst-pango.nsi		   uninst-pango.nsi	      \
-        inst-pkgconfig.nsi	   uninst-pkgconfig.nsi	      \
-        inst-regex.nsi		   uninst-regex.nsi	      \
-        inst-w32pth.nsi		   uninst-w32pth.nsi	      \
-        inst-zlib.nsi        	   uninst-zlib.nsi            \
-        inst-bsfilter.nsi        	   uninst-bsfilter.nsi            \
-	inst-bzip2.nsi             uninst-bzip2.nsi           \
-	inst-jpeg.nsi     uninst-jpeg.nsi         \
-	inst-webkit.nsi     uninst-webkit.nsi         \
-	inst-glib-networking.nsi     uninst-glib-networking.nsi         \
-	inst-libsoup.nsi     uninst-libsoup.nsi         \
-        inst-final.nsi
+        uninst-gpg4win.nsi	      \
+        uninst-atk.nsi	      \
+        uninst-expat.nsi	      \
+        uninst-freetype.nsi	      \
+        uninst-fontconfig.nsi      \
+        uninst-pixman.nsi	      \
+        uninst-cairo.nsi	      \
+        uninst-libgsasl.nsi        \
+        uninst-libtasn1.nsi        \
+        uninst-gnutls.nsi	      \
+        uninst-gmp.nsi	      \
+        uninst-nettle.nsi	      \
+        uninst-curl.nsi	      \
+        uninst-libxml2.nsi	      \
+        uninst-libetpan.nsi        \
+        uninst-claws-mail.nsi      \
+        uninst-crypt.nsi	      \
+        uninst-gettext.nsi	      \
+        uninst-libffi.nsi	      \
+        uninst-glib.nsi	      \
+        uninst-gpgme.nsi	      \
+        uninst-gdk-pixbuf.nsi      \
+        uninst-gtk+.nsi	      \
+				uninst-libassuan.nsi 	    \
+        uninst-libgcrypt.nsi	      \
+        uninst-libgpg-error.nsi    \
+        uninst-libiconv.nsi	      \
+        uninst-libpng.nsi	      \
+        uninst-enchant.nsi	      \
+        uninst-pango.nsi	      \
+        uninst-pkgconfig.nsi	      \
+        uninst-regex.nsi	      \
+        uninst-w32pth.nsi	      \
+        uninst-zlib.nsi            \
+        uninst-bsfilter.nsi            \
+	uninst-bzip2.nsi           \
+	uninst-jpeg.nsi         \
+	uninst-webkit.nsi         \
+	uninst-glib-networking.nsi         \
+	uninst-libsoup.nsi
 
 SUBDIRS = dictionaries
-
-gpg4win_readme_ll = en de ar es fr ru pt
-
-gpg4win_howto_smime_ll = en de
 
 # Need to clean the dll because we bypassed automake.
 #CLEANFILES = g4wihelp.dll versioninfo.txt \
@@ -77,7 +73,7 @@ gpg4win_howto_smime_ll = en de
 #	     gpgwrap.exe gpgwrap-2.exe
 
 # Supported source packages.
-gpg4win_spkgs = glib libffi gdk-pixbuf gtk+ expat \
+cm_spkgs = glib libffi gdk-pixbuf gtk+ expat \
 		libgpg-error gpgme libpng enchant atk fontconfig freetype \
 		libgsasl libtasn1 opencdk gnutls curl libxml2 \
 		jpeg glib-networking libsoup webkit gmp nettle \
@@ -86,72 +82,72 @@ gpg4win_spkgs = glib libffi gdk-pixbuf gtk+ expat \
 		w32pth regex libiconv gettext
 
 # Supported source packages to build in an additional architecture
-gpg4win_expkgs = libgpg-error libiconv gettext w32pth
+cm_expkgs = libgpg-error libiconv gettext w32pth
 
 # Extra options to configure for individual packages.
 # We can use $(idir) here for the installation prefix.
 
-gpg4win_pkg_harfbuzz_make_args = -j$(NUMPROC)
-gpg4win_pkg_freetype_make_args = -j$(NUMPROC)
-gpg4win_pkg_fontconfig_make_args = -j$(NUMPROC)
-gpg4win_pkg_pango_make_args = -j$(NUMPROC)
-gpg4win_pkg_atk_make_args = -j$(NUMPROC)
-gpg4win_pkg_gdk_pixbuf_make_args = -j$(NUMPROC)
-gpg4win_pkg_glib_make_args = -j$(NUMPROC)
-gpg4win_pkg_gtk__make_args = -j$(NUMPROC)
-gpg4win_pkg_libgpg_error_make_args = -j$(NUMPROC)
-gpg4win_pkg_gpgme_make_args = -j$(NUMPROC)
-gpg4win_pkg_expat_make_args = -j$(NUMPROC)
-gpg4win_pkg_libpng_make_args = -j$(NUMPROC)
-gpg4win_pkg_enchant_make_args = -j$(NUMPROC)
-gpg4win_pkg_libgsasl_make_args = -j$(NUMPROC)
-gpg4win_pkg_libtasn1_make_args = -j$(NUMPROC)
-gpg4win_pkg_opencdk_make_args = -j$(NUMPROC)
-gpg4win_pkg_curl_make_args = -j$(NUMPROC)
-gpg4win_pkg_libxml2_make_args = -j$(NUMPROC)
-gpg4win_pkg_libetpan_make_args = -j$(NUMPROC)
-gpg4win_pkg_claws_mail_make_args = -j$(NUMPROC)
-gpg4win_pkg_libassuan_make_args = -j$(NUMPROC)
-gpg4win_pkg_libgcrypt_make_args = -j$(NUMPROC)
-gpg4win_pkg_w32pth_make_args = -j$(NUMPROC)
-gpg4win_pkg_jpeg_make_args = -j$(NUMPROC)
-gpg4win_pkg_glib_networking_make_args = -j$(NUMPROC)
-gpg4win_pkg_libsoup_make_args = -j$(NUMPROC)
-gpg4win_pkg_webkit_make_args = -j$(NUMPROC)
-gpg4win_pkg_gmp_make_args = -j$(NUMPROC)
-gpg4win_pkg_nettle_make_args = -j$(NUMPROC)
-gpg4win_pkg_pixman_make_args = -j$(NUMPROC)
-gpg4win_pkg_cairo_make_args = -j$(NUMPROC)
+cm_pkg_harfbuzz_make_args = -j$(NUMPROC)
+cm_pkg_freetype_make_args = -j$(NUMPROC)
+cm_pkg_fontconfig_make_args = -j$(NUMPROC)
+cm_pkg_pango_make_args = -j$(NUMPROC)
+cm_pkg_atk_make_args = -j$(NUMPROC)
+cm_pkg_gdk_pixbuf_make_args = -j$(NUMPROC)
+cm_pkg_glib_make_args = -j$(NUMPROC)
+cm_pkg_gtk__make_args = -j$(NUMPROC)
+cm_pkg_libgpg_error_make_args = -j$(NUMPROC)
+cm_pkg_gpgme_make_args = -j$(NUMPROC)
+cm_pkg_expat_make_args = -j$(NUMPROC)
+cm_pkg_libpng_make_args = -j$(NUMPROC)
+cm_pkg_enchant_make_args = -j$(NUMPROC)
+cm_pkg_libgsasl_make_args = -j$(NUMPROC)
+cm_pkg_libtasn1_make_args = -j$(NUMPROC)
+cm_pkg_opencdk_make_args = -j$(NUMPROC)
+cm_pkg_curl_make_args = -j$(NUMPROC)
+cm_pkg_libxml2_make_args = -j$(NUMPROC)
+cm_pkg_libetpan_make_args = -j$(NUMPROC)
+cm_pkg_claws_mail_make_args = -j$(NUMPROC)
+cm_pkg_libassuan_make_args = -j$(NUMPROC)
+cm_pkg_libgcrypt_make_args = -j$(NUMPROC)
+cm_pkg_w32pth_make_args = -j$(NUMPROC)
+cm_pkg_jpeg_make_args = -j$(NUMPROC)
+cm_pkg_glib_networking_make_args = -j$(NUMPROC)
+cm_pkg_libsoup_make_args = -j$(NUMPROC)
+cm_pkg_webkit_make_args = -j$(NUMPROC)
+cm_pkg_gmp_make_args = -j$(NUMPROC)
+cm_pkg_nettle_make_args = -j$(NUMPROC)
+cm_pkg_pixman_make_args = -j$(NUMPROC)
+cm_pkg_cairo_make_args = -j$(NUMPROC)
 
 
 
-gpg4win_pkg_libiconv_ex_configure = \
+cm_pkg_libiconv_ex_configure = \
 	--enable-shared=no --enable-static=yes \
 	--enable-extra-encodings
 
-gpg4win_pkg_gettext_configure = \
+cm_pkg_gettext_configure = \
   --with-lib-prefix=$(idir) --with-libiconv-prefix=$(idir) \
   CPPFLAGS=-I$(idir)/include CFLAGS=-O2 LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
 
-gpg4win_pkg_gettext_ex_configure = \
+cm_pkg_gettext_ex_configure = \
   --with-lib-prefix=$(ex_idir) --with-libiconv-prefix=$(ex_idir) \
   CPPFLAGS=-I$(ex_idir)/include CFLAGS=-O2 LDFLAGS=\"-Wl,--enable-auto-image-base -L$(ex_idir)/lib\"
 
 # We only need gettext-runtime and there is sadly no top level
 # configure option for this
-gpg4win_pkg_gettext_make_dir = gettext-runtime
-gpg4win_pkg_gettext_make_dir_inst = gettext-runtime
-gpg4win_pkg_gettext_ex_make_dir = gettext-runtime
-gpg4win_pkg_gettext_ex_make_dir_inst = gettext-runtime
+cm_pkg_gettext_make_dir = gettext-runtime
+cm_pkg_gettext_make_dir_inst = gettext-runtime
+cm_pkg_gettext_ex_make_dir = gettext-runtime
+cm_pkg_gettext_ex_make_dir_inst = gettext-runtime
 
-gpg4win_pkg_glib_configure = \
+cm_pkg_glib_configure = \
 	--disable-gtk-doc-html \
   CPPFLAGS=-I$(idir)/include \
 	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\" \
 	CCC=$(host)-g++
-#gpg4win_pkg_glib_extracflags = -march=i486
+#cm_pkg_glib_extracflags = -march=i486
 
-gpg4win_pkg_gdk_pixbuf_configure = \
+cm_pkg_gdk_pixbuf_configure = \
   --with-lib-prefix=$(idir) --with-libiconv-prefix=$(idir) \
   --with-included-loaders=yes \
 	--with-gdiplus \
@@ -160,7 +156,7 @@ gpg4win_pkg_gdk_pixbuf_configure = \
 	--disable-glibtest \
   CPPFLAGS=-I$(idir)/include LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
 
-gpg4win_pkg_gtk__configure = \
+cm_pkg_gtk__configure = \
 	--with-gdktarget=win32 \
 	--with-included-immodules \
 	--disable-cups \
@@ -169,7 +165,7 @@ gpg4win_pkg_gtk__configure = \
 	--disable-glibtest \
   CPPFLAGS=-I$(idir)/include LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
 
-gpg4win_pkg_harfbuzz_configure = \
+cm_pkg_harfbuzz_configure = \
 	--disable-gtk-doc-html \
 	--with-glib \
 	--with-gobject \
@@ -179,35 +175,35 @@ gpg4win_pkg_harfbuzz_configure = \
 	CPPFLAGS=\"-I$(idir)/include\" \
 	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
 
-gpg4win_pkg_freetype_configure = \
+cm_pkg_freetype_configure = \
 	--host=i686-w64-mingw32 \
 	--build=x86_64-linux-gnu \
 	--with-png --without-bzip2 --with-zlib \
 	CPPFLAGS=\"-I$(idir)/include\" \
 	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
 
-gpg4win_pkg_fontconfig_configure = \
+cm_pkg_fontconfig_configure = \
 	--enable-iconv --disable-docs \
 	CPPFLAGS=\"-I$(idir)/include\" \
 	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
 
-gpg4win_pkg_pango_configure = \
+cm_pkg_pango_configure = \
 	--disable-gtk-doc-html --disable-glibtest --disable-doc-cross-references \
 	--with-included-modules=yes \
 	CPPFLAGS=\"-I$(idir)/include\" \
 	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
 
-gpg4win_pkg_atk_configure = \
+cm_pkg_atk_configure = \
 	--disable-gtk-doc-html --disable-glibtest \
 	CPPFLAGS=\"-I$(idir)/include\" \
 	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
 
-gpg4win_pkg_pixman_configure = \
+cm_pkg_pixman_configure = \
 	--enable-libpng --disable-gtk \
 	CPPFLAGS=\"-I$(idir)/include\" \
 	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
 
-gpg4win_pkg_cairo_configure = \
+cm_pkg_cairo_configure = \
 	--enable-win32 --enable-win32-font \
 	--enable-ft --enable-fc \
 	CPPFLAGS=\"-I$(idir)/include\" \
@@ -216,19 +212,19 @@ gpg4win_pkg_cairo_configure = \
 # We would like to use --with-libiconv-prefix and
 # --with-libintl-prefix, but these don't work with the cheesy
 # non-"libfoo.la" versions of iconv and gettext that we are using.
-#gpg4win_pkg_libgpg_error_configure = \
+#cm_pkg_libgpg_error_configure = \
 #  --with-libiconv-prefix=$(idir) --with-libintl-prefix=$(idir)
-gpg4win_pkg_libgpg_error_configure = --silent \
+cm_pkg_libgpg_error_configure = --silent \
   --enable-static \
   CPPFLAGS=-I$(idir)/include LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
 
-gpg4win_pkg_libgpg_error_ex_configure = --silent \
+cm_pkg_libgpg_error_ex_configure = --silent \
   CPPFLAGS=-I$(idir)/include LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\" \
   --enable-static
 
 # We convert the PO files to UTF-8.  FIXME: This should be done in
 # libgpg-error proper.
-define gpg4win_pkg_libgpg_error_post_install
+define cm_pkg_libgpg_error_post_install
 (for i in `$(tsdir)/src/potomo --get-linguas $$$${pkgsdir}/po` ; do \
    rm $$$${pkgidir}/share/locale/$$$${i}/LC_MESSAGES/libgpg-error.mo \
        2>/dev/null|| true; \
@@ -237,29 +233,29 @@ define gpg4win_pkg_libgpg_error_post_install
  done)
 endef
 
-gpg4win_pkg_libassuan_configure =  --silent --enable-static
+cm_pkg_libassuan_configure =  --silent --enable-static
 
 # Using gpgsm with VirtualBox on AES-NI hardware crashes gpg-agent.
 # However, the Libgcrypt's regression tests work just fine.  I don't
 # have a windows instance on AES-NI, thus I can't currently debug
 # this. As a workaround we disable AES-NI for now.
-gpg4win_pkg_libgcrypt_configure = --silent \
+cm_pkg_libgcrypt_configure = --silent \
   --with-gpg-error-prefix=$(idir) \
   --disable-aesni-support
 
-gpg4win_pkg_libpng_configure = HAVE_SOLARIS_LD_FALSE=yes CPPFLAGS=\"-I$(idir)/include -DPNG_BUILD_DLL\" LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\" LIBPNG_DEFINES=\"-DPNG_BUILD_DLL\"
+cm_pkg_libpng_configure = HAVE_SOLARIS_LD_FALSE=yes CPPFLAGS=\"-I$(idir)/include -DPNG_BUILD_DLL\" LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\" LIBPNG_DEFINES=\"-DPNG_BUILD_DLL\"
 
-gpg4win_pkg_enchant_configure = CPPFLAGS=\"-I$(idir)/include -UENCHANT_GLOBAL_MODULE_DIR -UENCHANT_GLOBAL_ORDERING -UENCHANT_MYSPELL_DICT_DIR -UENCHANT_USPELL_DICT_DIR\" LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
+cm_pkg_enchant_configure = CPPFLAGS=\"-I$(idir)/include -UENCHANT_GLOBAL_MODULE_DIR -UENCHANT_GLOBAL_ORDERING -UENCHANT_MYSPELL_DICT_DIR -UENCHANT_USPELL_DICT_DIR\" LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
 
 # The LDFLAGS is needed for -lintl for glib.
-gpg4win_pkg_gpgme_configure = --silent \
+cm_pkg_gpgme_configure = --silent \
   --with-gpg-error-prefix=$(idir) --enable-static \
   `test -n "@HAVE_PKG_GLIB@" && echo "--enable-w32-glib"` \
   --disable-w32-qt LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
 
 # We want to build with libgcrypt
 # We can't use pkcs11 tue to tto much additional dependencies.
-gpg4win_pkg_gnutls_configure = \
+cm_pkg_gnutls_configure = \
   --disable-cxx \
   --with-libgcrypt \
   --without-p11-kit \
@@ -268,12 +264,12 @@ gpg4win_pkg_gnutls_configure = \
   --with-libgcrypt-prefix=$(idir) \
 	CPPFLAGS=\"-I$(idir)/include\" LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
 
-gpg4win_pkg_gmp_configure = \
+cm_pkg_gmp_configure = \
   --disable-static \
 	--enable-shared \
 	--disable-cxx
 
-gpg4win_pkg_nettle_configure = \
+cm_pkg_nettle_configure = \
   --enable-public-key \
 	CPPFLAGS=\"-I$(idir)/include\" \
 	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
@@ -281,23 +277,23 @@ gpg4win_pkg_nettle_configure = \
 # In 2.12.21 gnutls_openssl is not linked to libtasn1, thus we use
 # this hack to here.  (Using the included minitasn does work either
 # due to a missing soruce file.)
-gpg4win_pkg_gnutls_make_args = \
+cm_pkg_gnutls_make_args = \
    LTLIBTASN1=-ltasn1
 
 
-gpg4win_pkg_curl_configure = \
+cm_pkg_curl_configure = \
   --with-gnutls --without-ca-bundle --with-libiconv-prefix=$(idir) \
   CPPFLAGS=\"-I$(idir)/include\" LIBS=\"-L$(idir)/lib\"
 
-gpg4win_pkg_libxml2_configure = \
+cm_pkg_libxml2_configure = \
   --enable-shared --without-python --with-iconv=$(idir)
 
-gpg4win_pkg_libetpan_configure = --with-gnutls --enable-threads \
+cm_pkg_libetpan_configure = --with-gnutls --enable-threads \
 	--enable-ipv6 \
   CPPFLAGS=\"-I$(idir)/include\" \
   LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\" LIBS=\"-lpthread\"
 
-gpg4win_pkg_claws_mail_configure = \
+cm_pkg_claws_mail_configure = \
   --with-lib-prefix=$(idir) --with-libiconv-prefix=$(idir) \
   --with-gpg-error-prefix=$(idir) --with-gpgme-prefix=$(idir) \
   --with-config-dir="Claws-mail" --enable-pthread --enable-gnutls \
@@ -313,10 +309,10 @@ gpg4win_pkg_claws_mail_configure = \
 	CPPFLAGS=\"-g -O2 -I$(idir)/include\" \
 	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\" LIBS=\"-lexpat\"
 
-gpg4win_pkg_jpeg_configure = \
+cm_pkg_jpeg_configure = \
 							--with-libiconv-prefix=$(idir)
 
-gpg4win_pkg_glib_networking_configure = \
+cm_pkg_glib_networking_configure = \
   --disable-glibtest \
 	--without-libproxy \
 	--without-gnome-proxy \
@@ -325,11 +321,11 @@ gpg4win_pkg_glib_networking_configure = \
 	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\" \
 	CPPFLAGS=\"-I$(idir)/include\"
 
-gpg4win_pkg_libsoup_configure = \
+cm_pkg_libsoup_configure = \
 							--without-apache-httpd --with-libiconv-prefix=$(idir) \
 							CPPFLAGS=\"-I$(idir)/include\" LIBS=\"-L$(idir)/lib\"
 
-gpg4win_pkg_webkit_configure = \
+cm_pkg_webkit_configure = \
                 --enable-silent-rules \
                 --disable-datalist \
                 --disable-dom-storage \
@@ -364,7 +360,7 @@ gpg4win_pkg_webkit_configure = \
 
 
 # This is not anymore needed sinces 3.8.0 already builds a PDF version.
-# define gpg4win_pkg_claws_mail_post_install
+# define cm_pkg_claws_mail_post_install
 # (for i in de en ; do \
 #     (cd $$$${pkgidir}/share/doc/claws-mail/manual/$$$${i}; \
 #     ps2pdf claws-mail-manual.ps); \
@@ -373,35 +369,35 @@ gpg4win_pkg_webkit_configure = \
 
 
 # Supported make-only source packages.
-gpg4win_mpkgs = bzip2 zlib crypt
+cm_mpkgs = bzip2 zlib crypt
 
 # Extra options for the make invocations for individual packages.
 # make_flags is used for building, make_args_inst is used for installing.
-gpg4win_pkg_bzip2_make_args = -j$(NUMPROC) \
+cm_pkg_bzip2_make_args = -j$(NUMPROC) \
   CC=$(CC) AR=$(AR) RANLIB=$(RANLIB)
 
-gpg4win_pkg_bzip2_make_args_inst = \
+cm_pkg_bzip2_make_args_inst = \
   PREFIX=$$$${pkgidir} CC=$(CC) AR=$(AR) RANLIB=$(RANLIB)
 
-gpg4win_pkg_crypt_make_args = -j$(NUMPROC) \
+cm_pkg_crypt_make_args = -j$(NUMPROC) \
   CC=$(CC) AR=$(AR)
 
-gpg4win_pkg_crypt_make_args_inst = \
+cm_pkg_crypt_make_args_inst = \
   prefix=$$$${pkgidir}
 
-gpg4win_pkg_zlib_make_args = -j$(NUMPROC) \
+cm_pkg_zlib_make_args = -j$(NUMPROC) \
   -fwin32/Makefile.gcc PREFIX=$(host)- IMPLIB=libz.dll.a
 
-gpg4win_pkg_zlib_make_args_inst = -fwin32/Makefile.gcc install \
+cm_pkg_zlib_make_args_inst = -fwin32/Makefile.gcc install \
 	BINARY_PATH=$$$${pkgidir}/bin INCLUDE_PATH=$$$${pkgidir}/include \
 	LIBRARY_PATH=$$$${pkgidir}/lib SHARED_MODE=1 IMPLIB=libz.dll.a
 
 # Supported binary packages.
-gpg4win_bpkgs = pkgconfig bsfilter
+cm_bpkgs = pkgconfig bsfilter
 
 # libiconv needs some special magic to generate a usable import
 # library.
-# define gpg4win_pkg_libiconv_post_install
+# define cm_pkg_libiconv_post_install
 # (cp $(srcdir)/libiconv.def $$$${pkgidir}/lib;		\
 # cd $$$${pkgidir}/lib;					\
 # $(DLLTOOL) --output-lib libiconv.dll.a --def libiconv.def)
@@ -411,7 +407,7 @@ gpg4win_bpkgs = pkgconfig bsfilter
 # library.  Note that we include some internal symbols that are not
 # actually part of the DLL.  They are needed by the AM_GNU_GETTEXT
 # configure test, but not used otherwise.
-# define gpg4win_pkg_gettext_post_install
+# define cm_pkg_gettext_post_install
 # (cp $(srcdir)/libintl.def $$$${pkgidir}/lib;		\
 # cd $$$${pkgidir}/lib;					\
 # $(DLLTOOL) --output-lib libintl.dll.a --def libintl.def)
@@ -420,7 +416,7 @@ gpg4win_bpkgs = pkgconfig bsfilter
 
 # Zlib needs some special magic to generate a libtool file.
 # We also install the pc file here.
-define gpg4win_pkg_zlib_post_install
+define cm_pkg_zlib_post_install
 (mkdir $$$${pkgidir}/lib/pkgconfig || true;             \
 cp $(abs_srcdir)/zlib.pc $$$${pkgidir}/lib/pkgconfig/;  \
 cd $$$${pkgidir};					\
@@ -441,7 +437,7 @@ endef
 
 # To make sure that we link against the static versions we need
 # remove the import libs from crypt
-#define gpg4win_pkg_crypt_post_install
+#define cm_pkg_crypt_post_install
 #(cd $$$${pkgidir}/lib && rm libcrypt.dll.a libcrypt.lib)
 #endef
 
@@ -449,78 +445,78 @@ endef
 # or we can't substitute it properly in our pkg-config wrapper.
 # glib also installs an empty charset.alias for mingw which creates
 # a stow conflict with the one from iconv.
-define gpg4win_pkg_glib_post_install
+define cm_pkg_glib_post_install
  (cd $$$${pkgidir};							\
  perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`; \
  rm $$$${pkgidir}/lib/charset.alias)
 endef
 
-define gpg4win_pkg_libffi_post_install
+define cm_pkg_libffi_post_install
  (cd $$$${pkgidir};							\
  perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)
 endef
 
-define gpg4win_pkg_gdk_pixbuf_post_install
+define cm_pkg_gdk_pixbuf_post_install
  (cd $$$${pkgidir};							\
  perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)
 endef
 
-define gpg4win_pkg_atk_post_install
+define cm_pkg_atk_post_install
  (cd $$$${pkgidir_dev};							\
  perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)
 endef
 
-define gpg4win_pkg_freetype_post_install
+define cm_pkg_freetype_post_install
  (cd $$$${pkgidir_dev};							\
  perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)
 endef
 
-define gpg4win_pkg_fontconfig_post_install
+define cm_pkg_fontconfig_post_install
  (cd $$$${pkgidir_dev};							\
  perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)
 endef
 
-define gpg4win_pkg_cairo_post_install
+define cm_pkg_cairo_post_install
  (cd $$$${pkgidir_dev};							\
  perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)
 endef
 
-define gpg4win_pkg_pango_post_install
+define cm_pkg_pango_post_install
  (cd $$$${pkgidir_dev};							\
  perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)
 endef
 
-define gpg4win_pkg_gtk__post_install
+define cm_pkg_gtk__post_install
  (cd $$$${pkgidir_dev};							\
  perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)
 endef
 
-define gpg4win_pkg_libpng_post_install
+define cm_pkg_libpng_post_install
  (cd $$$${pkgidir};							\
  perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)
 endef
 
-define gpg4win_pkg_enchant_post_install
+define cm_pkg_enchant_post_install
  (cd $$$${pkgidir};							\
  perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)
 endef
 
-define gpg4win_pkg_libgsasl_post_install
+define cm_pkg_libgsasl_post_install
  (cd $$$${pkgidir};							\
  perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)
 endef
 
-define gpg4win_pkg_libtasn1_post_install
+define cm_pkg_libtasn1_post_install
  (cd $$$${pkgidir};							\
  perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)
 endef
 
-define gpg4win_pkg_gnutls_post_install
+define cm_pkg_gnutls_post_install
  (cd $$$${pkgidir};							\
  perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)
 endef
 
-#define gpg4win_pkg_libiconv_post_install
+#define cm_pkg_libiconv_post_install
 #(cp $(srcdir)/libiconv.def $$$${pkgidir}/lib;		\
 #cd $$$${pkgidir}/lib;					\
 #$(DLLTOOL) --output-lib libiconv.dll.a --def libiconv.def)
@@ -536,13 +532,12 @@ define INCLUDE_BY_MAKE
 include $(1)
 endef
 
-$(eval $(call INCLUDE_BY_MAKE,gpg4win.mk))
+$(eval $(call INCLUDE_BY_MAKE,claws-mail.mk))
 
 clean-local: clean-gpg4win
 
-common_nsi = inst-sections.nsi installer.nsi installer-finish.nsi	\
-  $(addsuffix .nsi,$(addprefix inst-,$(gpg4win_build_list)))		\
-  $(addsuffix .nsi,$(addprefix uninst-,$(gpg4win_build_list)))
+common_nsi = \
+  $(addsuffix .nsi,$(addprefix uninst-,$(cm_build_list)))
 
 
 # Prepare the versioninfo file.  The pipeline extracts the last
@@ -579,7 +574,7 @@ installer-options.ini : $(top_srcdir)/src/installer-options.ini.in
 claws-mail-$(VERSION)-${REL}.exe: gpg4win.nsi $(common_nsi) stamps/stamp-final \
 	                license.blurb installer-options.ini versioninfo.txt
 	$(MAKENSIS) -V3 -DBUILD_DIR=`pwd` -DTOP_SRCDIR=$(top_srcdir) \
-           -DSRCDIR=$(srcdir) $(EXTRA_MAKENSIS_FLAGS) $(srcdir)/gpg4win.nsi
+           -DSRCDIR=$(srcdir) $(EXTRA_MAKENSIS_FLAGS) $(srcdir)/claws-mail.nsi
 
 claws-mail-$(VERSION)-${REL}.wix: gpg4win.nsi $(common_nsi) stamps/stamp-final \
 			versioninfo.txt
