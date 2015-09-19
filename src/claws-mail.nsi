@@ -58,6 +58,9 @@ VIAddVersionKey "FileVersion" "${PROD_VERSION}"
 !define MUI_UNFINISHPAGE_NOAUTOCLOSE
 
 # Images used
+ReserveFile "${TOP_SRCDIR}/doc/logo/claws-mail-nsis-header-install-150x57.bmp"
+ReserveFile "${TOP_SRCDIR}/doc/logo/claws-mail-nsis-wizard-install-164x314.bmp"
+
 !define MUI_HEADERIMAGE
 !define MUI_HEADERIMAGE_BITMAP \
   "${TOP_SRCDIR}/doc/logo/claws-mail-nsis-header-install-150x57.bmp"

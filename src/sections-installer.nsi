@@ -563,15 +563,13 @@ DetailPrint "Deleted obsolete Lang entry"
 "Field 1" "State"
 IntCmp $R0 0 skip_default_client
 
-SetOutPath "$INSTDIR"
-File ${prefix}/share/locale/sv/LC_MESSAGES/claws-mail.mo
-
 WriteRegStr   HKCU "SOFTWARE\Classes\mailto" "" "URL:MailTo-Protocol"
 WriteRegStr   HKCU "SOFTWARE\Classes\mailto" "URL Protocol" ""
 WriteRegDword HKCU "SOFTWARE\Classes\mailto" "EditFlags" 2
 WriteRegStr   HKCU "SOFTWARE\Classes\mailto" "FriendlyTypeName" "Claws-Mail URL"
 WriteRegStr   HKCU "SOFTWARE\Classes\mailto\DefaultIcon" "" "$INSTDIR\claws-mail.exe,0"
 WriteRegStr   HKCU "SOFTWARE\Classes\mailto\shell\open\command" "" "$INSTDIR\claws-mail.exe --compose %1"
+DetailPrint "Set Claws Mail as default mail client"
 
 skip_default_client:
 #just register Claws in the list of available mailers
@@ -616,5 +614,22 @@ WriteRegStr       HKLM $MYTMP "Publisher"       "${COMPANY}"
 WriteRegStr       HKLM $MYTMP "URLInfoAbout"    "${WEBSITE}"
 WriteRegDWORD     HKLM $MYTMP "NoModify"        "1"
 WriteRegDWORD     HKLM $MYTMP "NoRepair"        "1"
+DetailPrint "Added Claws Mail info to Add/Remove Programs list"
 
 SectionEnd
+
+### Installer section that uninstalls gnupg2, gpa and its dependencies
+### Uninstaller needs to have a similar section, doing the same work.
+Section /o "-uninst_gnupg" SEC_GnupgUninst
+!include "gnupg-uninst.nsi"
+SectionEnd
+
+# This function has to be defined here, after the section index of
+# which it references. NSIS is weird.
+Function UninstallGnupg
+  IfFileExists $INSTDIR\gpg2.exe 0 leave
+	MessageBox MB_YESNO "$(T_FoundGnupg)" IDYES uninstall IDNO leave
+  uninstall:
+  !insertmacro SelectSection ${SEC_GnupgUninst}
+	leave:
+FunctionEnd

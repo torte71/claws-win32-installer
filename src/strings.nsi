@@ -79,3 +79,12 @@ LangString T_SetDefaultClientHeader ${LANG_ENGLISH} \
 
 LangString T_SetDefaultClient ${LANG_ENGLISH} \
 "Do you want to make Claws Mail your default mail client?"
+
+LangString T_FoundGnupg ${LANG_ENGLISH} \
+"GnuPG2 was found in your installation directory. \
+$\r$\nPlease note that GnuPG and GPA utilities are no longer \
+bundled with Claws Mail. \
+You should uninstall them now, and if you wish to continue \
+to use them, install an up-to-date version of Gpg4win from:$\r$\n \
+http://www.gpg4win.org/$\r$\n$\r$\n \
+Uninstall GnuPG now?"

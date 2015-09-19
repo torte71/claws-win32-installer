@@ -1,4 +1,4 @@
-# Check whether gpg4win has already been installed.  This is called as
+# Check whether Claws Mail has already been installed.  This is called as
 # a leave function from the directory page.  A call to abort will get
 # back to the directory selection.
 Function CheckExistingVersion
@@ -31,7 +31,17 @@ Function CheckExistingVersion
      Abort
 
  leave:
+
+ Call UninstallGnupg
 FunctionEnd
+
+#Function UninstallGnupg
+#	IfFileExists $INSTDIR\gpg2.exe 0 leave
+#	MessageBox MB_YESNO "$(T_FoundGnupg)" IDYES uninstall IDNO leave
+#	uninstall:
+#		!insertmacro SelectSection ${SEC_GnupgUninst}
+#	leave:
+#FunctionEnd
 
 # Control function for the Custom page to select special
 # install options.
@@ -91,7 +101,9 @@ Function .onInit
   # We can't use TOP_SRCDIR dir as the name of the file needs to be
   # the same while building and running the installer.  Thus we
   # generate the file from a template.
+	ReserveFile "installer-options.ini"
   !insertmacro MUI_INSTALLOPTIONS_EXTRACT "installer-options.ini"
+	ReserveFile "installer-setdefaultclient.ini"
   !insertmacro MUI_INSTALLOPTIONS_EXTRACT "installer-setdefaultclient.ini"
 
   ${MementoSectionRestore}
