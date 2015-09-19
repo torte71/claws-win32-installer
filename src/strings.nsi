@@ -74,6 +74,8 @@ LangString T_AboutFileVersion ${LANG_ENGLISH} \
 LangString T_AboutReleaseDate ${LANG_ENGLISH} \
  "release date ${_BUILD_ISODATE}"
 
-LangString T_SetDefaultClient ${LANG_ENGLISH} \
-     "Do you want to make Claws Mail your default mail client?"
+LangString T_SetDefaultClientHeader ${LANG_ENGLISH} \
+"Default client"
 
+LangString T_SetDefaultClient ${LANG_ENGLISH} \
+"Do you want to make Claws Mail your default mail client?"

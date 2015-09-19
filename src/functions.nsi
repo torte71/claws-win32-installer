@@ -55,6 +55,15 @@ Function CustomPageOptions
   !insertmacro MUI_INSTALLOPTIONS_DISPLAY "installer-options.ini"
 FunctionEnd
 
+Function CustomPageDefaultClient
+	!insertmacro MUI_HEADER_TEXT "$(T_SetDefaultClientHeader)" ""
+
+	!insertmacro MUI_INSTALLOPTIONS_WRITE "installer-setdefaultclient.ini" \
+	"Field 1" "Text" "$(T_SetDefaultClient)"
+
+	!insertmacro MUI_INSTALLOPTIONS_DISPLAY "installer-setdefaultclient.ini"
+FunctionEnd
+
 # Macro to set "prefix" variable to correct package's install dir.
 !macro SetPrefix pkgname
 !ifdef prefix
@@ -83,6 +92,7 @@ Function .onInit
   # the same while building and running the installer.  Thus we
   # generate the file from a template.
   !insertmacro MUI_INSTALLOPTIONS_EXTRACT "installer-options.ini"
+  !insertmacro MUI_INSTALLOPTIONS_EXTRACT "installer-setdefaultclient.ini"
 
   ${MementoSectionRestore}
 FunctionEnd

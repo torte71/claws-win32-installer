@@ -543,10 +543,78 @@ File ${prefix}/share/locale/sk/LC_MESSAGES/claws-mail.mo
 SetOutPath "$INSTDIR\share\locale\sv\LC_MESSAGES"
 File ${prefix}/share/locale/sv/LC_MESSAGES/claws-mail.mo
 
-!include reg-inst.nsi
-
 SetOutPath "$INSTDIR"
 
 ${MementoSectionEnd}
 
 ${MementoSectionDone}
+
+##############################################
+### Windows Registry modification section
+Section
+# We used to determine the language using a Registry entry.
+# Although we don't want to delete the user's Lang Registry Setting
+# because he might have have selected a different language than his
+# default.  We delete the global Lang of the installation.
+DeleteRegValue HKLM "Software\GNU\Claws Mail" "Lang"
+DetailPrint "Deleted obsolete Lang entry"
+
+!insertmacro MUI_INSTALLOPTIONS_READ $R0 "installer-setdefaultclient.ini" \
+"Field 1" "State"
+IntCmp $R0 0 skip_default_client
+
+SetOutPath "$INSTDIR"
+File ${prefix}/share/locale/sv/LC_MESSAGES/claws-mail.mo
+
+WriteRegStr   HKCU "SOFTWARE\Classes\mailto" "" "URL:MailTo-Protocol"
+WriteRegStr   HKCU "SOFTWARE\Classes\mailto" "URL Protocol" ""
+WriteRegDword HKCU "SOFTWARE\Classes\mailto" "EditFlags" 2
+WriteRegStr   HKCU "SOFTWARE\Classes\mailto" "FriendlyTypeName" "Claws-Mail URL"
+WriteRegStr   HKCU "SOFTWARE\Classes\mailto\DefaultIcon" "" "$INSTDIR\claws-mail.exe,0"
+WriteRegStr   HKCU "SOFTWARE\Classes\mailto\shell\open\command" "" "$INSTDIR\claws-mail.exe --compose %1"
+
+skip_default_client:
+#just register Claws in the list of available mailers
+WriteRegStr   HKLM "SOFTWARE\Clients\Mail\Claws Mail" "" "Claws Mail"
+WriteRegStr   HKLM "SOFTWARE\Clients\Mail\Claws Mail" "DLLPath" ""
+
+WriteRegStr   HKLM "SOFTWARE\Clients\Mail\Claws Mail\Capabilities" "ApplicationDescription" "Fast, lightweight and user-friendly GTK+2 based email client"
+WriteRegStr   HKLM "SOFTWARE\Clients\Mail\Claws Mail\Capabilities" "ApplicationIcon" "$INSTDIR\claws-mail.exe,0"
+WriteRegStr   HKLM "SOFTWARE\Clients\Mail\Claws Mail\Capabilities" "ApplicationName" "Claws Mail"
+
+WriteRegStr   HKLM "SOFTWARE\Clients\Mail\Claws Mail\Capabilities\UrlAssociations" "mailto" "Claws-Mail.URL.mailto"
+
+WriteRegStr   HKLM "SOFTWARE\Clients\Mail\Claws Mail\Protocols\mailto" "" "URL:MailTo-Protocol"
+WriteRegStr   HKLM "SOFTWARE\Clients\Mail\Claws Mail\Protocols\mailto" "URL Protocol" ""
+WriteRegStr   HKLM "SOFTWARE\Clients\Mail\Claws Mail\Protocols\mailto" "FriendlyTypeName" "Claws-Mail URL"
+WriteRegDword HKLM "SOFTWARE\Clients\Mail\Claws Mail\Protocols\mailto" "EditFlags" 2
+WriteRegStr   HKLM "SOFTWARE\Clients\Mail\Claws Mail\Protocols\mailto\DefaultIcon" "" "$INSTDIR\claws-mail.exe,0"
+WriteRegStr   HKLM "SOFTWARE\Clients\Mail\Claws Mail\Protocols\mailto\shell\open\command" "" "$INSTDIR\claws-mail.exe --compose %1"
+
+WriteRegStr   HKLM "SOFTWARE\Clients\Mail\Claws Mail\shell\open\command" "" "$INSTDIR\claws-mail.exe"
+
+WriteRegStr   HKLM "SOFTWARE\Classes\Claws-Mail.URL.mailto" "" "Claws-Mail URL"
+WriteRegStr   HKLM "SOFTWARE\Classes\Claws-Mail.URL.mailto" "FriendlyTypeName" "Claws-Mail URL"
+WriteRegStr   HKLM "SOFTWARE\Classes\Claws-Mail.URL.mailto" "URL Protocol" ""
+WriteRegDword HKLM "SOFTWARE\Classes\Claws-Mail.URL.mailto" "EditFlags" 2
+
+WriteRegStr   HKLM "SOFTWARE\Classes\Claws-Mail.URL.mailto\DefaultIcon" "" "$INSTDIR\claws-mail.exe,0"
+WriteRegStr   HKLM "SOFTWARE\Classes\Claws-Mail.URL.mailto\shell\open\command" "" "$INSTDIR\claws-mail.exe --compose %1"
+
+# Windows 8
+WriteRegStr HKLM "SOFTWARE\RegisteredApplications" "Claws Mail" "Software\Clients\Mail\Claws Mail\Capabilities"
+
+# Windows Add/Remove Programs support
+Var /GLOBAL MYTMP
+StrCpy $MYTMP "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRETTY_PACKAGE_SHORT}"
+WriteRegExpandStr HKLM $MYTMP "UninstallString" '"$INSTDIR\${PACKAGE}-uninstall.exe"'
+WriteRegExpandStr HKLM $MYTMP "InstallLocation" "$INSTDIR"
+WriteRegStr       HKLM $MYTMP "DisplayName"     "${PRETTY_PACKAGE}"
+WriteRegStr       HKLM $MYTMP "DisplayIcon"     "$INSTDIR\claws-mail.exe,0"
+WriteRegStr       HKLM $MYTMP "DisplayVersion"  "${VERSION}"
+WriteRegStr       HKLM $MYTMP "Publisher"       "${COMPANY}"
+WriteRegStr       HKLM $MYTMP "URLInfoAbout"    "${WEBSITE}"
+WriteRegDWORD     HKLM $MYTMP "NoModify"        "1"
+WriteRegDWORD     HKLM $MYTMP "NoRepair"        "1"
+
+SectionEnd

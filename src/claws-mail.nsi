@@ -97,6 +97,8 @@ VIAddVersionKey "FileVersion" "${PROD_VERSION}"
 
 Page custom CustomPageOptions
 
+Page custom CustomPageDefaultClient
+
 ### Start Menu page
 Var STARTMENU_FOLDER
 !define MUI_STARTMENUPAGE_NODISABLE
@@ -127,8 +129,10 @@ Var STARTMENU_FOLDER
 !include "../po/catalogs.nsi"
 !undef PO_HEADER
 
-!include "section-installer.nsi"
-#!include "section-uninstaller.nsi"
+!include "sections-installer.nsi"
+
+#WriteUninstaller "$INSTDIR\${PACKAGE}-uninstall.exe"
+#!include "sections-uninstaller.nsi"
 
 # Last, include the strings
 !include "strings.nsi"
