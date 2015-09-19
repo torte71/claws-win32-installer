@@ -14,11 +14,11 @@ stamp-h1
 src/config.nsi
 po/POTFILES
 po/*.nsi
-po/gpg4win.pot
+po/claws-mail.pot
 po/remove-potcdate.sed
 po/stamp-po
 po/nsis-msgfmt
-src/gpg4win.mk
+src/claws-mail.mk
 /packages/*.tar.gz
 /packages/*.tar.bz2
 /packages/*.zip
@@ -40,6 +40,7 @@ src/gpg4win.mk
 /src/gpgwrap-2.exe
 /src/gpgwrap.exe
 /src/installer-options.ini
+/src/installer-setdefaultclient.ini
 /src/md5sum.exe
 /src/sha1sum.exe
 /src/sha256sum.exe
