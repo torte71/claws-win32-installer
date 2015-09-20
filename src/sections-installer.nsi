@@ -545,6 +545,12 @@ File ${prefix}/share/locale/sv/LC_MESSAGES/claws-mail.mo
 
 SetOutPath "$INSTDIR"
 
+DetailPrint "Writing VERSION file"
+FileOpen $0 "$INSTDIR\VERSION" w
+FileWrite $0 "${PACKAGE}$\r$\n"
+FileWrite $0 "${VERSION}$\r$\n"
+FileClose $0
+
 ${MementoSectionEnd}
 
 ${MementoSectionDone}
