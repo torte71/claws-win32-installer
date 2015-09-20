@@ -534,7 +534,7 @@ endef
 
 $(eval $(call INCLUDE_BY_MAKE,claws-mail.mk))
 
-clean-local: clean-gpg4win
+clean-local: clean-claws-mail
 
 common_nsi = \
   $(addsuffix .nsi,$(addprefix uninst-,$(cm_build_list)))
