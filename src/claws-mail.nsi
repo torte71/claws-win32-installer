@@ -134,8 +134,7 @@ Var STARTMENU_FOLDER
 
 !include "sections-installer.nsi"
 
-#WriteUninstaller "$INSTDIR\${PACKAGE}-uninstall.exe"
-#!include "sections-uninstaller.nsi"
+!include "sections-uninstaller.nsi"
 
 # Last, include the strings
 !include "strings.nsi"

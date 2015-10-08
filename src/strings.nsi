@@ -40,8 +40,8 @@ LangString T_FoundExistingVersion ${LANG_ENGLISH} \
 Do you want to overwrite it with version ${VERSION}?"
 LangString T_FoundExistingOldVersion ${LANG_ENGLISH} \
      "An old version $R1 has already been installed.  It is \
-strongly recommended to deinstall previous versions on \
-major upgrades. $\r$\n\
+strongly recommended to uninstall previous versions before \
+installing new one. $\r$\n\
 Do you want to continue installing Claws Mail ${VERSION} anyway?"
 LangString T_FoundExistingVersionB ${LANG_ENGLISH} \
      "A version of Claws Mail has already been installed on the system. \
@@ -88,3 +88,12 @@ You should uninstall them now, and if you wish to continue \
 to use them, install an up-to-date version of Gpg4win from:$\r$\n \
 http://www.gpg4win.org/$\r$\n$\r$\n \
 Uninstall GnuPG now?"
+
+LangString T_Menu_Uninstall ${LANG_ENGLISH} \
+"Uninstall"
+
+LangString T_Menu_ClawsMail ${LANG_ENGLISH} \
+"Run Claws Mail"
+
+LangString T_Menu_ClawsMailManual ${LANG_ENGLISH} \
+"Claws Mail Manual"

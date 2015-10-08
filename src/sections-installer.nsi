@@ -1,5 +1,5 @@
 ### Start of the installer section
-${MementoSection} "-Claws Mail" SEC_claws_mail
+${MementoSection} "-Claws-Mail" SEC_claws_mail
 
 SetOutPath "$INSTDIR"
 
@@ -476,7 +476,6 @@ File ${prefix}/bin/libhogweed-4-1.dll
 !insertmacro SetPrefix2 claws_mail claws-mail
 SetOutPath "$INSTDIR"
 File ${prefix}/bin/claws-mail.exe
-
 File ${prefix}/share/doc/claws-mail/manual/en/claws-mail-manual.pdf
 
 SetOutPath "$INSTDIR\share\claws-mail"
@@ -621,6 +620,53 @@ WriteRegStr       HKLM $MYTMP "URLInfoAbout"    "${WEBSITE}"
 WriteRegDWORD     HKLM $MYTMP "NoModify"        "1"
 WriteRegDWORD     HKLM $MYTMP "NoRepair"        "1"
 DetailPrint "Added Claws Mail info to Add/Remove Programs list"
+
+SectionEnd
+
+### Create the uninstaller and shortcuts
+Section
+WriteUninstaller "$INSTDIR\claws-mail-uninstall.exe"
+
+# Delete the old stuff, also old names of previous versions.
+Delete "$DESKTOP\Claws-Mail.lnk"
+Delete "$DESKTOP\Claws-Mail Manual.lnk"
+
+# Start Menu
+!insertmacro MUI_INSTALLOPTIONS_READ $R0 "installer-options.ini" \
+	"Field 2" "State"
+	IntCmp $R0 0 no_start_menu
+
+	CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Claws-Mail.lnk" \
+		"$INSTDIR\claws-mail.exe" \
+		"" "" "" SW_SHOWNORMAL "" $(T_Menu_ClawsMail)
+
+	CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Uninstall.lnk" \
+		"$INSTDIR\claws-mail-uninstall.exe" \
+		"" "$INSTDIR\claws-mail-uninstall.exe" "" SW_SHOWNORMAL "" $(T_Menu_Uninstall)
+
+	no_start_menu:
+
+# Desktop
+!insertmacro MUI_INSTALLOPTIONS_READ $R0 "installer-options.ini" \
+	"Field 3" "State"
+	IntCmp $R0 0 no_desktop
+
+	CreateShortCut "$DESKTOP\Claws-Mail.lnk" \
+		"$INSTDIR\claws-mail.exe" \
+		"" "" "" SW_SHOWNORMAL "" $(T_Menu_ClawsMail)
+	
+	no_desktop:
+
+# Quick Launch
+!insertmacro MUI_INSTALLOPTIONS_READ $R0 "installer-options.ini" \
+	"Field 4" "State"
+	IntCmp $R0 0 no_quicklaunch
+
+	CreateShortCut "$QUICKLAUNCH\Claws-Mail.lnk" \
+		"$INSTDIR\claws-mail.exe" \
+		"" "" "" SW_SHOWNORMAL "" $(T_Menu_ClawsMail)
+
+	no_quicklaunch:
 
 SectionEnd
 
