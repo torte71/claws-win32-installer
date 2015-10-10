@@ -1,32 +1,35 @@
-# Spanish translations for gpg4win package.
-# Copyright (C) 2007 g10 Code GmbH
-# This file is distributed under the same license as the gpg4win package.
+# translation of ar.po to Arabic
+# Copyright (C) YEAR g10 Code GmbH
+# This file is distributed under the same license as the PACKAGE package.
 #
+# Khaled Hosny <khaledhosny@eglug.org>, 2008.
+# Ahmad Gharbeia <gharbeia@gmail.com>, 2008.
 msgid ""
 msgstr ""
-"Project-Id-Version: gpg4win 1.1.1-svn417\n"
+"Project-Id-Version: Gpg4Win\n"
 "Report-Msgid-Bugs-To: ticho@claws-mail.org\n"
-"POT-Creation-Date: 2015-10-10 21:12+0200\n"
-"PO-Revision-Date: 2009-09-28 09:43+0200\n"
-"Last-Translator: Diego Escalante Urrelo <diegoe@gnome.org>\n"
-"Language-Team: Spanish <diegoe@gnome.org>\n"
-"Language: es\n"
+"POT-Creation-Date: 2015-10-10 21:05+0200\n"
+"PO-Revision-Date: 2008-03-11 23:52+0200\n"
+"Last-Translator: Ahmad Gharbeia <ahmad@gharbeia.org>\n"
+"Language-Team: Arabic <doc@arabeyes.org>\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=ISO-8859-1\n"
+"Content-Type: text/plain; charset=CP1256\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n>=3 && "
+"n<=10 ? 3 : n>=11 && n<=99 ? 4 : 5;\n"
 
 msgctxt "T_LangCode"
 msgid "en"
-msgstr "es"
+msgstr "ar"
 
 msgctxt "T_GPLHeader"
 msgid ""
 "This software is licensed under the terms of the GNU General Public License "
 "(GPL)."
 msgstr ""
-"Este software está licenciado bajo los términos de la GNU General Public "
-"License (GPL)."
+"åÐå ÇáÈÑãÌíÉ ãÑÎÕÉ ÈÑÎÕÉ Ìäæ ÇáÚãæãíÉ ÇáÚÇãÉ (GPL) æÇáÊí ÊãäÍß ÍÑíÉ ãÔÇÑßÉ "
+"æÊÚÏíá ÇáÈÑãÌíÇÊ ÇáÍÑÉ."
 
 msgctxt "T_GPLShort"
 msgid ""
@@ -34,51 +37,50 @@ msgid ""
 "distribute it as long as you give the recipients the same rights you have "
 "received."
 msgstr ""
-"En resúmen: Se le permite ejecutar este software para cualquier propósito. "
-"Puede distribuirlo en tanto dé al receptor los mismos derechos que usted ha "
-"recibido."
+"ÈÇÎÊÕÇÑ: ÊÓÊØíÚ ÊÔÛíá åÐå ÇáÈÑãÌíÉ áÃí ÛÑÖ. æíãßäß ÊæÒíÚåÇ ãÇ ÏãÊ ÊÚØí "
+"ÇáãÊáÞíä äÝÓ ÇáÍÞæÞ ÇáÊí ÍÕáÊ ÚáíåÇ."
 
 msgctxt "T_InstallOptions"
 msgid "Install Options"
-msgstr "Opciones de instalación"
+msgstr "ÎíÇÑÇÊ ÇáÊËÈíÊ"
 
 msgctxt "T_InstallOptLinks"
 msgid "Start links"
-msgstr "Vínculos de inicio"
+msgstr "æÕáÇÊ ÇáÈÏÁ"
 
 #, fuzzy
 msgctxt "T_InstOptLabelA"
 msgid "Please select where Claws Mail shall install links:"
-msgstr "Por favor seleccione dónde debe Gpg4win instalar los vínculos:"
+msgstr "ÇÎÊÑ Ãíä íÊÚíä ËÈíÊ ÇáæÕáÇÊ:"
 
 msgctxt "T_InstOptLabelB"
 msgid "(Only programs will be linked into the quick launch bar.)"
-msgstr "(Sólo las aplicaciones serán vinculadas en la barra de inicio rápido.)"
+msgstr "(ÝÞØ ÇáÈÑãÌíÇÊ ÓíÑÈØ ÅáíåÇ Ýí ÔÑíØ ÇáÈÏÁ ÇáÓÑíÚ.)"
 
 msgctxt "T_InstOptFieldA"
 msgid "Start Menu"
-msgstr "Menú inicio"
+msgstr "ÞÇÆãÉ ÇÈÏÃ"
 
 msgctxt "T_InstOptFieldB"
 msgid "Desktop"
-msgstr "Escritorio"
+msgstr "ÓØÍ ÇáãßÊÈ"
 
 msgctxt "T_InstOptFieldC"
 msgid "Quick Launch Bar"
-msgstr "Barra de inicio rápido"
+msgstr "ÔÑíØ ÇáÈÏÁ ÇáÓÑíÚ"
 
 #, fuzzy
 msgctxt "T_MoreInfo"
 msgid "Click here for the project homepage"
-msgstr "Siga este enlace para ver el sitio web del proyecto"
+msgstr "ÇäÞÑ åäÇ áÊÒæÑ ÕÝÍÉ ÇáãÔÑæÚ"
 
 msgctxt "T_FoundExistingVersion"
 msgid ""
 "Version $R1 has already been installed.\n"
 "Do you want to overwrite it with version ${VERSION}?"
 msgstr ""
-"La versión $R1 ya está instalada.\n"
-"¿Desea sobreescribirla con la versión ${VERSION}?"
+"ÇáÅÕÏÇÑÉ $R1 ãËÈÊÉ ÈÇáÝÚá.\n"
+"ÃÊÑíÏ ÇÓÊÈÏÇáåÇ ÈÇáÅÕÏÇÑÉ  ${VERSION}¿"
 
 #, fuzzy
 msgctxt "T_FoundExistingOldVersion"
@@ -87,10 +89,10 @@ msgid ""
 "to uninstall previous versions before installing new one.\n"
 "Do you want to continue installing Claws Mail ${VERSION} anyway?"
 msgstr ""
-"Una versión anterior 1.1.4 ya se encuentra instalada en este sistema. \n"
-"Recomendamos muy especialmente desinstalar las versiones anteriores \n"
-"cuando se trata de actualizaciones importantes. ¿Quiere continuar de \n"
-"todas formas la instalación de Gpg4win 2.0.0?"
+"Êã ÊËÈíÊ ÅÕÏÇÑÉ ãä Gpg4Win Úáì åÐÇ ÇáäÙÇã ãä ÞÈá. áÇ ãÔÇßá Ýí ÇáÊËÈíÊ "
+"æÇÓÊÈÏÇá Êáß ÇáÅÕÏÇÑÉ.\n"
+"\n"
+"ÃÊÑíÏ ãæÇÕáÉ ÊËÈíÊ Gpg4win¿"
 
 #, fuzzy
 msgctxt "T_FoundExistingVersionB"
@@ -100,15 +102,15 @@ msgid ""
 "\n"
 "Do you want to continue installing Claws Mail?"
 msgstr ""
-"Una versión de Gpg4Win ya se encuentra instalada en este sistema.No habrá "
-"problema si instala y por ende, sobreescribe esta versión.\n"
+"Êã ÊËÈíÊ ÅÕÏÇÑÉ ãä Gpg4Win Úáì åÐÇ ÇáäÙÇã ãä ÞÈá. áÇ ãÔÇßá Ýí ÇáÊËÈíÊ "
+"æÇÓÊÈÏÇá Êáß ÇáÅÕÏÇÑÉ.\n"
 "\n"
-"¿Desea continuar con la instalación?"
+"ÃÊÑíÏ ãæÇÕáÉ ÊËÈíÊ Gpg4win¿"
 
 #, fuzzy
 msgctxt "T_WelcomePageTitle"
 msgid "Welcome to the installation of ${PRETTY_PACKAGE}"
-msgstr "Bienvenido a la instalación de Gpg4win"
+msgstr "ãÑÍÈÇ Ýí ÊËÈíÊ Gpg4win"
 
 msgctxt "T_About"
 msgid ""
@@ -126,17 +128,17 @@ msgstr ""
 #, fuzzy
 msgctxt "T_AboutVersion"
 msgid "This is Claws Mail version ${VERSION}"
-msgstr "Este es Gpg4win versión ${VERSION}"
+msgstr "åÐå ÇáÅÕÏÇÑÉ ${VERSION} ãä Gpg4win"
 
 #, fuzzy
 msgctxt "T_AboutFileVersion"
 msgid "file version ${PROD_VERSION}"
-msgstr "versión del archivo ${PROD_VERSION}"
+msgstr "ÅÕÏÇÑÉ ÇáãáÝ ${PROD_VERSION}"
 
 #, fuzzy
 msgctxt "T_AboutReleaseDate"
 msgid "release date ${_BUILD_ISODATE}"
-msgstr "fecha de publicación ${_BUILD_ISODATE}"
+msgstr "ÊÇÑíÎ ÇáÅÕÏÇÑ ${_BUILD_ISODATE}"
 
 msgctxt "T_SetDefaultClientHeader"
 msgid "Default client"
@@ -164,7 +166,7 @@ msgstr ""
 #, fuzzy
 msgctxt "T_Menu_ClawsMail"
 msgid "Run Claws Mail"
-msgstr "Ejecutar el cliente de correo Claws."
+msgstr "ÔÛá ÈÑãÌíÉ ÇáÈÑíÏ Claws"
 
 msgctxt "T_Menu_ClawsMailManual"
 msgid "Claws Mail Manual"
@@ -172,12 +174,12 @@ msgstr ""
 
 #~ msgctxt "T_AlreadyRunning"
 #~ msgid "An instance of this installer is already running."
-#~ msgstr "Una instancia del instalador ya está ejecutándose."
+#~ msgstr "ÊÚãá ÓíÑæÑÉ ÃÎÑì ãä åÐÇ ÇáãõËÈøöÊ ÈÇáÝÚá."
 
 #, fuzzy
 #~ msgctxt "T_WelcomeTitleGpg4winSrc"
 #~ msgid "Welcome to the installation of the Claws Mail sources"
-#~ msgstr "Bienvenido a la instalación del código fuente de Gpg4win"
+#~ msgstr "ãÑÍÈÇ Ýí ÊËÈíÊ ãÕÇÏöÑ Gpg4win"
 
 #, fuzzy
 #~ msgctxt "T_AboutGpg4winSrc"
@@ -187,41 +189,38 @@ msgstr ""
 #~ "cryptography standards are supported, OpenPGP and S/MIME. Claws Mail and "
 #~ "the software included with Claws Mail are Free Software."
 #~ msgstr ""
-#~ "GnuPG es una herramienta GNU para la comunicación y el almacenamiento de "
-#~ "datos de forma segura. Puede ser usada para cifrar datos y crear firmas "
-#~ "digitales.Incluye un gestor de llaves avanzado y cumple con la propuesta "
-#~ "de estándar de Internet: OpenGPG, descrito en el RFC2440."
+#~ "þGnuPG åæ ÃÏÇÉ Ìäæ ááÇÊÕÇáÇÊ æ ÇáÊÎÒíä ÇáÂãä ááÈíÇäÇÊ. íõãßä ÇÓÊÎÏÇãå "
+#~ "áÊÚãíÉ ÇáÈíÇäÇÊ æ ÇáÊæÞíÚ ÇáÑÞãíº æ åæ íÔÊãá Úáì æÓíáÉ ãÊÞÏãÉ áÅÏÇÑÉ "
+#~ "ÇáãÝÇÊíÍ¡ æíÊæÇÝÞ ãÚ ãÚíÇÑ ÇáÅäÊÑäÊ OpenPGP ÇáãÞÊÑÍ ßãÇ æõÕöÝ Ýí RFC2440."
 
 #, fuzzy
 #~ msgctxt "T_AboutGpg4winSrcVersion"
 #~ msgid "This is Claws Mail version ${VERSION}"
-#~ msgstr "Este es Gpg4win versión ${VERSION}"
+#~ msgstr "åÐå ÇáÅÕÏÇÑÉ ${VERSION} ãä Gpg4win"
 
 #~ msgctxt "T_AboutGpg4winSrcFileVersion"
 #~ msgid "file version ${PROD_VERSION}"
-#~ msgstr "versión del archivo ${PROD_VERSION}"
+#~ msgstr "ÅÕÏÇÑÉ ÇáãáÝ ${PROD_VERSION}"
 
 #~ msgctxt "T_AboutGpg4winSrcReleaseDate"
 #~ msgid "release date ${_BUILD_ISODATE}"
-#~ msgstr "fecha de publicación ${_BUILD_ISODATE}"
+#~ msgstr "ÊÇÑíÎ ÇáÅÕÏÇÑ ${_BUILD_ISODATE}"
 
 #~ msgctxt "T_RunKeyManager"
 #~ msgid "Run the key manager"
-#~ msgstr "Ejecutar el gestor de llaves"
+#~ msgstr "ÔÛøá ãÏíÑ ÇáãÝÇÊíÍ"
 
 #~ msgctxt "T_NoKeyManager"
 #~ msgid "No key manager has been installed, thus we can't run one now."
-#~ msgstr ""
-#~ "No se puede ejecutar el gestor de llaves.No se encuentra ninguno "
-#~ "instalado."
+#~ msgstr "áã íõËÈøÊ Ãí ãÏíÑ ãÝÇÊíÍ¡ áÐÇ áÇ äÓÊØíÚ ÊÔÛíáå."
 
 #~ msgctxt "DESC_Menu_manuals"
 #~ msgid "Documentation"
-#~ msgstr "Documentación"
+#~ msgstr "ÇáÊæËíÞ"
 
 #~ msgctxt "DESC_Desktop_manuals"
 #~ msgid "Gpg4win Documentation"
-#~ msgstr "Documentación de Gpg4win"
+#~ msgstr "æËÇÆÞ Gpg4win"
 
 #, fuzzy
 #~ msgctxt "T_FoundOldSeeManual"
@@ -229,8 +228,8 @@ msgstr ""
 #~ "Please see the Claws Mail user manual to learn how to migrate existing "
 #~ "keys from other GnuPG based installations."
 #~ msgstr ""
-#~ "Por favor revise el manual del usuario de Gpg4Win para que aprenda cómo "
-#~ "migrar las llaves existentes de una instalación basada en GnuPG a Gpg4Win."
+#~ "ãä ÝÖáß ØÇáÚ Ïáíá ãÓÊÎÏã Gpg4win áÊÞÑÃ Úä ØÑíÞÉ äÞá ÇáãÝÇÊíÍ ÇáãæÌæÏÉ ãä "
+#~ "ÞÈá ãä ÊËÈíÊÇÊ ÓÇÈÞÉ ãÈäíÉ Úáì GnuPG Åáì Gpg4win."
 
 #, fuzzy
 #~ msgctxt "T_FoundOldGnuPP"
@@ -242,12 +241,10 @@ msgstr ""
 #~ "Do you want to continue installing Claws Mail and take care of the old "
 #~ "installation later?"
 #~ msgstr ""
-#~ "Una instalación anterior de GnuPP (GNU Privacy Project) ha sido "
-#~ "detectada.  Este software ya no se mantiene y por ende, debe ser "
-#~ "borrado.\n"
+#~ "æõÌöÏ ÊËÈíÊ ÞÏíã ãä GnuPP (ãÔÑæÚ ÎÕæÕíÉ Ìäæ). åÐå ÇáÈÑãÌíÇÊ áíÓÊ ÞíÏ "
+#~ "ÇáÊØæíÑ ÈÚÏ ÇáÂä æíÌÈ ÅÒÇáÊåÇ.\n"
 #~ "\n"
-#~ "¿Desea continuar con la instalación de Gpg4Win y dejar para mas tarde la "
-#~ "instalación antigua de GnuPP?"
+#~ "ÃÊÑíÏ ãæÇÕáÉ ÊËÈíÊ Gpg4win æÇáÊÚÇãá ãÚ ÇáÊËÈíÊ ÇáÞÏíã áÇÍÞÇ¿"
 
 #, fuzzy
 #~ msgctxt "T_FoundOldGnuPT"
@@ -257,10 +254,9 @@ msgstr ""
 #~ "\n"
 #~ "Do you want to continue installing Claws Mail?"
 #~ msgstr ""
-#~ "Una instalación de GnuPT ha sido detectada. Esto puede causar problemas "
-#~ "si ambas aplicaciones se usan simultáneamente.\n"
+#~ "æÌÏÊ ÊËÈíÊ ãä GnuPT.  ÞÏ íÓÈÈ åÐÇ ãÔÇßá ÅÐÇ ÇÓÊÎÏã ãÚ Gpg4win.\n"
 #~ "\n"
-#~ "¿Desea continuar instalando Gpg4Win?"
+#~ "ÃÊÑíÏ ãæÇÕáÉ ÊËÈíÊ Gpg4win¿"
 
 #, fuzzy
 #~ msgctxt "T_FoundOldWinPTSF"
@@ -272,11 +268,10 @@ msgstr ""
 #~ "Do you want to continue installing Claws Mail and take care of the old "
 #~ "installation later?"
 #~ msgstr ""
-#~ "Una instalación del antiguo WinPT (hospedado por Sourceforge) ha sido "
-#~ "detectada. Este software no tiene soporte y por ende, debe ser borrado.\n"
+#~ "æõÌöÏ ÊËÈíÊ ÞÏíã ãä WinPT ÇáãÓÊÖÇÝ Ýí Sourceforge.  áÇ ÊÎÖÚ åÐå ÇáÈÑãÌíÇÊ "
+#~ "ááÊØæíÑ ÈÚÏ ÇáÂä æíÌÈ ÅÒÇáÊåÇ.\n"
 #~ "\n"
-#~ "¿Desea continuar con la instalación de Gpg4Win y dejar para más tarde la "
-#~ "instalación antigua de WinPT?"
+#~ "ÃÊÑíÏ ãæÇÕáÉ ÊËÈíÊ Gpg4win æÇáÊÚÇãá ãÚ ÇáÊËÈíÊ ÇáÞÏíã áÇÍÞÇ¿"
 
 #, fuzzy
 #~ msgctxt "T_FoundOldGnuPack"
@@ -286,49 +281,44 @@ msgstr ""
 #~ "\n"
 #~ "The installation will be aborted now!"
 #~ msgstr ""
-#~ "Una instalación de GnuPG-Pack ha sido detectada. Debe desinstalarla antes "
-#~ "de continuar con la instalación de Gpg4Win.\n"
+#~ "æõÌöÏ ÊËÈíÊ ãä GnuPG-Pack.  ÊÍÊÇÌ Åáì ÅÒÇáÊå ÞÈá ÊËÈíÊ Gpg4win.\n"
 #~ "\n"
-#~ "La instalación se detendrá ahora."
+#~ "ÓíæÞÝ ÇáÊËÈíÊ ÇáÂä!"
 
 #~ msgctxt "T_AdminNeeded"
 #~ msgid ""
 #~ "Warning: Administrator permissions required for a successful installation"
-#~ msgstr ""
-#~ "Advertencia: Necesita permisos de administrador para una instalación "
-#~ "exitosa."
+#~ msgstr "ÊÍÐíÑ: ÊÍÊÇÌ Åáì ÕáÇÍíÇÊ ÇáãÏíÑ áÅÊãÇã ÇáÊËÈíÊ"
 
 #~ msgctxt "T_ShuttingDownWinPT"
 #~ msgid "Trying to shutdown a possible running instance of WinPT."
-#~ msgstr ""
-#~ "Intentado cerrar instancias de WinPT que podrían estar ejecutándose."
+#~ msgstr "ÊÌÑí ãÍÇæáÉ ÅÛáÇÞ ÓíÑæÑÉ ãÍÊãáÉ ÚÇãáÉ ãä WinPT."
 
 #~ msgctxt "T_ShuttingDownDirMngr"
 #~ msgid "Trying to shutdown a possible running instance of DirMngr."
-#~ msgstr ""
-#~ "Intentando cerrar instancias de DirMngr que podrían estar ejecutándose."
+#~ msgstr "ÊÌÑí ãÍÇæáÉ ÅÛáÇÞ ÓíÑæÑÉ ãÍÊãáÉ ÚÇãáÉ ãä DirMngr."
 
 #~ msgctxt "DESC_SEC_claws_mail"
 #~ msgid "Claws Mail-User-Agent"
-#~ msgstr "Cliente de correo Claws."
+#~ msgstr "ÈÑãÌíÉ ÇáÈÑíÏ Claws"
 
 #~ msgctxt "DESC_Menu_claws_mail_pdf"
 #~ msgid "Show the online manual of Claws Mail"
-#~ msgstr "Mostrar el manual en línea de Claws"
+#~ msgstr "ÇÚÑÖ ßÊíøÈ ÈÑíÏ Claws Úáì ÇáæÈ"
 
 #, fuzzy
 #~ msgctxt "DESC_SEC_gnupg2"
 #~ msgid "GNU Privacy Guard"
-#~ msgstr "GNU Privacy Guard (GnuPG)"
+#~ msgstr "ÍÇÑÓ ÎÕæÕíÉ Ìäæ"
 
 #~ msgctxt "DESC_SEC_gpa"
 #~ msgid "GNU Privacy Assistant"
-#~ msgstr "GNU Privacy Assistant"
+#~ msgstr "ãÓÇÚÏ ÎÕæÕíÉ Ìäæ"
 
 #, fuzzy
 #~ msgctxt "DESC_Menu_gpa"
 #~ msgid "Run the GNU Privacy Assistant key management tool."
-#~ msgstr "Ejecutar la herramienta de gestión de llaves Kleopatra."
+#~ msgstr "ÔÛá ÃÏÇÉ ÅÏÇÑÉ ÇáãÝÇÊíÍ ßáíæÈÇÊÑÇ."
 
 #, fuzzy
 #~ msgctxt "T_CloseOtherApps"
@@ -337,28 +327,27 @@ msgstr ""
 #~ "you should close Outlook and all Explorer windows.  Claws Mail will try "
 #~ "to install anyway but a reboot will be required then."
 #~ msgstr ""
-#~ "Por favor asegúrese que otras aplicaciones no están ejecutándose.  En "
-#~ "especial, cierre Outlook y las ventanas del Explorador de Windows. "
-#~ "Gpg4Win intentará instalarse de todas formas, pero será necesario que "
-#~ "reinicie su sistema una vez terminado el proceso. "
+#~ "ÑÌÇÁ ÊÃßÏ ãä ÚÏã ÊÔÛíá Ãí ÊØÈíÞÇÊ ÃÎÑì. Úáíß ÎÕæÕÇ ÅÛáÇÞ ßá äæÇÝÐ ÃæÊáæß "
+#~ "Ãæ ÅßÓÈáæÑÑ.  ÓíÍÇæá Gpg4Win ÇáËÈíÊ Úáì Ãí ÍÇá áßä ÓÊÍÊÇÌ Åáì ÅÚÇÏÉ "
+#~ "ÇáÊÔÛíá."
 
 #~ msgctxt "T_ShowReadme"
 #~ msgid "Show the README file"
-#~ msgstr "Ver el archivo README"
+#~ msgstr "ØÇáÚ ãáÝ README"
 
 #, fuzzy
 #~ msgctxt "DESC_Menu_gpg4win_readme"
 #~ msgid "General information on Gpg4win"
-#~ msgstr "Información general de Gpg4Win"
+#~ msgstr "ãÚáæãÇÊ ÚÇãÉ Úä Gpg4Win"
 
 #, fuzzy
 #~ msgctxt "DESC_Menu_gnupg_faq"
 #~ msgid "Show the Frequently Asked Questions document for GnuPG"
-#~ msgstr "Mostrar las preguntas frecuentes (FAQ) sobre GnuPG"
+#~ msgstr "ØÇáÚ ÇáÃÓÆáÉ ÇáÔÇÆÚÉ Íæá GnuPG"
 
 #~ msgctxt "T_AboutGpg4winSrcVersion"
 #~ msgid "This is Gpg4win version ${VERSION}"
-#~ msgstr "Este es Gpg4win versión ${VERSION}"
+#~ msgstr "åÐå ÇáÅÕÏÇÑÉ ${VERSION} ãä Gpg4win"
 
 #~ msgctxt "T_MoreInfoURL"
 #~ msgid "http://www.gpg4win.org"
@@ -371,146 +360,186 @@ msgstr ""
 #~ "standards are supported, OpenPGP and S/MIME. Gpg4win and the software "
 #~ "included with Gpg4win are Free Software."
 #~ msgstr ""
-#~ "GnuPG es una herramienta GNU para la comunicación y el almacenamiento de "
-#~ "datos de forma segura. Puede ser usada para cifrar y crear firmas "
-#~ "digitales.Incluye un gestor de llaves avanzado y cumple con la propuesta "
-#~ "de estándar de Internet: OpenGPG, descrito en el RFC2440."
+#~ "þGnuPG åæ ÃÏÇÉ Ìäæ ááÇÊÕÇáÇÊ æ ÇáÊÎÒíä ÇáÂãä ááÈíÇäÇÊ. íõãßä ÇÓÊÎÏÇãå "
+#~ "áÊÚãíÉ ÇáÈíÇäÇÊ æ ÇáÊæÞíÚ ÇáÑÞãíº æ åæ íÔÊãá Úáì æÓíáÉ ãÊÞÏãÉ áÅÏÇÑÉ "
+#~ "ÇáãÝÇÊíÍ¡ æíÊæÇÝÞ ãÚ ãÚíÇÑ ÇáÅäÊÑäÊ OpenPGP ÇáãÞÊÑÍ ßãÇ æõÕöÝ Ýí RFC2440."
 
 #~ msgctxt "T_GpgEX_RegFailed"
 #~ msgid "Warning: Registration of the GpgEX plugin failed."
-#~ msgstr "Advertencia: El intento de registrar el plugin GpgEx fracasó."
+#~ msgstr "ÊÍÐíÑ: ÝÔá ÊÓÌíá ãáÍÞÉ GpgEX."
 
 #~ msgctxt "DESC_SEC_gpgex"
 #~ msgid "GnuPG Shell Extension"
-#~ msgstr "GPG Shell Extension (GpgEX)."
+#~ msgstr "ãáÍÞ GnuPG ááÕøóÏóÝÉ"
 
 #~ msgctxt "T_GpgOL_RegFailed"
 #~ msgid "Warning: Registration of the GpgOL Outlook pluginfailed."
-#~ msgstr "Advertencia: El registro del plugin de Outlook GpgOL falló."
+#~ msgstr "ÊÍÐíÑ: ÝÔá ÊÓÌíá ãáÍÞÉ GpgOL áÃæÊáæß."
 
 #~ msgctxt "DESC_SEC_gpgol"
 #~ msgid "GnuPG for Outlook"
-#~ msgstr "GnuPG para Outlook (GpgOL)"
+#~ msgstr "þGnuPG áÃæÊáæß"
+
+#, fuzzy
+#~ msgctxt "DESC_Name_compendium"
+#~ msgid "Gpg4win Compendium"
+#~ msgstr "æËÇÆÞ Gpg4win"
 
 #, fuzzy
 #~ msgctxt "DESC_SEC_compendium"
 #~ msgid "The Gpg4win documentation (English and German)"
-#~ msgstr "Documentación de Gpg4win"
+#~ msgstr "æËÇÆÞ Gpg4win"
+
+#, fuzzy
+#~ msgctxt "DESC_Name_compendium_de_pdf"
+#~ msgid "Gpg4win Compendium (pdf, German)"
+#~ msgstr "æËÇÆÞ Gpg4win"
+
+#, fuzzy
+#~ msgctxt "DESC_Name_compendium_en_pdf"
+#~ msgid "Gpg4win Compendium (pdf, English)"
+#~ msgstr "æËÇÆÞ Gpg4win"
+
+#, fuzzy
+#~ msgctxt "DESC_Name_compendium_de_html"
+#~ msgid "Gpg4win Compendium (html, German)"
+#~ msgstr "æËÇÆÞ Gpg4win"
+
+#, fuzzy
+#~ msgctxt "DESC_Name_compendium_en_html"
+#~ msgid "Gpg4win Compendium (html, English)"
+#~ msgstr "æËÇÆÞ Gpg4win"
+
+#, fuzzy
+#~ msgctxt "DESC_Menu_compendium_de_pdf"
+#~ msgid "Show the Gpg4win Compendium (pdf, German)"
+#~ msgstr "æËÇÆÞ Gpg4win"
+
+#, fuzzy
+#~ msgctxt "DESC_Menu_compendium_en_pdf"
+#~ msgid "Show the Gpg4win Compendium (pdf, English)"
+#~ msgstr "ÇÚÑÖ Ïáíá Gpg4Win Úáì ÇáæÈ ááãÓÊÎÏãíä ÇáãÈÊÏÆíä"
 
 #~ msgctxt "DESC_Menu_kleopatra"
 #~ msgid "Run the Kleopatra key management tool."
-#~ msgstr "Ejecutar la herramienta de gestión de llaves Kleopatra."
+#~ msgstr "ÔÛá ÃÏÇÉ ÅÏÇÑÉ ÇáãÝÇÊíÍ ßáíæÈÇÊÑÇ."
+
+#, fuzzy
+#~ msgctxt "DESC_Menu_compendium_de_html"
+#~ msgid "Show the Gpg4win Compendium (html, German)"
+#~ msgstr "æËÇÆÞ Gpg4win"
+
+#, fuzzy
+#~ msgctxt "DESC_Menu_compendium_en_html"
+#~ msgid "Show the Gpg4win Compendium (html, English)"
+#~ msgstr "æËÇÆÞ Gpg4win"
 
 #~ msgctxt "DESC_SEC_eudoragpg"
 #~ msgid "EudoraGPG is a plugin for the Eudora mail program"
-#~ msgstr "EudoraGPG es un plugin para el cliente de correo Eudora"
+#~ msgstr "þEudoraGPG åí ãáÍÞÉ áÈÑãÌíÉ ÇáÈÑíÏ Eudora"
 
 #~ msgctxt "T_GPGee_RegFailed"
 #~ msgid "Warning: Registration of the GPGee explorer extension failed."
-#~ msgstr ""
-#~ "Advertencia: Falló el registro de la extensión GPGee del Explorador de "
-#~ "Windows."
+#~ msgstr "ÊÍÐíÑ: ÝÔá ÊÓÌíá ÇãÊÏÇÏ GPGee áÅßÓÈáæÑÑ."
 
 #~ msgctxt "DESC_SEC_gpgee"
 #~ msgid "GPG Explorer Extensions"
-#~ msgstr "GPG Explorer Extensions (GPGee)"
+#~ msgstr "ÇãÊÏÇÏ GPG áÅßÓÈáæÑÑ"
 
 #~ msgctxt "DESC_Menu_gpgee_hlp"
 #~ msgid "Show the online manual of GPGee"
-#~ msgstr "Mostrar el manual en línea de GPGee"
+#~ msgstr "ÇÚÑÖ ßÊíøÈ GPGee Úáì ÇáæÈ"
 
 #~ msgctxt "DESC_Name_man_advanced_de"
 #~ msgid "Advanced Manual (German)"
-#~ msgstr "Manual avanzado (Alemán)"
+#~ msgstr "ßÊíøÈ ÇáãÊÞÏãíä (ÈÇáÃáãÇäíÉ)"
 
 #~ msgctxt "DESC_SEC_man_advanced_de"
 #~ msgid "Gpg4Win Manual for the Advanced User (German)"
-#~ msgstr "Manual para el usuario avanzado de Gpg4Win (Alemán)"
+#~ msgstr "ßõÊíÈ Gpg4Win ááãÓÊÎÏãíä ÇáãÊÞÏãíä (ÈÇáÃáãÇäíÉ)"
 
 #~ msgctxt "DESC_Menu_man_advanced_de"
 #~ msgid "Show the German online manual of Gpg4Win for advanced users"
-#~ msgstr ""
-#~ "Mostrar el manual para usuarios avanzados de Gpg4Win, en línea (en "
-#~ "Alemán)."
+#~ msgstr "ÇÚÑÖ Ïáíá Gpg4Win ÈÇáÃáãÇäíÉ Úáì ÇáæÈ ááãÓÊÎÏãíä ÇáãÊÞÏãíä"
 
 #~ msgctxt "DESC_Name_man_advanced_en"
 #~ msgid "Advanced Manual"
-#~ msgstr "Manual avanzado (Inglés)"
+#~ msgstr "Ïáíá ÇáãÊÞÏãíä"
 
 #~ msgctxt "DESC_SEC_man_advanced_en"
 #~ msgid "Gpg4Win Manual for the Advanced User"
-#~ msgstr "Manual para el usuario avanzado de Gpg4Win (Inglés)"
+#~ msgstr "Ïáíá Gpg4Win ááãÓÊÎÏãíä ÇáãÊÞÏãíä"
 
 #~ msgctxt "DESC_Menu_man_advanced_en"
 #~ msgid "Show the online manual of Gpg4Win for advanced users"
-#~ msgstr "Mostrar el manual en línea de Gpg4Win para usuarios avanzados"
+#~ msgstr "ÇÚÑÖ Ïáíá Gpg4Win Úáì ÇáæÈ ááãÓÊÎÏãíä ÇáãÊÞÏãíä"
 
 #~ msgctxt "DESC_Name_man_novice_de"
 #~ msgid "Novice Manual (German)"
-#~ msgstr "Manual del principiante (Alemán)"
+#~ msgstr "Ïáíá ÇáãÈÊÏÆíä (ÈÇáÃáãÇäíÉ)"
 
 #~ msgctxt "DESC_SEC_man_novice_de"
 #~ msgid "Gpg4Win Manual for the Novice User (German)"
-#~ msgstr "Manual del principiante de Gpg4Win (Alemán)"
+#~ msgstr "Ïáíá Gpg4Win ááãÓÊÎÏãíä ÇáãÈÊÏÆíä (ÈÇáÃáãÇäíÉ)"
 
 #~ msgctxt "DESC_Menu_man_novice_de"
 #~ msgid "Show the German online manual of Gpg4Win for novice users"
-#~ msgstr "Mostrar el manual del principiante de Gpg4Win, en línea (en Alemán)"
+#~ msgstr "ÇÚÑÖ Ïáíá Gpg4Win ÈÇáÃáãÇäíÉ Úáì ÇáæÈ ááãÓÊÎÏãíä ÇáãÈÊÏÆíä"
 
 #, fuzzy
 #~ msgctxt "DESC_Name_man_novice_en"
 #~ msgid "Novice Manual (pdf, English)"
-#~ msgstr "Manual del principiante (Alemán)"
+#~ msgstr "Ïáíá ÇáãÈÊÏÆíä (ÈÇáÃáãÇäíÉ)"
 
 #, fuzzy
 #~ msgctxt "DESC_SEC_man_novice_en"
 #~ msgid "Gpg4win Manual for the Novice User (English)"
-#~ msgstr "Manual del principiante de Gpg4Win (Alemán)"
+#~ msgstr "Ïáíá Gpg4Win ááãÓÊÎÏãíä ÇáãÈÊÏÆíä (ÈÇáÃáãÇäíÉ)"
 
 #~ msgctxt "DESC_SEC_winpt"
 #~ msgid "Windows Privacy Tray"
-#~ msgstr "Windows Privacy Tray (WinPT)."
+#~ msgstr "áæÍÉ ÎÕæÕíÉ æíäÏæÒ"
 
 #~ msgctxt "DESC_Menu_winpt"
 #~ msgid ""
 #~ "Run the Windows Privacy Tray key management tool. This is a versatile key "
 #~ "management and encryption tool."
 #~ msgstr ""
-#~ "Ejecutar la herramienta de gestión de llaves Windows Privacy Tray. Ésta "
-#~ "es una herramienta  versátil para la gestión de llaves y cifrado."
+#~ "ÔÛá ÃÏÇÉ ÅÏÇÑÉ ÇáãÝÇÊíÍ áæÍÉ ÎÕæÕíÉ æíäÏæÒ. åÐå ÃÏÇÉ ÅÏÇÑÉ ãÝÇÊíÍ æÊÚãíÉ "
+#~ "ãÊÚÏÏÉ ÇáÇÓÊÚãÇáÇÊ."
 
 #~ msgctxt "DESC_Menu_gpa"
 #~ msgid ""
 #~ "Run the GNU Privacy Assistant key management tool. This is an alternative "
 #~ "to the WinPT key management tool."
 #~ msgstr ""
-#~ "Ejecutar la herramienta de gestión de llaves GNU Privacy Assistant. Ésta "
-#~ "es una alternativa a la herramienta de manejo de llaves WinPT."
+#~ "ÔÛá ÃÏÇÉ ÅÏÇÑÉ ÇáãÝÇÊíÍ ãÓÇÚÏ ÎÕæÕíÉ Ìäæ. åÐå ÈÏíá áÃÏÇÉ ÅÏÇÑÉ ÇáãÝÇÊíÍ "
+#~ "WinPT."
 
 #~ msgctxt "DESC_Name_man_novice_en"
 #~ msgid "Novice Manual"
-#~ msgstr "Manuel del principiante (Inglés)"
+#~ msgstr "Ïáíá ÇáãÈÊÏÆíä"
 
 #~ msgctxt "DESC_SEC_man_novice_en"
 #~ msgid "Gpg4Win Manual for the Novice User"
-#~ msgstr "Manual de Gpg4Win para el principiante (Inglés)"
+#~ msgstr "Ïáíá Gpg4Win ááãÓÊÎÏãíä ÇáãÈÊÏÆíä"
 
 #~ msgctxt "DESC_SEC_gnupg2"
 #~ msgid "GNU Privacy Guard with S/MIME support"
-#~ msgstr "GNU Privacy Guard (GnuPG) con soporte para S/MIME"
+#~ msgstr "ÍÇÑÓ ÎÕæÕíÉ Ìäæ ãÚ ÏÚã S/MIME"
 
 #~ msgctxt "DESC_SEC_kleopatra"
 #~ msgid "Kleopatra"
-#~ msgstr "Kleopatra"
+#~ msgstr "ßáíæÈÇÊÑÇ"
 
 #~ msgctxt "DESC_SEC_sylpheed"
 #~ msgid "Sylpheed-Claws Mail-User-Agent"
-#~ msgstr "Cliente de correo Sylpheed-Claws"
+#~ msgstr "ÈÑãÌíÉ ÇáÈÑíÏ Sylpheed-Claws"
 
 #~ msgctxt "DESC_Menu_sylpheed"
 #~ msgid "Run the Sylpheed-Claws mailprogram."
-#~ msgstr "Ejecutar el cliente de correo Sylpheed-Claws."
+#~ msgstr "ÔÛá ÈÑãÌíÉ ÇáÈÑíÏ Sylpheed-Claws"
 
 #~ msgctxt "DESC_Menu_sylpheed_pdf"
 #~ msgid "Show the online manual of Sylpheed Claws"
-#~ msgstr "Mostrar el manual en línea de Sylpheed Claws"
+#~ msgstr "ÇÚÑÖ Ïáíá Sylpheed Claws Úáì ÇáæÈ"

@@ -1,27 +1,9 @@
 !ifdef PO_HEADER
 !insertmacro MUI_LANGUAGE "Czech"
 !else
-LangString T_AlreadyRunning ${LANG_CZECH} "Jedna instance tohoto programu je už spuštìna."
-LangString T_WelcomeTitleGpg4win ${LANG_CZECH} "Vítejte v instalaci programu Gpg4win"
-LangString T_AboutGpg4win ${LANG_CZECH} "Claws Mail is an email client (and news reader), based on GTK+, featuring$\r$\nQuick response$\r$\nGraceful, and sophisticated interface$\r$\nEasy configuration, intuitive operation$\r$\nAbundant features$\r$\nExtensibility$\r$\nRobustness and stability.$\r$\nIt is Free Software, released under the GNU GPL v3 or later."
-LangString T_AboutGpg4winVersion ${LANG_CZECH} "Tato verze programu Gpg4win je ${VERSION}"
-LangString T_AboutGpg4winFileVersion ${LANG_CZECH} "verze souboru ${PROD_VERSION}"
-LangString T_AboutGpg4winReleaseDate ${LANG_CZECH} "datum vydání ${_BUILD_ISODATE}"
-LangString T_WelcomeTitleGpg4winSrc ${LANG_CZECH} "Vítejte v instalaci Gpg4win zdrojù"
-LangString T_AboutGpg4winSrc ${LANG_CZECH} "Gpg4win je instalaèní balíèek pro OS Windows pro šifrování e-mail zpráv a souborù, pomocí základních komponenent GnuPG pro Windows. Obì pøíslušné kryptografické normy jsou podporovány, OpenPGP a S / MIME. Gpg4win a zahrnutý software s Gpg4win jsou svobodný software."
-LangString T_AboutGpg4winSrcVersion ${LANG_CZECH} "Tato verze programu Gpg4win je ${VERSION}"
-LangString T_AboutGpg4winSrcFileVersion ${LANG_CZECH} "verze souboru ${PROD_VERSION}"
-LangString T_AboutGpg4winSrcReleaseDate ${LANG_CZECH} "datum vydání ${_BUILD_ISODATE}"
 LangString T_LangCode ${LANG_CZECH} "cz"
 LangString T_GPLHeader ${LANG_CZECH} "ento program je licencovaný pod licencí GNU General Public License (GPL)."
 LangString T_GPLShort ${LANG_CZECH} "In aller Kürze: Sie haben das Recht, die Software zu jedem Zweck einzusetzen.  Sie können die Software weitergeben, sofern Sie dem Empfänger dieselben Rechte einräumen, die auch Sie erhalten haben.Ve zkratce: mùžete spouštìt tentyo program pro jakýkoli úèrl. Mùžete distribuovat tento program se  stejnými právy, které jste obdrželi."
-LangString T_RunKeyManager ${LANG_CZECH} "Spustit manažer klíèù"
-LangString T_MoreInfo ${LANG_CZECH} "Kliknìte pro homepage projektu"
-LangString T_MoreInfoURL ${LANG_CZECH} "${WEBSITE}"
-LangString T_NoKeyManager ${LANG_CZECH} "Ještì nebyl nainstalován žádný manažér klíèù, proto nelze žádný spustit."
-LangString DESC_Menu_manuals ${LANG_CZECH} "Dokumentace"
-LangString DESC_Menu_uninstall ${LANG_CZECH} "Odinstalovat"
-LangString DESC_Desktop_manuals ${LANG_CZECH} "Gpg4win Dokumentace"
 LangString T_InstallOptions ${LANG_CZECH} "Možnosti instalace"
 LangString T_InstallOptLinks ${LANG_CZECH} "Start odkazy"
 LangString T_InstOptLabelA ${LANG_CZECH} "Prosím vyberte, kam má Gpg4win nainstalovat odkazy:"
@@ -29,9 +11,31 @@ LangString T_InstOptLabelB ${LANG_CZECH} "(Jen odkazy progarmù budou vytvoøeny v
 LangString T_InstOptFieldA ${LANG_CZECH} "Start Menu"
 LangString T_InstOptFieldB ${LANG_CZECH} "Plocha"
 LangString T_InstOptFieldC ${LANG_CZECH} "Panel rychlého spuštìní"
+LangString T_MoreInfo ${LANG_CZECH} "Kliknìte pro homepage projektu"
 LangString T_FoundExistingVersion ${LANG_CZECH} "Verze $R1 byla nainstalována.$\r$\nChcete ji pøepsat verzí ${VERSION} reiben?"
 LangString T_FoundExistingOldVersion ${LANG_CZECH} "Staší verze $R1 byla nainstalována. Dùraznì se doporuèuje odinstalovat starší verzi pøed instalací nové verze.$\r$\nChcete pokraèovat v instalaci Gpg4win verze ${VERSION} ?"
 LangString T_FoundExistingVersionB ${LANG_CZECH} "Jedna verze Gpg4Win již byla nainstalována. Nebude vadit, když se nainstaluje a tudíž pøepíše touhle verzí.$\r$\n$\r$\nChcete pokraèovat s instalací Gpg4win?"
+LangString T_WelcomePageTitle ${LANG_CZECH} "Vítejte v instalaci programu Gpg4win"
+LangString T_About ${LANG_CZECH} "Claws Mail is an email client (and news reader), based on GTK+, featuring $\r$\n		Quick response$\r$\nGraceful, and sophisticated interface$\r$\nEasy configuration, intuitive operation$\r$\nAbundant features$\r$\nExtensibility$\r$\nRobustness and stability.$\r$\nIt is Free Software, released under the GNU GPL v3 or later."
+LangString T_AboutVersion ${LANG_CZECH} "Tato verze programu Gpg4win je ${VERSION}"
+LangString T_AboutFileVersion ${LANG_CZECH} "verze souboru ${PROD_VERSION}"
+LangString T_AboutReleaseDate ${LANG_CZECH} "datum vydání ${_BUILD_ISODATE}"
+LangString T_SetDefaultClientHeader ${LANG_CZECH} "Default client"
+LangString T_SetDefaultClient ${LANG_CZECH} "Chcete nastavit Claws Mail jako váš pøednastavený poštovní program?"
+LangString T_FoundGnupg ${LANG_CZECH} "GnuPG2 was found in your installation directory.$\r$\nPlease note that GnuPG and GPA utilities are no longer bundled with Claws Mail. You should uninstall them now, and if you wish to continue to use them, install an up-to-date version of Gpg4win from:$\r$\nhttp://www.gpg4win.org/$\r$\n$\r$\nUninstall GnuPG now?"
+LangString T_Menu_Uninstall ${LANG_CZECH} "Odinstalovat"
+LangString T_Menu_ClawsMail ${LANG_CZECH} "Spustit Claws Mail."
+LangString T_Menu_ClawsMailManual ${LANG_CZECH} "Claws Mail Manual"
+LangString T_AlreadyRunning ${LANG_CZECH} "Jedna instance tohoto programu je už spuštìna."
+LangString T_WelcomeTitleGpg4winSrc ${LANG_CZECH} "Vítejte v instalaci Gpg4win zdrojù"
+LangString T_AboutGpg4winSrc ${LANG_CZECH} "Gpg4win je instalaèní balíèek pro OS Windows pro šifrování e-mail zpráv a souborù, pomocí základních komponenent GnuPG pro Windows. Obì pøíslušné kryptografické normy jsou podporovány, OpenPGP a S / MIME. Gpg4win a zahrnutý software s Gpg4win jsou svobodný software."
+LangString T_AboutGpg4winSrcVersion ${LANG_CZECH} "Tato verze programu Gpg4win je ${VERSION}"
+LangString T_AboutGpg4winSrcFileVersion ${LANG_CZECH} "verze souboru ${PROD_VERSION}"
+LangString T_AboutGpg4winSrcReleaseDate ${LANG_CZECH} "datum vydání ${_BUILD_ISODATE}"
+LangString T_RunKeyManager ${LANG_CZECH} "Spustit manažer klíèù"
+LangString T_NoKeyManager ${LANG_CZECH} "Ještì nebyl nainstalován žádný manažér klíèù, proto nelze žádný spustit."
+LangString DESC_Menu_manuals ${LANG_CZECH} "Dokumentace"
+LangString DESC_Desktop_manuals ${LANG_CZECH} "Gpg4win Dokumentace"
 LangString T_FoundOldSeeManual ${LANG_CZECH} "Prosím, vìnujte pozornost manuálu Gpg4win, kde se doètete, jak pøenést klíèe z jiných GnuPG instalací do Gpgp4win."
 LangString T_FoundOldGnuPP ${LANG_CZECH} "Byla detekována starší instalace GnuPP (GNU Privacy Project).  Tento starší program žuž není udržován, mìl by být proto odstranìn.$\r$\n$\r$\nChcete pokrèovat v instalaci Gpg4win a pozdìji odstranit staré GnuPP?"
 LangString T_FoundOldGnuPT ${LANG_CZECH} "Byla detekována GnuPT. To mùže zpùsobovat potíže se souèasným používaním Gpg4win.$\r$\n$\r$\nChcete pokraèovat v instalaci Gpg4win?"
@@ -40,9 +44,7 @@ LangString T_FoundOldGnuPack ${LANG_CZECH} "Byla detekována instalace GnuPG-Pack
 LangString T_AdminNeeded ${LANG_CZECH} "Upozornìní: Pro úspìšnou instalaci jsou vyžadována práva Administrátora."
 LangString T_ShuttingDownWinPT ${LANG_CZECH} "Pokus o ukonèení pravdìpodobnì bìžícího programu WinPT."
 LangString T_ShuttingDownDirMngr ${LANG_CZECH} "Pokus o ukonèení pravdìpodobnì bìžícího programu DirMngr."
-LangString T_SetDefaultClient ${LANG_CZECH} "Chcete nastavit Claws Mail jako váš pøednastavený poštovní program?"
 LangString DESC_SEC_claws_mail ${LANG_CZECH} "Claws Mail-User-Agent"
-LangString DESC_Menu_claws_mail ${LANG_CZECH} "Spustit Claws Mail."
 LangString DESC_Menu_claws_mail_pdf ${LANG_CZECH} "Ukázat on-line manuál programu Claws Mail"
 LangString DESC_SEC_gnupg2 ${LANG_CZECH} "GNU Privacy Guard"
 LangString DESC_SEC_gpa ${LANG_CZECH} "GNU Privacy Assistant"

@@ -1,27 +1,9 @@
 !ifdef PO_HEADER
 !insertmacro MUI_LANGUAGE "German"
 !else
-LangString T_AlreadyRunning ${LANG_GERMAN} "Ein Exemplar dieses Installers läuft bereits."
-LangString T_WelcomeTitleGpg4win ${LANG_GERMAN} "Willkommen bei der Installation von Gpg4win"
-LangString T_AboutGpg4win ${LANG_GERMAN} "Claws Mail is an email client (and news reader), based on GTK+, featuring$\r$\nQuick response$\r$\nGraceful, and sophisticated interface$\r$\nEasy configuration, intuitive operation$\r$\nAbundant features$\r$\nExtensibility$\r$\nRobustness and stability.$\r$\nIt is Free Software, released under the GNU GPL v3 or later."
-LangString T_AboutGpg4winVersion ${LANG_GERMAN} "Dies ist Gpg4win Version ${VERSION}"
-LangString T_AboutGpg4winFileVersion ${LANG_GERMAN} "Dateiversion ${PROD_VERSION}"
-LangString T_AboutGpg4winReleaseDate ${LANG_GERMAN} "Releasedatum ${_BUILD_ISODATE}"
-LangString T_WelcomeTitleGpg4winSrc ${LANG_GERMAN} "Willkommen bei der Installation der Gpg4win Quellen"
-LangString T_AboutGpg4winSrc ${LANG_GERMAN} "Gpg4win ist ein Installationspaket für Windows zur Nutzung von E-Mail- und Datei-Verschlüsselung unter Verwendung der Kernkomponente GnuPG für Windows. Die beiden relevanten kryptographischen Standards OpenPGP und S/MIME werden unterstützt. Gpg4win und die in Gpg4win enthaltene Software sind Freie Software."
-LangString T_AboutGpg4winSrcVersion ${LANG_GERMAN} "Dies ist Gpg4win Version ${VERSION}"
-LangString T_AboutGpg4winSrcFileVersion ${LANG_GERMAN} "Dateiversion ${PROD_VERSION}"
-LangString T_AboutGpg4winSrcReleaseDate ${LANG_GERMAN} "Releasedatum ${_BUILD_ISODATE}"
 LangString T_LangCode ${LANG_GERMAN} "de"
 LangString T_GPLHeader ${LANG_GERMAN} "Diese Software ist unter der GNU General Public License (GPL) lizensiert."
 LangString T_GPLShort ${LANG_GERMAN} "In aller Kürze: Sie haben das Recht, die Software zu jedem Zweck einzusetzen.  Sie können die Software weitergeben, sofern Sie dem Empfänger dieselben Rechte einräumen, die auch Sie erhalten haben."
-LangString T_RunKeyManager ${LANG_GERMAN} "Die Schlüsselverwaltung aufrufen"
-LangString T_MoreInfo ${LANG_GERMAN} "Hier klicken um zur Homepage des Projekts zu gelangen"
-LangString T_MoreInfoURL ${LANG_GERMAN} "${WEBSITE}"
-LangString T_NoKeyManager ${LANG_GERMAN} "Es wurde keine Schlüsselverwaltung installiert.  Deswegen kann sie jetzt auch nicht ausgeführt werden."
-LangString DESC_Menu_manuals ${LANG_GERMAN} "Dokumentation"
-LangString DESC_Menu_uninstall ${LANG_GERMAN} "Deinstallieren"
-LangString DESC_Desktop_manuals ${LANG_GERMAN} "Gpg4win Dokumentation"
 LangString T_InstallOptions ${LANG_GERMAN} "Installationsoptionen"
 LangString T_InstallOptLinks ${LANG_GERMAN} "Startlinks"
 LangString T_InstOptLabelA ${LANG_GERMAN} "Bitte wählen Sie, welche Verknüpfungen angelegt werden sollen:"
@@ -29,9 +11,31 @@ LangString T_InstOptLabelB ${LANG_GERMAN} "(In der Schnellstartleiste werden nur
 LangString T_InstOptFieldA ${LANG_GERMAN} "Startmenü"
 LangString T_InstOptFieldB ${LANG_GERMAN} "Arbeitsfläche"
 LangString T_InstOptFieldC ${LANG_GERMAN} "Schnellstartleiste"
+LangString T_MoreInfo ${LANG_GERMAN} "Hier klicken um zur Homepage des Projekts zu gelangen"
 LangString T_FoundExistingVersion ${LANG_GERMAN} "Version $R1 ist hier bereits installiert.$\r$\nMöchten Sie diese mit Version ${VERSION} überschreiben?$\r$\n$\r$\n(Sie können in jedem Fall mit JA antworten, falls es sich um eine neuere oder dieselbe Version handelt.)"
 LangString T_FoundExistingOldVersion ${LANG_GERMAN} "Eine alte Version $R1 ist hier bereits installiert.  Es wird dringend Empfohlen, bei einer großen Aktualisierung alte Versionen zu deinstallieren.$\r$\nMöchten Sie trotzdem fortfahren, Version ${VERSION} zu installieren?"
 LangString T_FoundExistingVersionB ${LANG_GERMAN} "Eine Version von Gpg4win ist hier bereits installiert.  Es ist problemlos möglich, die Installation fortzuführen.$\r$\n$\r$\nMöchten die die Installation von Gpg4win fortführen?"
+LangString T_WelcomePageTitle ${LANG_GERMAN} "Willkommen bei der Installation von Gpg4win"
+LangString T_About ${LANG_GERMAN} "Claws Mail is an email client (and news reader), based on GTK+, featuring $\r$\n		Quick response$\r$\nGraceful, and sophisticated interface$\r$\nEasy configuration, intuitive operation$\r$\nAbundant features$\r$\nExtensibility$\r$\nRobustness and stability.$\r$\nIt is Free Software, released under the GNU GPL v3 or later."
+LangString T_AboutVersion ${LANG_GERMAN} "Dies ist Gpg4win Version ${VERSION}"
+LangString T_AboutFileVersion ${LANG_GERMAN} "Dateiversion ${PROD_VERSION}"
+LangString T_AboutReleaseDate ${LANG_GERMAN} "Releasedatum ${_BUILD_ISODATE}"
+LangString T_SetDefaultClientHeader ${LANG_GERMAN} "Default client"
+LangString T_SetDefaultClient ${LANG_GERMAN} "Möchten Sie Claws-Mail als Ihr E-Mail-Standardprogramm auswählen?"
+LangString T_FoundGnupg ${LANG_GERMAN} "GnuPG2 was found in your installation directory.$\r$\nPlease note that GnuPG and GPA utilities are no longer bundled with Claws Mail. You should uninstall them now, and if you wish to continue to use them, install an up-to-date version of Gpg4win from:$\r$\nhttp://www.gpg4win.org/$\r$\n$\r$\nUninstall GnuPG now?"
+LangString T_Menu_Uninstall ${LANG_GERMAN} "Deinstallieren"
+LangString T_Menu_ClawsMail ${LANG_GERMAN} "Das Mailprogramm Claws Mail aufrufen."
+LangString T_Menu_ClawsMailManual ${LANG_GERMAN} "Claws Mail Manual"
+LangString T_AlreadyRunning ${LANG_GERMAN} "Ein Exemplar dieses Installers läuft bereits."
+LangString T_WelcomeTitleGpg4winSrc ${LANG_GERMAN} "Willkommen bei der Installation der Gpg4win Quellen"
+LangString T_AboutGpg4winSrc ${LANG_GERMAN} "Gpg4win ist ein Installationspaket für Windows zur Nutzung von E-Mail- und Datei-Verschlüsselung unter Verwendung der Kernkomponente GnuPG für Windows. Die beiden relevanten kryptographischen Standards OpenPGP und S/MIME werden unterstützt. Gpg4win und die in Gpg4win enthaltene Software sind Freie Software."
+LangString T_AboutGpg4winSrcVersion ${LANG_GERMAN} "Dies ist Gpg4win Version ${VERSION}"
+LangString T_AboutGpg4winSrcFileVersion ${LANG_GERMAN} "Dateiversion ${PROD_VERSION}"
+LangString T_AboutGpg4winSrcReleaseDate ${LANG_GERMAN} "Releasedatum ${_BUILD_ISODATE}"
+LangString T_RunKeyManager ${LANG_GERMAN} "Die Schlüsselverwaltung aufrufen"
+LangString T_NoKeyManager ${LANG_GERMAN} "Es wurde keine Schlüsselverwaltung installiert.  Deswegen kann sie jetzt auch nicht ausgeführt werden."
+LangString DESC_Menu_manuals ${LANG_GERMAN} "Dokumentation"
+LangString DESC_Desktop_manuals ${LANG_GERMAN} "Gpg4win Dokumentation"
 LangString T_FoundOldSeeManual ${LANG_GERMAN} "Bitte sehen Sie im Gpg4win für Einsteiger Handbuch nach, wie Sie Ihre Schlüssel aus anderen - GnuPG basierten - Installationen in Gpg4win überführen.  Es wird dringend geraten Gpg4win nicht zusammen mit diesen anderen Installation zu betreiben."
 LangString T_FoundOldGnuPP ${LANG_GERMAN} "Eine alte Installation von GnuPP (GNU Privacy Project) wurde gefunden.  Diese Software wird nicht mehr gepflegt und sollte deshalb vom System entfernt werden.$\r$\n$\r$\nSie können die Installation von Gpg4win jetzt weiterdurchführen und danach entscheiden, ob Sie das alte GnuPP dann entfernen.  Sie finden hierzu Hinweise im Gpg4win Handbuch für Einsteiger.  Falls Sie die alte Installation schon jetzt entfernen möchten, so exportieren Sie dort alle vorhandenen Schlüssel in eine Datei um sie so später in Gpg4win wieder importieren zu können.$\r$\n$\r$\nMöchten Sie die Installation von Gpg4win weiter durchführen und sich dann später um die Entfernung von GnuPP kümmern?"
 LangString T_FoundOldGnuPT ${LANG_GERMAN} "Eine Installation von GnuPT wurde gefunden.  Dies kann zu Problemen führen, falls GnuPT zusammem mit Gpg4win benutzt wird.  Falls Sie GnuPT zwischenzeitlich bereits entfernt haben, so ignorieren Sie diese Warnung bitte.  Die Deinstallation von GnuPT erfolgt nicht immer spurlos und Gpg4win kann deshalb nicht sicher erkennen, ob es vollständig entfernt wurde.$\r$\n$\r$\nSie können die Installation von Gpg4win jetzt weiterdurchführen und danach entscheiden, ob Sie das alte GnuPT dann entfernen.  Sie finden hierzu Hinweise im Gpg4win Handbuch für Einsteiger.  Falls Sie die alte Installation schon jetzt entfernen möchten, so exportieren Sie dort alle vorhandenen Schlüssel in eine Datei um sie so später in Gpg4win wieder importieren zu können.$\r$\n$\r$\nMöchten Sie die Installation von Gpg4win fortführen?"
@@ -40,9 +44,7 @@ LangString T_FoundOldGnuPack ${LANG_GERMAN} "Eine Installation von GnuPG-Pack wu
 LangString T_AdminNeeded ${LANG_GERMAN} "Achtung: Für eine erfolgreiche Installation werden Administratorrechte benötigt."
 LangString T_ShuttingDownWinPT ${LANG_GERMAN} "Ein möglicherweise laufendes WinPT wird jetzt automatisch beendet."
 LangString T_ShuttingDownDirMngr ${LANG_GERMAN} "Ein möglicherweise laufender DirMngr wird jetzt automatisch beendet."
-LangString T_SetDefaultClient ${LANG_GERMAN} "Möchten Sie Claws-Mail als Ihr E-Mail-Standardprogramm auswählen?"
 LangString DESC_SEC_claws_mail ${LANG_GERMAN} "Claws Mail ist ein vollständiges Mail- und News-Programm mit sehr guter Unterstützung für GnuPG."
-LangString DESC_Menu_claws_mail ${LANG_GERMAN} "Das Mailprogramm Claws Mail aufrufen."
 LangString DESC_Menu_claws_mail_pdf ${LANG_GERMAN} "Das englische Handbuch zu Claws Mail anzeigen"
 LangString DESC_SEC_gnupg2 ${LANG_GERMAN} "Der GNU Privacy Guard (GnuPG) ist der Kernbestandteil dieser Software.  GnuPG stellt die eigentliche Verschlüsselung sowie die Verwaltung der Schlüssel bereit."
 LangString DESC_SEC_gpa ${LANG_GERMAN} "GNU Privacy Assistent (GPA) ist ein Programm zum Verwalten von Zertifikaten welches für mehrere Plattformen verfügbar ist."

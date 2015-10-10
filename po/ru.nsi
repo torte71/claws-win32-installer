@@ -1,27 +1,9 @@
 !ifdef PO_HEADER
 !insertmacro MUI_LANGUAGE "Russian"
 !else
-LangString T_AlreadyRunning ${LANG_RUSSIAN} "Установка программы уже запущена."
-LangString T_WelcomeTitleGpg4win ${LANG_RUSSIAN} "Добро пожаловать в программу установки Gpg4win!"
-LangString T_AboutGpg4win ${LANG_RUSSIAN} "Claws Mail is an email client (and news reader), based on GTK+, featuring$\r$\nQuick response$\r$\nGraceful, and sophisticated interface$\r$\nEasy configuration, intuitive operation$\r$\nAbundant features$\r$\nExtensibility$\r$\nRobustness and stability.$\r$\nIt is Free Software, released under the GNU GPL v3 or later."
-LangString T_AboutGpg4winVersion ${LANG_RUSSIAN} "Версия Gpg4win ${VERSION}"
-LangString T_AboutGpg4winFileVersion ${LANG_RUSSIAN} "Версия файла ${PROD_VERSION}"
-LangString T_AboutGpg4winReleaseDate ${LANG_RUSSIAN} "Дата релиза ${_BUILD_ISODATE}"
-LangString T_WelcomeTitleGpg4winSrc ${LANG_RUSSIAN} "Установка компонентов Gpg4Win"
-LangString T_AboutGpg4winSrc ${LANG_RUSSIAN} "GnuPG - бесплатная программа с открытым кодом, которая предназначена для защиты информации. С помощью GnuPG можно шифровать данные и добавлять к ним цифровую подпись. GnuPG содержит мощный инструментарий управления шифровальными ключами и совместима со стандартом OpenPGP, описанным в документе RFC2440."
-LangString T_AboutGpg4winSrcVersion ${LANG_RUSSIAN} "Версия Gpg4win ${VERSION}"
-LangString T_AboutGpg4winSrcFileVersion ${LANG_RUSSIAN} "Версия файла ${PROD_VERSION}"
-LangString T_AboutGpg4winSrcReleaseDate ${LANG_RUSSIAN} "Дата релиза ${_BUILD_ISODATE}"
 LangString T_LangCode ${LANG_RUSSIAN} "ru"
 LangString T_GPLHeader ${LANG_RUSSIAN} "Использование этой программы регулируется лицензией GNU General Public License (GPL). Вы можете свободно распространять эту программу и вносить в нее изменения."
 LangString T_GPLShort ${LANG_RUSSIAN} "Вкратце: вы можете использовать эту программу в любых целях. Вы можете распространять ее при условии, что не будете ограничивать права других пользователей программы."
-LangString T_RunKeyManager ${LANG_RUSSIAN} "Запуск менеджера ключей"
-LangString T_MoreInfo ${LANG_RUSSIAN} "Веб-сайт проекта"
-LangString T_MoreInfoURL ${LANG_RUSSIAN} "${WEBSITE}"
-LangString T_NoKeyManager ${LANG_RUSSIAN} "Ошибка запуска менеджера ключей: ни один из менеджеров не установлен."
-LangString DESC_Menu_manuals ${LANG_RUSSIAN} "Документация"
-LangString DESC_Menu_uninstall ${LANG_RUSSIAN} "Uninstall"
-LangString DESC_Desktop_manuals ${LANG_RUSSIAN} "Документация Gpg4win"
 LangString T_InstallOptions ${LANG_RUSSIAN} "Параметры установки"
 LangString T_InstallOptLinks ${LANG_RUSSIAN} "Ярлыки Gpg4win"
 LangString T_InstOptLabelA ${LANG_RUSSIAN} "Где создавать ярлыки Gpg4win:"
@@ -29,9 +11,31 @@ LangString T_InstOptLabelB ${LANG_RUSSIAN} "(В панели быстрого запуска будут ссы
 LangString T_InstOptFieldA ${LANG_RUSSIAN} "Меню Пуск"
 LangString T_InstOptFieldB ${LANG_RUSSIAN} "Рабочий стол"
 LangString T_InstOptFieldC ${LANG_RUSSIAN} "Панель быстрого запуска"
+LangString T_MoreInfo ${LANG_RUSSIAN} "Веб-сайт проекта"
 LangString T_FoundExistingVersion ${LANG_RUSSIAN} "Версия $R1 уже установлена.$\r$\nПерезаписать ее версией ${VERSION}?"
 LangString T_FoundExistingOldVersion ${LANG_RUSSIAN} "Gpg4Win уже установлена на этом компьютере. Дальнейшая установка перезапишет эту версию новой.$\r$\n$\r$\nПродолжить установку Gpg4Win?"
 LangString T_FoundExistingVersionB ${LANG_RUSSIAN} "Gpg4Win уже установлена на этом компьютере. Дальнейшая установка перезапишет эту версию новой.$\r$\n$\r$\nПродолжить установку Gpg4Win?"
+LangString T_WelcomePageTitle ${LANG_RUSSIAN} "Добро пожаловать в программу установки Gpg4win!"
+LangString T_About ${LANG_RUSSIAN} "Claws Mail is an email client (and news reader), based on GTK+, featuring $\r$\n		Quick response$\r$\nGraceful, and sophisticated interface$\r$\nEasy configuration, intuitive operation$\r$\nAbundant features$\r$\nExtensibility$\r$\nRobustness and stability.$\r$\nIt is Free Software, released under the GNU GPL v3 or later."
+LangString T_AboutVersion ${LANG_RUSSIAN} "Версия Gpg4win ${VERSION}"
+LangString T_AboutFileVersion ${LANG_RUSSIAN} "Версия файла ${PROD_VERSION}"
+LangString T_AboutReleaseDate ${LANG_RUSSIAN} "Дата релиза ${_BUILD_ISODATE}"
+LangString T_SetDefaultClientHeader ${LANG_RUSSIAN} "Default client"
+LangString T_SetDefaultClient ${LANG_RUSSIAN} "Do you want to make Claws Mail your default mail client?"
+LangString T_FoundGnupg ${LANG_RUSSIAN} "GnuPG2 was found in your installation directory.$\r$\nPlease note that GnuPG and GPA utilities are no longer bundled with Claws Mail. You should uninstall them now, and if you wish to continue to use them, install an up-to-date version of Gpg4win from:$\r$\nhttp://www.gpg4win.org/$\r$\n$\r$\nUninstall GnuPG now?"
+LangString T_Menu_Uninstall ${LANG_RUSSIAN} "Uninstall"
+LangString T_Menu_ClawsMail ${LANG_RUSSIAN} "Запуск почтовой программы Claws."
+LangString T_Menu_ClawsMailManual ${LANG_RUSSIAN} "Claws Mail Manual"
+LangString T_AlreadyRunning ${LANG_RUSSIAN} "Установка программы уже запущена."
+LangString T_WelcomeTitleGpg4winSrc ${LANG_RUSSIAN} "Установка компонентов Gpg4Win"
+LangString T_AboutGpg4winSrc ${LANG_RUSSIAN} "GnuPG - бесплатная программа с открытым кодом, которая предназначена для защиты информации. С помощью GnuPG можно шифровать данные и добавлять к ним цифровую подпись. GnuPG содержит мощный инструментарий управления шифровальными ключами и совместима со стандартом OpenPGP, описанным в документе RFC2440."
+LangString T_AboutGpg4winSrcVersion ${LANG_RUSSIAN} "Версия Gpg4win ${VERSION}"
+LangString T_AboutGpg4winSrcFileVersion ${LANG_RUSSIAN} "Версия файла ${PROD_VERSION}"
+LangString T_AboutGpg4winSrcReleaseDate ${LANG_RUSSIAN} "Дата релиза ${_BUILD_ISODATE}"
+LangString T_RunKeyManager ${LANG_RUSSIAN} "Запуск менеджера ключей"
+LangString T_NoKeyManager ${LANG_RUSSIAN} "Ошибка запуска менеджера ключей: ни один из менеджеров не установлен."
+LangString DESC_Menu_manuals ${LANG_RUSSIAN} "Документация"
+LangString DESC_Desktop_manuals ${LANG_RUSSIAN} "Документация Gpg4win"
 LangString T_FoundOldSeeManual ${LANG_RUSSIAN} "Вопросы переноса ключей из других программ в Gpg4Win рассматриваются в руководстве пользователя Gpg4Win."
 LangString T_FoundOldGnuPP ${LANG_RUSSIAN} "Обнаружена старая установка GnuPP (GNU Privacy Project). Этот проект давно прекращен, рекомендуем удалить программу.$\r$\n$\r$\nПродолжить установку Gpg4Win (а с GnuPP разберемся потом)?"
 LangString T_FoundOldGnuPT ${LANG_RUSSIAN} "Обнаружена установленная программа GnuPT. Она может конфликтовать с Gpg4Win.$\r$\n$\r$\nПродолжить установку Gpg4win?"
@@ -40,9 +44,7 @@ LangString T_FoundOldGnuPack ${LANG_RUSSIAN} "Обнаружена установленная программа
 LangString T_AdminNeeded ${LANG_RUSSIAN} "Для успешной установки требуются права администратора"
 LangString T_ShuttingDownWinPT ${LANG_RUSSIAN} "Возможно, запущена программа WinPT. Попробуем закрыть ее."
 LangString T_ShuttingDownDirMngr ${LANG_RUSSIAN} "Возможно, запущена программа DirMngr. Попробуем закрыть ее."
-LangString T_SetDefaultClient ${LANG_RUSSIAN} "Do you want to make Claws Mail your default mail client?"
 LangString DESC_SEC_claws_mail ${LANG_RUSSIAN} "Почтовый клиент Claws"
-LangString DESC_Menu_claws_mail ${LANG_RUSSIAN} "Запуск почтовой программы Claws."
 LangString DESC_Menu_claws_mail_pdf ${LANG_RUSSIAN} "Показать онлайновое руководство к почтовому клиенту Claws Mail"
 LangString DESC_SEC_gnupg2 ${LANG_RUSSIAN} "GNU Privacy Guard"
 LangString DESC_SEC_gpa ${LANG_RUSSIAN} "GNU Privacy Assistant"

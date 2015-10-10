@@ -1,27 +1,9 @@
 !ifdef PO_HEADER
 !insertmacro MUI_LANGUAGE "Arabic"
 !else
-LangString T_AlreadyRunning ${LANG_ARABIC} "ÊÚãá ÓíÑæÑÉ ÃÎÑì ãä åĞÇ ÇáãõËÈøöÊ ÈÇáİÚá."
-LangString T_WelcomeTitleGpg4win ${LANG_ARABIC} "ãÑÍÈÇ İí ÊËÈíÊ Gpg4win"
-LangString T_AboutGpg4win ${LANG_ARABIC} "Claws Mail is an email client (and news reader), based on GTK+, featuring$\r$\nQuick response$\r$\nGraceful, and sophisticated interface$\r$\nEasy configuration, intuitive operation$\r$\nAbundant features$\r$\nExtensibility$\r$\nRobustness and stability.$\r$\nIt is Free Software, released under the GNU GPL v3 or later."
-LangString T_AboutGpg4winVersion ${LANG_ARABIC} "åĞå ÇáÅÕÏÇÑÉ ${VERSION} ãä Gpg4win"
-LangString T_AboutGpg4winFileVersion ${LANG_ARABIC} "ÅÕÏÇÑÉ Çáãáİ ${PROD_VERSION}"
-LangString T_AboutGpg4winReleaseDate ${LANG_ARABIC} "ÊÇÑíÎ ÇáÅÕÏÇÑ ${_BUILD_ISODATE}"
-LangString T_WelcomeTitleGpg4winSrc ${LANG_ARABIC} "ãÑÍÈÇ İí ÊËÈíÊ ãÕÇÏöÑ Gpg4win"
-LangString T_AboutGpg4winSrc ${LANG_ARABIC} "şGnuPG åæ ÃÏÇÉ Ìäæ ááÇÊÕÇáÇÊ æ ÇáÊÎÒíä ÇáÂãä ááÈíÇäÇÊ. íõãßä ÇÓÊÎÏÇãå áÊÚãíÉ ÇáÈíÇäÇÊ æ ÇáÊæŞíÚ ÇáÑŞãíº æ åæ íÔÊãá Úáì æÓíáÉ ãÊŞÏãÉ áÅÏÇÑÉ ÇáãİÇÊíÍ¡ æíÊæÇİŞ ãÚ ãÚíÇÑ ÇáÅäÊÑäÊ OpenPGP ÇáãŞÊÑÍ ßãÇ æõÕöİ İí RFC2440."
-LangString T_AboutGpg4winSrcVersion ${LANG_ARABIC} "åĞå ÇáÅÕÏÇÑÉ ${VERSION} ãä Gpg4win"
-LangString T_AboutGpg4winSrcFileVersion ${LANG_ARABIC} "ÅÕÏÇÑÉ Çáãáİ ${PROD_VERSION}"
-LangString T_AboutGpg4winSrcReleaseDate ${LANG_ARABIC} "ÊÇÑíÎ ÇáÅÕÏÇÑ ${_BUILD_ISODATE}"
 LangString T_LangCode ${LANG_ARABIC} "ar"
 LangString T_GPLHeader ${LANG_ARABIC} "åĞå ÇáÈÑãÌíÉ ãÑÎÕÉ ÈÑÎÕÉ Ìäæ ÇáÚãæãíÉ ÇáÚÇãÉ (GPL) æÇáÊí ÊãäÍß ÍÑíÉ ãÔÇÑßÉ æÊÚÏíá ÇáÈÑãÌíÇÊ ÇáÍÑÉ."
 LangString T_GPLShort ${LANG_ARABIC} "ÈÇÎÊÕÇÑ: ÊÓÊØíÚ ÊÔÛíá åĞå ÇáÈÑãÌíÉ áÃí ÛÑÖ. æíãßäß ÊæÒíÚåÇ ãÇ ÏãÊ ÊÚØí ÇáãÊáŞíä äİÓ ÇáÍŞæŞ ÇáÊí ÍÕáÊ ÚáíåÇ."
-LangString T_RunKeyManager ${LANG_ARABIC} "ÔÛøá ãÏíÑ ÇáãİÇÊíÍ"
-LangString T_MoreInfo ${LANG_ARABIC} "ÇäŞÑ åäÇ áÊÒæÑ ÕİÍÉ ÇáãÔÑæÚ"
-LangString T_MoreInfoURL ${LANG_ARABIC} "${WEBSITE}"
-LangString T_NoKeyManager ${LANG_ARABIC} "áã íõËÈøÊ Ãí ãÏíÑ ãİÇÊíÍ¡ áĞÇ áÇ äÓÊØíÚ ÊÔÛíáå."
-LangString DESC_Menu_manuals ${LANG_ARABIC} "ÇáÊæËíŞ"
-LangString DESC_Menu_uninstall ${LANG_ARABIC} "Uninstall"
-LangString DESC_Desktop_manuals ${LANG_ARABIC} "æËÇÆŞ Gpg4win"
 LangString T_InstallOptions ${LANG_ARABIC} "ÎíÇÑÇÊ ÇáÊËÈíÊ"
 LangString T_InstallOptLinks ${LANG_ARABIC} "æÕáÇÊ ÇáÈÏÁ"
 LangString T_InstOptLabelA ${LANG_ARABIC} "ÇÎÊÑ Ãíä íÊÚíä ËÈíÊ ÇáæÕáÇÊ:"
@@ -29,9 +11,31 @@ LangString T_InstOptLabelB ${LANG_ARABIC} "(İŞØ ÇáÈÑãÌíÇÊ ÓíÑÈØ ÅáíåÇ İí ÔÑíØ Çá
 LangString T_InstOptFieldA ${LANG_ARABIC} "ŞÇÆãÉ ÇÈÏÃ"
 LangString T_InstOptFieldB ${LANG_ARABIC} "ÓØÍ ÇáãßÊÈ"
 LangString T_InstOptFieldC ${LANG_ARABIC} "ÔÑíØ ÇáÈÏÁ ÇáÓÑíÚ"
+LangString T_MoreInfo ${LANG_ARABIC} "ÇäŞÑ åäÇ áÊÒæÑ ÕİÍÉ ÇáãÔÑæÚ"
 LangString T_FoundExistingVersion ${LANG_ARABIC} "ÇáÅÕÏÇÑÉ $R1 ãËÈÊÉ ÈÇáİÚá.$\r$\nÃÊÑíÏ ÇÓÊÈÏÇáåÇ ÈÇáÅÕÏÇÑÉ  ${VERSION}¿"
 LangString T_FoundExistingOldVersion ${LANG_ARABIC} "Êã ÊËÈíÊ ÅÕÏÇÑÉ ãä Gpg4Win Úáì åĞÇ ÇáäÙÇã ãä ŞÈá. áÇ ãÔÇßá İí ÇáÊËÈíÊ æÇÓÊÈÏÇá Êáß ÇáÅÕÏÇÑÉ.$\r$\n$\r$\nÃÊÑíÏ ãæÇÕáÉ ÊËÈíÊ Gpg4win¿"
 LangString T_FoundExistingVersionB ${LANG_ARABIC} "Êã ÊËÈíÊ ÅÕÏÇÑÉ ãä Gpg4Win Úáì åĞÇ ÇáäÙÇã ãä ŞÈá. áÇ ãÔÇßá İí ÇáÊËÈíÊ æÇÓÊÈÏÇá Êáß ÇáÅÕÏÇÑÉ.$\r$\n$\r$\nÃÊÑíÏ ãæÇÕáÉ ÊËÈíÊ Gpg4win¿"
+LangString T_WelcomePageTitle ${LANG_ARABIC} "ãÑÍÈÇ İí ÊËÈíÊ Gpg4win"
+LangString T_About ${LANG_ARABIC} "Claws Mail is an email client (and news reader), based on GTK+, featuring $\r$\n		Quick response$\r$\nGraceful, and sophisticated interface$\r$\nEasy configuration, intuitive operation$\r$\nAbundant features$\r$\nExtensibility$\r$\nRobustness and stability.$\r$\nIt is Free Software, released under the GNU GPL v3 or later."
+LangString T_AboutVersion ${LANG_ARABIC} "åĞå ÇáÅÕÏÇÑÉ ${VERSION} ãä Gpg4win"
+LangString T_AboutFileVersion ${LANG_ARABIC} "ÅÕÏÇÑÉ Çáãáİ ${PROD_VERSION}"
+LangString T_AboutReleaseDate ${LANG_ARABIC} "ÊÇÑíÎ ÇáÅÕÏÇÑ ${_BUILD_ISODATE}"
+LangString T_SetDefaultClientHeader ${LANG_ARABIC} "Default client"
+LangString T_SetDefaultClient ${LANG_ARABIC} "Do you want to make Claws Mail your default mail client?"
+LangString T_FoundGnupg ${LANG_ARABIC} "GnuPG2 was found in your installation directory.$\r$\nPlease note that GnuPG and GPA utilities are no longer bundled with Claws Mail. You should uninstall them now, and if you wish to continue to use them, install an up-to-date version of Gpg4win from:$\r$\nhttp://www.gpg4win.org/$\r$\n$\r$\nUninstall GnuPG now?"
+LangString T_Menu_Uninstall ${LANG_ARABIC} "Uninstall"
+LangString T_Menu_ClawsMail ${LANG_ARABIC} "ÔÛá ÈÑãÌíÉ ÇáÈÑíÏ Claws"
+LangString T_Menu_ClawsMailManual ${LANG_ARABIC} "Claws Mail Manual"
+LangString T_AlreadyRunning ${LANG_ARABIC} "ÊÚãá ÓíÑæÑÉ ÃÎÑì ãä åĞÇ ÇáãõËÈøöÊ ÈÇáİÚá."
+LangString T_WelcomeTitleGpg4winSrc ${LANG_ARABIC} "ãÑÍÈÇ İí ÊËÈíÊ ãÕÇÏöÑ Gpg4win"
+LangString T_AboutGpg4winSrc ${LANG_ARABIC} "şGnuPG åæ ÃÏÇÉ Ìäæ ááÇÊÕÇáÇÊ æ ÇáÊÎÒíä ÇáÂãä ááÈíÇäÇÊ. íõãßä ÇÓÊÎÏÇãå áÊÚãíÉ ÇáÈíÇäÇÊ æ ÇáÊæŞíÚ ÇáÑŞãíº æ åæ íÔÊãá Úáì æÓíáÉ ãÊŞÏãÉ áÅÏÇÑÉ ÇáãİÇÊíÍ¡ æíÊæÇİŞ ãÚ ãÚíÇÑ ÇáÅäÊÑäÊ OpenPGP ÇáãŞÊÑÍ ßãÇ æõÕöİ İí RFC2440."
+LangString T_AboutGpg4winSrcVersion ${LANG_ARABIC} "åĞå ÇáÅÕÏÇÑÉ ${VERSION} ãä Gpg4win"
+LangString T_AboutGpg4winSrcFileVersion ${LANG_ARABIC} "ÅÕÏÇÑÉ Çáãáİ ${PROD_VERSION}"
+LangString T_AboutGpg4winSrcReleaseDate ${LANG_ARABIC} "ÊÇÑíÎ ÇáÅÕÏÇÑ ${_BUILD_ISODATE}"
+LangString T_RunKeyManager ${LANG_ARABIC} "ÔÛøá ãÏíÑ ÇáãİÇÊíÍ"
+LangString T_NoKeyManager ${LANG_ARABIC} "áã íõËÈøÊ Ãí ãÏíÑ ãİÇÊíÍ¡ áĞÇ áÇ äÓÊØíÚ ÊÔÛíáå."
+LangString DESC_Menu_manuals ${LANG_ARABIC} "ÇáÊæËíŞ"
+LangString DESC_Desktop_manuals ${LANG_ARABIC} "æËÇÆŞ Gpg4win"
 LangString T_FoundOldSeeManual ${LANG_ARABIC} "ãä İÖáß ØÇáÚ Ïáíá ãÓÊÎÏã Gpg4win áÊŞÑÃ Úä ØÑíŞÉ äŞá ÇáãİÇÊíÍ ÇáãæÌæÏÉ ãä ŞÈá ãä ÊËÈíÊÇÊ ÓÇÈŞÉ ãÈäíÉ Úáì GnuPG Åáì Gpg4win."
 LangString T_FoundOldGnuPP ${LANG_ARABIC} "æõÌöÏ ÊËÈíÊ ŞÏíã ãä GnuPP (ãÔÑæÚ ÎÕæÕíÉ Ìäæ). åĞå ÇáÈÑãÌíÇÊ áíÓÊ ŞíÏ ÇáÊØæíÑ ÈÚÏ ÇáÂä æíÌÈ ÅÒÇáÊåÇ.$\r$\n$\r$\nÃÊÑíÏ ãæÇÕáÉ ÊËÈíÊ Gpg4win æÇáÊÚÇãá ãÚ ÇáÊËÈíÊ ÇáŞÏíã áÇÍŞÇ¿"
 LangString T_FoundOldGnuPT ${LANG_ARABIC} "æÌÏÊ ÊËÈíÊ ãä GnuPT.  ŞÏ íÓÈÈ åĞÇ ãÔÇßá ÅĞÇ ÇÓÊÎÏã ãÚ Gpg4win.$\r$\n$\r$\nÃÊÑíÏ ãæÇÕáÉ ÊËÈíÊ Gpg4win¿"
@@ -40,9 +44,7 @@ LangString T_FoundOldGnuPack ${LANG_ARABIC} "æõÌöÏ ÊËÈíÊ ãä GnuPG-Pack.  ÊÍÊÇÌ Å
 LangString T_AdminNeeded ${LANG_ARABIC} "ÊÍĞíÑ: ÊÍÊÇÌ Åáì ÕáÇÍíÇÊ ÇáãÏíÑ áÅÊãÇã ÇáÊËÈíÊ"
 LangString T_ShuttingDownWinPT ${LANG_ARABIC} "ÊÌÑí ãÍÇæáÉ ÅÛáÇŞ ÓíÑæÑÉ ãÍÊãáÉ ÚÇãáÉ ãä WinPT."
 LangString T_ShuttingDownDirMngr ${LANG_ARABIC} "ÊÌÑí ãÍÇæáÉ ÅÛáÇŞ ÓíÑæÑÉ ãÍÊãáÉ ÚÇãáÉ ãä DirMngr."
-LangString T_SetDefaultClient ${LANG_ARABIC} "Do you want to make Claws Mail your default mail client?"
 LangString DESC_SEC_claws_mail ${LANG_ARABIC} "ÈÑãÌíÉ ÇáÈÑíÏ Claws"
-LangString DESC_Menu_claws_mail ${LANG_ARABIC} "ÔÛá ÈÑãÌíÉ ÇáÈÑíÏ Claws"
 LangString DESC_Menu_claws_mail_pdf ${LANG_ARABIC} "ÇÚÑÖ ßÊíøÈ ÈÑíÏ Claws Úáì ÇáæÈ"
 LangString DESC_SEC_gnupg2 ${LANG_ARABIC} "ÍÇÑÓ ÎÕæÕíÉ Ìäæ"
 LangString DESC_SEC_gpa ${LANG_ARABIC} "ãÓÇÚÏ ÎÕæÕíÉ Ìäæ"

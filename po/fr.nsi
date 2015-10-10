@@ -1,27 +1,9 @@
 !ifdef PO_HEADER
 !insertmacro MUI_LANGUAGE "French"
 !else
-LangString T_AlreadyRunning ${LANG_FRENCH} "Une instance de cet installeur fonctionne déjà."
-LangString T_WelcomeTitleGpg4win ${LANG_FRENCH} "Bienvenue dans l'installation de Gpg4win"
-LangString T_AboutGpg4win ${LANG_FRENCH} "Claws Mail is an email client (and news reader), based on GTK+, featuring$\r$\nQuick response$\r$\nGraceful, and sophisticated interface$\r$\nEasy configuration, intuitive operation$\r$\nAbundant features$\r$\nExtensibility$\r$\nRobustness and stability.$\r$\nIt is Free Software, released under the GNU GPL v3 or later."
-LangString T_AboutGpg4winVersion ${LANG_FRENCH} "Gpg4win version ${VERSION}"
-LangString T_AboutGpg4winFileVersion ${LANG_FRENCH} "version du fichier : ${PROD_VERSION}"
-LangString T_AboutGpg4winReleaseDate ${LANG_FRENCH} "date de sortie : ${_BUILD_ISODATE}"
-LangString T_WelcomeTitleGpg4winSrc ${LANG_FRENCH} "Bienvenue dans l'installation des sources de Gpg4win"
-LangString T_AboutGpg4winSrc ${LANG_FRENCH} "Gpg4win est un ensemble d'installeurs pour Windows permettant le chiffrage des emails et des fichiers, basé sur le composant GnuPG pour Windows. Les deux standards de cryptographie OpenPGP et S/MIME sont gérés. Gpg4win et les logiciels inclus avec Gpg4win sond des Logiciels Libres."
-LangString T_AboutGpg4winSrcVersion ${LANG_FRENCH} "Gpg4win version ${VERSION}"
-LangString T_AboutGpg4winSrcFileVersion ${LANG_FRENCH} "version du fichier : ${PROD_VERSION}"
-LangString T_AboutGpg4winSrcReleaseDate ${LANG_FRENCH} "date de sortie : ${_BUILD_ISODATE}"
 LangString T_LangCode ${LANG_FRENCH} "fr"
 LangString T_GPLHeader ${LANG_FRENCH} "Ce logiciel est publié selon les termes de la Licence publique générale GNU (GPL)."
 LangString T_GPLShort ${LANG_FRENCH} "En bref : vous avez le droit d'utiliser ce logiciel à n'importe quelle fin. Vous pouvez le redistribuer pour autant que vous donniez aux destinataires les mêmes droits que ceux que vous avez."
-LangString T_RunKeyManager ${LANG_FRENCH} "Lancer le gestionnaire de clés"
-LangString T_MoreInfo ${LANG_FRENCH} "Cliquer ici pour ouvrir la page d'accueil du projet"
-LangString T_MoreInfoURL ${LANG_FRENCH} "${WEBSITE}"
-LangString T_NoKeyManager ${LANG_FRENCH} "Aucun gestionnaire de clés n'étant installé, il est impossible d'en lancer un."
-LangString DESC_Menu_manuals ${LANG_FRENCH} "Documentation"
-LangString DESC_Menu_uninstall ${LANG_FRENCH} "Désinstaller"
-LangString DESC_Desktop_manuals ${LANG_FRENCH} "Documentation de Gpg4win"
 LangString T_InstallOptions ${LANG_FRENCH} "Options de l'installation"
 LangString T_InstallOptLinks ${LANG_FRENCH} "Liens de démarrage"
 LangString T_InstOptLabelA ${LANG_FRENCH} "Veuillez choisir où Gpg4win doit installer des liens :"
@@ -29,9 +11,31 @@ LangString T_InstOptLabelB ${LANG_FRENCH} "(Seuls les programmes seront intégrés
 LangString T_InstOptFieldA ${LANG_FRENCH} "Menu Démarrer"
 LangString T_InstOptFieldB ${LANG_FRENCH} "Bureau"
 LangString T_InstOptFieldC ${LANG_FRENCH} "Barre de lancement rapide"
+LangString T_MoreInfo ${LANG_FRENCH} "Cliquer ici pour ouvrir la page d'accueil du projet"
 LangString T_FoundExistingVersion ${LANG_FRENCH} "La version $R1 est déjà installée.$\r$\nVoulez-vous la remplacer par la version ${VERSION} ?"
 LangString T_FoundExistingOldVersion ${LANG_FRENCH} "Une version ancienne $R1 est déjà installée.  Il est fortement recommandé de désinstaller les versions antérieures lors des mises à jour importantes.$\r$\nSouhaitez-vous tout de même pousuivre l'installation de Gpg4win ${VERSION} ?"
 LangString T_FoundExistingVersionB ${LANG_FRENCH} "Une version de Gpg4Win est déjà installée sur le système. Le remplacement de cette version s'effectuera sans problème.$\r$\n$\r$\nVoulez-vous poursuivre l'installation de Gpg4win?"
+LangString T_WelcomePageTitle ${LANG_FRENCH} "Bienvenue dans l'installation de Gpg4win"
+LangString T_About ${LANG_FRENCH} "Claws Mail is an email client (and news reader), based on GTK+, featuring $\r$\n		Quick response$\r$\nGraceful, and sophisticated interface$\r$\nEasy configuration, intuitive operation$\r$\nAbundant features$\r$\nExtensibility$\r$\nRobustness and stability.$\r$\nIt is Free Software, released under the GNU GPL v3 or later."
+LangString T_AboutVersion ${LANG_FRENCH} "Gpg4win version ${VERSION}"
+LangString T_AboutFileVersion ${LANG_FRENCH} "version du fichier : ${PROD_VERSION}"
+LangString T_AboutReleaseDate ${LANG_FRENCH} "date de sortie : ${_BUILD_ISODATE}"
+LangString T_SetDefaultClientHeader ${LANG_FRENCH} "Default client"
+LangString T_SetDefaultClient ${LANG_FRENCH} "Voulez-vous faire de Claws Mail votre client de messagerie électronique par défaut ?"
+LangString T_FoundGnupg ${LANG_FRENCH} "GnuPG2 was found in your installation directory.$\r$\nPlease note that GnuPG and GPA utilities are no longer bundled with Claws Mail. You should uninstall them now, and if you wish to continue to use them, install an up-to-date version of Gpg4win from:$\r$\nhttp://www.gpg4win.org/$\r$\n$\r$\nUninstall GnuPG now?"
+LangString T_Menu_Uninstall ${LANG_FRENCH} "Désinstaller"
+LangString T_Menu_ClawsMail ${LANG_FRENCH} "Lancer le programme de messagerie Claws Mail."
+LangString T_Menu_ClawsMailManual ${LANG_FRENCH} "Claws Mail Manual"
+LangString T_AlreadyRunning ${LANG_FRENCH} "Une instance de cet installeur fonctionne déjà."
+LangString T_WelcomeTitleGpg4winSrc ${LANG_FRENCH} "Bienvenue dans l'installation des sources de Gpg4win"
+LangString T_AboutGpg4winSrc ${LANG_FRENCH} "Gpg4win est un ensemble d'installeurs pour Windows permettant le chiffrage des emails et des fichiers, basé sur le composant GnuPG pour Windows. Les deux standards de cryptographie OpenPGP et S/MIME sont gérés. Gpg4win et les logiciels inclus avec Gpg4win sond des Logiciels Libres."
+LangString T_AboutGpg4winSrcVersion ${LANG_FRENCH} "Gpg4win version ${VERSION}"
+LangString T_AboutGpg4winSrcFileVersion ${LANG_FRENCH} "version du fichier : ${PROD_VERSION}"
+LangString T_AboutGpg4winSrcReleaseDate ${LANG_FRENCH} "date de sortie : ${_BUILD_ISODATE}"
+LangString T_RunKeyManager ${LANG_FRENCH} "Lancer le gestionnaire de clés"
+LangString T_NoKeyManager ${LANG_FRENCH} "Aucun gestionnaire de clés n'étant installé, il est impossible d'en lancer un."
+LangString DESC_Menu_manuals ${LANG_FRENCH} "Documentation"
+LangString DESC_Desktop_manuals ${LANG_FRENCH} "Documentation de Gpg4win"
 LangString T_FoundOldSeeManual ${LANG_FRENCH} "Veuillez consulter le manuel d'utilisation de Gpg4win pour apprendre comment déplacer des clés existantes depuis une autre installation basée sur GnuPG vers Gpg4win."
 LangString T_FoundOldGnuPP ${LANG_FRENCH} "Une vieille installation de GnuPP (GNU Privacy Project) a été détectée.  Ce logiciel n'est plus maintenu à jour et devrait donc être suprimé.$\r$\n$\r$\nVoulez-vous poursuivre l'installation de Gpg4win et vous occuper de cette vieille installation plus tard ?"
 LangString T_FoundOldGnuPT ${LANG_FRENCH} "Une installation de GnuPT a été détectée.  Ceci peut poser des problèmes lors de l'utilisation simultanée de Gpg4win.$\r$\n$\r$\nVoulez-vous poursuivre l'installation de Gpg4win ?"
@@ -40,9 +44,7 @@ LangString T_FoundOldGnuPack ${LANG_FRENCH} "Une installation de GnuPG-Pack a ét
 LangString T_AdminNeeded ${LANG_FRENCH} "Avertissement : l'installation requiert des droits d'administrateur"
 LangString T_ShuttingDownWinPT ${LANG_FRENCH} "Tentative de quitter une éventuelle instance de WinPT en cours d'exécution."
 LangString T_ShuttingDownDirMngr ${LANG_FRENCH} "Tentative de quitter une éventuelle instance de DirMngr en cours d'exécution."
-LangString T_SetDefaultClient ${LANG_FRENCH} "Voulez-vous faire de Claws Mail votre client de messagerie électronique par défaut ?"
 LangString DESC_SEC_claws_mail ${LANG_FRENCH} "Claws Mail-User-Agent"
-LangString DESC_Menu_claws_mail ${LANG_FRENCH} "Lancer le programme de messagerie Claws Mail."
 LangString DESC_Menu_claws_mail_pdf ${LANG_FRENCH} "Afficher le manuel en ligne de Claws Mail"
 LangString DESC_SEC_gnupg2 ${LANG_FRENCH} "GNU Privacy Guard"
 LangString DESC_SEC_gpa ${LANG_FRENCH} "GNU Privacy Assistant"
