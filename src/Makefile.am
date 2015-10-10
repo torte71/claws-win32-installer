@@ -17,52 +17,13 @@
 # along with this program; if not, see <http://www.gnu.org/licenses/>.
 
 
-EXTRA_DIST = pkg-config claws-mail.nsi gpg4win-src.nsi \
+EXTRA_DIST = pkg-config claws-mail.nsi \
 				config.site config.nsi.in \
 				functions.nsi strings.nsi \
-				reg-inst.nsi reg-uninst.nsi \
+				gnupg-uninst.nsi \
+				sections-installer.nsi sections-uninstaller.nsi \
         installer-options.ini.in libiconv.def libintl.def \
-        potomo Memento.nsh \
-        uninst-gpg4win.nsi	      \
-        uninst-atk.nsi	      \
-        uninst-expat.nsi	      \
-        uninst-freetype.nsi	      \
-        uninst-fontconfig.nsi      \
-        uninst-pixman.nsi	      \
-        uninst-cairo.nsi	      \
-        uninst-libgsasl.nsi        \
-        uninst-libtasn1.nsi        \
-        uninst-gnutls.nsi	      \
-        uninst-gmp.nsi	      \
-        uninst-nettle.nsi	      \
-        uninst-curl.nsi	      \
-        uninst-libxml2.nsi	      \
-        uninst-libetpan.nsi        \
-        uninst-claws-mail.nsi      \
-        uninst-crypt.nsi	      \
-        uninst-gettext.nsi	      \
-        uninst-libffi.nsi	      \
-        uninst-glib.nsi	      \
-        uninst-gpgme.nsi	      \
-        uninst-gdk-pixbuf.nsi      \
-        uninst-gtk+.nsi	      \
-				uninst-libassuan.nsi 	    \
-        uninst-libgcrypt.nsi	      \
-        uninst-libgpg-error.nsi    \
-        uninst-libiconv.nsi	      \
-        uninst-libpng.nsi	      \
-        uninst-enchant.nsi	      \
-        uninst-pango.nsi	      \
-        uninst-pkgconfig.nsi	      \
-        uninst-regex.nsi	      \
-        uninst-w32pth.nsi	      \
-        uninst-zlib.nsi            \
-        uninst-bsfilter.nsi            \
-	uninst-bzip2.nsi           \
-	uninst-jpeg.nsi         \
-	uninst-webkit.nsi         \
-	uninst-glib-networking.nsi         \
-	uninst-libsoup.nsi
+        potomo Memento.nsh
 
 SUBDIRS = dictionaries
 
@@ -534,12 +495,6 @@ endef
 
 $(eval $(call INCLUDE_BY_MAKE,claws-mail.mk))
 
-clean-local: clean-claws-mail
-
-common_nsi = \
-  $(addsuffix .nsi,$(addprefix uninst-,$(cm_build_list)))
-
-
 # Prepare the versioninfo file.  The pipeline extracts the last
 # occurrence of a package with the same name, sorts the entries and
 # writes the file with DOS line endings.  This helps to avoid
@@ -571,17 +526,17 @@ installer-options.ini : $(top_srcdir)/src/installer-options.ini.in
 # For some nut-crazy reason someone thought it would be a great idea
 # if makensis changed to the directory of the source file at startup.
 # So we have to pull a couple of strings to correct this.
-claws-mail-$(VERSION)-${REL}.exe: gpg4win.nsi $(common_nsi) stamps/stamp-final \
+claws-mail-$(VERSION)-${REL}.exe: claws-mail.nsi stamps/stamp-final \
 	                license.blurb installer-options.ini versioninfo.txt
 	$(MAKENSIS) -V3 -DBUILD_DIR=`pwd` -DTOP_SRCDIR=$(top_srcdir) \
            -DSRCDIR=$(srcdir) $(EXTRA_MAKENSIS_FLAGS) $(srcdir)/claws-mail.nsi
 
-claws-mail-$(VERSION)-${REL}.wix: gpg4win.nsi $(common_nsi) stamps/stamp-final \
+claws-mail-$(VERSION)-${REL}.wix: claws-mail.nsi stamps/stamp-final \
 			versioninfo.txt
 	perl make-msi.pl --guids $(srcdir)/make-msi.guids \
-		--manifest gpg4win-$(VERSION).files \
+		--manifest claws-mail-$(VERSION).files \
 		-DBUILD_DIR=. -DTOP_SRCDIR=$(top_srcdir) \
-		-DSRCDIR=$(srcdir) $(srcdir)/gpg4win.nsi > $@
+		-DSRCDIR=$(srcdir) $(srcdir)/claws-mail.nsi > $@
 
 .PHONY: msi
 msi: claws-mail-$(VERSION)-${REL}.wix
@@ -591,12 +546,12 @@ stamps/stamp-dist-self: versioninfo.txt
 	(set -e; cd ..; make dist-bzip2)
 	touch stamps/stamp-dist-self
 
-claws-mail-src-$(VERSION)-${REL}.exe: gpg4win-src.nsi $(common_nsi) \
-	stamps/stamp-final \
-	stamps/stamp-dist-self installer-options.ini \
-	license.blurb
-	$(MAKENSIS) -V3 -DBUILD_DIR=`pwd` -DTOP_SRCDIR=$(top_srcdir) \
-	  -DSRCDIR=$(srcdir) $(EXTRA_MAKENSIS_FLAGS) $(srcdir)/gpg4win-src.nsi
+#claws-mail-src-$(VERSION)-${REL}.exe: claws-mail-src.nsi \
+#	stamps/stamp-final \
+#	stamps/stamp-dist-self installer-options.ini \
+#	license.blurb
+#	$(MAKENSIS) -V3 -DBUILD_DIR=`pwd` -DTOP_SRCDIR=$(top_srcdir) \
+#	  -DSRCDIR=$(srcdir) $(EXTRA_MAKENSIS_FLAGS) $(srcdir)/claws-mail-src.nsi
 
 license.blurb: $(top_srcdir)/doc/license-page $(top_srcdir)/doc/GPLv3
 	cat $(top_srcdir)/doc/license-page $(top_srcdir)/doc/GPLv3 >$@
@@ -610,7 +565,8 @@ endif
 
 all_full = claws-mail-$(VERSION)-${REL}.exe
 
-all-local: $(all_full) $(all_src)
+#all-local: $(all_full) $(all_src)
+all-local: $(all_full)
 
 clean-local:
 	rm -f claws-mail-$(VERSION)-${REL}.exe claws-mail-src-$(VERSION)-${REL}.exe

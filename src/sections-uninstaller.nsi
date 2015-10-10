@@ -496,7 +496,9 @@ SectionEnd
 
 Section "-un.registry"
 DeleteRegKey HKLM "SOFTWARE\Clients\Mail\Claws Mail"
-DeleteRegKey HKLM "SOFTWARE\Classes\Claws-Mail.Url.mailto"
+DeleteRegKey HKLM "SOFTWARE\Classes\Claws-Mail.URL.mailto"
+DeleteRegValue HKLM "SOFTWARE\RegisteredApplications" "Claws Mail"
+DeleteRegKey HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\ClawsMail"
 SectionEnd
 
 
@@ -531,5 +533,12 @@ DeleteRegValue HKLM "Software\GNU\${PRETTY_PACKAGE_SHORT}" \
 Delete "$DESKTOP\Claws-Mail.lnk"
 Delete "$QUICKLAUNCH\Claws-Mail.lnk"
 
+# Try to remove other top directories.
+RMDir "$INSTDIR\lib"
+RMDir "$INSTDIR\include"
+RMDir "$INSTDIR\share"
+RMDir "$INSTDIR\pub"
+RMDir "$INSTDIR\etc"
 RMDir "$INSTDIR"
+
 SectionEnd

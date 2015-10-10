@@ -1,3 +1,4 @@
+!addincludedir "${TOP_SRCDIR}/po"
 !include "config.nsi"
 
 !define PACKAGE "${_PACKAGE}"

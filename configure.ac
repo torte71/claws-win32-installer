@@ -24,7 +24,7 @@ min_automake_version="1.9.3"
 m4_define([my_version], [3.12.0])
 m4_define([my_release], [2])
 
-AC_INIT([claws-mail],
+AC_INIT([claws-mail-win32],
 				[my_version],[ticho@claws-mail.org])
 
 PACKAGE=$PACKAGE_NAME
