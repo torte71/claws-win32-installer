@@ -29,7 +29,6 @@ EXTRA_DIST = autogen.sh \
 				patches/libetpan-1.6/mingw-closesocket-include.patch \
 				patches/libetpan-1.6/ipv6.patch \
 				patches/libetpan-1.6/ipv6-wsock.patch \
-				patches/libtasn1-2.14/gnulib-mingw-w64-fix.patch \
 				patches/w32pth-2.0.5/01-def-fix.patch \
 				patches/dirmngr-1.1.1/dirmngr-pth.patch \
 				patches/webkit-1.3.10/01-fixes.patch \
@@ -39,12 +38,4 @@ EXTRA_DIST = autogen.sh \
 				patches/glib-networking-2.45.1/01-giomoduledir.patch \
 				patches/cairo-1.10.2/01-fix-A1-surfaces.patch \
 				patches/cairo-1.10.2/02-reset-clip-region.patch \
-				patches/cairo-1.10.2/03-fix-ffs.patch \
-				patches/claws-mail-3.12.0/managesieve-defs.patch \
-				patches/claws-mail-3.12.0/01-bug3475-dragndrop.patch \
-				patches/claws-mail-3.12.0/02-bug2115-dragndrop-percent.patch \
-				patches/claws-mail-3.12.0/03-bug3454-glib-funcs.patch \
-				patches/claws-mail-3.12.0/v6.patch \
-				patches/claws-mail-3.12.0/v6-configure.patch \
-				patches/claws-mail-3.12.0/ipv6-imap-cachedir.patch \
-				patches/claws-mail-3.12.0/trayicon.patch
+				patches/cairo-1.10.2/03-fix-ffs.patch
