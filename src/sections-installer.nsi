@@ -525,22 +525,26 @@ SetOutPath "$INSTDIR\share\locale\he\LC_MESSAGES"
 File ${prefix}/share/locale/he/LC_MESSAGES/claws-mail.mo
 SetOutPath "$INSTDIR\share\locale\hu\LC_MESSAGES"
 File ${prefix}/share/locale/hu/LC_MESSAGES/claws-mail.mo
-SetOutPath "$INSTDIR\share\locale\id_ID\LC_MESSAGES"
-File ${prefix}/share/locale/id_ID/LC_MESSAGES/claws-mail.mo
+#SetOutPath "$INSTDIR\share\locale\id_ID\LC_MESSAGES"
+#File ${prefix}/share/locale/id_ID/LC_MESSAGES/claws-mail.mo
+SetOutPath "$INSTDIR\share\locale\it\LC_MESSAGES"
+File ${prefix}/share/locale/it/LC_MESSAGES/claws-mail.mo
 SetOutPath "$INSTDIR\share\locale\lt\LC_MESSAGES"
 File ${prefix}/share/locale/lt/LC_MESSAGES/claws-mail.mo
 SetOutPath "$INSTDIR\share\locale\nb\LC_MESSAGES"
 File ${prefix}/share/locale/nb/LC_MESSAGES/claws-mail.mo
 SetOutPath "$INSTDIR\share\locale\nl\LC_MESSAGES"
 File ${prefix}/share/locale/nl/LC_MESSAGES/claws-mail.mo
-SetOutPath "$INSTDIR\share\locale\pl\LC_MESSAGES"
-File ${prefix}/share/locale/pl/LC_MESSAGES/claws-mail.mo
+#SetOutPath "$INSTDIR\share\locale\pl\LC_MESSAGES"
+#File ${prefix}/share/locale/pl/LC_MESSAGES/claws-mail.mo
 SetOutPath "$INSTDIR\share\locale\pt_BR\LC_MESSAGES"
 File ${prefix}/share/locale/pt_BR/LC_MESSAGES/claws-mail.mo
 SetOutPath "$INSTDIR\share\locale\sk\LC_MESSAGES"
 File ${prefix}/share/locale/sk/LC_MESSAGES/claws-mail.mo
 SetOutPath "$INSTDIR\share\locale\sv\LC_MESSAGES"
 File ${prefix}/share/locale/sv/LC_MESSAGES/claws-mail.mo
+SetOutPath "$INSTDIR\share\locale\zh_TW\LC_MESSAGES"
+File ${prefix}/share/locale/zh_TW/LC_MESSAGES/claws-mail.mo
 
 SetOutPath "$INSTDIR"
 

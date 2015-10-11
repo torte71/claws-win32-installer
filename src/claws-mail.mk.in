@@ -476,10 +476,10 @@ all-claws-mail: stamps/stamp-final
 clean-stamps:
 	$(RM) -fR $(stamps)
 
-clean-claws-mail:
+clean-claws-mail-src:
 	$(RM) -fR playground stamps
 
-.PHONY : all-claws-mail clean-stamps clean-claws-mail
+.PHONY : all-claws-mail clean-stamps clean-claws-mail-src
 
 # @emacs_local_vars_begin@
 # @emacs_local_vars_read_only@

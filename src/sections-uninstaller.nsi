@@ -48,6 +48,7 @@ Delete "$INSTDIR\share\locale\fr\LC_MESSAGES\claws-mail.mo"
 Delete "$INSTDIR\share\locale\he\LC_MESSAGES\claws-mail.mo"
 Delete "$INSTDIR\share\locale\hu\LC_MESSAGES\claws-mail.mo"
 Delete "$INSTDIR\share\locale\id_ID\LC_MESSAGES\claws-mail.mo"
+Delete "$INSTDIR\share\locale\it\LC_MESSAGES\claws-mail.mo"
 Delete "$INSTDIR\share\locale\lt\LC_MESSAGES\claws-mail.mo"
 Delete "$INSTDIR\share\locale\nb\LC_MESSAGES\claws-mail.mo"
 Delete "$INSTDIR\share\locale\nl\LC_MESSAGES\claws-mail.mo"
@@ -55,6 +56,7 @@ Delete "$INSTDIR\share\locale\pl\LC_MESSAGES\claws-mail.mo"
 Delete "$INSTDIR\share\locale\pt_BR\LC_MESSAGES\claws-mail.mo"
 Delete "$INSTDIR\share\locale\sk\LC_MESSAGES\claws-mail.mo"
 Delete "$INSTDIR\share\locale\sv\LC_MESSAGES\claws-mail.mo"
+Delete "$INSTDIR\share\locale\zh_TW\LC_MESSAGES\claws-mail.mo"
 
 #######################################
 ### nettle

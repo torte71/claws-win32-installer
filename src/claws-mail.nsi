@@ -1,7 +1,7 @@
 !addincludedir "${TOP_SRCDIR}/po"
 !include "config.nsi"
 
-!define PACKAGE "${_PACKAGE}"
+!define PACKAGE "claws-mail"
 !define VERSION "${_VERSION}"
 !define PROD_VERSION "${_BUILD_FILEVERSION}.${_REL}"
 !define RELEASE "${_REL}"
@@ -121,10 +121,10 @@ Var STARTMENU_FOLDER
 !insertmacro MUI_PAGE_FINISH
 
 ### Uninstaller pages
-#!insertmacro MUI_UNPAGE_WELCOME
-#!insertmacro MUI_UNPAGE_CONFIRM
-#!insertmacro MUI_UNPAGE_INSTFILES
-#!insertmacro MUI_UNPAGE_FINISH
+!insertmacro MUI_UNPAGE_WELCOME
+!insertmacro MUI_UNPAGE_CONFIRM
+!insertmacro MUI_UNPAGE_INSTFILES
+!insertmacro MUI_UNPAGE_FINISH
 
 ### Language support.  This has to be done after defining the pages, but
 ### before defining the translation strings.  Confusing.
