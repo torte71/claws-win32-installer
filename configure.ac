@@ -21,8 +21,8 @@
 AC_PREREQ(2.59)
 min_automake_version="1.9.3"
 
-m4_define([my_version], [3.12.0])
-m4_define([my_release], [2])
+m4_define([my_version], [3.13.0])
+m4_define([my_release], [1])
 
 AC_INIT([claws-mail-win32],
 				[my_version],[ticho@claws-mail.org])
