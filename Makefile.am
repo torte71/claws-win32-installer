@@ -47,6 +47,4 @@ EXTRA_DIST = autogen.sh \
 				patches/claws-mail-3.12.0/v6.patch \
 				patches/claws-mail-3.12.0/v6-configure.patch \
 				patches/claws-mail-3.12.0/ipv6-imap-cachedir.patch \
-				patches/claws-mail-3.12.0/trayicon.patch \
-				packages/*.tar.gz
-
+				patches/claws-mail-3.12.0/trayicon.patch
