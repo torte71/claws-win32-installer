@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: ticho@claws-mail.org\n"
-"POT-Creation-Date: 2015-10-10 21:12+0200\n"
+"POT-Creation-Date: 2015-10-11 14:53+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -84,7 +84,7 @@ msgid ""
 "Do you want to overwrite it with version ${VERSION}?"
 msgstr ""
 
-#: src/strings.nsi:41
+#: src/strings.nsi:42
 msgctxt "T_FoundExistingOldVersion"
 msgid ""
 "An old version $R1 has already been installed.  It is strongly recommended "
@@ -92,7 +92,7 @@ msgid ""
 "Do you want to continue installing Claws Mail ${VERSION} anyway?"
 msgstr ""
 
-#: src/strings.nsi:46
+#: src/strings.nsi:48
 msgctxt "T_FoundExistingVersionB"
 msgid ""
 "A version of Claws Mail has already been installed on the system. There will "
@@ -101,12 +101,12 @@ msgid ""
 "Do you want to continue installing Claws Mail?"
 msgstr ""
 
-#: src/strings.nsi:54
+#: src/strings.nsi:56
 msgctxt "T_WelcomePageTitle"
 msgid "Welcome to the installation of ${PRETTY_PACKAGE}"
 msgstr ""
 
-#: src/strings.nsi:58
+#: src/strings.nsi:60
 msgctxt "T_About"
 msgid ""
 "Claws Mail is an email client (and news reader), based on GTK+, featuring "
@@ -120,54 +120,58 @@ msgid ""
 "It is Free Software, released under the GNU GPL v3 or later."
 msgstr ""
 
-#: src/strings.nsi:68
+#: src/strings.nsi:70
 msgctxt "T_AboutVersion"
 msgid "This is Claws Mail version ${VERSION}"
 msgstr ""
 
-#: src/strings.nsi:71
+#: src/strings.nsi:73
 msgctxt "T_AboutFileVersion"
 msgid "file version ${PROD_VERSION}"
 msgstr ""
 
-#: src/strings.nsi:74
+#: src/strings.nsi:76
 msgctxt "T_AboutReleaseDate"
 msgid "release date ${_BUILD_ISODATE}"
 msgstr ""
 
-#: src/strings.nsi:77
+#: src/strings.nsi:79
 msgctxt "T_SetDefaultClientHeader"
 msgid "Default client"
 msgstr ""
 
-#: src/strings.nsi:80
+#: src/strings.nsi:82
 msgctxt "T_SetDefaultClient"
 msgid "Do you want to make Claws Mail your default mail client?"
 msgstr ""
 
-#: src/strings.nsi:83
+#: src/strings.nsi:85
 msgctxt "T_FoundGnupg"
 msgid ""
 "GnuPG2 was found in your installation directory.\n"
 "Please note that GnuPG and GPA utilities are no longer bundled with Claws "
-"Mail. You should uninstall them now, and if you wish to continue to use "
-"them, install an up-to-date version of Gpg4win from:\n"
+"Mail. You should uninstall your current version of Claws Mail now, and if "
+"you wish to continue these utilities, install an up-to-date version of "
+"Gpg4win from:\n"
 "http://www.gpg4win.org/\n"
 "\n"
-"Uninstall GnuPG now?"
+"If you continue now, these utilities will be left behind on your disk, and "
+"you will have to remove them manually.\n"
+"\n"
+"Do you want to continue installing Claws Mail?"
 msgstr ""
 
-#: src/strings.nsi:92
+#: src/strings.nsi:97
 msgctxt "T_Menu_Uninstall"
 msgid "Uninstall"
 msgstr ""
 
-#: src/strings.nsi:95
+#: src/strings.nsi:100
 msgctxt "T_Menu_ClawsMail"
 msgid "Run Claws Mail"
 msgstr ""
 
-#: src/strings.nsi:98
+#: src/strings.nsi:103
 msgctxt "T_Menu_ClawsMailManual"
 msgid "Claws Mail Manual"
 msgstr ""

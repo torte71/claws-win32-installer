@@ -22,7 +22,7 @@ LangString T_AboutFileVersion ${LANG_FRENCH} "version du fichier : ${PROD_VERSIO
 LangString T_AboutReleaseDate ${LANG_FRENCH} "date de sortie : ${_BUILD_ISODATE}"
 LangString T_SetDefaultClientHeader ${LANG_FRENCH} "Default client"
 LangString T_SetDefaultClient ${LANG_FRENCH} "Voulez-vous faire de Claws Mail votre client de messagerie électronique par défaut ?"
-LangString T_FoundGnupg ${LANG_FRENCH} "GnuPG2 was found in your installation directory.$\r$\nPlease note that GnuPG and GPA utilities are no longer bundled with Claws Mail. You should uninstall them now, and if you wish to continue to use them, install an up-to-date version of Gpg4win from:$\r$\nhttp://www.gpg4win.org/$\r$\n$\r$\nUninstall GnuPG now?"
+LangString T_FoundGnupg ${LANG_FRENCH} "GnuPG2 was found in your installation directory.$\r$\nPlease note that GnuPG and GPA utilities are no longer bundled with Claws Mail. You should uninstall your current version of Claws Mail now, and if you wish to continue these utilities, install an up-to-date version of Gpg4win from:$\r$\nhttp://www.gpg4win.org/$\r$\n$\r$\nIf you continue now, these utilities will be left behind on your disk, and you will have to remove them manually.$\r$\n$\r$\nDo you want to continue installing Claws Mail?"
 LangString T_Menu_Uninstall ${LANG_FRENCH} "Désinstaller"
 LangString T_Menu_ClawsMail ${LANG_FRENCH} "Lancer le programme de messagerie Claws Mail."
 LangString T_Menu_ClawsMailManual ${LANG_FRENCH} "Claws Mail Manual"
