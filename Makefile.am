@@ -36,9 +36,6 @@ EXTRA_DIST = autogen.sh \
 				patches/webkit-1.3.10/02-print-size.patch \
 				patches/glib-2.45.2/01-socket.patch \
 				patches/glib-2.45.2/02-folder-icons.patch \
-				patches/gnupg2-2.0.28/0001-Enable-wildcard-expansion-with-mingw-w64.patch \
-				patches/gnupg2-2.0.28/0002-Let-wchar_to_native-convert-to-console-codepage.patch \
-				patches/gnupg2-2.0.28/0005-Fix-gpgtar-8-bit-encoding-handling-on-Win32.patch \
 				patches/glib-networking-2.45.1/01-giomoduledir.patch \
 				patches/cairo-1.10.2/01-fix-A1-surfaces.patch \
 				patches/cairo-1.10.2/02-reset-clip-region.patch \
