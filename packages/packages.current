@@ -66,12 +66,20 @@ chk  1836601393522124787e029466935408e22dd204
 # gnutls
 server ftp://ftp.gnutls.org/gcrypt
 
-file gnutls/v3.4/gnutls-3.4.2.tar.xz
-chk  f29b4d763aee89c860aa5c54574778537239da08
-
+file gnutls/v3.4/gnutls-3.4.5.tar.xz
+chk  4d869d518cb868b42e009e9e0b3b36e700c4146e
 
 #
-# libetpan for claws
+# claws-mail itself
+#
+
+server http://www.claws-mail.org/releases/
+
+file   claws-mail-3.13.0.tar.xz
+chk    87d329ad507e88ebe60730c3f099fda0ba7886bc
+
+#
+# libetpan and expat libraries
 #
 
 # (Kept on our own mirror due to Sourceforge/github peculiarities.)
@@ -79,9 +87,6 @@ server http://www.claws-mail.org/win32/
 
 file   libetpan-1.6.tar.gz
 chk    54d0c6d612e3981cc71e52e3c9e04d5805d9917f
-
-file   claws-mail-3.12.0.tar.xz
-chk    f28f62de97a80d32bb875aef83f901c903fe324b
 
 file   expat-2.1.0.tar.gz
 chk    b08197d146930a5543a7b99e871cba3da614f6f0
@@ -92,8 +97,8 @@ chk    b08197d146930a5543a7b99e871cba3da614f6f0
 
 server http://curl.haxx.se/download
 
-file  curl-7.42.1.tar.bz2
-chk   f65708915875b8cb35edb51d8dd31440dc02fbd3
+file  curl-7.45.0.tar.bz2
+chk   ea2e8ef812972202be9ffb2220ef07f7f8ae5b30
 
 
 #
@@ -101,8 +106,8 @@ chk   f65708915875b8cb35edb51d8dd31440dc02fbd3
 
 server ftp://xmlsoft.org/libxml2
 
-file   libxml2-2.9.1.tar.gz
-chk    eb3e2146c6d68aea5c2a4422ed76fe196f933c21
+file   libxml2-2.9.2.tar.gz
+chk    f46a37ea6d869f702e03f393c376760f3cbee673
 
 #
 # regex for Claws
