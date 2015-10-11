@@ -613,7 +613,7 @@ WriteRegStr HKLM "SOFTWARE\RegisteredApplications" "Claws Mail" "Software\Client
 
 # Windows Add/Remove Programs support
 Var /GLOBAL MYTMP
-StrCpy $MYTMP "Software\Microsoft\Windows\CurrentVersion\Uninstall\ClawsMail"
+StrCpy $MYTMP "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRETTY_PACKAGE_SHORT}"
 WriteRegExpandStr HKLM $MYTMP "UninstallString" '"$INSTDIR\claws-mail-uninstall.exe"'
 WriteRegExpandStr HKLM $MYTMP "InstallLocation" "$INSTDIR"
 WriteRegStr       HKLM $MYTMP "DisplayName"     "Claws Mail"
@@ -641,9 +641,14 @@ Delete "$DESKTOP\Claws-Mail Manual.lnk"
 	IntCmp $R0 0 no_start_menu
 
 	SetOutPath "$SMPROGRAMS\$STARTMENU_FOLDER"
+
 	CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Claws-Mail.lnk" \
 		"$INSTDIR\claws-mail.exe" \
 		"" "" "" SW_SHOWNORMAL "" $(T_Menu_ClawsMail)
+
+	CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Claws-Mail Manual.lnk" \
+		"$INSTDIR\claws-mail-manual.pdf" \
+		"" "" "" SW_SHOWNORMAL "" $(T_Menu_ClawsMailManual)
 
 	CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Uninstall.lnk" \
 		"$INSTDIR\claws-mail-uninstall.exe" \

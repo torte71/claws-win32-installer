@@ -24,11 +24,12 @@ min_automake_version="1.9.3"
 m4_define([my_version], [3.13.0])
 m4_define([my_release], [1])
 
-AC_INIT([claws-mail-win32],
-				[my_version],[ticho@claws-mail.org])
+AC_INIT([Claws Mail Win32],
+				[my_version]-[my_release],[ticho@claws-mail.org])
 
 PACKAGE=$PACKAGE_NAME
 VERSION=$PACKAGE_VERSION
+VERSION_NO_REL=my_version
 REL=my_release
 GIT_REVISION=git_revision
 GIT_REVISION_DEC=git_revision_dec
@@ -48,6 +49,7 @@ AM_PO_SUBDIRS
 
 AC_SUBST(PACKAGE)
 AC_SUBST(VERSION)
+AC_SUBST(VERSION_NO_REL)
 AC_SUBST(REL)
 if echo "${PACKAGE_VERSION}" | egrep 'svn|rc|beta|git' >/dev/null ; then
   IS_BETA_BUILD=yes

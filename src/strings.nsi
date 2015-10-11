@@ -38,11 +38,13 @@ LangString T_MoreInfo ${LANG_ENGLISH} \
 LangString T_FoundExistingVersion ${LANG_ENGLISH} \
      "Version $R1 has already been installed.  $\r$\n\
 Do you want to overwrite it with version ${VERSION}?"
+
 LangString T_FoundExistingOldVersion ${LANG_ENGLISH} \
      "An old version $R1 has already been installed.  It is \
 strongly recommended to uninstall previous versions before \
 installing new one. $\r$\n\
 Do you want to continue installing Claws Mail ${VERSION} anyway?"
+
 LangString T_FoundExistingVersionB ${LANG_ENGLISH} \
      "A version of Claws Mail has already been installed on the system. \
 There will be no problem installing and thus overwriting this \
@@ -84,10 +86,13 @@ LangString T_FoundGnupg ${LANG_ENGLISH} \
 "GnuPG2 was found in your installation directory. \
 $\r$\nPlease note that GnuPG and GPA utilities are no longer \
 bundled with Claws Mail. \
-You should uninstall them now, and if you wish to continue \
-to use them, install an up-to-date version of Gpg4win from:$\r$\n \
+You should uninstall your current version of Claws Mail now, \
+and if you wish to continue these utilities, install an \
+up-to-date version of Gpg4win from:$\r$\n \
 http://www.gpg4win.org/$\r$\n$\r$\n \
-Uninstall GnuPG now?"
+If you continue now, these utilities will be left behind on your \
+disk, and you will have to remove them manually.$\r$\n$\r$\n \
+Do you want to continue installing Claws Mail?"
 
 LangString T_Menu_Uninstall ${LANG_ENGLISH} \
 "Uninstall"

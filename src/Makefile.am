@@ -526,12 +526,12 @@ installer-options.ini : $(top_srcdir)/src/installer-options.ini.in
 # For some nut-crazy reason someone thought it would be a great idea
 # if makensis changed to the directory of the source file at startup.
 # So we have to pull a couple of strings to correct this.
-claws-mail-$(VERSION)-${REL}.exe: claws-mail.nsi stamps/stamp-final \
+claws-mail-$(VERSION).exe: claws-mail.nsi stamps/stamp-final \
 	                license.blurb installer-options.ini versioninfo.txt
 	$(MAKENSIS) -V3 -DBUILD_DIR=`pwd` -DTOP_SRCDIR=$(top_srcdir) \
            -DSRCDIR=$(srcdir) $(EXTRA_MAKENSIS_FLAGS) $(srcdir)/claws-mail.nsi
 
-claws-mail-$(VERSION)-${REL}.wix: claws-mail.nsi stamps/stamp-final \
+claws-mail-$(VERSION).wix: claws-mail.nsi stamps/stamp-final \
 			versioninfo.txt
 	perl make-msi.pl --guids $(srcdir)/make-msi.guids \
 		--manifest claws-mail-$(VERSION).files \
@@ -539,14 +539,14 @@ claws-mail-$(VERSION)-${REL}.wix: claws-mail.nsi stamps/stamp-final \
 		-DSRCDIR=$(srcdir) $(srcdir)/claws-mail.nsi > $@
 
 .PHONY: msi
-msi: claws-mail-$(VERSION)-${REL}.wix
+msi: claws-mail-$(VERSION).wix
 
 
 stamps/stamp-dist-self: versioninfo.txt
 	(set -e; cd ..; make dist-bzip2)
 	touch stamps/stamp-dist-self
 
-#claws-mail-src-$(VERSION)-${REL}.exe: claws-mail-src.nsi \
+#claws-mail-src-$(VERSION).exe: claws-mail-src.nsi \
 #	stamps/stamp-final \
 #	stamps/stamp-dist-self installer-options.ini \
 #	license.blurb
@@ -558,15 +558,15 @@ license.blurb: $(top_srcdir)/doc/license-page $(top_srcdir)/doc/GPLv3
 
 
 if BUILD_SOURCE_INSTALLER
-all_src = claws-mail-src-$(VERSION)-${REL}.exe
+all_src = claws-mail-src-$(VERSION).exe
 else
 all_src =
 endif
 
-all_full = claws-mail-$(VERSION)-${REL}.exe
+all_full = claws-mail-$(VERSION).exe
 
 #all-local: $(all_full) $(all_src)
 all-local: $(all_full)
 
 clean-local:
-	rm -f claws-mail-$(VERSION)-${REL}.exe claws-mail-src-$(VERSION)-${REL}.exe
+	rm -f claws-mail-$(VERSION).exe claws-mail-src-$(VERSION).exe

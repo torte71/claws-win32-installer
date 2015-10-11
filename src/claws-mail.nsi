@@ -3,7 +3,8 @@
 
 !define PACKAGE "claws-mail"
 !define VERSION "${_VERSION}"
-!define PROD_VERSION "${_BUILD_FILEVERSION}.${_REL}"
+!define VERSION_NO_REL "${_VERSION_NO_REL}"
+!define PROD_VERSION "${_VERSION_NO_REL}.${_REL}"
 !define RELEASE "${_REL}"
 !define PRETTY_PACKAGE "Claws Mail"
 !define PRETTY_PACKAGE_SHORT "ClawsMail"
@@ -32,11 +33,11 @@ SetCompressor /SOLID lzma
 !include "functions.nsi"
 
 Name "${PRETTY_PACKAGE}"
-OutFile "${PACKAGE}-${VERSION}-${RELEASE}.exe"
+OutFile "${PACKAGE}-${VERSION}.exe"
 
 # Add version information to the file properties.
 InstallDir "$PROGRAMFILES\${PRETTY_PACKAGE}"
-VIProductVersion "${VERSION}.${RELEASE}"
+VIProductVersion "${PROD_VERSION}"
 VIAddVersionKey "ProductName" "${PACKAGE} (${VERSION})"
 VIAddVersionKey "Comments" \
 "${PRETTY_PACKAGE_SHORT} is Free Software; you can redistribute it \

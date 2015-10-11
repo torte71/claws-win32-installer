@@ -1,6 +1,13 @@
 # Check whether Claws Mail has already been installed.  This is called as
 # a leave function from the directory page.  A call to abort will get
 # back to the directory selection.
+#
+# TODO: We should read "Software\Microsoft\Windows\CurrentVersion\Uninstall
+# \${PRETTY_PACKAGE_SHORT}\InstallLocation" registry key, and read the
+# VERSION file from that directory.
+# For now, we just check if we're upgrading from 3.12.0, which is considered
+# incompatible (different paths, gnupg2 included, etc.), so we'll suggest
+# to uninstall that version manually first.
 Function CheckExistingVersion
   ClearErrors
   FileOpen $0 "$INSTDIR\VERSION" r
@@ -14,9 +21,9 @@ Function CheckExistingVersion
   Pop $R1
 
   # Extract major version.
-  StrCpy $0 $R1 2
-  StrCmp $0 "1." 0 secondtest
-    MessageBox MB_YESNO "$(T_FoundExistingOldVersion)" IDYES leave
+  StrCpy $0 $R1 4
+  StrCmp $0 "3.12" 0 secondtest
+    MessageBox MB_YESNO "$(T_FoundGnupg)" IDYES leave
     Abort
 
  secondtest:
@@ -25,14 +32,19 @@ Function CheckExistingVersion
 
  nexttest:
   ClearErrors
-  ReadRegStr $0 HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRETTY_PACKAGE_SHORT}" "DisplayVersion"
-  IfErrors leave 0
-     MessageBox MB_YESNO "$(T_FoundExistingVersionB)" IDYES leave
-     Abort
+  ReadRegStr $0 HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRETTY_PACKAGE_SHORT}" "URLInfoAbout"
+  IfErrors 0 urltest
+		MessageBox MB_YESNO "$(T_FoundExistingVersionB)" IDYES leave
+  	Abort
+
+ urltest:
+  StrCmp $0 "http://www.gpg4win.org/" 0 leave
+		MessageBox MB_YESNO "$(T_FoundGnupg)" IDYES leave
+		Abort
 
  leave:
 
- Call UninstallGnupg
+# Call UninstallGnupg
 FunctionEnd
 
 #Function UninstallGnupg
