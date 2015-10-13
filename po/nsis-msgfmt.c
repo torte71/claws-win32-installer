@@ -331,21 +331,26 @@ convert_newline (const char *msg)
     error (EXIT_FAILURE, errno, "couldn't allocate memory");
 
   i = 0;
-  while (*msg)
-    {
-      if (*msg == '\n')
-	{
-	  new_msg[i++] = '$';
-	  new_msg[i++] = '\\';
-	  new_msg[i++] = 'r';
-	  new_msg[i++] = '$';
-	  new_msg[i++] = '\\';
-	  new_msg[i++] = 'n';
-	}
-      else
-	new_msg[i++] = *msg;
-      msg++;
-    }
+  while (*msg) {
+		if (*msg == '\n') {
+//		  new_msg[i++] = '$';
+//		  new_msg[i++] = '\\';
+//		  new_msg[i++] = 'r';
+//		  new_msg[i++] = '$';
+	 	 new_msg[i++] = '\\';
+	 	 new_msg[i++] = 'n';
+		} else if (*msg == '\r') {
+//		  new_msg[i++] = '$';
+		  new_msg[i++] = '\\';
+		  new_msg[i++] = 'r';
+//		  new_msg[i++] = '$';
+//	 	 new_msg[i++] = '\\';
+//	 	 new_msg[i++] = 'n';
+		} else {
+			new_msg[i++] = *msg;
+		}
+    msg++;
+  }
   new_msg[i] = '\0';
   return new_msg;
 }
