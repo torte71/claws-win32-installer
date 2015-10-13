@@ -30,6 +30,11 @@ SetCompressor /SOLID lzma
 
 !include "MUI.nsh"
 
+!define MUI_LANGDLL_REGISTRY_ROOT "HKLM"
+!define MUI_LANGDLL_REGISTRY_KEY "Software\${PRETTY_PACKAGE_SHORT}"
+!define MUI_LANGDLL_REGISTRY_VALUENAME "Installer Language"
+!define MUI_LANGDLL_INFO "Please choose a language for the setup."
+
 !include "functions.nsi"
 
 Name "${PRETTY_PACKAGE}"
@@ -130,14 +135,38 @@ Var STARTMENU_FOLDER
 ### Language support.  This has to be done after defining the pages, but
 ### before defining the translation strings.  Confusing.
 !insertmacro MUI_LANGUAGE "English"
-!define PO_HEADER
-!include "../po/catalogs.nsi"
-!undef PO_HEADER
+#!define PO_HEADER
+#!include "../po/catalogs.nsi"
+#!undef PO_HEADER
+
+#!insertmacro MUI_RESERVEFILE_LANGDLL
+#!insertmacro MUI_RESERVEFILE_INSTALLOPTIONS
 
 !include "sections-installer.nsi"
 
 !include "sections-uninstaller.nsi"
 
-# Last, include the strings
+### Last, include the strings
+# ...first English...
 !include "strings.nsi"
+# ...then for all other languages
+#!include "../po/catalogs.nsi"
+
+Function .onInit
+  SetOutPath $TEMP
+
+	StrCpy $LANGUAGE ${LANG_ENGLISH}
+#	!define MUI_LANGDLL_ALWAYSSHOW
+#  !insertmacro MUI_LANGDLL_DISPLAY
+
+  # We can't use TOP_SRCDIR dir as the name of the file needs to be
+  # the same while building and running the installer.  Thus we
+  # generate the file from a template.
+	ReserveFile "installer-options.ini"
+  !insertmacro MUI_INSTALLOPTIONS_EXTRACT "installer-options.ini"
+	ReserveFile "installer-setdefaultclient.ini"
+  !insertmacro MUI_INSTALLOPTIONS_EXTRACT "installer-setdefaultclient.ini"
+
+  ${MementoSectionRestore}
+FunctionEnd
 

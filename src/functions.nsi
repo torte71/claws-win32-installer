@@ -33,8 +33,7 @@ Function CheckExistingVersion
  nexttest:
   ClearErrors
   ReadRegStr $0 HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRETTY_PACKAGE_SHORT}" "URLInfoAbout"
-  IfErrors 0 urltest
-		MessageBox MB_YESNO "$(T_FoundExistingVersionB)" IDYES leave
+  IfErrors leave urltest
   	Abort
 
  urltest:
@@ -104,22 +103,6 @@ FunctionEnd
 !endif
 !define prefix ${ipdir}/${pkgdirname}-${cm_pkg_${pkgname}_version}
 !macroend
-
-Function .onInit
-  SetOutPath $TEMP
-
-#  !insertmacro MUI_LANGDLL_DISPLAY
-
-  # We can't use TOP_SRCDIR dir as the name of the file needs to be
-  # the same while building and running the installer.  Thus we
-  # generate the file from a template.
-	ReserveFile "installer-options.ini"
-  !insertmacro MUI_INSTALLOPTIONS_EXTRACT "installer-options.ini"
-	ReserveFile "installer-setdefaultclient.ini"
-  !insertmacro MUI_INSTALLOPTIONS_EXTRACT "installer-setdefaultclient.ini"
-
-  ${MementoSectionRestore}
-FunctionEnd
 
 Function .onInstSuccess
   ${MementoSectionSave}

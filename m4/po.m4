@@ -157,11 +157,7 @@ changequote([,])dnl
           if test -n "$ALL_LINGUAS"; then
             for presentlang in $ALL_LINGUAS; do
               useit=no
-              if test "%UNSET%" != "$LINGUAS"; then
-                desiredlanguages="$LINGUAS"
-              else
-                desiredlanguages="$ALL_LINGUAS"
-              fi
+              desiredlanguages="$ALL_LINGUAS"
               for desiredlang in $desiredlanguages; do
                 # Use the presentlang catalog if desiredlang is
                 #   a. equal to presentlang, or
@@ -359,11 +355,7 @@ changequote([,])dnl
   if test -n "$ALL_LINGUAS"; then
     for presentlang in $ALL_LINGUAS; do
       useit=no
-      if test "%UNSET%" != "$LINGUAS"; then
-        desiredlanguages="$LINGUAS"
-      else
-        desiredlanguages="$ALL_LINGUAS"
-      fi
+      desiredlanguages="$ALL_LINGUAS"
       for desiredlang in $desiredlanguages; do
         # Use the presentlang catalog if desiredlang is
         #   a. equal to presentlang, or

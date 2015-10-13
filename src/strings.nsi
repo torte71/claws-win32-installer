@@ -36,7 +36,7 @@ LangString T_MoreInfo ${LANG_ENGLISH} \
 
 # Strings pertaining to the existing version check
 LangString T_FoundExistingVersion ${LANG_ENGLISH} \
-     "Version $R1 has already been installed.  $\r$\n\
+     "Version $R1 has already been installed.$\r$\n\
 Do you want to overwrite it with version ${VERSION}?"
 
 LangString T_FoundExistingOldVersion ${LANG_ENGLISH} \
@@ -45,12 +45,12 @@ strongly recommended to uninstall previous versions before \
 installing new one. $\r$\n\
 Do you want to continue installing Claws Mail ${VERSION} anyway?"
 
-LangString T_FoundExistingVersionB ${LANG_ENGLISH} \
-     "A version of Claws Mail has already been installed on the system. \
-There will be no problem installing and thus overwriting this \
-Version. $\r$\n\
-$\r$\n\
-Do you want to continue installing Claws Mail?"
+#LangString T_FoundExistingVersionB ${LANG_ENGLISH} \
+#     "A version of Claws Mail has already been installed on the system. \
+#There will be no problem installing and thus overwriting this \
+#Version. $\r$\n\
+#$\r$\n\
+#Do you want to continue installing Claws Mail?"
 
 # Welcome Page strings
 LangString T_WelcomePageTitle ${LANG_ENGLISH} \
@@ -59,12 +59,12 @@ LangString T_WelcomePageTitle ${LANG_ENGLISH} \
 # The About string as displayed on the first page.
 LangString T_About ${LANG_ENGLISH} \
 	"Claws Mail is an email client (and news reader), based on GTK+, featuring \r\n\
-		Quick response\r\n\
-    Graceful, and sophisticated interface\r\n\
-    Easy configuration, intuitive operation\r\n\
-    Abundant features\r\n\
-    Extensibility\r\n\
-    Robustness and stability.\r\n\
+Quick response\r\n\
+Graceful, and sophisticated interface\r\n\
+Easy configuration, intuitive operation\r\n\
+Abundant features\r\n\
+Extensibility\r\n\
+Robustness and stability.\r\n\
 It is Free Software, released under the GNU GPL v3 or later."
 
 LangString T_AboutVersion ${LANG_ENGLISH} \
@@ -80,7 +80,7 @@ LangString T_SetDefaultClientHeader ${LANG_ENGLISH} \
 "Default client"
 
 LangString T_SetDefaultClient ${LANG_ENGLISH} \
-"Do you want to make Claws Mail your default mail client?"
+"Do you want Claws Mail to handle 'mailto:' URLs?"
 
 LangString T_FoundGnupg ${LANG_ENGLISH} \
 "GnuPG2 was found in your installation directory. \

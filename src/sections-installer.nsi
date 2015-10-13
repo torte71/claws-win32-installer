@@ -688,10 +688,10 @@ SectionEnd
 
 # This function has to be defined here, after the section index of
 # which it references. NSIS is weird.
-Function UninstallGnupg
-  IfFileExists $INSTDIR\gpg2.exe 0 leave
-	MessageBox MB_YESNO "$(T_FoundGnupg)" IDYES uninstall IDNO leave
-  uninstall:
-  !insertmacro SelectSection ${SEC_GnupgUninst}
-	leave:
-FunctionEnd
+#Function UninstallGnupg
+#  IfFileExists $INSTDIR\gpg2.exe 0 leave
+#	MessageBox MB_YESNO "$(T_FoundGnupg)" IDYES uninstall IDNO leave
+#  uninstall:
+#  !insertmacro SelectSection ${SEC_GnupgUninst}
+#	leave:
+#FunctionEnd

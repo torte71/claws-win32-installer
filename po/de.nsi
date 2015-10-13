@@ -12,17 +12,17 @@ LangString T_InstOptFieldA ${LANG_GERMAN} "Startmenü"
 LangString T_InstOptFieldB ${LANG_GERMAN} "Arbeitsfläche"
 LangString T_InstOptFieldC ${LANG_GERMAN} "Schnellstartleiste"
 LangString T_MoreInfo ${LANG_GERMAN} "Hier klicken um zur Homepage des Projekts zu gelangen"
-LangString T_FoundExistingVersion ${LANG_GERMAN} "Version $R1 ist hier bereits installiert.$\r$\nMöchten Sie diese mit Version ${VERSION} überschreiben?$\r$\n$\r$\n(Sie können in jedem Fall mit JA antworten, falls es sich um eine neuere oder dieselbe Version handelt.)"
-LangString T_FoundExistingOldVersion ${LANG_GERMAN} "Eine alte Version $R1 ist hier bereits installiert.  Es wird dringend Empfohlen, bei einer großen Aktualisierung alte Versionen zu deinstallieren.$\r$\nMöchten Sie trotzdem fortfahren, Version ${VERSION} zu installieren?"
-LangString T_FoundExistingVersionB ${LANG_GERMAN} "Eine Version von Gpg4win ist hier bereits installiert.  Es ist problemlos möglich, die Installation fortzuführen.$\r$\n$\r$\nMöchten die die Installation von Gpg4win fortführen?"
-LangString T_WelcomePageTitle ${LANG_GERMAN} "Willkommen bei der Installation von Gpg4win"
-LangString T_About ${LANG_GERMAN} "Claws Mail is an email client (and news reader), based on GTK+, featuring $\r$\n		Quick response$\r$\nGraceful, and sophisticated interface$\r$\nEasy configuration, intuitive operation$\r$\nAbundant features$\r$\nExtensibility$\r$\nRobustness and stability.$\r$\nIt is Free Software, released under the GNU GPL v3 or later."
-LangString T_AboutVersion ${LANG_GERMAN} "Dies ist Gpg4win Version ${VERSION}"
+LangString T_FoundExistingVersion ${LANG_GERMAN} "Version $R1 ist hier bereits installiert.\nMöchten Sie diese mit Version ${VERSION} überschreiben?\n\n(Sie können in jedem Fall mit JA antworten, falls es sich um eine neuere oder dieselbe Version handelt.)"
+LangString T_FoundExistingOldVersion ${LANG_GERMAN} "Eine alte Version $R1 ist hier bereits installiert.  Es wird dringend Empfohlen, bei einer großen Aktualisierung alte Versionen zu deinstallieren.\nMöchten Sie trotzdem fortfahren, Version ${VERSION} zu installieren?"
+LangString T_FoundExistingVersionB ${LANG_GERMAN} "Eine Version von Claws Mail ist hier bereits installiert.  Es ist problemlos möglich, die Installation fortzuführen.\n\nMöchten die die Installation von Claws Mail fortführen?"
+LangString T_WelcomePageTitle ${LANG_GERMAN} "Willkommen bei der Installation von Claws Mail"
+LangString T_About ${LANG_GERMAN} "Claws Mail is an email client (and news reader), based on GTK+, featuring \r\nQuick response\r\nGraceful, and sophisticated interface\r\nEasy configuration, intuitive operation\r\nAbundant features\r\nExtensibility\r\nRobustness and stability.\r\nIt is Free Software, released under the GNU GPL v3 or later."
+LangString T_AboutVersion ${LANG_GERMAN} "Dies ist Claws Mail Version ${VERSION}"
 LangString T_AboutFileVersion ${LANG_GERMAN} "Dateiversion ${PROD_VERSION}"
 LangString T_AboutReleaseDate ${LANG_GERMAN} "Releasedatum ${_BUILD_ISODATE}"
 LangString T_SetDefaultClientHeader ${LANG_GERMAN} "Default client"
 LangString T_SetDefaultClient ${LANG_GERMAN} "Möchten Sie Claws-Mail als Ihr E-Mail-Standardprogramm auswählen?"
-LangString T_FoundGnupg ${LANG_GERMAN} "GnuPG2 was found in your installation directory.$\r$\nPlease note that GnuPG and GPA utilities are no longer bundled with Claws Mail. You should uninstall your current version of Claws Mail now, and if you wish to continue these utilities, install an up-to-date version of Gpg4win from:$\r$\nhttp://www.gpg4win.org/$\r$\n$\r$\nIf you continue now, these utilities will be left behind on your disk, and you will have to remove them manually.$\r$\n$\r$\nDo you want to continue installing Claws Mail?"
+LangString T_FoundGnupg ${LANG_GERMAN} "GnuPG2 was found in your installation directory.\nPlease note that GnuPG and GPA utilities are no longer bundled with Claws Mail. You should uninstall your current version of Claws Mail now, and if you wish to continue these utilities, install an up-to-date version of Claws Mail from:\nhttp://www.gpg4win.org/\n\nIf you continue now, these utilities will be left behind on your disk, and you will have to remove them manually.\n\nDo you want to continue installing Claws Mail?"
 LangString T_Menu_Uninstall ${LANG_GERMAN} "Deinstallieren"
 LangString T_Menu_ClawsMail ${LANG_GERMAN} "Das Mailprogramm Claws Mail aufrufen."
 LangString T_Menu_ClawsMailManual ${LANG_GERMAN} "Claws Mail Manual"
