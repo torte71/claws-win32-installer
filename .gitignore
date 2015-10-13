@@ -14,6 +14,7 @@ stamp-h1
 src/config.nsi
 po/POTFILES
 po/*.nsi
+po/*.gmo
 po/*.po~
 po/claws-mail.pot
 po/remove-potcdate.sed
