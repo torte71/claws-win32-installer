@@ -254,6 +254,8 @@ cm_pkg_libetpan_configure = --with-gnutls --enable-threads \
   CPPFLAGS=\"-I$(idir)/include\" \
   LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\" LIBS=\"-lpthread\"
 
+# -D_POSIX_C_SOURCE is there so that time.h from mingw64-4.x
+# actually gives us gmtime_r() and localtime_r() prototype declarations
 cm_pkg_claws_mail_configure = \
   --with-lib-prefix=$(idir) --with-libiconv-prefix=$(idir) \
   --with-gpg-error-prefix=$(idir) --with-gpgme-prefix=$(idir) \
@@ -267,7 +269,7 @@ cm_pkg_claws_mail_configure = \
   --disable-perl-plugin --disable-python-plugin --disable-demo-plugin \
   --disable-newmail-plugin --disable-mailmbox-plugin \
 	CFLAGS=\"-g -O2 \" \
-	CPPFLAGS=\"-g -O2 -I$(idir)/include\" \
+	CPPFLAGS=\"-g -O2 -I$(idir)/include -D_POSIX_C_SOURCE\" \
 	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\" LIBS=\"-lexpat\"
 
 cm_pkg_jpeg_configure = \
