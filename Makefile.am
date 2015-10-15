@@ -38,4 +38,5 @@ EXTRA_DIST = autogen.sh \
 				patches/glib-networking-2.45.1/01-giomoduledir.patch \
 				patches/cairo-1.10.2/01-fix-A1-surfaces.patch \
 				patches/cairo-1.10.2/02-reset-clip-region.patch \
-				patches/cairo-1.10.2/03-fix-ffs.patch
+				patches/cairo-1.10.2/03-fix-ffs.patch \
+				patches/gpgme-1.5.5/01-remove-mkstemp.patch
