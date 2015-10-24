@@ -175,12 +175,12 @@ chk  495f7cc9281847ecfbbaf9d3edd9eb2a2123350e
 #
 # GDK-PIXBUF
 #
-server http://ftp.gnome.org/pub/gnome/sources/gdk-pixbuf/2.31/
+server http://ftp.gnome.org/pub/gnome/sources/gdk-pixbuf/2.32/
 
 # checked: 2014-06-20 ah - updated
 # verified with linuxfromscratch and frugalware checksums
-file gdk-pixbuf-2.31.4.tar.xz
-chk  f2355fdc6ecabca3c48de33499bd8262c839e591
+file gdk-pixbuf-2.32.1.tar.xz
+chk  40482f165f3fc587e54a08bb9212aeca97e2d07d
 
 
 #
