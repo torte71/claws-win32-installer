@@ -286,7 +286,7 @@ cm_pkg_glib_networking_configure = \
 	CPPFLAGS=\"-I$(idir)/include\"
 
 cm_pkg_libsoup_configure = \
-							--without-apache-httpd --with-libiconv-prefix=$(idir) \
+							--without-gnome --without-apache-httpd \
 							CPPFLAGS=\"-I$(idir)/include\" LIBS=\"-L$(idir)/lib\"
 
 cm_pkg_webkit_configure = \
