@@ -88,11 +88,11 @@ cm_pkg_libiconv_ex_configure = \
 
 cm_pkg_gettext_configure = \
   --with-lib-prefix=$(idir) --with-libiconv-prefix=$(idir) \
-  CPPFLAGS=-I$(idir)/include CFLAGS=-O2 LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
+  CPPFLAGS=-I$(idir)/include CFLAGS=-O2 LDFLAGS=\"-L$(idir)/lib\"
 
 cm_pkg_gettext_ex_configure = \
   --with-lib-prefix=$(ex_idir) --with-libiconv-prefix=$(ex_idir) \
-  CPPFLAGS=-I$(ex_idir)/include CFLAGS=-O2 LDFLAGS=\"-Wl,--enable-auto-image-base -L$(ex_idir)/lib\"
+  CPPFLAGS=-I$(ex_idir)/include CFLAGS=-O2 LDFLAGS=\"-L$(ex_idir)/lib\"
 
 # We only need gettext-runtime and there is sadly no top level
 # configure option for this
@@ -104,7 +104,7 @@ cm_pkg_gettext_ex_make_dir_inst = gettext-runtime
 cm_pkg_glib_configure = \
 	--disable-gtk-doc-html \
   CPPFLAGS=-I$(idir)/include \
-	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\" \
+	LDFLAGS=\"-L$(idir)/lib\" \
 	CCC=$(host)-g++
 #cm_pkg_glib_extracflags = -march=i486
 
@@ -115,7 +115,7 @@ cm_pkg_gdk_pixbuf_configure = \
 	--without-libjasper \
 	--disable-gtk-doc-html \
 	--disable-glibtest \
-  CPPFLAGS=-I$(idir)/include LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
+  CPPFLAGS=-I$(idir)/include LDFLAGS=\"-L$(idir)/lib\"
 
 cm_pkg_gtk__configure = \
 	--with-gdktarget=win32 \
@@ -124,7 +124,7 @@ cm_pkg_gtk__configure = \
 	--disable-gtk-doc \
 	--disable-static \
 	--disable-glibtest \
-  CPPFLAGS=-I$(idir)/include LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
+  CPPFLAGS=-I$(idir)/include LDFLAGS=\"-L$(idir)/lib\"
 
 cm_pkg_harfbuzz_configure = \
 	--disable-gtk-doc-html \
@@ -133,42 +133,43 @@ cm_pkg_harfbuzz_configure = \
 	--with-fontconfig \
 	--with-freetype \
 	--with-cairo \
+	--with-icu=no \
 	CPPFLAGS=\"-I$(idir)/include\" \
-	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
+	LDFLAGS=\"-L$(idir)/lib\"
 
 cm_pkg_freetype_configure = \
 	--host=i686-w64-mingw32 \
 	--build=x86_64-linux-gnu \
 	--with-png --without-bzip2 --with-zlib \
 	CPPFLAGS=\"-I$(idir)/include\" \
-	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
+	LDFLAGS=\"-L$(idir)/lib\"
 
 cm_pkg_fontconfig_configure = \
 	--enable-iconv --disable-docs \
 	CPPFLAGS=\"-I$(idir)/include\" \
-	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
+	LDFLAGS=\"-L$(idir)/lib\"
 
 cm_pkg_pango_configure = \
 	--disable-gtk-doc-html --disable-glibtest --disable-doc-cross-references \
 	--with-included-modules=yes \
 	CPPFLAGS=\"-I$(idir)/include\" \
-	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
+	LDFLAGS=\"-L$(idir)/lib\"
 
 cm_pkg_atk_configure = \
 	--disable-gtk-doc-html --disable-glibtest \
 	CPPFLAGS=\"-I$(idir)/include\" \
-	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
+	LDFLAGS=\"-L$(idir)/lib\"
 
 cm_pkg_pixman_configure = \
 	--enable-libpng --disable-gtk \
 	CPPFLAGS=\"-I$(idir)/include\" \
-	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
+	LDFLAGS=\"-L$(idir)/lib\"
 
 cm_pkg_cairo_configure = \
 	--enable-win32 --enable-win32-font \
 	--enable-ft --enable-fc \
 	CPPFLAGS=\"-I$(idir)/include\" \
-	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
+	LDFLAGS=\"-L$(idir)/lib\"
 
 # We would like to use --with-libiconv-prefix and
 # --with-libintl-prefix, but these don't work with the cheesy
@@ -177,10 +178,10 @@ cm_pkg_cairo_configure = \
 #  --with-libiconv-prefix=$(idir) --with-libintl-prefix=$(idir)
 cm_pkg_libgpg_error_configure = --silent \
   --enable-static \
-  CPPFLAGS=-I$(idir)/include LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
+  CPPFLAGS=-I$(idir)/include LDFLAGS=\"-L$(idir)/lib\"
 
 cm_pkg_libgpg_error_ex_configure = --silent \
-  CPPFLAGS=-I$(idir)/include LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\" \
+  CPPFLAGS=-I$(idir)/include LDFLAGS=\"-L$(idir)/lib\" \
   --enable-static
 
 # We convert the PO files to UTF-8.  FIXME: This should be done in
@@ -204,15 +205,15 @@ cm_pkg_libgcrypt_configure = --silent \
   --with-gpg-error-prefix=$(idir) \
   --disable-aesni-support
 
-cm_pkg_libpng_configure = HAVE_SOLARIS_LD_FALSE=yes CPPFLAGS=\"-I$(idir)/include -DPNG_BUILD_DLL\" LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\" LIBPNG_DEFINES=\"-DPNG_BUILD_DLL\"
+cm_pkg_libpng_configure = HAVE_SOLARIS_LD_FALSE=yes CPPFLAGS=\"-I$(idir)/include -DPNG_BUILD_DLL\" LDFLAGS=\"-L$(idir)/lib\" LIBPNG_DEFINES=\"-DPNG_BUILD_DLL\"
 
-cm_pkg_enchant_configure = CPPFLAGS=\"-I$(idir)/include -UENCHANT_GLOBAL_MODULE_DIR -UENCHANT_GLOBAL_ORDERING -UENCHANT_MYSPELL_DICT_DIR -UENCHANT_USPELL_DICT_DIR\" LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
+cm_pkg_enchant_configure = CPPFLAGS=\"-I$(idir)/include -UENCHANT_GLOBAL_MODULE_DIR -UENCHANT_GLOBAL_ORDERING -UENCHANT_MYSPELL_DICT_DIR -UENCHANT_USPELL_DICT_DIR\" LDFLAGS=\"-L$(idir)/lib\"
 
 # The LDFLAGS is needed for -lintl for glib.
 cm_pkg_gpgme_configure = --silent \
   --with-gpg-error-prefix=$(idir) --enable-static \
   `test -n "@HAVE_PKG_GLIB@" && echo "--enable-w32-glib"` \
-  --disable-w32-qt LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
+  --disable-w32-qt LDFLAGS=\"-L$(idir)/lib\"
 
 # We want to build with libgcrypt
 # We can't use pkcs11 tue to tto much additional dependencies.
@@ -223,7 +224,7 @@ cm_pkg_gnutls_configure = \
 	--disable-gtk-doc-html \
   --with-libtasn1-prefix=$(idir) \
   --with-libgcrypt-prefix=$(idir) \
-	CPPFLAGS=\"-I$(idir)/include\" LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
+	CPPFLAGS=\"-I$(idir)/include\" LDFLAGS=\"-L$(idir)/lib\"
 
 cm_pkg_gmp_configure = \
   --disable-static \
@@ -233,7 +234,7 @@ cm_pkg_gmp_configure = \
 cm_pkg_nettle_configure = \
   --enable-public-key \
 	CPPFLAGS=\"-I$(idir)/include\" \
-	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\"
+	LDFLAGS=\"-L$(idir)/lib\"
 
 # In 2.12.21 gnutls_openssl is not linked to libtasn1, thus we use
 # this hack to here.  (Using the included minitasn does work either
@@ -252,7 +253,7 @@ cm_pkg_libxml2_configure = \
 cm_pkg_libetpan_configure = --with-gnutls --enable-threads \
 	--enable-ipv6 \
   CPPFLAGS=\"-I$(idir)/include\" \
-  LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\" LIBS=\"-lpthread\"
+  LDFLAGS=\"-L$(idir)/lib\" LIBS=\"-lpthread\"
 
 # -D_POSIX_C_SOURCE is there so that time.h from mingw64-4.x
 # actually gives us gmtime_r() and localtime_r() prototype declarations
@@ -270,7 +271,7 @@ cm_pkg_claws_mail_configure = \
   --disable-newmail-plugin --disable-mailmbox-plugin \
 	CFLAGS=\"-g -O2 \" \
 	CPPFLAGS=\"-g -O2 -I$(idir)/include -D_POSIX_C_SOURCE\" \
-	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\" LIBS=\"-lexpat\"
+	LDFLAGS=\"-L$(idir)/lib\" LIBS=\"-lexpat\"
 
 cm_pkg_jpeg_configure = \
 							--with-libiconv-prefix=$(idir)
@@ -281,7 +282,7 @@ cm_pkg_glib_networking_configure = \
 	--without-gnome-proxy \
 	--with-gnutls \
 	--without-pkcs11 \
-	LDFLAGS=\"-Wl,--enable-auto-image-base -L$(idir)/lib\" \
+	LDFLAGS=\"-L$(idir)/lib\" \
 	CPPFLAGS=\"-I$(idir)/include\"
 
 cm_pkg_libsoup_configure = \
