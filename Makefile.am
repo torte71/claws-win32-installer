@@ -27,16 +27,16 @@ SUBDIRS = doc packages po src
 EXTRA_DIST = autogen.sh \
         doc/license-page doc/GPLv3 \
 				patches/libetpan-1.6/mingw-closesocket-include.patch \
-				patches/libetpan-1.6/ipv6.patch \
 				patches/libetpan-1.6/ipv6-wsock.patch \
+				patches/libetpan-1.6/ipv6.patch \
 				patches/w32pth-2.0.5/01-def-fix.patch \
-				patches/dirmngr-1.1.1/dirmngr-pth.patch \
 				patches/webkit-1.3.10/01-fixes.patch \
 				patches/webkit-1.3.10/02-print-size.patch \
 				patches/glib-2.45.2/01-socket.patch \
 				patches/glib-2.45.2/02-folder-icons.patch \
-				patches/glib-networking-2.45.1/01-giomoduledir.patch \
 				patches/cairo-1.10.2/01-fix-A1-surfaces.patch \
 				patches/cairo-1.10.2/02-reset-clip-region.patch \
 				patches/cairo-1.10.2/03-fix-ffs.patch \
-				patches/gpgme-1.5.5/01-remove-mkstemp.patch
+				patches/gpgme-1.6.0/01-remove-mkstemp.patch \
+				patches/gnutls-3.4.7/01-no-endservent.patch \
+				patches/glib-networking-2.45.1/01-giomoduledir.patch
