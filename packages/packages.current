@@ -106,8 +106,8 @@ chk   ea2e8ef812972202be9ffb2220ef07f7f8ae5b30
 
 server ftp://xmlsoft.org/libxml2
 
-file   libxml2-2.9.2.tar.gz
-chk    f46a37ea6d869f702e03f393c376760f3cbee673
+file   libxml2-2.9.3.tar.gz
+chk    0301ce933637e0ceda049047dbefd18714f59b6e
 
 #
 # regex for Claws
@@ -194,8 +194,8 @@ chk  d097c6cec71ffede77be9f13f4ceee9880c0a5d7
 # harfbuzz
 server http://www.freedesktop.org/software/harfbuzz/release/
 
-file harfbuzz-0.9.41.tar.bz2
-chk  a77d5d061e91322c1196ab23afeeb8c7e4bf62bb
+file harfbuzz-1.1.2.tar.bz2
+chk  bc2aa95d35b47a7367929b3fe9e4fba76789fc3f
 
 #
 # PANGO
@@ -296,17 +296,17 @@ chk  6e38be3377340a21a1f13ff84b5e6adce97cd1d4
 #
 server ftp://ftp.gnupg.org/gcrypt
 
-file libgpg-error/libgpg-error-1.19.tar.bz2
-chk  4997951ab058788de48b989013668eb3df1e6939
+file libgpg-error/libgpg-error-1.20.tar.bz2
+chk  89c961f63469739fe816a56dcdd86c2e1897cace
 
-file libgcrypt/libgcrypt-1.6.3.tar.bz2
-chk  9456e7b64db9df8360a1407a38c8c958da80bbf1
+file libgcrypt/libgcrypt-1.6.4.tar.bz2
+chk  ed52add1ce635deeb2f5c6650e52667debd4ec70
 
-file libassuan/libassuan-2.2.0.tar.bz2
-chk  7cf0545955ce414044bb99b871d324753dd7b2e5
+file libassuan/libassuan-2.4.2.tar.bz2
+chk  ac1047f9764fd4a4db7dafe47640643164394db9
 
-file gpgme/gpgme-1.5.5.tar.bz2
-chk  88476d72cb099e179de4040760502886f7a54926
+file gpgme/gpgme-1.6.0.tar.bz2
+chk  21510323495f6220f8f67610c3c27a23d761d43d
 
 # jpeg
 server http://www.claws-mail.org/win32
