@@ -22,7 +22,7 @@ AC_PREREQ(2.59)
 min_automake_version="1.9.3"
 
 m4_define([my_version], [3.13.0])
-m4_define([my_release], [3])
+m4_define([my_release], [1beta])
 
 AC_INIT([Claws Mail Win32],
 				[my_version]-[my_release],[ticho@claws-mail.org])
@@ -221,7 +221,6 @@ cm_dup_sources=""
 
 CM_SPKG([zlib])
 CM_SPKG([bzip2])
-#CM_SPKG([adns])
 CM_SPKG([w32pth])
 CM_SPKG([jpeg])
 CM_SPKG([gmp])
@@ -251,13 +250,8 @@ CM_SPKG([enchant], [pkgconfig glib])
 
 CM_SPKG([libgpg-error], [libiconv gettext])
 CM_SPKG([libgcrypt], [libgpg-error])
-#CM_SPKG([libksba], [libgpg-error])
 CM_SPKG([libassuan], [libgpg-error w32pth])
-#CM_SPKG([dirmngr], [libgpg-error libgcrypt libassuan libksba w32pth])
-#CM_SPKG([pinentry], [libiconv gtk+])
 CM_SPKG([gpgme], [libgpg-error libassuan glib])
-#CM_SPKG([gnupg2], [libiconv libgcrypt libksba libassuan libgpg-error dnl
-#                        w32pth zlib bzip2 adns pinentry])
 CM_SPKG([libxml2], [zlib])
 CM_SPKG([libgsasl])
 CM_SPKG([libtasn1])
@@ -266,7 +260,6 @@ CM_SPKG([gnutls], [gmp nettle libgsasl libtasn1 libgcrypt])
 CM_SPKG([glib-networking], [glib gnutls])
 CM_SPKG([libsoup], [gnutls libxml2 glib-networking])
 CM_SPKG([webkit], [jpeg libpng glib gtk+ libsoup libxml2])
-#CM_SPKG([gpa], [libiconv gettext zlib gtk+ libpng glib gpgme])
 CM_SPKG([curl], [zlib gnutls])
 CM_SPKG([libetpan], [gnutls])
 CM_BPKG_GNUWIN32([bsfilter])
