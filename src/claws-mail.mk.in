@@ -260,7 +260,6 @@ stamps/stamp-$(1)-02-configure: stamps/stamp-$(1)-01-patch
 		--host=$(host)				\
 		--build=$(build)			\
 		$$$${pkgcfg} CFLAGS=\"-mms-bitfields $$$${pkgextracflags}\";\
-		LDFLAGS=\"$$$$LDFLAGS -Wl,--enable-auto-image-base\";\
 	 shopt -s nullglob;					\
 	 for pfile in "$$$${pkgpbdir}"/*.postcfg       		\
                        "$$$${pkgpdir}"/*.postcfg ; do  		\
