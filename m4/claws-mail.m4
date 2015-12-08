@@ -318,31 +318,6 @@ AC_DEFUN([CM_SPKG],
 ])
 
 
-# CM_SPKGEX([PKG],[DEPENDS],[IF-FOUND],[IF-NOT-FOUND])
-# Set up the source package PKG to be additionally built
-# for the host provided as additional-gpgex-host
-AC_DEFUN([CM_SPKGEX],
-[
-  CM_SPKG([$1],[$2],[$3],[$4])
-
-  AS_IF([test ! -z "$GPGEX_ADD_HOST"],
-
-    # cm_pkg_PKGNAME_deps=DEPS
-    cm_pkg_[]m4_translit([$1],[A-Z+-],[a-z__])[]_ex_deps="$2"
-    AC_SUBST(cm_pkg_[]m4_translit([$1],[A-Z+-],[a-z__])[]_ex_deps)
-
-    cm_ex_pkgs="$cm_ex_pkgs $1"
-
-    CM_DEFINE(HAVE_PKG_[]m4_translit([$1],[a-z+-],[A-Z__])_EX)
-    # Record dependencies.  Also enter every package as node.
-    _cm_ex_deps="$_cm_ex_deps $1 $1"
-    AS_IF([test ! -z "$2"],
-          for _cm_i in $2; do
-            _cm_ex_deps="$_cm_ex_deps $_cm_i $1"
-          done)
-  )
-])
-
 # CM_BPKG_GNUWIN32([PKG],[DEPENDS],[IF-FOUND],[IF-NOT-FOUND])
 # Set up the gnuwin32 package PKG.
 # It is provided in cm_val.

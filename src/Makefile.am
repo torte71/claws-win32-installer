@@ -42,9 +42,6 @@ cm_spkgs = glib libffi gdk-pixbuf gtk+ expat \
 		libgcrypt libassuan \
 		w32pth regex libiconv gettext
 
-# Supported source packages to build in an additional architecture
-cm_expkgs = libgpg-error libiconv gettext w32pth
-
 # Extra options to configure for individual packages.
 # We can use $(idir) here for the installation prefix.
 
