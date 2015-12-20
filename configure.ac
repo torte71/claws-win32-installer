@@ -21,8 +21,8 @@
 AC_PREREQ(2.59)
 min_automake_version="1.9.3"
 
-m4_define([my_version], [3.13.0])
-m4_define([my_release], [1beta])
+m4_define([my_version], [3.13.1])
+m4_define([my_release], [1])
 
 AC_INIT([Claws Mail Win32],
 				[my_version]-[my_release],[ticho@claws-mail.org])
@@ -132,8 +132,9 @@ fi
 AC_SUBST(NUMPROC)
 
 changequote(,)dnl
+echo ,,,,${CC} >>/tmp/f
 gcc_major_minor=$($CC --version \
-									| awk 'NR==1 {split($NF,a,"."); print a[1] "." a[2]}')
+									| awk 'NR==1 {split($3,a,"."); print a[1] "." a[2]}')
 changequote([,])dnl
 
 missing_opt_tools=""
@@ -167,6 +168,7 @@ AC_ARG_WITH([libstdc++-6-dll],
            [libstdcpp_dll=$withval])
 if test "$libstdcpp_dll" = "no"; then
   file="/usr/lib/gcc/$host/${gcc_major_minor}-win32/libstdc++-6.dll"
+	echo ,,,,,,,,,,,${file}, >>/tmp/f
   if test -r "$file"; then
     libstdcpp_dll="$file"
   fi
