@@ -36,6 +36,15 @@ ifErrors 0 +3
 	File /oname=libiconv-2.dll.tmp "${prefix}/bin/libiconv-2.dll"
 	Rename /REBOOTOK libiconv-2.dll.tmp libiconv-2.dll
 
+  # Also install the same file under the name bsfilter expects.
+	ClearErrors
+	SetOverwrite try
+	File /oname=iconv.dll "${prefix}/bin/libiconv-2.dll"
+	SetOverwrite lastused
+	ifErrors 0 +3
+		File /oname=iconv.dll.tmp "${prefix}/bin/libiconv-2.dll"
+		Rename /REBOOTOK iconv.dll.tmp iconv.dll
+
 SetOutPath "$INSTDIR\lib"
 File "${prefix}/lib/charset.alias"
 SetOutPath "$INSTDIR"
