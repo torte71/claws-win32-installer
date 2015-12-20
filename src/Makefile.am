@@ -79,9 +79,8 @@ cm_pkg_cairo_make_args = -j$(NUMPROC)
 
 
 
-cm_pkg_libiconv_ex_configure = \
-	--enable-shared=no --enable-static=yes \
-	--enable-extra-encodings
+cm_pkg_libiconv_configure = \
+	--enable-shared=yes --enable-static=no
 
 cm_pkg_gettext_configure = \
   --with-lib-prefix=$(idir) --with-libiconv-prefix=$(idir) \
