@@ -1,0 +1,17 @@
+#! /bin/sh
+patch -p1 -f $* < $0
+exit $?
+
+diff -ruN libiconv-1.14-orig/lib/iconv.c libiconv-1.14/lib/iconv.c
+--- libiconv-1.14-orig/lib/iconv.c	2015-12-20 18:05:53.694526461 +0100
++++ libiconv-1.14/lib/iconv.c	2015-12-20 18:06:08.206906772 +0100
+@@ -176,9 +176,6 @@
+ #include "aliases2.h"
+ #undef S
+ };
+-#ifdef __GNUC__
+-__inline
+-#endif
+ const struct alias *
+ aliases2_lookup (register const char *str)
+ {

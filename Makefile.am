@@ -29,6 +29,7 @@ EXTRA_DIST = autogen.sh \
 				patches/libetpan-1.6/mingw-closesocket-include.patch \
 				patches/libetpan-1.6/ipv6-wsock.patch \
 				patches/libetpan-1.6/ipv6.patch \
+				patches/libiconv-1.14/01-aliases2_lookup-no-inline.patch \
 				patches/w32pth-2.0.5/01-def-fix.patch \
 				patches/webkit-1.3.10/01-fixes.patch \
 				patches/webkit-1.3.10/02-print-size.patch \
