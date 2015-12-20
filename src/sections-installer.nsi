@@ -503,8 +503,8 @@ File ${prefix}/lib/claws-mail/plugins/spamreport.dll
 File ${prefix}/lib/claws-mail/plugins/vcalendar.dll
 File ${prefix}/lib/claws-mail/plugins/managesieve.dll
 
-SetOutPath "$INSTDIR\share\locale\bg\LC_MESSAGES"
-File ${prefix}/share/locale/bg/LC_MESSAGES/claws-mail.mo
+#SetOutPath "$INSTDIR\share\locale\bg\LC_MESSAGES"
+#File ${prefix}/share/locale/bg/LC_MESSAGES/claws-mail.mo
 SetOutPath "$INSTDIR\share\locale\ca\LC_MESSAGES"
 File ${prefix}/share/locale/ca/LC_MESSAGES/claws-mail.mo
 SetOutPath "$INSTDIR\share\locale\cs\LC_MESSAGES"
@@ -513,10 +513,10 @@ SetOutPath "$INSTDIR\share\locale\de\LC_MESSAGES"
 File ${prefix}/share/locale/de/LC_MESSAGES/claws-mail.mo
 SetOutPath "$INSTDIR\share\locale\en_GB\LC_MESSAGES"
 File ${prefix}/share/locale/en_GB/LC_MESSAGES/claws-mail.mo
-SetOutPath "$INSTDIR\share\locale\eo\LC_MESSAGES"
-File ${prefix}/share/locale/eo/LC_MESSAGES/claws-mail.mo
 SetOutPath "$INSTDIR\share\locale\es\LC_MESSAGES"
 File ${prefix}/share/locale/es/LC_MESSAGES/claws-mail.mo
+#SetOutPath "$INSTDIR\share\locale\eo\LC_MESSAGES"
+#File ${prefix}/share/locale/eo/LC_MESSAGES/claws-mail.mo
 SetOutPath "$INSTDIR\share\locale\fi\LC_MESSAGES"
 File ${prefix}/share/locale/fi/LC_MESSAGES/claws-mail.mo
 SetOutPath "$INSTDIR\share\locale\fr\LC_MESSAGES"
