@@ -1,0 +1,15 @@
+#! /bin/sh
+patch -p1 -f $* < $0
+exit $?
+
+diff -ruN claws-mail-3.13.1-orig/src/plugins/vcalendar/claws.def claws-mail-3.13.1/src/plugins/vcalendar/claws.def
+--- claws-mail-3.13.1-orig/src/plugins/vcalendar/claws.def	2015-12-20 20:25:20.842456756 +0100
++++ claws-mail-3.13.1/src/plugins/vcalendar/claws.def	2015-12-20 20:26:49.320826078 +0100
+@@ -67,6 +67,7 @@
+ folder_set_xml
+ folder_unregister_class
+ folderview_check_new
++folderview_get_opened_item
+ folderview_get_selected_item
+ folderview_register_popup
+ folderview_unregister_popup

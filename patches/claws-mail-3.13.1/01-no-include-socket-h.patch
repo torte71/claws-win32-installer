@@ -1,0 +1,17 @@
+#! /bin/sh
+patch -p1 -f $* < $0
+exit $?
+
+diff -ruN claws-mail-3.13.1-orig/src/common/utils.c claws-mail-3.13.1/src/common/utils.c
+--- claws-mail-3.13.1-orig/src/common/utils.c	2015-12-20 20:25:20.822456220 +0100
++++ claws-mail-3.13.1/src/common/utils.c	2015-12-20 20:25:40.126973252 +0100
+@@ -49,7 +49,9 @@
+ #include <ctype.h>
+ #include <errno.h>
+ #include <sys/param.h>
++#ifndef G_OS_WIN32
+ #include <sys/socket.h>
++#endif
+ 
+ #if (HAVE_WCTYPE_H && HAVE_WCHAR_H)
+ #  include <wchar.h>
