@@ -132,7 +132,6 @@ fi
 AC_SUBST(NUMPROC)
 
 changequote(,)dnl
-echo ,,,,${CC} >>/tmp/f
 gcc_major_minor=$($CC --version \
 									| awk 'NR==1 {split($3,a,"."); print a[1] "." a[2]}')
 changequote([,])dnl
@@ -168,7 +167,6 @@ AC_ARG_WITH([libstdc++-6-dll],
            [libstdcpp_dll=$withval])
 if test "$libstdcpp_dll" = "no"; then
   file="/usr/lib/gcc/$host/${gcc_major_minor}-win32/libstdc++-6.dll"
-	echo ,,,,,,,,,,,${file}, >>/tmp/f
   if test -r "$file"; then
     libstdcpp_dll="$file"
   fi
