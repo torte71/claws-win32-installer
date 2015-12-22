@@ -548,6 +548,8 @@ File ${prefix}/share/locale/nl/LC_MESSAGES/claws-mail.mo
 #File ${prefix}/share/locale/pl/LC_MESSAGES/claws-mail.mo
 SetOutPath "$INSTDIR\share\locale\pt_BR\LC_MESSAGES"
 File ${prefix}/share/locale/pt_BR/LC_MESSAGES/claws-mail.mo
+SetOutPath "$INSTDIR\share\locale\ru\LC_MESSAGES"
+File ${prefix}/share/locale/ru/LC_MESSAGES/claws-mail.mo
 SetOutPath "$INSTDIR\share\locale\sk\LC_MESSAGES"
 File ${prefix}/share/locale/sk/LC_MESSAGES/claws-mail.mo
 SetOutPath "$INSTDIR\share\locale\sv\LC_MESSAGES"
