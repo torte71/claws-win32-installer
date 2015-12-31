@@ -80,7 +80,7 @@ chk    a40ce184245f467b2eb6d1ca4249f797d84b12d6
 #
 
 # (Kept on our own mirror due to Sourceforge/github peculiarities.)
-server http://www.claws-mail.org/win32/
+server http://www.claws-mail.org/win32
 
 file   libetpan-1.6.tar.gz
 chk    54d0c6d612e3981cc71e52e3c9e04d5805d9917f
@@ -160,7 +160,7 @@ chk  495f7cc9281847ecfbbaf9d3edd9eb2a2123350e
 #
 # GDK-PIXBUF
 #
-server http://ftp.gnome.org/pub/gnome/sources/gdk-pixbuf/2.32/
+server http://ftp.gnome.org/pub/gnome/sources/gdk-pixbuf/2.32
 
 file gdk-pixbuf-2.32.1.tar.xz
 chk  40482f165f3fc587e54a08bb9212aeca97e2d07d
@@ -175,7 +175,7 @@ file atk-2.16.0.tar.xz
 chk  d097c6cec71ffede77be9f13f4ceee9880c0a5d7
 
 # harfbuzz
-server http://www.freedesktop.org/software/harfbuzz/release/
+server http://www.freedesktop.org/software/harfbuzz/release
 
 file harfbuzz-1.1.2.tar.bz2
 chk  bc2aa95d35b47a7367929b3fe9e4fba76789fc3f
@@ -240,9 +240,9 @@ chk  d063e705812e1ee7feb8f35d51b3cad04ca13b0d
 
 # libpng
 
-server ftp://ftp.simplesystems.org/pub/png/src/
-file libpng14/libpng-1.4.18.tar.xz
-chk  5abf2e8430fbb5f0948b0e4782a62d23ba293864
+server ftp://ftp.simplesystems.org/pub/png/src
+file libpng14/libpng-1.4.19.tar.xz
+chk  5af8bdd6e5f2954787a7a8ce6760c7d0ae830162
 
 #
 # LibFFI
@@ -307,7 +307,7 @@ chk  e6e17d1d6ed86a99db228fcf3ea1bd7f844a0cb5
 
 # libsoup
 # Can't update: newer versions require sqlite
-server ftp://ftp.gnome.org/pub/GNOME/sources/libsoup/2.40/
+server ftp://ftp.gnome.org/pub/GNOME/sources/libsoup/2.40
 
 file libsoup-2.40.3.tar.xz
 chk  63ce1d2b022b58831430099b28dee3b47fb63ed1

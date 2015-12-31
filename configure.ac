@@ -22,7 +22,7 @@ AC_PREREQ(2.59)
 min_automake_version="1.9.3"
 
 m4_define([my_version], [3.13.1])
-m4_define([my_release], [1])
+m4_define([my_release], [2])
 
 AC_INIT([Claws Mail Win32],
 				[my_version]-[my_release],[ticho@claws-mail.org])
