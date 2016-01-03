@@ -256,7 +256,7 @@ cm_pkg_libetpan_configure = --with-gnutls --enable-threads \
 cm_pkg_claws_mail_configure = \
   --with-lib-prefix=$(idir) --with-libiconv-prefix=$(idir) \
   --with-gpg-error-prefix=$(idir) --with-gpgme-prefix=$(idir) \
-  --with-config-dir="Claws-mail" --enable-pthread --enable-gnutls \
+  --enable-pthread --enable-gnutls \
   --enable-libetpan --disable-dbus --disable-valgrind --enable-ipv6 \
   --disable-jpilot --disable-startup-notification \
   --disable-spamassassin-plugin --disable-bogofilter-plugin \
