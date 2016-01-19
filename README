@@ -63,33 +63,23 @@ build-essential (libc6-dev, gcc, g++, make)
 
 Adding new packages to the installer:
 =====================================
-***AKacian: This list is not necessarily up to date***
 
-This requires editing a couple of files; we might eventually automate
-some of these tasks.  Here is a short run up:
+This requires editing a couple of files.
 
-1. Add constants for the package FOO into include/config.nsi.in .
+1. Add package to toplevel configure.ac, stating its dependencies.
 
-2. Create 2 new installer scripts, named src/inst-foo.nsi and
-   uninst-foo.nsi and add them to EXTRA_DIST in src/Makefile.am.
+2. Add download information to packages/packages.current.
 
-3. Add foo to one the variables gpg4win_bpgks (if foo should not be
-   build be the gpg4win) or gpg4win_spkgs (if foo should be build by
-   gpg4win) in src/Makefile.am .  Also add any required configure
-   flags etc.
+3. Add variables cm_pkg_<package>_configure, cm_pkg_<package_make_args
+   to src/Makefile.am. Also add the package to cm_spkgs in same file.
 
-4. Add FOO to inst-sections.nsi.
+4. Specify what files from the built package should be included in
+   the installation (and uninstallation) in src/sections-(un)installer.nsi.
 
-5. Add detection of packages to configure.ac.  Check out the available
-   macros in m4/gpg4win.m4.  Depending on the way an upstream package
-   is packaged, you might need to write a new macro.
-
-6. Add download information to packages/download.sh.
-
-7. If the package ships pkg-config (*.pc) support files, you need add
+5. If the package ships pkg-config (*.pc) support files, you need add
    post install instructions to Makefile.am.  Note that *.pc files may
    be in the "runtime" directory ${pkgidir} if the package is built
-   within gpg4win (or peculiarly shipped), or in the development
+   within Claws Mail (or peculiarly shipped), or in the development
    package ${pkgidir_dev}.
 
 Then run the usual "./autogen.sh" to create the actual configure file
@@ -101,7 +91,7 @@ Copyright
 
 The entire Claws Mail package is
 
-  Copyright (C) 1999-2015 Hiroyuki Yamamoto <hiro-y@kcn.ne.jp> and the
+  Copyright (C) 1999-2016 Hiroyuki Yamamoto <hiro-y@kcn.ne.jp> and the
 	Claws Mail Team
 
   Claws Mail is free software; you can redistribute it and/or modify it
