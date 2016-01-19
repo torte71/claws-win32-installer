@@ -72,8 +72,8 @@ chk  d5fed5acf91e6e571c50e11354044fbef38de006
 
 server http://www.claws-mail.org/releases
 
-file   claws-mail-3.13.1.tar.xz
-chk    a40ce184245f467b2eb6d1ca4249f797d84b12d6
+file   claws-mail-3.13.2.tar.xz
+chk    8d670c30b07ac47ee1772e47f6721f49df77a4a7
 
 #
 # libetpan and expat libraries

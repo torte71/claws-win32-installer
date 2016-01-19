@@ -1,14 +1,15 @@
-# configure.ac for GPG4Win
+# configure.ac for Claws Mail Windows installer
 # Copyright (C) 2005, 2006, 2007, 2008, 2010 g10 Code GmbH
+# Copyright (C) 2015, 2016 the Claws Mail team
 #
-# This file is part of GPG4Win
+# This file is part of Claws-Mail.
 #
-# GPG4Win is free software; you can redistribute it and/or modify it
+# Claws Mail is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by
 # the Free Software Foundation; either version 2 of the License, or
 # (at your option) any later version.
 #
-# GPG4Win is distributed in the hope that it will be useful, but
+# Claws Mail is distributed in the hope that it will be useful, but
 # WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
 # General Public License for more details.
@@ -21,8 +22,8 @@
 AC_PREREQ(2.59)
 min_automake_version="1.9.3"
 
-m4_define([my_version], [3.13.1])
-m4_define([my_release], [2])
+m4_define([my_version], [3.13.2])
+m4_define([my_release], [1])
 
 AC_INIT([Claws Mail Win32],
 				[my_version]-[my_release],[ticho@claws-mail.org])
