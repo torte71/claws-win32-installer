@@ -1,4 +1,4 @@
-# configure.ac for Claws Mail Windows installer
+# configure.ac - Windows Installer for Claws Mail
 # Copyright (C) 2005, 2006, 2007, 2008, 2010 g10 Code GmbH
 # Copyright (C) 2015, 2016 the Claws Mail team
 #
