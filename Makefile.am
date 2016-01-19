@@ -42,6 +42,5 @@ EXTRA_DIST = autogen.sh \
 				patches/gpgme-1.6.0/01-remove-mkstemp.patch \
 				patches/gnutls-3.4.7/01-no-endservent.patch \
 				patches/glib-networking-2.45.1/01-giomoduledir.patch \
-				patches/claws-mail-3.13.1/01-no-include-socket-h.patch \
-				patches/claws-mail-3.13.1/02-vcalendar-symbol-defs.patch
-
+				patches/claws-mail-3.13.2/01-no-include-socket-h.patch \
+				patches/claws-mail-3.13.2/02-rssyl-typo-fix.patch
