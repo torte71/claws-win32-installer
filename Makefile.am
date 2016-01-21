@@ -43,4 +43,5 @@ EXTRA_DIST = autogen.sh \
 				patches/gnutls-3.4.7/01-no-endservent.patch \
 				patches/glib-networking-2.45.1/01-giomoduledir.patch \
 				patches/claws-mail-3.13.2/01-no-include-socket-h.patch \
-				patches/claws-mail-3.13.2/02-rssyl-typo-fix.patch
+				patches/claws-mail-3.13.2/02-rssyl-typo-fix.patch \
+				patches/claws-mail-3.13.2/03-rcdir.patch
