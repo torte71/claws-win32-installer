@@ -24,7 +24,7 @@ EXTRA_DIST = pkg-config claws-mail.nsi \
 				gnupg-uninst.nsi \
 				sections-installer.nsi sections-uninstaller.nsi \
         installer-options.ini.in libiconv.def libintl.def \
-        potomo Memento.nsh
+        Memento.nsh
 
 SUBDIRS = dictionaries
 
@@ -183,14 +183,14 @@ cm_pkg_libgpg_error_ex_configure = --silent \
 
 # We convert the PO files to UTF-8.  FIXME: This should be done in
 # libgpg-error proper.
-define cm_pkg_libgpg_error_post_install
-(for i in `$(tsdir)/src/potomo --get-linguas $$$${pkgsdir}/po` ; do \
-   rm $$$${pkgidir}/share/locale/$$$${i}/LC_MESSAGES/libgpg-error.mo \
-       2>/dev/null|| true; \
-   $(tsdir)/src/potomo $$$${pkgsdir}/po/$$$${i}.po \
-             $$$${pkgidir}/share/locale/$$$${i}/LC_MESSAGES/libgpg-error.mo; \
- done)
-endef
+#define cm_pkg_libgpg_error_post_install
+#(for i in `$(tsdir)/src/potomo --get-linguas $$$${pkgsdir}/po` ; do \
+#   rm $$$${pkgidir}/share/locale/$$$${i}/LC_MESSAGES/libgpg-error.mo \
+#       2>/dev/null|| true; \
+#   $(tsdir)/src/potomo $$$${pkgsdir}/po/$$$${i}.po \
+#             $$$${pkgidir}/share/locale/$$$${i}/LC_MESSAGES/libgpg-error.mo; \
+# done)
+#endef
 
 cm_pkg_libassuan_configure =  --silent --enable-static
 
