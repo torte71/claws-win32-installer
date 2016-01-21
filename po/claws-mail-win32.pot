@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: ticho@claws-mail.org\n"
-"POT-Creation-Date: 2015-10-13 18:56+0200\n"
+"POT-Creation-Date: 2016-01-21 09:20+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -92,15 +92,6 @@ msgid ""
 "Do you want to continue installing Claws Mail ${VERSION} anyway?"
 msgstr ""
 
-#: src/strings.nsi:48
-msgctxt "T_FoundExistingVersionB"
-msgid ""
-"A version of Claws Mail has already been installed on the system. There will "
-"be no problem installing and thus overwriting this Version.\n"
-"\n"
-"Do you want to continue installing Claws Mail?"
-msgstr ""
-
 #: src/strings.nsi:56
 msgctxt "T_WelcomePageTitle"
 msgid "Welcome to the installation of ${PRETTY_PACKAGE}"
@@ -142,7 +133,7 @@ msgstr ""
 
 #: src/strings.nsi:82
 msgctxt "T_SetDefaultClient"
-msgid "Do you want to make Claws Mail your default mail client?"
+msgid "Do you want Claws Mail to handle 'mailto:' URLs?"
 msgstr ""
 
 #: src/strings.nsi:85
