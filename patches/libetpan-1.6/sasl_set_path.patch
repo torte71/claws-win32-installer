@@ -1,0 +1,32 @@
+#! /bin/sh
+patch -p1 -f $* < $0
+exit $?
+
+diff -ruN libetpan-1.6-orig/src/data-types/mailsasl.c libetpan-1.6/src/data-types/mailsasl.c
+--- libetpan-1.6-orig/src/data-types/mailsasl.c	2016-05-29 18:00:21.532742072 +0200
++++ libetpan-1.6/src/data-types/mailsasl.c	2016-05-29 18:00:32.416458966 +0200
+@@ -102,6 +102,13 @@
+   UNLOCK_SASL();
+ }
+ 
++void mailsasl_set_plugin_path(char *path)
++{
++	LOCK_SASL();
++	sasl_set_path(SASL_PATH_TYPE_PLUGIN, path);
++	UNLOCK_SASL();
++}
++
+ void mailsasl_unref(void)
+ {
+   LOCK_SASL();
+diff -ruN libetpan-1.6-orig/src/data-types/mailsasl.h libetpan-1.6/src/data-types/mailsasl.h
+--- libetpan-1.6-orig/src/data-types/mailsasl.h	2016-05-29 18:00:21.532742072 +0200
++++ libetpan-1.6/src/data-types/mailsasl.h	2016-05-29 18:00:32.416458966 +0200
+@@ -40,6 +40,7 @@
+ void mailsasl_external_ref(void);
+ 
+ void mailsasl_ref(void);
++void mailsasl_set_plugin_path(char *path);
+ void mailsasl_unref(void);
+ 
+ #ifdef __cplusplus

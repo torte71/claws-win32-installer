@@ -23,7 +23,7 @@ AC_PREREQ(2.59)
 min_automake_version="1.9.3"
 
 m4_define([my_version], [3.13.2])
-m4_define([my_release], [1])
+m4_define([my_release], [99])
 
 AC_INIT([Claws Mail Win32],
 				[my_version]-[my_release],[ticho@claws-mail.org])
@@ -267,7 +267,8 @@ CM_SPKG([glib-networking], [glib gnutls])
 CM_SPKG([libsoup], [gnutls libxml2 glib-networking])
 CM_SPKG([webkit], [jpeg libpng glib gtk+ libsoup libxml2])
 CM_SPKG([curl], [zlib gnutls])
-CM_SPKG([libetpan], [gnutls])
+CM_SPKG([cyrus-sasl])
+CM_SPKG([libetpan], [gnutls cyrus-sasl])
 CM_BPKG_GNUWIN32([bsfilter])
 CM_SPKG([claws-mail], [libiconv gettext zlib gtk+ libpng enchant glib dnl
                             gpgme crypt regex libetpan gnutls dnl

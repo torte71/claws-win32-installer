@@ -324,3 +324,8 @@ server http://webkitgtk.org/releases
 file webkit-1.3.10.tar.gz
 chk  a5ea274a461b7527d900b60e16e895618cf80949
 
+# cyrus-sasl
+server ftp://ftp.cyrusimap.org/cyrus-sasl
+
+file cyrus-sasl-2.1.26.tar.gz
+chk d6669fb91434192529bd13ee95737a8a5040241c

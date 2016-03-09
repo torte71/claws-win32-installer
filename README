@@ -86,6 +86,21 @@ Then run the usual "./autogen.sh" to create the actual configure file
 and run configure as described above.
 
 
+SASL and unofficial patches
+===========================
+
+In order for libsasl2 to find its plugins (which we install into
+$INSTDIR\lib\sasl2), I've had to add a new API function to libetpan,
+mailsasl_set_plugin_path(), which in turn calls sasl_set_path().
+
+We call this new function from Claws Mail's main() during initialization.
+
+This is done via patches held in this repository, since this stuff can
+not go upstream - or at least the Claws Mail patch shouldn't, until
+libetpan provides some way to set the SASL plugin path. I'll consider
+submitting the libetpan patch upstream later.
+
+
 Copyright
 =========
 

@@ -330,6 +330,17 @@ RMDir "$INSTDIR\lib"
 RMDir "$INSTDIR\include"
 
 #######################################
+### cyrus-sasl
+Delete /REBOOTOK "$INSTDIR\libsasl2-3.dll"
+Delete /REBOOTOK "$INSTDIR\lib/sasl2/libanonymous-3.dll"
+Delete /REBOOTOK "$INSTDIR\lib/sasl2/libcrammd5-3.dll"
+Delete /REBOOTOK "$INSTDIR\lib/sasl2/libdigestmd5-3.dll"
+Delete /REBOOTOK "$INSTDIR\lib/sasl2/liblogin-3.dll"
+Delete /REBOOTOK "$INSTDIR\lib/sasl2/libplain-3.dll"
+RMDir "$INSTDIR\lib\sasl2"
+RMDir "$INSTDIR\lib"
+
+#######################################
 ### libetpan
 Delete "$INSTDIR\libetpan-17.dll"
 
@@ -393,7 +404,7 @@ RMDir "$INSTDIR\lib"
 
 #######################################
 ### crypt
-# Nothing to uninstall, as we link statically
+Delete /REBOOTOK "$INSTDIR\crypt-0.dll"
 
 #######################################
 ### bzip2

@@ -91,6 +91,9 @@
 !define cm_pkg_libxml2 @cm_pkg_libxml2@
 !define cm_pkg_libxml2_version @cm_pkg_libxml2_version@
 
+!define cm_pkg_cyrus_sasl @cm_pkg_cyrus_sasl@
+!define cm_pkg_cyrus_sasl_version @cm_pkg_cyrus_sasl_version@
+
 !define cm_pkg_libetpan @cm_pkg_libetpan@
 !define cm_pkg_libetpan_version @cm_pkg_libetpan_version@
 

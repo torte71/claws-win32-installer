@@ -18,7 +18,8 @@ File /oname=libwinpthread-1.dll "${BUILD_DIR}/libwinpthread-1.dll-x"
 
 #######################################
 ### crypt
-# Nothing to install, as we link statically
+!insertmacro SetPrefix crypt
+File ${prefix}/bin/crypt-0.dll
 
 #######################################
 ### libiconv
@@ -106,6 +107,18 @@ File dictionaries/de.aff
 File dictionaries/de.dic
 File dictionaries/fr.aff
 File dictionaries/fr.dic
+SetOutPath "$INSTDIR"
+
+#######################################
+### cyrus-sasl
+!insertmacro SetPrefix2 cyrus_sasl cyrus-sasl
+File ${prefix}/bin/libsasl2-3.dll
+SetOutPath "$INSTDIR\lib\sasl2"
+File ${prefix}/lib/sasl2/libanonymous-3.dll
+File ${prefix}/lib/sasl2/libcrammd5-3.dll
+File ${prefix}/lib/sasl2/libdigestmd5-3.dll
+File ${prefix}/lib/sasl2/liblogin-3.dll
+File ${prefix}/lib/sasl2/libplain-3.dll
 SetOutPath "$INSTDIR"
 
 #######################################

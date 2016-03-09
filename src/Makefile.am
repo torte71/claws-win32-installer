@@ -40,7 +40,7 @@ cm_spkgs = glib libffi gdk-pixbuf gtk+ expat \
 		libtasn1 opencdk gnutls curl libxml2 \
 		jpeg glib-networking libsoup webkit gmp nettle \
 		harfbuzz pango pixman cairo libetpan claws-mail \
-		libgcrypt libassuan \
+		libgcrypt libassuan cyrus-sasl \
 		w32pth regex libiconv gettext
 
 # Extra options to configure for individual packages.
@@ -76,6 +76,7 @@ cm_pkg_gmp_make_args = -j$(NUMPROC)
 cm_pkg_nettle_make_args = -j$(NUMPROC)
 cm_pkg_pixman_make_args = -j$(NUMPROC)
 cm_pkg_cairo_make_args = -j$(NUMPROC)
+cm_pkg_cyrus_sasl_make_args = -j$(NUMPROC)
 
 
 
@@ -246,6 +247,14 @@ cm_pkg_curl_configure = \
 cm_pkg_libxml2_configure = \
   --enable-shared --without-python --with-iconv=$(idir)
 
+cm_pkg_cyrus_sasl_configure = \
+	--without-openssl --disable-ldapd --without-saslauthd \
+	--without-pwcheck --without-des --without-authdaemond \
+	--enable-cram --enable-digest \
+	--enable-plain --enable-anon --enable-login \
+	--disable-static --enable-shared \
+	CPPFLAGS=\"-I$(idir)/include\" LIBS=\"-L$(idir)/lib\"
+
 cm_pkg_libetpan_configure = --with-gnutls --enable-threads \
 	--enable-ipv6 \
   CPPFLAGS=\"-I$(idir)/include\" \
@@ -265,6 +274,7 @@ cm_pkg_claws_mail_configure = \
   --disable-bogofilter-plugin --disable-spamassassin-plugin \
   --disable-perl-plugin --disable-python-plugin --disable-demo-plugin \
   --disable-newmail-plugin --disable-mailmbox-plugin \
+	--with-password-encryption=gnutls \
 	CFLAGS=\"-g -O2 \" \
 	CPPFLAGS=\"-g -O2 -I$(idir)/include -D_POSIX_C_SOURCE\" \
 	LDFLAGS=\"-L$(idir)/lib\" LIBS=\"-lexpat\"

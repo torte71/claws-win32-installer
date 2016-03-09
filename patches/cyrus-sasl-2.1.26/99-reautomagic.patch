@@ -1,0 +1,11 @@
+sed 's/AM_CONFIG_HEADER/AC_CONFIG_HEADERS/' -i configure.in
+
+rm -f config/config.guess config/config.sub
+rm -f config/ltconfig config/ltmain.sh config/libtool.m4
+rm -fr autom4te.cache
+
+libtoolize -c
+aclocal -I config -I cmulocal
+automake -a -c
+autoheader
+autoconf
