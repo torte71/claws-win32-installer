@@ -7,9 +7,10 @@ tools are installed. About 6GB of disk space will be needed.
 
 First, following packages need to be installed:
 
- apt-get install mingw-w64 gcc automake make unzip stow nsis \
- graphicsmagick-imagemagick-compat gettext libgettextpo-dev pkg-config \
- libglib2.0-dev libgdk-pixbuf2.0-dev intltool bison flex gperf docbook-utils
+apt-get install \
+mingw-w64 gcc automake make unzip stow nsis gettext libgettextpo-dev \
+graphicsmagick-imagemagick-compat pkg-config libglib2.0-dev bison flex \
+libgdk-pixbuf2.0-dev intltool gperf docbook-utils libswitch-perl
 
 These packages will pull in lot of other packages as dependencies, around
 400MB in total.
