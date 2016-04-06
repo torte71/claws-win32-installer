@@ -20,6 +20,9 @@ mingw-w64 version 3.x is installed, as mingw-w64 versions 4.x come with
 a broken libstdc++. Use Debian snapshot archive if needed.
 See https://bugs.debian.org/cgi-bin/bugreport.cgi?bug=736946 for details.
 
+If your flex version is less than 2.60, delete file
+patches/webkit-1.3.10/03-maketokenizer-flex2.60.patch.
+
 Latest installer source can be found in git repository, if building from
 a release tarball (claws-mail-win32-x.y.z-N.tar.bz2) is not what you want:
   git clone http://git.claws-mail.org/readonly/claws-win32-installer.git

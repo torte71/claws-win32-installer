@@ -34,6 +34,7 @@ EXTRA_DIST = autogen.sh \
 				patches/w32pth-2.0.5/01-def-fix.patch \
 				patches/webkit-1.3.10/01-fixes.patch \
 				patches/webkit-1.3.10/02-print-size.patch \
+				patches/webkit-1.3.10/03-maketokenizer-flex2.60.patch \
 				patches/glib-2.45.2/01-socket.patch \
 				patches/glib-2.45.2/02-folder-icons.patch \
 				patches/cairo-1.10.2/01-fix-A1-surfaces.patch \
