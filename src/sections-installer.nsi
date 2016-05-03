@@ -21,11 +21,6 @@ File /oname=libwinpthread-1.dll "${BUILD_DIR}/libwinpthread-1.dll-x"
 # Nothing to install, as we link statically
 
 #######################################
-### libgsasl
-!insertmacro SetPrefix libgsasl
-File ${prefix}/bin/libgsasl-7.dll
-
-#######################################
 ### libiconv
 !insertmacro SetPrefix libiconv
 ClearErrors

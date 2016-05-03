@@ -392,10 +392,6 @@ Delete "$INSTDIR\lib\charset.alias"
 RMDir "$INSTDIR\lib"
 
 #######################################
-### libgsasl
-Delete "$INSTDIR\libgsasl-7.dll"
-
-#######################################
 ### crypt
 # Nothing to uninstall, as we link statically
 

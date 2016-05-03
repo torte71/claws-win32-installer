@@ -67,9 +67,6 @@
 !define cm_pkg_gpgme @cm_pkg_gpgme@
 !define cm_pkg_gpgme_version @cm_pkg_gpgme_version@
 
-!define cm_pkg_libgsasl @cm_pkg_libgsasl@
-!define cm_pkg_libgsasl_version @cm_pkg_libgsasl_version@
-
 !define cm_pkg_libtasn1 @cm_pkg_libtasn1@
 !define cm_pkg_libtasn1_version @cm_pkg_libtasn1_version@
 

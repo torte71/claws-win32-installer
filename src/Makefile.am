@@ -37,7 +37,7 @@ SUBDIRS = dictionaries
 # Supported source packages.
 cm_spkgs = glib libffi gdk-pixbuf gtk+ expat \
 		libgpg-error gpgme libpng enchant atk fontconfig freetype \
-		libgsasl libtasn1 opencdk gnutls curl libxml2 \
+		libtasn1 opencdk gnutls curl libxml2 \
 		jpeg glib-networking libsoup webkit gmp nettle \
 		harfbuzz pango pixman cairo libetpan claws-mail \
 		libgcrypt libassuan \
@@ -59,7 +59,6 @@ cm_pkg_gpgme_make_args = -j$(NUMPROC)
 cm_pkg_expat_make_args = -j$(NUMPROC)
 cm_pkg_libpng_make_args = -j$(NUMPROC)
 cm_pkg_enchant_make_args = -j$(NUMPROC)
-cm_pkg_libgsasl_make_args = -j$(NUMPROC)
 cm_pkg_libtasn1_make_args = -j$(NUMPROC)
 cm_pkg_opencdk_make_args = -j$(NUMPROC)
 cm_pkg_curl_make_args = -j$(NUMPROC)
@@ -458,11 +457,6 @@ define cm_pkg_libpng_post_install
 endef
 
 define cm_pkg_enchant_post_install
- (cd $$$${pkgidir};							\
- perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)
-endef
-
-define cm_pkg_libgsasl_post_install
  (cd $$$${pkgidir};							\
  perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)
 endef
