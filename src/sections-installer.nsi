@@ -84,8 +84,8 @@ File ${prefix}/bin/bsfilter.exe
 #######################################
 ### gettext
 !insertmacro SetPrefix gettext
-File ${prefix}/bin/libintl-8.dll
-File /oname=intl.dll ${prefix}/bin/libintl-8.dll
+File ${prefix}/bin/libintl-9.dll
+File /oname=intl.dll ${prefix}/bin/libintl-9.dll
 
 #######################################
 ### libpng
@@ -485,8 +485,8 @@ File ${prefix}/bin/libgmp-10.dll
 #######################################
 ### nettle
 !insertmacro SetPrefix nettle
-File ${prefix}/bin/libnettle-6-1.dll
-File ${prefix}/bin/libhogweed-4-1.dll
+File ${prefix}/bin/libnettle-6-2.dll
+File ${prefix}/bin/libhogweed-4-2.dll
 
 #######################################
 ### claws-mail

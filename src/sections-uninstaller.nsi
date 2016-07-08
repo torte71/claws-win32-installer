@@ -61,8 +61,8 @@ Delete "$INSTDIR\share\locale\zh_TW\LC_MESSAGES\claws-mail.mo"
 
 #######################################
 ### nettle
-Delete "$INSTDIR\libhogweed-4-1.dll"
-Delete "$INSTDIR\libnettle-6-1.dll"
+Delete "$INSTDIR\libhogweed-4-2.dll"
+Delete "$INSTDIR\libnettle-6-2.dll"
 
 #######################################
 ### gmp
@@ -367,7 +367,7 @@ Delete /REBOOTOK "$INSTDIR\libpng14-14.dll"
 
 #######################################
 ### gettext
-Delete /REBOOTOK "$INSTDIR\libintl-8.dll"
+Delete /REBOOTOK "$INSTDIR\libintl-9.dll"
 Delete /REBOOTOK "$INSTDIR\intl.dll"
 
 #######################################

@@ -219,6 +219,7 @@ cm_pkg_gnutls_configure = \
   --with-libgcrypt \
   --without-p11-kit \
 	--disable-gtk-doc-html \
+	--disable-tests \
   --with-libtasn1-prefix=$(idir) \
   --with-libgcrypt-prefix=$(idir) \
 	CPPFLAGS=\"-I$(idir)/include\" LDFLAGS=\"-L$(idir)/lib\"
