@@ -23,7 +23,8 @@ AC_PREREQ(2.59)
 min_automake_version="1.9.3"
 
 m4_define([my_version], [3.13.2])
-m4_define([my_release], [99])
+m4_define([my_release], [1])
+m4_define([my_gitrev], [git172])
 
 AC_INIT([Claws Mail Win32],
 				[my_version]-[my_release],[ticho@claws-mail.org])
@@ -32,9 +33,7 @@ PACKAGE=$PACKAGE_NAME
 VERSION=$PACKAGE_VERSION
 VERSION_NO_REL=my_version
 REL=my_release
-GIT_REVISION=git_revision
-GIT_REVISION_DEC=git_revision_dec
-
+GIT_REVISION=my_gitrev
 
 AC_CONFIG_SRCDIR(src/config.nsi.in)
 AC_CONFIG_MACRO_DIR(m4)
@@ -51,6 +50,7 @@ AM_PO_SUBDIRS
 AC_SUBST(PACKAGE)
 AC_SUBST(VERSION)
 AC_SUBST(VERSION_NO_REL)
+AC_SUBST(GIT_REVISION)
 AC_SUBST(REL)
 if echo "${PACKAGE_VERSION}" | egrep 'svn|rc|beta|git' >/dev/null ; then
   IS_BETA_BUILD=yes
@@ -326,7 +326,7 @@ if test -n "$missing_opt_tools"; then
 fi
 
 echo "
-        $PACKAGE_NAME-$PACKAGE_VERSION prepared for make
+        ${PACKAGE_NAME} ${VERSION_NO_REL}${GIT_REVISION}-${REL} prepared for make
 
         Platform: $host
 "

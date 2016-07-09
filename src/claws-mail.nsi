@@ -4,6 +4,7 @@
 !define PACKAGE "claws-mail"
 !define VERSION "${_VERSION}"
 !define VERSION_NO_REL "${_VERSION_NO_REL}"
+!define GIT_REVISION "${_GIT_REVISION}"
 !define PROD_VERSION "${_VERSION_NO_REL}.${_REL}"
 !define RELEASE "${_REL}"
 !define PRETTY_PACKAGE "Claws Mail"
@@ -38,7 +39,7 @@ SetCompressor /SOLID lzma
 !include "functions.nsi"
 
 Name "${PRETTY_PACKAGE}"
-OutFile "${PACKAGE}-${VERSION}.exe"
+OutFile "${PACKAGE}-${VERSION_NO_REL}${GIT_REVISION}-${RELEASE}.exe"
 
 # Add version information to the file properties.
 InstallDir "$PROGRAMFILES\${PRETTY_PACKAGE}"

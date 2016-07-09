@@ -68,7 +68,7 @@ Robustness and stability.\r\n\
 It is Free Software, released under the GNU GPL v3 or later."
 
 LangString T_AboutVersion ${LANG_ENGLISH} \
- "This is Claws Mail version ${VERSION}"
+ "This is Claws Mail version ${VERSION_NO_REL}${GIT_REVISION}-${RELEASE}"
 
 LangString T_AboutFileVersion ${LANG_ENGLISH} \
  "file version ${PROD_VERSION}"
