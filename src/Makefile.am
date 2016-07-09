@@ -100,6 +100,7 @@ cm_pkg_gettext_ex_make_dir_inst = gettext-runtime
 
 cm_pkg_glib_configure = \
 	--disable-gtk-doc-html \
+	--with-pcre=internal \
   CPPFLAGS=-I$(idir)/include \
 	LDFLAGS=\"-L$(idir)/lib\" \
 	CCC=$(host)-g++

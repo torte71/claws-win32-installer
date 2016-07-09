@@ -123,45 +123,39 @@ file   enchant-1.6.0.tar.gz
 chk    321f9cf0abfa1937401676ce60976d8779c39536
 
 #
-# GLIB
+# GLIB & friends
 #
-server http://ftp.gnome.org/pub/gnome/sources/glib/2.45
+server http://ftp.gnome.org/pub/gnome/sources
 
-file glib-2.45.2.tar.xz
-chk  495f7cc9281847ecfbbaf9d3edd9eb2a2123350e
+file glib/2.49/glib-2.49.2.tar.xz
+chk  906720f36c4c16829485610eabefb39cf933fc59
 
-#
-# GDK-PIXBUF
-#
-server http://ftp.gnome.org/pub/gnome/sources/gdk-pixbuf/2.32
+file gtk+/2.24/gtk+-2.24.30.tar.xz
+chk  aa5bc6dca583cf2bff137606dc2014f6ea559da7
 
-file gdk-pixbuf-2.32.1.tar.xz
-chk  40482f165f3fc587e54a08bb9212aeca97e2d07d
+file gdk-pixbuf/2.35/gdk-pixbuf-2.35.2.tar.xz
+chk  7881ebc8cab2b5885e6d3fc47cf09c675ea1ef7e
 
+# Can't upgrade here, since newer pango requires newer cairo. See
+# cairo note below.
+file pango/1.34/pango-1.34.1.tar.xz
+chk  a6c224424eb3f0dcc231a8000591c05a85df689c
 
-#
-# ATK
-#
-server http://ftp.gnome.org/pub/gnome/sources/atk/2.16
+file atk/2.20/atk-2.20.0.tar.xz
+chk  5d4d699721fee8bcecd3edf1361e89af1db06148
 
-file atk-2.16.0.tar.xz
-chk  d097c6cec71ffede77be9f13f4ceee9880c0a5d7
+file glib-networking/2.48/glib-networking-2.48.2.tar.xz
+chk  3094dee201937f678ca018a8d88ff2f345ce4227
+
+# Can't update: newer versions require sqlite
+file libsoup/2.40/libsoup-2.40.3.tar.xz
+chk  63ce1d2b022b58831430099b28dee3b47fb63ed1
 
 # harfbuzz
 server http://www.freedesktop.org/software/harfbuzz/release
 
 file harfbuzz-1.1.2.tar.bz2
 chk  bc2aa95d35b47a7367929b3fe9e4fba76789fc3f
-
-#
-# PANGO
-#
-# Can't upgrade here, since newer pango requires newer cairo. See
-# cairo note below.
-server http://ftp.gnome.org/pub/gnome/sources/pango/1.34
-
-file pango-1.34.1.tar.xz
-chk  a6c224424eb3f0dcc231a8000591c05a85df689c
 
 #
 # CAIRO
@@ -189,19 +183,10 @@ file fontconfig-2.11.1.tar.bz2
 chk  08565feea5a4e6375f9d8a7435dac04e52620ff2
 
 #
-# GTK+
-#
-server http://ftp.gnome.org/pub/gnome/sources/gtk+/2.24
-
-file gtk+-2.24.30.tar.xz
-chk  aa5bc6dca583cf2bff137606dc2014f6ea559da7
-
-#
 # GIMP stuff for W32
 #
 server http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies
 
-# checked: 2012-03-28 wk - Not updated - not a security problem
 name pkgconfig-0.23.tar.gz
 file pkg-config-0.23.tar.gz
 chk  b59dddd6b5320bd74c0f74b3339618a327096b2a
@@ -264,20 +249,6 @@ chk  ac1047f9764fd4a4db7dafe47640643164394db9
 
 file gpgme/gpgme-1.6.0.tar.bz2
 chk  21510323495f6220f8f67610c3c27a23d761d43d
-
-# glib-networking
-# Can't update: newer version requires newer glib
-server http://ftp.acc.umu.se/pub/gnome/sources/glib-networking/2.45
-
-file glib-networking-2.45.1.tar.xz
-chk  e6e17d1d6ed86a99db228fcf3ea1bd7f844a0cb5
-
-# libsoup
-# Can't update: newer versions require sqlite
-server ftp://ftp.gnome.org/pub/GNOME/sources/libsoup/2.40
-
-file libsoup-2.40.3.tar.xz
-chk  63ce1d2b022b58831430099b28dee3b47fb63ed1
 
 # libwebp
 server http://downloads.webmproject.org/releases/webp

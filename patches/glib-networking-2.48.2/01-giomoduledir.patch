@@ -2,10 +2,10 @@
 patch -p1 -l -f $* < $0
 exit $?
 
-diff -ur glib-networking-2.45.1-orig/configure glib-networking-2.45.1/configure
---- glib-networking-2.45.1-orig/configure	2015-06-15 23:33:23.402189411 +0200
-+++ glib-networking-2.45.1/configure	2015-06-15 23:36:30.667205438 +0200
-@@ -14175,7 +14175,7 @@
+diff -ruN glib-networking-2.48.2-orig/configure glib-networking-2.48.2/configure
+--- glib-networking-2.48.2-orig/configure	2016-05-09 16:03:18.000000000 +0200
++++ glib-networking-2.48.2/configure	2016-07-09 11:57:00.571747092 +0200
+@@ -14626,7 +14626,7 @@
  
  GLIB_CFLAGS="$GLIB_CFLAGS -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_46"
  
