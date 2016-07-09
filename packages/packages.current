@@ -76,8 +76,8 @@ server http://www.claws-mail.org/win32
 file   libetpan-1.6.tar.gz
 chk    54d0c6d612e3981cc71e52e3c9e04d5805d9917f
 
-file   expat-2.1.0.tar.gz
-chk    b08197d146930a5543a7b99e871cba3da614f6f0
+file   expat-2.2.0.tar.gz
+chk    8453bc52324be4c796fd38742ec48470eef358b3
 
 #
 # curl for Claws plugins
@@ -85,8 +85,8 @@ chk    b08197d146930a5543a7b99e871cba3da614f6f0
 
 server http://curl.haxx.se/download
 
-file  curl-7.45.0.tar.bz2
-chk   ea2e8ef812972202be9ffb2220ef07f7f8ae5b30
+file  curl-7.49.1.tar.bz2
+chk   50db69ee612d36a465e2fec3a35028e11c2766bb
 
 
 #
