@@ -94,8 +94,8 @@ chk   50db69ee612d36a465e2fec3a35028e11c2766bb
 
 server ftp://xmlsoft.org/libxml2
 
-file   libxml2-2.9.3.tar.gz
-chk    0301ce933637e0ceda049047dbefd18714f59b6e
+file   libxml2-2.9.4.tar.gz
+chk    958ae70baf186263a4bd801a81dd5d682aedd1db
 
 #
 # regex for Claws
