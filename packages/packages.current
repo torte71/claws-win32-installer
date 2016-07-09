@@ -76,7 +76,7 @@ server http://www.claws-mail.org/win32
 file   libetpan-1.6.tar.gz
 chk    54d0c6d612e3981cc71e52e3c9e04d5805d9917f
 
-file   expat-2.2.0.tar.gz
+file   expat-2.2.0.tar.bz2
 chk    8453bc52324be4c796fd38742ec48470eef358b3
 
 #
