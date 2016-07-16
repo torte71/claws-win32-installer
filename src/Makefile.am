@@ -23,14 +23,14 @@ EXTRA_DIST = pkg-config claws-mail.nsi \
 				functions.nsi strings.nsi \
 				gnupg-uninst.nsi \
 				sections-installer.nsi sections-uninstaller.nsi \
-        installer-options.ini.in libiconv.def libintl.def \
+        libiconv.def libintl.def \
         Memento.nsh
 
 SUBDIRS = dictionaries
 
 # Need to clean the dll because we bypassed automake.
 #CLEANFILES = g4wihelp.dll versioninfo.txt \
-#             installer-options.ini NEWS.tmp COMPONENTS-list.tmp \
+#             NEWS.tmp COMPONENTS-list.tmp \
 #	     license.blurb cdversioninfo.tmp \
 #	     gpgwrap.exe gpgwrap-2.exe
 
@@ -525,15 +525,12 @@ COMPONENTS-list.tmp : $(top_srcdir)/NEWS
 	awk '/^~~~~~~~~~~~/ { ok++; next} ok==1 {print "    "$$0}' \
             < $(top_srcdir)/NEWS > COMPONENTS-list.tmp
 
-installer-options.ini : $(top_srcdir)/src/installer-options.ini.in
-	cat $(top_srcdir)/src/installer-options.ini.in >installer-options.ini
-
 
 # For some nut-crazy reason someone thought it would be a great idea
 # if makensis changed to the directory of the source file at startup.
 # So we have to pull a couple of strings to correct this.
 claws-mail-$(VERSION).exe: claws-mail.nsi stamps/stamp-final \
-	                license.blurb installer-options.ini versioninfo.txt
+	                license.blurb versioninfo.txt
 	$(MAKENSIS) -V3 -DBUILD_DIR=`pwd` -DTOP_SRCDIR=$(top_srcdir) \
            -DSRCDIR=$(srcdir) $(EXTRA_MAKENSIS_FLAGS) $(srcdir)/claws-mail.nsi
 
@@ -554,7 +551,7 @@ stamps/stamp-dist-self: versioninfo.txt
 
 #claws-mail-src-$(VERSION).exe: claws-mail-src.nsi \
 #	stamps/stamp-final \
-#	stamps/stamp-dist-self installer-options.ini \
+#	stamps/stamp-dist-self \
 #	license.blurb
 #	$(MAKENSIS) -V3 -DBUILD_DIR=`pwd` -DTOP_SRCDIR=$(top_srcdir) \
 #	  -DSRCDIR=$(srcdir) $(EXTRA_MAKENSIS_FLAGS) $(srcdir)/claws-mail-src.nsi
