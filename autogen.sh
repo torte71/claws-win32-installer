@@ -13,18 +13,24 @@
 
 configure_ac="configure.ac"
 
-clawsver=$(echo $(basename $(ls -1 packages/claws-mail-*.*.*.tar.*)) | sed 's/claws-mail-\(.*\)\.tar\..*/\1/')
-clawsver_nogit=$(echo $clawsver | sed 's/git.*//')
+if [ $# -eq 0 ]; then
+	clawsver=$(echo $(basename $(ls -1 packages/claws-mail-*.*.*.tar.*)) | sed 's/claws-mail-\(.*\)\.tar\..*/\1/')
+	clawsver_nogit=$(echo $clawsver | sed 's/git.*//')
 
-gitrev=""
-if [ "$clawsver" != "$clawsver_nogit" ]; then
-	gitrev=$(echo $clawsver | sed 's/.*\(git.*\)/\1/')
+	gitrev=""
+	gitsed=""
+	if [ "$clawsver" != "$clawsver_nogit" ]; then
+		echo "Building a git snapshot of Claws Mail."
+		gitrev=$(echo $clawsver | sed 's/.*\(git.*\)/\1/')
+		gitsed="s/^m4_define(\[my_release\].*/m4_define([my_release], [99])/"
+	fi
+
+	sed \
+		-e "s/^m4_define(\[my_version\].*/m4_define([my_version], [$clawsver_nogit])/" \
+		-e "s/^m4_define(\[my_gitrev\].*/m4_define([my_gitrev], [$gitrev])/" \
+		-e "$gitsed" \
+		${configure_ac}.template >${configure_ac}
 fi
-
-sed -i \
-	-e "s/^m4_define(\[my_version\].*/m4_define([my_version], [$clawsver_nogit])/" \
-	-e "s/^m4_define(\[my_gitrev\].*/m4_define([my_gitrev], [$gitrev])/" \
-	configure.ac
 
 cvtver () {
   awk 'NR==1 {split($NF,A,".");X=1000000*A[1]+1000*A[2]+A[3];print X;exit 0}'
