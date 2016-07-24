@@ -273,7 +273,6 @@ cm_pkg_claws_mail_configure = \
   --disable-spamassassin-plugin --disable-bogofilter-plugin \
   --enable-fancy-plugin --disable-geolocation-plugin \
   --disable-acpi_notifier-plugin --disable-clamd-plugin \
-  --disable-bogofilter-plugin --disable-spamassassin-plugin \
   --disable-perl-plugin --disable-python-plugin --disable-demo-plugin \
   --disable-newmail-plugin --disable-mailmbox-plugin \
 	--with-password-encryption=gnutls \
