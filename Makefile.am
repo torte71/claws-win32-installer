@@ -27,22 +27,42 @@ SUBDIRS = doc packages po src
 
 EXTRA_DIST = autogen.sh \
         doc/license-page doc/GPLv3 \
-				patches/libetpan-1.6/mingw-closesocket-include.patch \
-				patches/libetpan-1.6/ipv6-wsock.patch \
+				patches/cairo-1.10.2/01-fix-A1-surfaces.patch \
+				patches/cairo-1.10.2/02-reset-clip-region.patch \
+				patches/cairo-1.10.2/03-fix-ffs.patch \
+				patches/crypt-1.1/01-build-dll.patch \
+				patches/cyrus-sasl-2.1.26/01-no-undefined.patch \
+				patches/cyrus-sasl-2.1.26/02-exeext.patch \
+				patches/cyrus-sasl-2.1.26/03-fix-plugins.patch \
+				patches/cyrus-sasl-2.1.26/04-manpage-paths.patch \
+				patches/cyrus-sasl-2.1.26/05-remove-warnings.patch \
+				patches/cyrus-sasl-2.1.26/06-fix-sqlite-search.patch \
+				patches/cyrus-sasl-2.1.26/07-fix-pkgconfig.patch \
+				patches/cyrus-sasl-2.1.26/08-cyrus-sasl-2.1.26-size_t.patch \
+				patches/cyrus-sasl-2.1.26/09-cyrus-sasl-2.1.26-msys2.patch \
+				patches/cyrus-sasl-2.1.26/10-MinGW-w64-already-has-getopt.patch \
+				patches/cyrus-sasl-2.1.26/11-MinGW-w64-add-disable-win32-reg-option.patch \
+				patches/cyrus-sasl-2.1.26/12-MinGW-w64-uses-ws2_32-not-socket.patch \
+				patches/cyrus-sasl-2.1.26/13-plugins-COMPAT_OBJS_REAL.patch \
+				patches/cyrus-sasl-2.1.26/14-MinGW-w64-add-LIBSASL_API-to-function-definitions.patch \
+				patches/cyrus-sasl-2.1.26/15-MinGW-w64-define-LIBSASL_EXPORTS_eq_1-for-sasldb.patch \
+				patches/cyrus-sasl-2.1.26/16-MinGW-w64-define-WIN32_LEAN_AND_MEAN-avoiding-handle_t-redef.patch \
+				patches/cyrus-sasl-2.1.26/17-MinGW-w64-define-S_IRUSR-and-S_IWUSR.patch \
+				patches/cyrus-sasl-2.1.26/18-MinGW-w64-use-windlopen.c-not-dlopen.c.patch \
+				patches/cyrus-sasl-2.1.26/19-paths-relocation.patch \
+				patches/cyrus-sasl-2.1.26/20-makemd5.patch \
+				patches/cyrus-sasl-2.1.26/99-reautomagic.patch \
+				patches/glib-2.49.2/01-socket.patch \
+				patches/glib-2.49.2/02-folder-icons.patch \
+				patches/glib-networking-2.48.2/01-giomoduledir.patch \
+				patches/gnutls-3.5.2/01-no-endservent.patch \
+				patches/gpgme-1.6.0/01-remove-mkstemp.patch \
 				patches/libetpan-1.6/ipv6.patch \
+				patches/libetpan-1.6/ipv6-wsock.patch \
+				patches/libetpan-1.6/mingw-closesocket-include.patch \
+				patches/libetpan-1.6/sasl_set_path.patch \
 				patches/libiconv-1.14/01-aliases2_lookup-no-inline.patch \
 				patches/w32pth-2.0.5/01-def-fix.patch \
 				patches/webkit-1.3.10/01-fixes.patch \
 				patches/webkit-1.3.10/02-print-size.patch \
-				patches/webkit-1.3.10/03-maketokenizer-flex2.60.patch \
-				patches/glib-2.45.2/01-socket.patch \
-				patches/glib-2.45.2/02-folder-icons.patch \
-				patches/cairo-1.10.2/01-fix-A1-surfaces.patch \
-				patches/cairo-1.10.2/02-reset-clip-region.patch \
-				patches/cairo-1.10.2/03-fix-ffs.patch \
-				patches/gpgme-1.6.0/01-remove-mkstemp.patch \
-				patches/gnutls-3.4.7/01-no-endservent.patch \
-				patches/glib-networking-2.45.1/01-giomoduledir.patch \
-				patches/claws-mail-3.13.2/01-no-include-socket-h.patch \
-				patches/claws-mail-3.13.2/02-rssyl-typo-fix.patch \
-				patches/claws-mail-3.13.2/03-rcdir.patch
+				patches/webkit-1.3.10/03-maketokenizer-flex2.60.patch
