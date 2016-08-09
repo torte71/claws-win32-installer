@@ -94,15 +94,13 @@ fi
 
 # Convenience option to use certain configure options for some hosts.
 myhost=""
-myhostsub=""
 case "$1" in
     --build-w32)
         myhost="w32"
         shift
         ;;
-    --build-w32-w64)
-        myhost="w32"
-        myhostsub="w64"
+    --build-w64)
+        myhost="w64"
         shift
         ;;
     --build*)
@@ -126,19 +124,9 @@ if [ "$myhost" = "w32" ]; then
     fi
     build=`$tsdir/config.guess`
 
-    case $myhostsub in
-        w64)
-          toolprefixes="$w32_toolprefixes i686-w64-mingw32 i586-mingw32msvc"
-          toolprefixes="$toolprefixes i386-mingw32msvc mingw32"
-          extraoptions="$w32_extraoptions"
-          extratoolprefixes="$w64_toolprefixes x86_64-w64-mingw32"
-          ;;
-        *)
-          toolprefixes="$w32_toolprefixes i686-w64-mingw32 i586-mingw32msvc"
-          toolprefixes="$toolprefixes i386-mingw32msvc mingw32"
-          extraoptions="$w32_extraoptions"
-          ;;
-    esac
+    toolprefixes="$w32_toolprefixes i686-w64-mingw32 i586-mingw32msvc"
+    toolprefixes="$toolprefixes i386-mingw32msvc mingw32"
+    extraoptions="$w32_extraoptions"
 
     # Locate the cross compiler
     crossbindir=
@@ -150,26 +138,9 @@ if [ "$myhost" = "w32" ]; then
         fi
     done
 
-    w64_crossbindir=
-    for extra_host in $extratoolprefixes; do
-        if ${extra_host}-gcc --version >/dev/null 2>&1 ; then
-            w64_crossbindir=/usr/${extra_host}/bin
-            extraoptions="$extraoptions --with-additional-gpgex-host=${extra_host} "
-            break;
-        fi
-    done
-
     if [ -z "$crossbindir" ]; then
         echo "Cross compiler kit not installed" >&2
         echo "Under Debian GNU/Linux Jessie and later, you may install it using" >&2
-        echo "  apt-get install mingw-w64" >&2
-        echo "Stop." >&2
-        exit 1
-    fi
-
-    if [ "$myhostsub" = "w64" -a -z "$w64_crossbindir" ]; then
-        echo "Cross compiler for x64 architecture not installed" >&2
-        echo "Under Debian GNU/Linux, you may install it using" >&2
         echo "  apt-get install mingw-w64" >&2
         echo "Stop." >&2
         exit 1
