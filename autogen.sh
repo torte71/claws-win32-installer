@@ -113,9 +113,18 @@ case "$1" in
 esac
 
 
-# ***** W32 build script *******
+# ***** Windows build script *******
 # Used to cross-compile for Windows.
 if [ "$myhost" = "w32" ]; then
+    toolprefixes="$w32_toolprefixes i686-w64-mingw32 i586-mingw32msvc"
+    toolprefixes="$toolprefixes i386-mingw32msvc mingw32"
+    extraoptions="$w32_extraoptions"
+elif [ "$myhost" = "w64" ]; then
+    toolprefixes="$w64_toolprefixes x86_64-w64-mingw32"
+    extraoptions="$w64_extraoptions"
+fi
+
+if [ -n "$myhost" ]; then
     tmp=`dirname $0`
     tsdir=`cd "$tmp"; pwd`
     if [ ! -f $tsdir/config.guess ]; then
@@ -123,10 +132,6 @@ if [ "$myhost" = "w32" ]; then
         exit 1
     fi
     build=`$tsdir/config.guess`
-
-    toolprefixes="$w32_toolprefixes i686-w64-mingw32 i586-mingw32msvc"
-    toolprefixes="$toolprefixes i386-mingw32msvc mingw32"
-    extraoptions="$w32_extraoptions"
 
     # Locate the cross compiler
     crossbindir=
@@ -156,12 +161,9 @@ if [ "$myhost" = "w32" ]; then
     $tsdir/configure --host=${host} --build=${build} --enable-maintainer-mode \
                      ${extraoptions} "$@"
     rc=$?
-
     exit $rc
 fi
-# ***** end W32 build script *******
-
-
+# ***** end Windows build script *******
 
 
 # Grep the required versions from configure.ac

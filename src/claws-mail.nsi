@@ -41,8 +41,12 @@ SetCompressor /SOLID lzma
 Name "${PRETTY_PACKAGE}"
 OutFile "${PACKAGE}-${VERSION_NO_REL}${GIT_REVISION}-${RELEASE}.exe"
 
-# Add version information to the file properties.
+!include "x64.nsh"
+
+# Default 32-bit here, we override for 64-bit in .onInit
 InstallDir "$PROGRAMFILES\${PRETTY_PACKAGE}"
+
+# Add version information to the file properties.
 VIProductVersion "${PROD_VERSION}"
 VIAddVersionKey "ProductName" "${PACKAGE} (${VERSION})"
 VIAddVersionKey "Comments" \
@@ -154,6 +158,11 @@ Var STARTMENU_FOLDER
 #!include "../po/catalogs.nsi"
 
 Function .onInit
+	${If} ${RunningX64}
+		SetRegView 64
+		StrCpy $INSTDIR "$PROGRAMFILES64\AppName"
+	${EndIf}
+
   SetOutPath $TEMP
 
 	StrCpy $LANGUAGE ${LANG_ENGLISH}

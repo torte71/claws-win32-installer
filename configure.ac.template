@@ -145,26 +145,29 @@ changequote([,])dnl
 
 missing_opt_tools=""
 
-libgcc_dll=no
-AC_ARG_WITH([libgcc_s_sjlj-1-dll],
-           AC_HELP_STRING([--with-libgcc_s_sjlj-1-dll=FILE],
-                          [use the libgcc_s_sjlj-1 DLL]),
-           [libgcc_dll=$withval])
-
-if test "$libgcc_dll" = "no"; then
-  file="/usr/lib/gcc/$host/${gcc_major_minor}-win32/libgcc_s_sjlj-1.dll"
+have_libgcc_dll=no
+if test "$have_libgcc_dll" = "no"; then
+	if test "$host" = "i686-w64-mingw32"; then
+	  dllfile="libgcc_s_sjlj-1.dll"
+	elif test "$host" = "x86_64-w64-mingw32"; then
+	  dllfile="libgcc_s_seh-1.dll"
+	fi
+	file="/usr/lib/gcc/$host/${gcc_major_minor}-win32/${dllfile}"
   if test -r "$file"; then
-    libgcc_dll="$file"
+    libgcc_dll_path="$file"
+		libgcc_dll=$(basename "$file")
+		have_libgcc_dll=yes
   fi
 fi
-if test "$libgcc_dll" = "no"; then
-  missing_opt_tools="libgcc_s_sjlj-1.dll $missing_opt_tools"
+
+if test "$have_libgcc_dll" = "no"; then
+  missing_opt_tools="$libgcc_dll $missing_opt_tools"
 else
-  if test -r "$libgcc_dll"; then
-    cp $libgcc_dll src/libgcc_s_sjlj-1.dll-x
-  else
-    missing_opt_tools="libgcc_s_sjlj-1.dll $missing_opt_tools"
-  fi
+  if test -r "$libgcc_dll_path"; then
+		cp $libgcc_dll_path src/${libgcc_dll}-x
+	else
+	  missing_opt_tools="$libgcc_dll $missing_opt_tools"
+	fi
 fi
 
 libstdcpp_dll=no
@@ -209,6 +212,15 @@ else
     missing_opt_tools="libwinpthread-1.dll $missing_opt_tools"
   fi
 fi
+
+# Set correct DLL names, based on arch
+if test "$host" = "i686-w64-mingw32"; then
+	gpg_dll_num=""
+elif test "$host" = "x86_64-w64-mingw32"; then
+	gpg_dll_num="6"
+fi
+AC_SUBST(gpg_dll_num)
+AC_SUBST(libgcc_dll)
 
 # For the manual we need:
 AC_CHECK_PROGS(DOCBOOK2HTML, docbook2html)
@@ -298,7 +310,6 @@ $i"
     done
     AC_MSG_ERROR([Packages with more that one source version:$tmp])
 fi
-
 
 # Finalize.
 

@@ -279,8 +279,6 @@ RMDir "$INSTDIR\share\glib-2.0\schemas"
 RMDir "$INSTDIR\share\glib-2.0"
 RMDir "$INSTDIR\share"
 
-Delete "$INSTDIR\gspawn-win32-helper.exe"
-Delete "$INSTDIR\gspawn-win32-helper-console.exe"
 Delete "$INSTDIR\gdbus.exe"
 Delete "$INSTDIR\gio-querymodules.exe"
 Delete "$INSTDIR\glib-compile-resources.exe"
@@ -289,8 +287,6 @@ Delete "$INSTDIR\glib-genmarshal.exe"
 Delete "$INSTDIR\gobject-query.exe"
 Delete "$INSTDIR\gresource.exe"
 Delete "$INSTDIR\gsettings.exe"
-Delete "$INSTDIR\gspawn-win32-helper-console.exe"
-Delete "$INSTDIR\gspawn-win32-helper.exe"
 
 Delete /REBOOTOK "$INSTDIR\libglib-2.0-0.dll"
 Delete /REBOOTOK "$INSTDIR\libgmodule-2.0-0.dll"
@@ -307,7 +303,7 @@ Delete /REBOOTOK "$INSTDIR\libffi-6.dll"
 
 #######################################
 ### libgpg-error
-Delete /REBOOTOK "$INSTDIR\libgpg-error-0.dll"
+Delete /REBOOTOK "$INSTDIR\libgpg-error${gpg_dll_num}-0.dll"
 
 Delete "$INSTDIR\share\locale\de\LC_MESSAGES\libgpg-error.mo"
 Delete "$INSTDIR\share\locale\pl\LC_MESSAGES\libgpg-error.mo"
@@ -323,7 +319,7 @@ RMDir "$INSTDIR\include"
 
 #######################################
 ### libassuan
-Delete /REBOOTOK "$INSTDIR\libassuan-0.dll"
+Delete /REBOOTOK "$INSTDIR\libassuan${gpg_dll_num}-0.dll"
 Delete "$INSTDIR\lib\libassuan.imp"
 Delete "$INSTDIR\include\assuan.h"
 RMDir "$INSTDIR\lib"
@@ -414,7 +410,7 @@ Delete /REBOOTOK "$INSTDIR\crypt-0.dll"
 
 ### Final cleanup
 Delete /REBOOTOK "$INSTDIR\libstdc++-6.dll"
-Delete /REBOOTOK "$INSTDIR\libgcc_s_sjlj-1.dll"
+Delete /REBOOTOK "$INSTDIR\${libgcc_dll}.dll"
 Delete /REBOOTOK "$INSTDIR\libwinpthread-1.dll"
 
 # Remove the locale directories.

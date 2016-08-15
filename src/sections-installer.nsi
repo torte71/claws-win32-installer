@@ -7,7 +7,7 @@ SetOutPath "$INSTDIR"
 # build directory with a different suffix, so that makensis does not
 # list sumbol names.
 File /oname=libstdc++-6.dll     "${BUILD_DIR}/libstdc++-6.dll-x"
-File /oname=libgcc_s_sjlj-1.dll "${BUILD_DIR}/libgcc_s_sjlj-1.dll-x"
+File /oname=${libgcc_dll} "${BUILD_DIR}/${libgcc_dll}-x"
 File /oname=libwinpthread-1.dll "${BUILD_DIR}/libwinpthread-1.dll-x"
 
 ### Now install files for each software component
@@ -131,11 +131,11 @@ File ${prefix}/bin/libetpan-17.dll
 !insertmacro SetPrefix libassuan
 ClearErrors
 SetOverwrite try
-File "${prefix}/bin/libassuan-0.dll"
+File "${prefix}/bin/libassuan${gpg_dll_num}-0.dll"
 SetOverwrite lastused
 ifErrors 0 +3
-	File /oname=libassuan-0.dll.tmp "${prefix}/bin/libassuan-0.dll"
-	Rename /REBOOTOK libassuan-0.dll.tmp libassuan-0.dll
+	File /oname=libassuan${gpg_dll_num}-0.tmp "${prefix}/bin/libassuan${gpg_dll_num}-0.dll"
+	Rename /REBOOTOK libassuan${gpg_dll_num}-0.dll.tmp libassuan${gpg_dll_num}.dll
 
 SetOutPath "$INSTDIR\lib"
 File /oname=libgpg-assuan.imp "${prefix}/lib/libassuan.dll.a"
@@ -150,11 +150,11 @@ SetOutPath "$INSTDIR"
 !insertmacro SetPrefix2 libgpg_error libgpg-error
 ClearErrors
 SetOverwrite try
-File "${prefix}/bin/libgpg-error-0.dll"
+File "${prefix}/bin/libgpg-error${gpg_dll_num}-0.dll"
 SetOverwrite lastused
 ifErrors 0 +3
-	File /oname=libgpg-error-0.dll.tmp "${prefix}/bin/libgpg-error-0.dll"
-	Rename /REBOOTOK libgpg-error-0.dll.tmp libgpg-error-0.dll
+	File /oname=libgpg-error${gpg_dll_num}-0.dll.tmp "${prefix}/bin/libgpg-error${gpg_dll_num}-0.dll"
+	Rename /REBOOTOK libgpg-error${gpg_dll_num}-0.dll.tmp libgpg-error${gpg_dll_num}-0.dll
 
 SetOutPath "$INSTDIR\share\locale\de\LC_MESSAGES"
 File ${prefix}/share/locale/de/LC_MESSAGES/libgpg-error.mo
@@ -184,8 +184,6 @@ File ${prefix}/bin/libffi-6.dll
 #######################################
 ### glib
 !insertmacro SetPrefix glib
-File ${prefix}/bin/gspawn-win32-helper.exe
-File ${prefix}/bin/gspawn-win32-helper-console.exe
 File ${prefix}/bin/libglib-2.0-0.dll
 File ${prefix}/bin/libgmodule-2.0-0.dll
 File ${prefix}/bin/libgobject-2.0-0.dll
@@ -200,8 +198,6 @@ File ${prefix}/bin/glib-genmarshal.exe
 File ${prefix}/bin/gobject-query.exe
 File ${prefix}/bin/gresource.exe
 File ${prefix}/bin/gsettings.exe
-File ${prefix}/bin/gspawn-win32-helper-console.exe
-File ${prefix}/bin/gspawn-win32-helper.exe
 
 SetOutPath "$INSTDIR\share\glib-2.0\schemas"
 File ${prefix}/share/glib-2.0/schemas/gschema.dtd

@@ -136,8 +136,6 @@ cm_pkg_harfbuzz_configure = \
 	LDFLAGS=\"-L$(idir)/lib\"
 
 cm_pkg_freetype_configure = \
-	--host=i686-w64-mingw32 \
-	--build=x86_64-linux-gnu \
 	--with-png --without-bzip2 --with-zlib \
 	CPPFLAGS=\"-I$(idir)/include\" \
 	LDFLAGS=\"-L$(idir)/lib\"
@@ -199,13 +197,26 @@ cm_pkg_libassuan_configure =  --silent --enable-static
 # However, the Libgcrypt's regression tests work just fine.  I don't
 # have a windows instance on AES-NI, thus I can't currently debug
 # this. As a workaround we disable AES-NI for now.
-cm_pkg_libgcrypt_configure = --silent \
+cm_pkg_libgcrypt_configure = \
   --with-gpg-error-prefix=$(idir) \
   --disable-aesni-support
 
 cm_pkg_libpng_configure = HAVE_SOLARIS_LD_FALSE=yes CPPFLAGS=\"-I$(idir)/include -DPNG_BUILD_DLL\" LDFLAGS=\"-L$(idir)/lib\" LIBPNG_DEFINES=\"-DPNG_BUILD_DLL\"
 
-cm_pkg_enchant_configure = CPPFLAGS=\"-I$(idir)/include -UENCHANT_GLOBAL_MODULE_DIR -UENCHANT_GLOBAL_ORDERING -UENCHANT_MYSPELL_DICT_DIR -UENCHANT_USPELL_DICT_DIR\" LDFLAGS=\"-L$(idir)/lib\"
+cm_pkg_enchant_configure = \
+	--enable-ispell \
+	--enable-myspell \
+	--enable-aspell \
+	--disable-voikko \
+	--disable-uspell \
+	--disable-hspell \
+	--disable-zemberek \
+	CPPFLAGS=\"-I$(idir)/include \
+	-UENCHANT_GLOBAL_MODULE_DIR \
+	-UENCHANT_GLOBAL_ORDERING \
+	-UENCHANT_MYSPELL_DICT_DIR \
+	-UENCHANT_USPELL_DICT_DIR\" \
+	LDFLAGS=\"-L$(idir)/lib\"
 
 # The LDFLAGS is needed for -lintl for glib.
 cm_pkg_gpgme_configure = --silent \
