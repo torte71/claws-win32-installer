@@ -158,10 +158,10 @@ Var STARTMENU_FOLDER
 #!include "../po/catalogs.nsi"
 
 Function .onInit
-	${If} ${RunningX64}
-		SetRegView 64
-		StrCpy $INSTDIR "$PROGRAMFILES64\AppName"
-	${EndIf}
+#	${If} ${RunningX64}
+#		SetRegView 64
+#		StrCpy $INSTDIR "$PROGRAMFILES64\Claws Mail"
+#	${EndIf}
 
   SetOutPath $TEMP
 

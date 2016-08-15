@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# We run this primarily for the libtoolize step, so that libtool
+# gets updated to a newer version. The version enchant ships is older
+# and buggy when it comes to generating a DLL for x86_64.
+./autogen.sh --no-configure

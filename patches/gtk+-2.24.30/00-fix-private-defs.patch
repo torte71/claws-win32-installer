@@ -1,0 +1,3 @@
+#!/bin/bash
+
+sed -i -e 's: PRIVATE$::' gtk/gtk.def gtk/gtk.symbols
