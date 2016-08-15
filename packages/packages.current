@@ -63,8 +63,8 @@ chk 3adf0db008a0a2ee40dd016c137e0abd8b320933
 
 server http://www.claws-mail.org/releases
 
-file   claws-mail-3.13.2.tar.xz
-chk    8d670c30b07ac47ee1772e47f6721f49df77a4a7
+file   claws-mail-3.14.0.tar.xz
+chk    fe5464abeab7391d6947a4570895fd834e52b871
 
 #
 # Various libraries, mostly those from sf.net
@@ -241,8 +241,8 @@ server ftp://ftp.gnupg.org/gcrypt
 file libgpg-error/libgpg-error-1.20.tar.bz2
 chk  89c961f63469739fe816a56dcdd86c2e1897cace
 
-file libgcrypt/libgcrypt-1.6.4.tar.bz2
-chk  ed52add1ce635deeb2f5c6650e52667debd4ec70
+file libgcrypt/libgcrypt-1.7.2.tar.bz2
+chk  85a6a936bcab4c3c05f5efbf6ce847f23d35c0c4
 
 file libassuan/libassuan-2.4.2.tar.bz2
 chk  ac1047f9764fd4a4db7dafe47640643164394db9
