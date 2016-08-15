@@ -39,6 +39,7 @@ RMDir "$INSTDIR\lib"
 Delete "$INSTDIR\share\locale\bg\LC_MESSAGES\claws-mail.mo"
 Delete "$INSTDIR\share\locale\ca\LC_MESSAGES\claws-mail.mo"
 Delete "$INSTDIR\share\locale\cs\LC_MESSAGES\claws-mail.mo"
+Delete "$INSTDIR\share\locale\da\LC_MESSAGES\claws-mail.mo"
 Delete "$INSTDIR\share\locale\de\LC_MESSAGES\claws-mail.mo"
 Delete "$INSTDIR\share\locale\en_GB\LC_MESSAGES\claws-mail.mo"
 Delete "$INSTDIR\share\locale\eo\LC_MESSAGES\claws-mail.mo"
@@ -57,6 +58,7 @@ Delete "$INSTDIR\share\locale\pt_BR\LC_MESSAGES\claws-mail.mo"
 Delete "$INSTDIR\share\locale\ru\LC_MESSAGES\claws-mail.mo"
 Delete "$INSTDIR\share\locale\sk\LC_MESSAGES\claws-mail.mo"
 Delete "$INSTDIR\share\locale\sv\LC_MESSAGES\claws-mail.mo"
+Delete "$INSTDIR\share\locale\tr\LC_MESSAGES\claws-mail.mo"
 Delete "$INSTDIR\share\locale\zh_TW\LC_MESSAGES\claws-mail.mo"
 
 #######################################
@@ -328,11 +330,11 @@ RMDir "$INSTDIR\include"
 #######################################
 ### cyrus-sasl
 Delete /REBOOTOK "$INSTDIR\libsasl2-3.dll"
-Delete /REBOOTOK "$INSTDIR\lib/sasl2/libanonymous-3.dll"
-Delete /REBOOTOK "$INSTDIR\lib/sasl2/libcrammd5-3.dll"
-Delete /REBOOTOK "$INSTDIR\lib/sasl2/libdigestmd5-3.dll"
-Delete /REBOOTOK "$INSTDIR\lib/sasl2/liblogin-3.dll"
-Delete /REBOOTOK "$INSTDIR\lib/sasl2/libplain-3.dll"
+Delete /REBOOTOK "$INSTDIR\lib\sasl2\libanonymous-3.dll"
+Delete /REBOOTOK "$INSTDIR\lib\sasl2\libcrammd5-3.dll"
+Delete /REBOOTOK "$INSTDIR\lib\sasl2\libdigestmd5-3.dll"
+Delete /REBOOTOK "$INSTDIR\lib\sasl2\liblogin-3.dll"
+Delete /REBOOTOK "$INSTDIR\lib\sasl2\libplain-3.dll"
 RMDir "$INSTDIR\lib\sasl2"
 RMDir "$INSTDIR\lib"
 
@@ -410,7 +412,7 @@ Delete /REBOOTOK "$INSTDIR\crypt-0.dll"
 
 ### Final cleanup
 Delete /REBOOTOK "$INSTDIR\libstdc++-6.dll"
-Delete /REBOOTOK "$INSTDIR\${libgcc_dll}.dll"
+Delete /REBOOTOK "$INSTDIR\${libgcc_dll}"
 Delete /REBOOTOK "$INSTDIR\libwinpthread-1.dll"
 
 # Remove the locale directories.
