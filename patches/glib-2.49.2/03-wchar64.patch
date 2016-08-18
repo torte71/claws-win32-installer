@@ -1,0 +1,19 @@
+#! /bin/sh
+patch -p1 -l -f $* < $0
+exit $?
+
+diff -ruN glib-2.49.2-orig/glib/gstdio.c glib-2.49.2/glib/gstdio.c
+--- glib-2.49.2-orig/glib/gstdio.c	2016-08-17 15:33:32.086368623 +0200
++++ glib-2.49.2/glib/gstdio.c	2016-08-17 15:33:50.274002720 +0200
+@@ -54,6 +54,11 @@
+ #define _wstat _wstat32
+ #endif
+ 
++#if defined(_WIN64)
++#undef _wstat
++#define _wstat _wstat64
++#endif
++
+ /**
+  * g_access:
+  * @filename: (type filename): a pathname in the GLib file name encoding

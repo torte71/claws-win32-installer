@@ -1,0 +1,77 @@
+#! /bin/sh
+patch -p1 -l -f $* < $0
+exit $?
+
+diff -ruN regex-20090805-orig/lib/regex.h regex-20090805/lib/regex.h
+--- regex-20090805-orig/lib/regex.h	2016-08-17 23:37:38.252583496 +0200
++++ regex-20090805/lib/regex.h	2016-08-18 10:31:59.942333978 +0200
+@@ -37,38 +37,6 @@
+ # define __USE_GNU_REGEX 1
+ #endif
+ 
+-#ifdef _REGEX_LARGE_OFFSETS
+-
+-/* Use types and values that are wide enough to represent signed and
+-   unsigned byte offsets in memory.  This currently works only when
+-   the regex code is used outside of the GNU C library; it is not yet
+-   supported within glibc itself, and glibc users should not define
+-   _REGEX_LARGE_OFFSETS.  */
+-
+-/* The type of the offset of a byte within a string.
+-   For historical reasons POSIX 1003.1-2004 requires that regoff_t be
+-   at least as wide as off_t.  However, many common POSIX platforms set
+-   regoff_t to the more-sensible ssize_t and the Open Group has
+-   signalled its intention to change the requirement to be that
+-   regoff_t be at least as wide as ptrdiff_t and ssize_t; see XBD ERN
+-   60 (2005-08-25).  We don't know of any hosts where ssize_t or
+-   ptrdiff_t is wider than ssize_t, so ssize_t is safe.  */
+-typedef ssize_t regoff_t;
+-
+-/* The type of nonnegative object indexes.  Traditionally, GNU regex
+-   uses 'int' for these.  Code that uses __re_idx_t should work
+-   regardless of whether the type is signed.  */
+-typedef size_t __re_idx_t;
+-
+-/* The type of object sizes.  */
+-typedef size_t __re_size_t;
+-
+-/* The type of object sizes, in places where the traditional code
+-   uses unsigned long int.  */
+-typedef size_t __re_long_size_t;
+-
+-#else
+-
+ /* Use types that are binary-compatible with the traditional GNU regex
+    implementation, which mishandles strings longer than INT_MAX.  */
+ 
+@@ -77,8 +45,6 @@
+ typedef unsigned int __re_size_t;
+ typedef unsigned long int __re_long_size_t;
+ 
+-#endif
+-
+ /* The following two types have to be signed and unsigned integer type
+    wide enough to hold a value of a pointer.  For most ANSI compilers
+    ptrdiff_t and size_t should be likely OK.  Still size of these two
+diff -ruN regex-20090805-orig/lib/regex_internal.h regex-20090805/lib/regex_internal.h
+--- regex-20090805-orig/lib/regex_internal.h	2016-08-17 23:37:38.252583496 +0200
++++ regex-20090805/lib/regex_internal.h	2016-08-18 10:32:25.301817741 +0200
+@@ -136,18 +136,10 @@
+ #define REG_ERROR ((Idx) -2)
+ 
+ /* Test whether N is a valid index, and is not one of the above.  */
+-#ifdef _REGEX_LARGE_OFFSETS
+-# define REG_VALID_INDEX(n) ((Idx) (n) < REG_ERROR)
+-#else
+ # define REG_VALID_INDEX(n) (0 <= (n))
+-#endif
+ 
+ /* Test whether N is a valid nonzero index.  */
+-#ifdef _REGEX_LARGE_OFFSETS
+-# define REG_VALID_NONZERO_INDEX(n) ((Idx) ((n) - 1) < (Idx) (REG_ERROR - 1))
+-#else
+ # define REG_VALID_NONZERO_INDEX(n) (0 < (n))
+-#endif
+ 
+ /* A hash value, suitable for computing hash tables.  */
+ typedef __re_size_t re_hashval_t;
