@@ -243,4 +243,7 @@ $AUTOMAKE --gnu -Wno-portability;
 echo "Running autoconf${FORCE} ..."
 $AUTOCONF${FORCE}
 
-echo "You may now run \"./autogen.sh --build-w32 && make\"."
+echo
+echo "You may now run ./autogen.sh with --build-w32 or --build-w64 switch,"
+echo "followed by \"make\"."
+echo

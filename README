@@ -11,9 +11,12 @@ Instructions:
    [...]
    $ cd ..
 
-2. Configure the source tree for cross compilation:
+2. Configure the source tree for cross compilation, for either
+   32-bit or 64-bit release:
 
    $ ./autogen.sh --build-w32
+	 or
+	 $ ./autogen.sh --build-w64
 
 3. Build the installer:
 
