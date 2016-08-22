@@ -666,7 +666,7 @@ Delete "$DESKTOP\Claws-Mail Manual.lnk"
 	"Field 2" "State"
 	IntCmp $R0 0 no_start_menu
 
-	SetOutPath "$SMPROGRAMS\$STARTMENU_FOLDER"
+	SetOutPath "$INSTDIR"
 
 	CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Claws-Mail.lnk" \
 		"$INSTDIR\claws-mail.exe" \
@@ -687,6 +687,8 @@ Delete "$DESKTOP\Claws-Mail Manual.lnk"
 	"Field 3" "State"
 	IntCmp $R0 0 no_desktop
 
+	SetOutPath "$INSTDIR"
+
 	CreateShortCut "$DESKTOP\Claws-Mail.lnk" \
 		"$INSTDIR\claws-mail.exe" \
 		"" "" "" SW_SHOWNORMAL "" $(T_Menu_ClawsMail)
@@ -697,6 +699,8 @@ Delete "$DESKTOP\Claws-Mail Manual.lnk"
 !insertmacro MUI_INSTALLOPTIONS_READ $R0 "installer-options.ini" \
 	"Field 4" "State"
 	IntCmp $R0 0 no_quicklaunch
+
+	SetOutPath "$INSTDIR"
 
 	CreateShortCut "$QUICKLAUNCH\Claws-Mail.lnk" \
 		"$INSTDIR\claws-mail.exe" \
