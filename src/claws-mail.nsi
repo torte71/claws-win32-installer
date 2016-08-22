@@ -1,4 +1,4 @@
-!addincludedir "${TOP_SRCDIR}/po"
+#!addincludedir "${TOP_SRCDIR}/po"
 !include "config.nsi"
 
 !define PACKAGE "claws-mail"
@@ -38,9 +38,12 @@ SetCompressor /SOLID lzma
 
 !include "functions.nsi"
 
+# Set default installation dir based on arch.
 !if ${w64} == "yes"
+InstallDir "$PROGRAMFILES64\${PRETTY_PACKAGE}"
 !define instfile_suffix ""
 !else
+InstallDir "$PROGRAMFILES\${PRETTY_PACKAGE}"
 !define instfile_suffix "-32bit"
 !endif
 
@@ -48,9 +51,6 @@ Name "${PRETTY_PACKAGE}"
 OutFile "${PACKAGE}-${VERSION_NO_REL}${GIT_REVISION}-${RELEASE}${instfile_suffix}.exe"
 
 #!include "x64.nsh"
-
-# Default 32-bit here, we override for 64-bit in .onInit
-InstallDir "$PROGRAMFILES\${PRETTY_PACKAGE}"
 
 # Add version information to the file properties.
 VIProductVersion "${PROD_VERSION}"
@@ -113,6 +113,7 @@ ReserveFile "${TOP_SRCDIR}/doc/logo/claws-mail-nsis-wizard-install-164x314.bmp"
 !insertmacro MUI_PAGE_LICENSE "license.blurb"
 
 ### Install directory page
+!define MUI_PAGE_CUSTOMFUNCTION_PRE CheckInstallDirectory
 !define MUI_PAGE_CUSTOMFUNCTION_LEAVE CheckExistingVersion
 !insertmacro MUI_PAGE_DIRECTORY
 
@@ -164,11 +165,6 @@ Var STARTMENU_FOLDER
 #!include "../po/catalogs.nsi"
 
 Function .onInit
-#	${If} ${RunningX64}
-#		SetRegView 64
-#		StrCpy $INSTDIR "$PROGRAMFILES64\Claws Mail"
-#	${EndIf}
-
   SetOutPath $TEMP
 
 	StrCpy $LANGUAGE ${LANG_ENGLISH}

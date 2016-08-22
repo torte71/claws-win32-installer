@@ -1,3 +1,21 @@
+# If Claws Mail is already installed, set $INSTDIR from the current
+# install location, stored in registry.
+# This is needed so that the install directory page offers correct
+# value, for people who chose a non-default install location.
+#
+# This function should be called from .onInit
+Function CheckInstallDirectory
+	ReadRegStr $0 HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\${PRETTY_PACKAGE_SHORT}" "InstallLocation"
+	IfErrors continue setinstdir
+		Abort
+
+	setinstdir:
+		StrCpy $INSTDIR $0
+
+	continue:
+
+FunctionEnd
+
 # Check whether Claws Mail has already been installed.  This is called as
 # a leave function from the directory page.  A call to abort will get
 # back to the directory selection.
