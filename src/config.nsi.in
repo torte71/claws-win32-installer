@@ -32,6 +32,7 @@
 # DLL filenames which change between i686 and x86_64
 !define gpg_dll_num @gpg_dll_num@
 !define libgcc_dll @libgcc_dll@
+!define w64 @w64@
 
 !define build @build_cpu@-@build_os@
 !define host @host_cpu@-@host_os@

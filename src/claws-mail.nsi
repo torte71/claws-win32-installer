@@ -38,10 +38,16 @@ SetCompressor /SOLID lzma
 
 !include "functions.nsi"
 
-Name "${PRETTY_PACKAGE}"
-OutFile "${PACKAGE}-${VERSION_NO_REL}${GIT_REVISION}-${RELEASE}.exe"
+!if ${w64} == "yes"
+!define instfile_suffix ""
+!else
+!define instfile_suffix "-32bit"
+!endif
 
-!include "x64.nsh"
+Name "${PRETTY_PACKAGE}"
+OutFile "${PACKAGE}-${VERSION_NO_REL}${GIT_REVISION}-${RELEASE}${instfile_suffix}.exe"
+
+#!include "x64.nsh"
 
 # Default 32-bit here, we override for 64-bit in .onInit
 InstallDir "$PROGRAMFILES\${PRETTY_PACKAGE}"

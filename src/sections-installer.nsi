@@ -32,15 +32,6 @@ ifErrors 0 +3
 	File /oname=libiconv-2.dll.tmp "${prefix}/bin/libiconv-2.dll"
 	Rename /REBOOTOK libiconv-2.dll.tmp libiconv-2.dll
 
-  # Also install the same file under the name bsfilter expects.
-	ClearErrors
-	SetOverwrite try
-	File /oname=iconv.dll "${prefix}/bin/libiconv-2.dll"
-	SetOverwrite lastused
-	ifErrors 0 +3
-		File /oname=iconv.dll.tmp "${prefix}/bin/libiconv-2.dll"
-		Rename /REBOOTOK iconv.dll.tmp iconv.dll
-
 SetOutPath "$INSTDIR\lib"
 File "${prefix}/lib/charset.alias"
 SetOutPath "$INSTDIR"
@@ -80,6 +71,14 @@ File ${prefix}/bin/zlib1.dll
 !insertmacro SetPrefix bsfilter
 File ${prefix}/bin/bsfilterw.exe
 File ${prefix}/bin/bsfilter.exe
+# Also install the same file under the name bsfilter expects.
+ClearErrors
+SetOverwrite try
+File "${prefix}/bin/iconv.dll"
+SetOverwrite lastused
+ifErrors 0 +3
+	File /oname=iconv.dll.tmp "${prefix}/bin/iconv.dll"
+	Rename /REBOOTOK iconv.dll.tmp iconv.dll
 
 #######################################
 ### gettext
@@ -198,6 +197,14 @@ File ${prefix}/bin/glib-genmarshal.exe
 File ${prefix}/bin/gobject-query.exe
 File ${prefix}/bin/gresource.exe
 File ${prefix}/bin/gsettings.exe
+!if ${w64} == "yes"
+File ${prefix}/bin/gspawn-win64-helper.exe
+File ${prefix}/bin/gspawn-win64-helper-console.exe
+!else
+File ${prefix}/bin/gspawn-win32-helper.exe
+File ${prefix}/bin/gspawn-win32-helper-console.exe
+!endif
+
 
 SetOutPath "$INSTDIR\share\glib-2.0\schemas"
 File ${prefix}/share/glib-2.0/schemas/gschema.dtd

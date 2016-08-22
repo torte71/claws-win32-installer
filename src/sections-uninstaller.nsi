@@ -289,6 +289,13 @@ Delete "$INSTDIR\glib-genmarshal.exe"
 Delete "$INSTDIR\gobject-query.exe"
 Delete "$INSTDIR\gresource.exe"
 Delete "$INSTDIR\gsettings.exe"
+!if ${w64} == "yes"
+Delete "$INSTDIR\gspawn-win64-helper.exe"
+Delete "$INSTDIR\gspawn-win64-helper-console.exe"
+!else
+Delete "$INSTDIR\gspawn-win32-helper.exe"
+Delete "$INSTDIR\gspawn-win32-helper-console.exe"
+!endif
 
 Delete /REBOOTOK "$INSTDIR\libglib-2.0-0.dll"
 Delete /REBOOTOK "$INSTDIR\libgmodule-2.0-0.dll"
@@ -372,6 +379,7 @@ Delete /REBOOTOK "$INSTDIR\intl.dll"
 ### bsfilter
 Delete /REBOOTOK "$INSTDIR\bsfilterw.exe"
 Delete /REBOOTOK "$INSTDIR\bsfilter.exe"
+Delete /REBOOTOK "$INSTDIR\iconv.dll"
 
 #######################################
 ### zlib
@@ -396,7 +404,6 @@ Delete "$INSTDIR\libtasn1-6.dll"
 #######################################
 ### libiconv
 Delete /REBOOTOK "$INSTDIR\libiconv-2.dll"
-Delete /REBOOTOK "$INSTDIR\iconv.dll"
 Delete "$INSTDIR\lib\charset.alias"
 RMDir "$INSTDIR\lib"
 

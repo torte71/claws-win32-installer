@@ -213,14 +213,17 @@ else
   fi
 fi
 
-# Set correct DLL names, based on arch
+# Set correct variables for the installer, based on arch
 if test "$host" = "i686-w64-mingw32"; then
 	gpg_dll_num=""
+	w64="no"
 elif test "$host" = "x86_64-w64-mingw32"; then
 	gpg_dll_num="6"
+	w64="yes"
 fi
 AC_SUBST(gpg_dll_num)
 AC_SUBST(libgcc_dll)
+AC_SUBST(w64)
 
 # For the manual we need:
 AC_CHECK_PROGS(DOCBOOK2HTML, docbook2html)
