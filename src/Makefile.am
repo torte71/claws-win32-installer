@@ -254,7 +254,9 @@ cm_pkg_gnutls_make_args = \
 
 
 cm_pkg_curl_configure = \
-  --with-gnutls --without-ca-bundle --with-libiconv-prefix=$(idir) \
+  --with-gnutls --with-winssl --with-winidn\
+	--without-ca-bundle --without-ca-path \
+	--with-libiconv-prefix=$(idir) \
   CPPFLAGS=\"-I$(idir)/include\" LIBS=\"-L$(idir)/lib\"
 
 cm_pkg_libxml2_configure = \
