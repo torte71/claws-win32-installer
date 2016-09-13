@@ -668,6 +668,8 @@ Delete "$DESKTOP\Claws-Mail Manual.lnk"
 
 	SetOutPath "$INSTDIR"
 
+	CreateDirectory "$SMPROGRAMS\$STARTMENU_FOLDER"
+
 	CreateShortCut "$SMPROGRAMS\$STARTMENU_FOLDER\Claws-Mail.lnk" \
 		"$INSTDIR\claws-mail.exe" \
 		"" "" "" SW_SHOWNORMAL "" $(T_Menu_ClawsMail)
