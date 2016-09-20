@@ -585,3 +585,6 @@ all-local: $(all_full)
 
 clean-local:
 	rm -f claws-mail-$(VERSION).exe claws-mail-src-$(VERSION).exe
+
+distclean-local:
+	rm -rf stamps playground *.dll-x
