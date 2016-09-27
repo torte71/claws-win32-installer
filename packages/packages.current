@@ -238,17 +238,17 @@ chk  6e38be3377340a21a1f13ff84b5e6adce97cd1d4
 #
 server ftp://ftp.gnupg.org/gcrypt
 
-file libgpg-error/libgpg-error-1.20.tar.bz2
-chk  89c961f63469739fe816a56dcdd86c2e1897cace
+file libgpg-error/libgpg-error-1.24.tar.bz2
+chk  c3e5bd0c3ddea647416b429cd8e2ec755bad9d9e
 
-file libgcrypt/libgcrypt-1.7.2.tar.bz2
-chk  85a6a936bcab4c3c05f5efbf6ce847f23d35c0c4
+file libgcrypt/libgcrypt-1.7.3.tar.bz2
+chk  5a034291e7248592605db448481478e6c963aa9c
 
-file libassuan/libassuan-2.4.2.tar.bz2
-chk  ac1047f9764fd4a4db7dafe47640643164394db9
+file libassuan/libassuan-2.4.3.tar.bz2
+chk  27391cf4a820b5350ea789c30661830c9a271518
 
-file gpgme/gpgme-1.6.0.tar.bz2
-chk  21510323495f6220f8f67610c3c27a23d761d43d
+file gpgme/gpgme-1.7.0.tar.bz2
+chk  41030f0f317100af6e9a1a05a4b0218aee684d8a
 
 # libwebp
 server http://downloads.webmproject.org/releases/webp

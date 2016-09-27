@@ -199,6 +199,7 @@ cm_pkg_libassuan_configure =  --silent --enable-static
 # this. As a workaround we disable AES-NI for now.
 cm_pkg_libgcrypt_configure = \
   --with-gpg-error-prefix=$(idir) \
+	--disable-tests \
   --disable-aesni-support
 
 cm_pkg_libpng_configure = HAVE_SOLARIS_LD_FALSE=yes CPPFLAGS=\"-I$(idir)/include -DPNG_BUILD_DLL\" LDFLAGS=\"-L$(idir)/lib\" LIBPNG_DEFINES=\"-DPNG_BUILD_DLL\"
