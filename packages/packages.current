@@ -25,9 +25,6 @@ file libiconv/libiconv-1.14.tar.gz
 chk  be7d67e50d72ff067b2c0291311bc283add36965
 
 # GNU TLS and support libraries
-file gsasl/libgsasl-1.8.0.tar.gz
-chk  08fd5dfdd3d88154cf06cb0759a732790c47b4f7
-
 file libtasn1/libtasn1-4.8.tar.gz
 chk  a59c9f5db50909bd21ae143da40d74397fd51320
 
@@ -63,8 +60,8 @@ chk 3adf0db008a0a2ee40dd016c137e0abd8b320933
 
 server http://www.claws-mail.org/releases
 
-file   claws-mail-3.14.0.tar.xz
-chk    fe5464abeab7391d6947a4570895fd834e52b871
+file   claws-mail-3.14.1.tar.xz
+chk    9705b0c28c48ee705ae128a570dba6c465a345eb
 
 #
 # Various libraries, mostly those from sf.net
@@ -101,8 +98,8 @@ chk  724987e7690ca3d74d6ab7c1f1b6854e88ca204b
 
 server http://curl.haxx.se/download
 
-file  curl-7.49.1.tar.bz2
-chk   50db69ee612d36a465e2fec3a35028e11c2766bb
+file  curl-7.50.3.tar.xz
+chk   f7cbfde3ecef2bebbd2e05313853767723ef0891
 
 
 #
@@ -130,8 +127,8 @@ server http://ftp.gnome.org/pub/gnome/sources
 file glib/2.49/glib-2.49.2.tar.xz
 chk  906720f36c4c16829485610eabefb39cf933fc59
 
-file gtk+/2.24/gtk+-2.24.30.tar.xz
-chk  aa5bc6dca583cf2bff137606dc2014f6ea559da7
+file gtk+/2.24/gtk+-2.24.31.tar.xz
+chk  c3d828135994a52cc9428a60175bd2b294656611
 
 file gdk-pixbuf/2.35/gdk-pixbuf-2.35.2.tar.xz
 chk  7881ebc8cab2b5885e6d3fc47cf09c675ea1ef7e
