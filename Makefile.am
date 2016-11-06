@@ -47,7 +47,6 @@ EXTRA_DIST = autogen.sh \
         patches/webkit-1.3.10/03-maketokenizer-flex2.60.patch \
         patches/webkit-1.3.10/04-GType-redefined.patch \
         patches/gnutls-3.5.2/01-no-endservent.patch \
-        patches/gpgme-1.6.0/01-remove-mkstemp.patch \
         patches/cyrus-sasl-2.1.26/14-MinGW-w64-add-LIBSASL_API-to-function-definitions.patch \
         patches/cyrus-sasl-2.1.26/10-MinGW-w64-already-has-getopt.patch \
         patches/cyrus-sasl-2.1.26/03-fix-plugins.patch \
