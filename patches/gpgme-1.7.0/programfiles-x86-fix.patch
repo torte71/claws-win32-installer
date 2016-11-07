@@ -1,0 +1,36 @@
+#! /bin/sh
+patch -p1 -f $* < $0
+exit $?
+
+diff -ruN gpgme-1.7.0-orig/src/w32-util.c gpgme-1.7.0/src/w32-util.c
+--- gpgme-1.7.0-orig/src/w32-util.c	2016-09-22 09:01:08.305025791 +0200
++++ gpgme-1.7.0/src/w32-util.c	2016-09-22 09:02:10.015775512 +0200
+@@ -414,8 +414,26 @@
+      We First try the generic place and then fallback to the x86
+      (i.e. 32 bit) place.  This will prefer a 64 bit of the program
+      over a 32 bit version on 64 bit Windows if installed.  */
+-  if (SHGetSpecialFolderPathA (NULL, path, CSIDL_PROGRAM_FILES, 0)
+-      || SHGetSpecialFolderPathA (NULL, path, CSIDL_PROGRAM_FILESX86, 0))
++  if (SHGetSpecialFolderPathA (NULL, path, CSIDL_PROGRAM_FILES, 0))
++    {
++      result = malloc (strlen (path) + 1 + strlen (name) + 1);
++      if (result)
++        {
++          strcpy (stpcpy (stpcpy (result, path), "\\"), name);
++          if (access (result, F_OK))
++            {
++              free (result);
++              result = NULL;
++            }
++        }
++    }
++
++	if (result != NULL)
++		{
++			return result;
++		}
++
++  if (SHGetSpecialFolderPathA (NULL, path, CSIDL_PROGRAM_FILESX86, 0))
+     {
+       result = malloc (strlen (path) + 1 + strlen (name) + 1);
+       if (result)
