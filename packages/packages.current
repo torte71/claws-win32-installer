@@ -98,8 +98,8 @@ chk  724987e7690ca3d74d6ab7c1f1b6854e88ca204b
 
 server http://curl.haxx.se/download
 
-file  curl-7.50.3.tar.xz
-chk   f7cbfde3ecef2bebbd2e05313853767723ef0891
+file  curl-7.51.0.tar.bz2
+chk   f02a14bbe580d2a8cf3bf45a79d39eb595220ac7
 
 
 #
@@ -151,8 +151,8 @@ chk  63ce1d2b022b58831430099b28dee3b47fb63ed1
 # harfbuzz
 server http://www.freedesktop.org/software/harfbuzz/release
 
-file harfbuzz-1.1.2.tar.bz2
-chk  bc2aa95d35b47a7367929b3fe9e4fba76789fc3f
+file harfbuzz-1.3.3.tar.bz2
+chk  37c00f40e18387900cdfe221a04353dbeef7bcb3
 
 #
 # CAIRO
@@ -235,8 +235,8 @@ chk  6e38be3377340a21a1f13ff84b5e6adce97cd1d4
 #
 server ftp://ftp.gnupg.org/gcrypt
 
-file libgpg-error/libgpg-error-1.24.tar.bz2
-chk  c3e5bd0c3ddea647416b429cd8e2ec755bad9d9e
+file libgpg-error/libgpg-error-1.25.tar.bz2
+chk  8ab7494e40f80f4138edc9516981bf4afe7d9dbf
 
 file libgcrypt/libgcrypt-1.7.3.tar.bz2
 chk  5a034291e7248592605db448481478e6c963aa9c
@@ -244,14 +244,14 @@ chk  5a034291e7248592605db448481478e6c963aa9c
 file libassuan/libassuan-2.4.3.tar.bz2
 chk  27391cf4a820b5350ea789c30661830c9a271518
 
-file gpgme/gpgme-1.7.0.tar.bz2
-chk  41030f0f317100af6e9a1a05a4b0218aee684d8a
+file gpgme/gpgme-1.8.0.tar.bz2
+chk  efa043064dbf675fd713228c6fcfcc4116feb221
 
 # libwebp
 server http://downloads.webmproject.org/releases/webp
 
-file libwebp-0.4.4.tar.gz
-chk  b8762e330b6cd7e7b4a5a6dbfc53bc787a4f0ba3
+file libwebp-0.5.1.tar.gz
+chk  66efb2213015ad3460bef64b4fb218fdc10ce83f
 
 # webkitgtk
 server http://webkitgtk.org/releases

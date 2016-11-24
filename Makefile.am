@@ -73,5 +73,4 @@ EXTRA_DIST = autogen.sh \
         patches/cairo-1.10.2/99-libtoolize.patch \
         patches/cairo-1.10.2/02-reset-clip-region.patch \
         patches/cairo-1.10.2/01-fix-A1-surfaces.patch \
-        patches/claws-mail-3.14.1/01-etpan-sasl-plugin-path.patch \
-				patches/gpgme-1.7.0/programfiles-x86-fix.patch
+        patches/claws-mail-3.14.1/01-etpan-sasl-plugin-path.patch
