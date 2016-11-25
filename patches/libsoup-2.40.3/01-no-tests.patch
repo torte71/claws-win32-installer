@@ -1,0 +1,16 @@
+#! /bin/sh
+patch -p1 -f $* < $0
+exit $?
+
+diff -ruN libsoup-2.40.3-orig/Makefile.in libsoup-2.40.3/Makefile.in
+--- libsoup-2.40.3-orig/Makefile.in	2016-11-25 12:14:45.929493389 +0100
++++ libsoup-2.40.3/Makefile.in	2016-11-25 12:15:05.161079770 +0100
+@@ -370,7 +370,7 @@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+ ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
+-SUBDIRS = libsoup po tests docs
++SUBDIRS = libsoup po docs
+ EXTRA_DIST = \
+ 	data/effective_tld_names.dat	\
+ 	libsoup-2.4.pc.in		\

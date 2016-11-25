@@ -31,6 +31,7 @@ EXTRA_DIST = autogen.sh \
         patches/libetpan-1.6/sasl_set_path.patch \
         patches/libetpan-1.6/mingw-closesocket-include.patch \
         patches/libetpan-1.6/ipv6-wsock.patch \
+        patches/libsoup-2.40.3/01-no-tests.patch \
         patches/glib-2.49.2/03-wchar64.patch \
         patches/glib-2.49.2/01-socket.patch \
         patches/glib-2.49.2/02-folder-icons.patch \
@@ -40,6 +41,10 @@ EXTRA_DIST = autogen.sh \
         patches/w32pth-2.0.5/99-autogen.sh.patch \
         patches/w32pth-2.0.5/01-def-fix.patch \
         patches/regex-20090805/01-no-large-offsets.patch \
+        patches/libetpan-1.7/ipv6.patch \
+        patches/libetpan-1.7/notests.patch \
+        patches/libetpan-1.7/sasl_set_path.patch \
+        patches/libetpan-1.7/mingw-closesocket-include.patch \
         patches/libiconv-1.14/01-aliases2_lookup-no-inline.patch \
         patches/crypt-1.1/01-build-dll.patch \
         patches/webkit-1.3.10/01-fixes.patch \
