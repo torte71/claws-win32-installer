@@ -41,7 +41,7 @@ SetCompressor /SOLID lzma
 # Set default installation dir based on arch.
 !if ${w64} == "yes"
 InstallDir "$PROGRAMFILES64\${PRETTY_PACKAGE}"
-!define instfile_suffix ""
+!define instfile_suffix "-64bit"
 !else
 InstallDir "$PROGRAMFILES\${PRETTY_PACKAGE}"
 !define instfile_suffix "-32bit"
