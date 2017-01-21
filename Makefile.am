@@ -31,7 +31,7 @@ EXTRA_DIST = autogen.sh \
         patches/libetpan-1.6/sasl_set_path.patch \
         patches/libetpan-1.6/mingw-closesocket-include.patch \
         patches/libetpan-1.6/ipv6-wsock.patch \
-        patches/libsoup-2.40.3/01-no-tests.patch \
+        patches/libsoup-2.40.3/01-no-docs-no-tests.patch \
         patches/glib-2.49.2/03-wchar64.patch \
         patches/glib-2.49.2/01-socket.patch \
         patches/glib-2.49.2/02-folder-icons.patch \
@@ -74,8 +74,4 @@ EXTRA_DIST = autogen.sh \
         patches/cyrus-sasl-2.1.26/99-reautomagic.patch \
         patches/cyrus-sasl-2.1.26/04-manpage-paths.patch \
         patches/gtk+-2.24.31/00-fix-private-defs.patch \
-        patches/cairo-1.10.2/03-fix-ffs.patch \
-        patches/cairo-1.10.2/99-libtoolize.patch \
-        patches/cairo-1.10.2/02-reset-clip-region.patch \
-        patches/cairo-1.10.2/01-fix-A1-surfaces.patch \
         patches/claws-mail-3.14.1/01-etpan-sasl-plugin-path.patch
