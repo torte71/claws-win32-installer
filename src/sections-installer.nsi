@@ -492,6 +492,13 @@ File ${prefix}/bin/libnettle-6-2.dll
 File ${prefix}/bin/libhogweed-4-2.dll
 
 #######################################
+### nettle
+!insertmacro SetPrefix libical
+File ${prefix}/bin/libical.dll
+File ${prefix}/bin/libicalss.dll
+File ${prefix}/bin/libicalvcal.dll
+
+#######################################
 ### claws-mail
 !insertmacro SetPrefix2 claws_mail claws-mail
 SetOutPath "$INSTDIR"

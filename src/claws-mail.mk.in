@@ -68,7 +68,12 @@ define SETVARS
 	pkg_dev="$(call GETVAR,cm_pkg_$(1)_dev)";			\
 	pkg_version_dev="$(1)-dev-$(call GETVAR,cm_pkg_$(1)_version)"; \
 	pkgidir_dev="$(ipdir)/$$$${pkg_version_dev}";			\
-	pkgcfg="$(call GETVAR,cm_pkg_$(1)_configure)";		\
+	if [ "x$(call GETVAR,cm_pkg_$(1)_cmake)" = "xyes" ]; then \
+		pkgcmake="yes"; \
+		pkgcfg="$(call GETVAR,cm_pkg_$(1)_cmake_args)"; \
+	else \
+		pkgcfg="$(call GETVAR,cm_pkg_$(1)_configure)";		\
+	fi; \
 	pkgextracflags="$(call GETVAR,cm_pkg_$(1)_extracflags)";	\
 	pkgmkargs="$(call GETVAR,cm_pkg_$(1)_make_args)";          \
 	pkgmkargs_inst="$(call GETVAR,cm_pkg_$(1)_make_args_inst)";\
@@ -138,22 +143,26 @@ stamps/stamp-$(1)-01-patch: stamps/stamp-$(1)-00-unpack
 
 stamps/stamp-$(1)-02-configure: stamps/stamp-$(1)-01-patch
 	($(call SETVARS,$(1));				\
-	 mkdir "$$$${pkgbdir}";				\
-	  cd "$$$${pkgbdir}";				\
-	 eval "../$$$${pkg_version}/configure"		\
-		--prefix="$$$${pkgidir}"		\
-		--host=$(host)				\
-		--build=$(build)			\
-		$$$${pkgcfg} CFLAGS=\"-mms-bitfields $$$${pkgextracflags}\";\
-	 shopt -s nullglob;					\
-	 for pfile in "$$$${pkgpbdir}"/*.postcfg       		\
-                       "$$$${pkgpdir}"/*.postcfg ; do  		\
-	   (cd "$$$${pkgsdir}"; "$$$${pfile}")		     	\
-	 done;                                               	\
-	 for pfile in "$$$${pkgpbdir}"/*.postcfg-build    	\
-                       "$$$${pkgpdir}"/*.postcfg-build ; do	\
-	   (cd "$$$${pkgbdir}"; "$$$${pfile}")			\
-	 done)
+	mkdir "$$$${pkgbdir}";				\
+	cd "$$$${pkgbdir}";				\
+	if [ "$$$${pkgcmake}" = "yes" ]; then \
+		eval "cmake $$$${pkgcfg} -DCMAKE_INSTALL_PREFIX=$$$${pkgidir} ../$$$${pkg_version}"; \
+	else \
+		eval "../$$$${pkg_version}/configure"		\
+			--prefix="$$$${pkgidir}"		\
+			--host=$(host)				\
+			--build=$(build)			\
+			$$$${pkgcfg} CFLAGS=\"-mms-bitfields $$$${pkgextracflags}\"; \
+		shopt -s nullglob;					\
+		for pfile in "$$$${pkgpbdir}"/*.postcfg       		\
+	                       "$$$${pkgpdir}"/*.postcfg ; do  		\
+			(cd "$$$${pkgsdir}"; "$$$${pfile}")		     	\
+		done;                                               	\
+		for pfile in "$$$${pkgpbdir}"/*.postcfg-build    	\
+	                       "$$$${pkgpdir}"/*.postcfg-build ; do	\
+			(cd "$$$${pkgbdir}"; "$$$${pfile}")			\
+		done; \
+	fi)
 	touch stamps/stamp-$(1)-02-configure
 
 stamps/stamp-$(1)-03-make: stamps/stamp-$(1)-02-configure

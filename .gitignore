@@ -59,3 +59,4 @@ src/claws-mail.mk
 /po/build-cc
 /src/license.blurb
 /src/mkportable.exe
+/src/Toolchain-mingw32.cmake

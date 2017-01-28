@@ -157,7 +157,7 @@ while read key value ; do
            [ $quiet = no ] && echo "package     \`$url' ... already exists"
        else
            echo -n "downloading \`$url' ..."
-           if ${WGET} -c -q "$url" -O "$name" ; then
+           if ${WGET} "$url" -O "$name" ; then
                if [ $(stat -c'%s' "$name" 2>/dev/null || echo 0) -eq 0 ]; then
                  echo " FAILED (line $lnr)"
                  echo "line $lnr: $url has zero length" >> '.#download.failed'

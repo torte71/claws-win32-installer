@@ -24,7 +24,7 @@ EXTRA_DIST = pkg-config claws-mail.nsi \
 				gnupg-uninst.nsi \
 				sections-installer.nsi sections-uninstaller.nsi \
         libiconv.def libintl.def \
-        Memento.nsh
+        Memento.nsh Toolchain-mingw32.cmake.in
 
 SUBDIRS = dictionaries
 
@@ -41,7 +41,7 @@ cm_spkgs = glib libffi gdk-pixbuf gtk+ expat \
 		jpeg glib-networking libsoup webkit gmp nettle \
 		harfbuzz pango pixman cairo libetpan claws-mail \
 		libgcrypt libassuan cyrus-sasl \
-		w32pth regex libiconv gettext
+		w32pth regex libiconv gettext libical
 
 # Extra options to configure for individual packages.
 # We can use $(idir) here for the installation prefix.
@@ -77,8 +77,9 @@ cm_pkg_nettle_make_args = -j$(NUMPROC)
 cm_pkg_pixman_make_args = -j$(NUMPROC)
 cm_pkg_cairo_make_args = -j$(NUMPROC)
 cm_pkg_cyrus_sasl_make_args = -j$(NUMPROC)
+cm_pkg_libical_make_args = -j$(NUMPROC)
 
-
+cm_pkg_libical_cmake = yes
 
 cm_pkg_libiconv_configure = \
 	--enable-shared=yes --enable-static=no
@@ -343,6 +344,8 @@ cm_pkg_webkit_configure = \
                CPPFLAGS=\"-I$(idir)/include -g -O2 -std=gnu++98 -mms-bitfields\" \
          CC=$(CC) LIBS=\"-L$(idir)/lib\"
 
+cm_pkg_libical_cmake_args = \
+											 -DCMAKE_TOOLCHAIN_FILE=$(tsdir)/src/Toolchain-mingw32.cmake
 
 # This is not anymore needed sinces 3.8.0 already builds a PDF version.
 # define cm_pkg_claws_mail_post_install

@@ -88,6 +88,10 @@ This requires editing a couple of files.
 Then run the usual "./autogen.sh" to create the actual configure file
 and run configure as described above.
 
+If the package is using cmake, set pkg_cm_<package>_cmake to "yes",
+and optionally set pkg_cm_<package>_cmake_args. Libical is an example
+to follow.
+
 
 SASL and unofficial patches
 ===========================

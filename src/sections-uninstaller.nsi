@@ -62,6 +62,12 @@ Delete "$INSTDIR\share\locale\tr\LC_MESSAGES\claws-mail.mo"
 Delete "$INSTDIR\share\locale\zh_TW\LC_MESSAGES\claws-mail.mo"
 
 #######################################
+### libical
+Delete "$INSTDIR\libical.dll"
+Delete "$INSTDIR\libicalss.dll"
+Delete "$INSTDIR\libicalvcal.dll"
+
+#######################################
 ### nettle
 Delete "$INSTDIR\libhogweed-4-2.dll"
 Delete "$INSTDIR\libnettle-6-2.dll"

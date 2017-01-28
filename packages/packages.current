@@ -263,3 +263,8 @@ server ftp://ftp.cyrusimap.org/cyrus-sasl
 
 file cyrus-sasl-2.1.26.tar.gz
 chk d6669fb91434192529bd13ee95737a8a5040241c
+
+# libical
+server https://github.com/libical/libical/releases/download
+file v2.0.0/libical-2.0.0.tar.gz
+chk 8540d5d73422496e1d350b86ff32333daa08144c

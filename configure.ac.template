@@ -224,6 +224,7 @@ fi
 AC_SUBST(gpg_dll_num)
 AC_SUBST(libgcc_dll)
 AC_SUBST(w64)
+AC_SUBST(host)
 
 # For the manual we need:
 AC_CHECK_PROGS(DOCBOOK2HTML, docbook2html)
@@ -285,9 +286,10 @@ CM_SPKG([curl], [zlib gnutls])
 CM_SPKG([cyrus-sasl])
 CM_SPKG([libetpan], [gnutls cyrus-sasl])
 CM_BPKG_GNUWIN32([bsfilter])
+CM_SPKG([libical])
 CM_SPKG([claws-mail], [libiconv gettext zlib gtk+ libpng enchant glib dnl
                             gpgme crypt regex libetpan gnutls dnl
-                            libxml2 expat webkit curl])
+                            libxml2 expat webkit curl libical])
 
 
 CM_FINALIZE
@@ -318,6 +320,7 @@ fi
 
 AC_CONFIG_FILES(Makefile)
 AC_CONFIG_FILES(packages/Makefile src/Makefile po/Makefile.in)
+AC_CONFIG_FILES(src/Toolchain-mingw32.cmake)
 AC_CONFIG_FILES(po/build-cc)
 AC_CONFIG_FILES(src/config.nsi src/claws-mail.mk)
 AC_CONFIG_FILES(doc/Makefile)

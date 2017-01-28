@@ -45,6 +45,7 @@ EXTRA_DIST = autogen.sh \
         patches/libetpan-1.7/notests.patch \
         patches/libetpan-1.7/sasl_set_path.patch \
         patches/libetpan-1.7/mingw-closesocket-include.patch \
+				patches/libical-2.0.0/01-gmtime_r.patch \
         patches/libiconv-1.14/01-aliases2_lookup-no-inline.patch \
         patches/crypt-1.1/01-build-dll.patch \
         patches/webkit-1.3.10/01-fixes.patch \
