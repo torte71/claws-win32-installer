@@ -183,3 +183,7 @@
 !define cm_pkg_gettext @cm_pkg_gettext@
 !define cm_pkg_gettext_version @cm_pkg_gettext_version@
 !define cm_pkg_gettext_src @cm_pkg_gettext_src@
+
+!define cm_pkg_libical @cm_pkg_libical@
+!define cm_pkg_libical_version @cm_pkg_libical_version@
+!define cm_pkg_libical_src @cm_pkg_libical_src@
