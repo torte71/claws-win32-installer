@@ -290,6 +290,7 @@ cm_pkg_claws_mail_configure = \
   --disable-acpi_notifier-plugin --disable-clamd-plugin \
   --disable-perl-plugin --disable-python-plugin --disable-demo-plugin \
   --disable-newmail-plugin --disable-mailmbox-plugin \
+	--disable-dillo-plugin \
 	--with-password-encryption=gnutls \
 	CFLAGS=\"-g -O2 \" \
 	CPPFLAGS=\"-g -O2 -I$(idir)/include -D_POSIX_C_SOURCE\" \
