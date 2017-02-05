@@ -1,0 +1,41 @@
+#!/bin/bash
+
+topdir=`dirname $0`
+topdir=${topdir/\/src*/}
+srcdir=`basename \`dirname $0\``
+
+# Find out which arch we're building for
+if [ -f ${topdir}/src/libgcc_s_seh-1.dll-x ]; then
+	arch=x86_64
+else
+	arch=i686
+fi
+
+# Build for linux first
+cd playground/build
+cp -r icu icu-linux
+cd icu-linux/source
+if [ ! -f Makefile ]; then
+	./configure
+	ret=$?
+else
+	ret=0
+fi
+if [ $ret -ne 0 ]; then
+	echo configure for linux ICU build failed
+	exit 1
+fi
+make -j8
+
+# Now for windows
+cd ../..
+mv icu ${srcdir}-build
+cd ${srcdir}-build
+mv source/* .
+./configure --host=${arch}-w64-mingw32 --build=${arch}-unknown-linux-gnu --prefix=${topdir}/src/playground/install/pkgs/${srcdir} --with-cross-build=${topdir}/src/playground/build/icu-linux/source LIBS=-lmsvcr100 CFLAGS=-mms-bitfields
+ret=$?
+if [ $ret -ne 0 ]; then
+	echo configure for windows ICU build failed
+	exit 1
+fi
+touch ${topdir}/src/stamps/stamp-icu4c-02-configure

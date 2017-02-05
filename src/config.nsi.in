@@ -97,6 +97,9 @@
 !define cm_pkg_libxml2 @cm_pkg_libxml2@
 !define cm_pkg_libxml2_version @cm_pkg_libxml2_version@
 
+!define cm_pkg_libxslt @cm_pkg_libxslt@
+!define cm_pkg_libxslt_version @cm_pkg_libxslt_version@
+
 !define cm_pkg_cyrus_sasl @cm_pkg_cyrus_sasl@
 !define cm_pkg_cyrus_sasl_version @cm_pkg_cyrus_sasl_version@
 
@@ -112,8 +115,17 @@
 !define cm_pkg_claws_mail @cm_pkg_claws_mail@
 !define cm_pkg_claws_mail_version @cm_pkg_claws_mail_version@
 
-!define cm_pkg_webkit @cm_pkg_webkit@
-!define cm_pkg_webkit_version @cm_pkg_webkit_version@
+!define cm_pkg_libwebp @cm_pkg_libwebp@
+!define cm_pkg_libwebp_version @cm_pkg_libwebp_version@
+
+!define cm_pkg_sqlite_autoconf @cm_pkg_sqlite_autoconf@
+!define cm_pkg_sqlite_autoconf_version @cm_pkg_sqlite_autoconf_version@
+
+!define cm_pkg_icu4c @cm_pkg_icu4c@
+!define cm_pkg_icu4c_version @cm_pkg_icu4c_version@
+
+!define cm_pkg_webkitgtk @cm_pkg_webkitgtk@
+!define cm_pkg_webkitgtk_version @cm_pkg_webkitgtk_version@
 
 !define cm_pkg_jpeg @cm_pkg_jpeg@
 !define cm_pkg_jpeg_version @cm_pkg_jpeg_version@

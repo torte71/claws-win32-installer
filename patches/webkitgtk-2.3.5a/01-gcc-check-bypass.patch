@@ -1,0 +1,25 @@
+#! /bin/sh
+patch -p1 -f $* < $0
+exit $?
+
+diff -ruN webkitgtk-2.3.5-orig/configure webkitgtk-2.3.5/configure
+--- webkitgtk-2.3.5-orig/configure	2016-11-25 00:28:43.467452096 +0100
++++ webkitgtk-2.3.5/configure	2016-11-25 00:29:06.958943358 +0100
+@@ -4873,7 +4873,7 @@
+ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
+-#if !(defined(__GNUC__) && !defined(__clang__) && !defined(__INTEL_COMPILER) && __GNUC__ >= 4 && __GNUC_MINOR__ >= 7)
++#if !(defined(__GNUC__) && !defined(__clang__) && !defined(__INTEL_COMPILER) && __GNUC__ >= 5)
+ #error Not a supported GCC compiler
+ #endif
+ 
+@@ -4931,7 +4931,7 @@
+ cat confdefs.h - <<_ACEOF >conftest.$ac_ext
+ /* end confdefs.h.  */
+ 
+-#if !(defined(__GNUG__) && defined(__GNUC__) && !defined(__clang__) && !defined(__INTEL_COMPILER) && __GNUC__ >= 4 && __GNUC_MINOR__ >= 7)
++#if !(defined(__GNUG__) && defined(__GNUC__) && !defined(__clang__) && !defined(__INTEL_COMPILER) && __GNUC__ >= 5)
+ #error Not a supported G++ compiler
+ #endif
+ 

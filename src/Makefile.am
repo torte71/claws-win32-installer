@@ -37,10 +37,10 @@ SUBDIRS = dictionaries
 # Supported source packages.
 cm_spkgs = glib libffi gdk-pixbuf gtk+ expat \
 		libgpg-error gpgme libpng enchant atk fontconfig freetype \
-		libtasn1 opencdk gnutls curl libxml2 \
-		jpeg glib-networking libsoup webkit gmp nettle \
+		libtasn1 opencdk gnutls curl libxml2 libxslt sqlite-autoconf \
+		jpeg glib-networking libsoup libwebp webkitgtk gmp nettle \
 		harfbuzz pango pixman cairo libetpan claws-mail \
-		libgcrypt libassuan cyrus-sasl \
+		libgcrypt libassuan cyrus-sasl icu4c \
 		w32pth regex libiconv gettext libical
 
 # Extra options to configure for individual packages.
@@ -62,6 +62,7 @@ cm_pkg_enchant_make_args = -j$(NUMPROC)
 cm_pkg_libtasn1_make_args = -j$(NUMPROC)
 cm_pkg_opencdk_make_args = -j$(NUMPROC)
 cm_pkg_curl_make_args = -j$(NUMPROC)
+cm_pkg_libxslt_make_args = -j$(NUMPROC)
 cm_pkg_libxml2_make_args = -j$(NUMPROC)
 cm_pkg_libetpan_make_args = -j$(NUMPROC)
 cm_pkg_claws_mail_make_args = -j$(NUMPROC)
@@ -70,8 +71,11 @@ cm_pkg_libgcrypt_make_args = -j$(NUMPROC)
 cm_pkg_w32pth_make_args = -j$(NUMPROC)
 cm_pkg_jpeg_make_args = -j$(NUMPROC)
 cm_pkg_glib_networking_make_args = -j$(NUMPROC)
+cm_pkg_sqlite_autoconf_make_args = -j$(NUMPROC)
 cm_pkg_libsoup_make_args = -j$(NUMPROC)
-cm_pkg_webkit_make_args = -j$(NUMPROC)
+cm_pkg_libwebp_make_args = -j$(NUMPROC)
+cm_pkg_icu4c_make_args = -j$(NUMPROC)
+cm_pkg_webkitgtk_make_args = -j$(NUMPROC)
 cm_pkg_gmp_make_args = -j$(NUMPROC)
 cm_pkg_nettle_make_args = -j$(NUMPROC)
 cm_pkg_pixman_make_args = -j$(NUMPROC)
@@ -132,7 +136,7 @@ cm_pkg_harfbuzz_configure = \
 	--with-fontconfig \
 	--with-freetype \
 	--with-cairo \
-	--with-icu=no \
+	--with-icu=yes \
 	CPPFLAGS=\"-I$(idir)/include\" \
 	LDFLAGS=\"-L$(idir)/lib\"
 
@@ -264,6 +268,9 @@ cm_pkg_curl_configure = \
 cm_pkg_libxml2_configure = \
   --enable-shared --without-python --with-iconv=$(idir)
 
+cm_pkg_libxslt_configure = \
+	--enable-shared --without-python
+
 cm_pkg_cyrus_sasl_configure = \
 	--without-openssl --disable-ldapd --without-saslauthd \
 	--without-pwcheck --without-des --without-authdaemond \
@@ -299,6 +306,9 @@ cm_pkg_claws_mail_configure = \
 cm_pkg_jpeg_configure = \
 							--with-libiconv-prefix=$(idir)
 
+cm_pkg_sqlite_autoconf_configure = \
+	--disable-static-shell
+
 cm_pkg_glib_networking_configure = \
   --disable-glibtest \
 	--without-libproxy \
@@ -309,39 +319,44 @@ cm_pkg_glib_networking_configure = \
 	CPPFLAGS=\"-I$(idir)/include\"
 
 cm_pkg_libsoup_configure = \
-							--without-gnome --without-apache-httpd \
-							CPPFLAGS=\"-I$(idir)/include\" LIBS=\"-L$(idir)/lib\"
+	--without-gnome \
+	--without-apache-httpd \
+	--without-gssapi \
+	CPPFLAGS=\"-I$(idir)/include\" LIBS=\"-L$(idir)/lib\"
 
-cm_pkg_webkit_configure = \
-                --enable-silent-rules \
-                --disable-datalist \
-                --disable-dom-storage \
-                --disable-icon-database \
-                --disable-offline-web-applications \
-                --disable-xslt \
-                --disable-eventsource \
-                --disable-filters \
+cm_pkg_libwebp_configure = \
+	LDFLAGS=\"-L$(idir)/lib\" \
+	CPPFLAGS=\"-I$(idir)/include\"
+
+cm_pkg_webkitgtk_configure = \
+								--disable-webkit2 \
+								--enable-webkit1 \
+								--with-gtk=2.0 \
+								--disable-x11-target \
+								--disable-wayland-target \
+								--enable-win32-target \
+								--disable-spellcheck \
+								--disable-credential-storage \
                 --disable-gtk-doc-html \
-								--disable-svg-foreign-object \
-								--disable-web-sockets \
+								--disable-svg-fonts \
 								--disable-jit \
-                --disable-workers \
-                --disable-shared-workers \
                 --disable-silent-rules \
                 --disable-video \
-                --disable-xpath \
-                --disable-database \
-								--with-unicode-backend=glib \
-                --with-target=win32 \
-								--with-font-backend=pango \
-								--disable-indexed-database \
+								--disable-web-audio \
+								--disable-battery-status \
+								--disable-geolocation \
+								--disable-coverage \
+								--disable-glx \
+								--disable-egl \
+								--disable-gles2 \
+								--disable-gamepad \
+								--disable-webgl \
 								--disable-glibtest \
-								--disable-javascript-debugger \
-								--disable-3D-canvas \
-								--disable-channel-messaging \
 								--disable-debug \
+								--disable-accelerated-compositing \
+								--enable-silent-rules \
                CFLAGS=\"-I$(idir)/include -g -O2 -std=gnu99 -mms-bitfields\" \
-               CXXFLAGS=\"-I$(idir)/include -g -O2 -std=gnu++98 -mms-bitfields\" \
+               CXXFLAGS=\"-I$(idir)/include -g -O2 -std=gnu++98 -mms-bitfields -fexceptions\" \
                CPPFLAGS=\"-I$(idir)/include -g -O2 -std=gnu++98 -mms-bitfields\" \
          CC=$(CC) LIBS=\"-L$(idir)/lib\"
 

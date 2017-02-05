@@ -1,0 +1,64 @@
+#! /bin/sh
+cd playground/build
+patch -p0 -f $* < $0
+exit $?
+
+diff -ruN icu-orig/source/config/mh-mingw icu/source/config/mh-mingw
+--- icu-orig/source/config/mh-mingw	2017-01-25 21:54:55.857368572 +0100
++++ icu/source/config/mh-mingw	2017-01-25 22:08:02.801267547 +0100
+@@ -78,8 +78,8 @@
+ 
+ # Change the stubnames so that poorly working FAT disks and installation programs can work.
+ # This is also for backwards compatibility.
+-DATA_STUBNAME = dt
+-I18N_STUBNAME = in
++DATA_STUBNAME = data
++I18N_STUBNAME = i18n
+ LIBICU = $(STATIC_PREFIX_WHEN_USED)$(ICUPREFIX)
+ 
+ #SH### copied from Makefile.inc
+diff -ruN icu-orig/source/config/mh-mingw64 icu/source/config/mh-mingw64
+--- icu-orig/source/config/mh-mingw64	2017-01-25 21:54:55.857368572 +0100
++++ icu/source/config/mh-mingw64	2017-01-25 22:08:51.456277629 +0100
+@@ -78,8 +78,8 @@
+ 
+ # Change the stubnames so that poorly working FAT disks and installation programs can work.
+ # This is also for backwards compatibility.
+-DATA_STUBNAME = dt
+-I18N_STUBNAME = in
++DATA_STUBNAME = data
++I18N_STUBNAME = i18n
+ LIBICU = $(STATIC_PREFIX_WHEN_USED)$(ICUPREFIX)
+ 
+ #SH### copied from Makefile.inc
+diff -ruN icu-orig/source/Makefile.in icu/source/Makefile.in
+--- icu-orig/source/Makefile.in	2017-01-25 21:54:55.769370383 +0100
++++ icu/source/Makefile.in	2017-01-25 22:07:45.077628297 +0100
+@@ -180,7 +180,7 @@
+ 	$(INSTALL_SCRIPT) $(top_srcdir)/install-sh $(DESTDIR)$(pkgdatadir)/install-sh
+ 	@$(MKINSTALLDIRS) $(DESTDIR)$(libdir)/pkgconfig
+ 	$(INSTALL_DATA) $(ALL_PKGCONFIG_FILES) $(DESTDIR)$(libdir)/pkgconfig/
+-	$(INSTALL_DATA) $(top_srcdir)/../LICENSE $(DESTDIR)$(pkgdatadir)/LICENSE
++	$(INSTALL_DATA) $(top_srcdir)/LICENSE $(DESTDIR)$(pkgdatadir)/LICENSE
+ 	$(INSTALL_SCRIPT) $(top_builddir)/config/icu-config $(DESTDIR)$(bindir)/icu-config
+ 	$(INSTALL_DATA) $(top_builddir)/config/Makefile.inc $(DESTDIR)$(pkglibdir)/Makefile.inc
+ 	$(INSTALL_DATA) $(top_builddir)/config/pkgdata.inc $(DESTDIR)$(pkglibdir)/pkgdata.inc
+@@ -190,6 +190,9 @@
+ 	    $(RM) current && ln -s $(VERSION) current; \
+ 	    $(RM) Makefile.inc && ln -s current/Makefile.inc Makefile.inc; \
+ 	    $(RM) pkgdata.inc && ln -s current/pkgdata.inc pkgdata.inc
++	cd $(DESTDIR)$(libdir); \
++			cp icuuc58.dll libicuuc58.dll; \
++			cp icudt58.dll libicudt58.dll
+ 
+ ifeq ($(DOXYGEN),)
+ install-doc:
+@@ -201,7 +204,7 @@
+ 
+ endif
+ 
+-$(DESTDIR)$(pkglibdir)/%: $(top_srcdir)/../data/%
++$(DESTDIR)$(pkglibdir)/%: $(top_srcdir)/data/%
+ 	$(INSTALL_DATA) $< $@
+ 
+ # Build the tests, but don't run them.

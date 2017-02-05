@@ -280,6 +280,7 @@ File ${prefix}/bin/libcairo-script-interpreter-2.dll
 ### harfbuzz
 !insertmacro SetPrefix harfbuzz
 File ${prefix}/bin/libharfbuzz-0.dll
+File ${prefix}/bin/libharfbuzz-icu-0.dll
 
 #######################################
 ### pango
@@ -402,6 +403,11 @@ File ${prefix}/bin/libcurl-4.dll
 File ${prefix}/bin/libxml2-2.dll
 
 #######################################
+### libxslt
+!insertmacro SetPrefix libxslt
+File ${prefix}/bin/libxslt-1.dll
+
+#######################################
 ### gpgme
 !insertmacro SetPrefix gpgme
 ClearErrors
@@ -433,35 +439,31 @@ File "${prefix}/include/gpgme.h"
 SetOutPath "$INSTDIR"
 
 #######################################
-### webkit
-!insertmacro SetPrefix webkit
-SetOutPath "$INSTDIR\share\locale\pt_BR\LC_MESSAGES"
-File ${prefix}/share/locale/pt_BR/LC_MESSAGES/webkit-2.0.mo
-SetOutPath "$INSTDIR\share\locale\uk\LC_MESSAGES"
-File ${prefix}/share/locale/uk/LC_MESSAGES/webkit-2.0.mo
-SetOutPath "$INSTDIR\share\locale\pt\LC_MESSAGES"
-File ${prefix}/share/locale/pt/LC_MESSAGES/webkit-2.0.mo
-SetOutPath "$INSTDIR\share\locale\it\LC_MESSAGES"
-File ${prefix}/share/locale/it/LC_MESSAGES/webkit-2.0.mo
-SetOutPath "$INSTDIR\share\locale\es\LC_MESSAGES"
-File ${prefix}/share/locale/es/LC_MESSAGES/webkit-2.0.mo
-SetOutPath "$INSTDIR\share\locale\zh_CN\LC_MESSAGES"
-File ${prefix}/share/locale/zh_CN/LC_MESSAGES/webkit-2.0.mo
-SetOutPath "$INSTDIR\share\locale\nl\LC_MESSAGES"
-File ${prefix}/share/locale/nl/LC_MESSAGES/webkit-2.0.mo
-SetOutPath "$INSTDIR\share\locale\cs\LC_MESSAGES"
-File ${prefix}/share/locale/cs/LC_MESSAGES/webkit-2.0.mo
-SetOutPath "$INSTDIR\share\locale\ru\LC_MESSAGES"
-File ${prefix}/share/locale/ru/LC_MESSAGES/webkit-2.0.mo
-SetOutPath "$INSTDIR\share\locale\sv\LC_MESSAGES"
-File ${prefix}/share/locale/sv/LC_MESSAGES/webkit-2.0.mo
-SetOutPath "$INSTDIR\share\locale\de\LC_MESSAGES"
-File ${prefix}/share/locale/de/LC_MESSAGES/webkit-2.0.mo
-SetOutPath "$INSTDIR\share\locale\en_GB\LC_MESSAGES"
-File ${prefix}/share/locale/en_GB/LC_MESSAGES/webkit-2.0.mo
+### libwebp
+!insertmacro SetPrefix libwebp
+SetOutPath "$INSTDIR"
+File ${prefix}/bin/libwebp-6.dll
 
+#######################################
+### icu4c
+!insertmacro SetPrefix icu4c
+SetOutPath "$INSTDIR"
+File ${prefix}/lib/icui18n58.dll
+File ${prefix}/lib/icuuc58.dll
+File ${prefix}/lib/icudata58.dll
+
+#######################################
+### sqlite-autoconf
+!insertmacro SetPrefix2 sqlite_autoconf sqlite-autoconf
+SetOutPath "$INSTDIR"
+File ${prefix}/bin/libsqlite3-0.dll
+
+#######################################
+### webkit
+!insertmacro SetPrefix webkitgtk
 SetOutPath "$INSTDIR"
 File ${prefix}/bin/libwebkitgtk-1.0-0.dll
+File ${prefix}/bin/libjavascriptcoregtk-1.0-0.dll
 
 #######################################
 ### jpeg

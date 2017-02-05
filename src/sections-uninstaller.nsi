@@ -90,22 +90,23 @@ Delete "$INSTDIR\lib\gio\modules\libgiognutls.dll"
 Delete "$INSTDIR\libjpeg-9.dll"
 
 #######################################
-### webkit
+### webkitgtk
 Delete "$INSTDIR\libwebkitgtk-1.0-0.dll"
+Delete "$INSTDIR\libjavascriptcoregtk-1.0-0.dll"
 
-Delete "$INSTDIR\share\locale\pt_BR\LC_MESSAGES\webkit-2.0.mo"
-Delete "$INSTDIR\share\locale\uk\LC_MESSAGES\webkit-2.0.mo"
-Delete "$INSTDIR\share\locale\pt\LC_MESSAGES\webkit-2.0.mo"
-Delete "$INSTDIR\share\locale\it\LC_MESSAGES\webkit-2.0.mo"
-Delete "$INSTDIR\share\locale\es\LC_MESSAGES\webkit-2.0.mo"
-Delete "$INSTDIR\share\locale\zh_CN\LC_MESSAGES\webkit-2.0.mo"
-Delete "$INSTDIR\share\locale\nl\LC_MESSAGES\webkit-2.0.mo"
-Delete "$INSTDIR\share\locale\cs\LC_MESSAGES\webkit-2.0.mo"
-Delete "$INSTDIR\share\locale\ru\LC_MESSAGES\webkit-2.0.mo"
-Delete "$INSTDIR\share\locale\sv\LC_MESSAGES\webkit-2.0.mo"
-Delete "$INSTDIR\share\locale\de\LC_MESSAGES\webkit-2.0.mo"
-Delete "$INSTDIR\share\locale\en_GB\LC_MESSAGES\webkit-2.0.mo"
+#######################################
+### sqlite-autoconf
+Delete "$INSTDIR\libsqlite3-0.dll"
 
+#######################################
+### libwebp
+Delete "$INSTDIR\libwebp-6.dll"
+
+#######################################
+### icu4c
+Delete "$INSTDIR\icui18n58.dll"
+Delete "$INSTDIR\icuuc58.dll"
+Delete "$INSTDIR\icudata58.dll"
 
 #######################################
 ### gpgme
@@ -119,6 +120,9 @@ Delete "$INSTDIR\include\gpgme.h"
 RMDir "$INSTDIR\lib"
 RMDir "$INSTDIR\include"
 
+#######################################
+### libxslt
+Delete "$INSTDIR\libxslt-1.dll"
 
 #######################################
 ### libxml2
@@ -240,6 +244,7 @@ Delete /REBOOTOK "$INSTDIR\libpangocairo-1.0-0.dll"
 #######################################
 ### harfbuzz
 Delete "$INSTDIR\libharfbuzz-0.dll"
+Delete "$INSTDIR\libharfbuzz-icu-0.dll"
 
 #######################################
 ### cairo

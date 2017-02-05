@@ -1,0 +1,5 @@
+#!/bin/bash
+
+echo === Renaming webkitgtk-2.3.5 to webkitgtk-2.3.5a
+cd playground/build
+mv webkitgtk-2.3.5 webkitgtk-2.3.5a

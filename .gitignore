@@ -26,6 +26,7 @@ src/claws-mail.mk
 /packages/*.zip
 /packages/*.tar.bz2
 /packages/*.tar.xz
+/packages/*.tgz
 /packages/packages.current.sig
 /src/playground
 /src/stamps

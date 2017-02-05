@@ -48,10 +48,16 @@ EXTRA_DIST = autogen.sh \
 				patches/libical-2.0.0/01-gmtime_r.patch \
         patches/libiconv-1.14/01-aliases2_lookup-no-inline.patch \
         patches/crypt-1.1/01-build-dll.patch \
-        patches/webkit-1.3.10/01-fixes.patch \
-        patches/webkit-1.3.10/02-print-size.patch \
-        patches/webkit-1.3.10/03-maketokenizer-flex2.60.patch \
-        patches/webkit-1.3.10/04-GType-redefined.patch \
+        webkitgtk-2.3.5a/00-srcdir-rename.patch \
+        webkitgtk-2.3.5a/01-gcc-check-bypass.patch \
+        webkitgtk-2.3.5a/02-WTFHeaderDetection-be-gone.patch \
+        webkitgtk-2.3.5a/03-std-threads.patch \
+        webkitgtk-2.3.5a/04-no-msvc-asm.patch \
+        webkitgtk-2.3.5a/05-no-class-size-check.patch \
+        webkitgtk-2.3.5a/06-LLIntAssembly-hack.patch \
+        webkitgtk-2.3.5a/07-GDIObject-h.patch \
+        webkitgtk-2.3.5a/08-no-opengl.patch \
+        webkitgtk-2.3.5a/09-duplicate-plugin-files.patch \
         patches/gnutls-3.5.2/01-no-endservent.patch \
         patches/cyrus-sasl-2.1.26/14-MinGW-w64-add-LIBSASL_API-to-function-definitions.patch \
         patches/cyrus-sasl-2.1.26/10-MinGW-w64-already-has-getopt.patch \

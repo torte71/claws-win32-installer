@@ -102,12 +102,15 @@ chk   f02a14bbe580d2a8cf3bf45a79d39eb595220ac7
 
 
 #
-# libxml2 for Claws plugins
+# libxml2 & libxslt
 
 server ftp://xmlsoft.org/libxml2
 
 file   libxml2-2.9.4.tar.gz
 chk    958ae70baf186263a4bd801a81dd5d682aedd1db
+
+file   libxslt-1.1.29.tar.gz
+chk    edcaeabb3555ae44853bdc406ee9521fb65c620d
 
 #
 # Enchant for Claws
@@ -117,6 +120,11 @@ server http://www.abisource.com/downloads/enchant/1.6.0
 # checked: 2014-06-20 ah
 file   enchant-1.6.0.tar.gz
 chk    321f9cf0abfa1937401676ce60976d8779c39536
+
+# sqlite for libsoup
+server http://sqlite.org/2016
+file sqlite-autoconf-3150200.tar.gz
+chk  31f52169bcfeef9efb61480d0950e928ad059552
 
 #
 # GLIB & friends
@@ -143,9 +151,8 @@ chk  5d4d699721fee8bcecd3edf1361e89af1db06148
 file glib-networking/2.48/glib-networking-2.48.2.tar.xz
 chk  3094dee201937f678ca018a8d88ff2f345ce4227
 
-# Can't update: newer versions require sqlite
-file libsoup/2.40/libsoup-2.40.3.tar.xz
-chk  63ce1d2b022b58831430099b28dee3b47fb63ed1
+file libsoup/2.56/libsoup-2.56.0.tar.xz
+chk  faf72c678d013b8ad9d1d9eecc7e7da8a93c4dd1
 
 # harfbuzz
 server http://www.freedesktop.org/software/harfbuzz/release
@@ -252,11 +259,16 @@ server http://downloads.webmproject.org/releases/webp
 file libwebp-0.5.1.tar.gz
 chk  66efb2213015ad3460bef64b4fb218fdc10ce83f
 
+# icu4c
+server http://download.icu-project.org/files/icu4c
+file 58.2/icu4c-58_2-src.tgz
+chk  b67913c90a484c59fda011797c6f3959d84bdc7c
+
 # webkitgtk
 server http://webkitgtk.org/releases
 
-file webkit-1.3.10.tar.gz
-chk  a5ea274a461b7527d900b60e16e895618cf80949
+file webkitgtk-2.3.5a.tar.xz
+chk  a29620aa248fb1c440a09ad418bf0675276da139
 
 # cyrus-sasl
 server ftp://ftp.cyrusimap.org/cyrus-sasl

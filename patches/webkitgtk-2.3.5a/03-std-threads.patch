@@ -1,0 +1,199 @@
+#! /bin/sh
+patch -p1 -f $* < $0
+exit $?
+
+diff -ruN webkitgtk-2.3.5a-orig/Source/JavaScriptCore/heap/BlockAllocator.h webkitgtk-2.3.5a/Source/JavaScriptCore/heap/BlockAllocator.h
+--- webkitgtk-2.3.5a-orig/Source/JavaScriptCore/heap/BlockAllocator.h	2014-01-23 17:49:58.000000000 +0100
++++ webkitgtk-2.3.5a/Source/JavaScriptCore/heap/BlockAllocator.h	2017-02-05 17:42:05.462977592 +0100
+@@ -29,7 +29,8 @@
+ #include "GCActivityCallback.h"
+ #include "HeapBlock.h"
+ #include "Region.h"
+-#include <condition_variable>
++#include "mingw.mutex.h"
++#include "mingw.condition_variable.h"
+ #include <wtf/DoublyLinkedList.h>
+ #include <wtf/Forward.h>
+ #include <wtf/PageAllocationAligned.h>
+diff -ruN webkitgtk-2.3.5a-orig/Source/WebCore/fileapi/ThreadableBlobRegistry.cpp webkitgtk-2.3.5a/Source/WebCore/fileapi/ThreadableBlobRegistry.cpp
+--- webkitgtk-2.3.5a-orig/Source/WebCore/fileapi/ThreadableBlobRegistry.cpp	2014-01-21 15:06:51.000000000 +0100
++++ webkitgtk-2.3.5a/Source/WebCore/fileapi/ThreadableBlobRegistry.cpp	2017-02-05 17:42:23.438532924 +0100
+@@ -36,6 +36,7 @@
+ #include "BlobURL.h"
+ #include "SecurityOrigin.h"
+ #include <mutex>
++#include "mingw.mutex.h"
+ #include <wtf/HashMap.h>
+ #include <wtf/MainThread.h>
+ #include <wtf/RefPtr.h>
+diff -ruN webkitgtk-2.3.5a-orig/Source/WebCore/loader/CrossOriginAccessControl.cpp webkitgtk-2.3.5a/Source/WebCore/loader/CrossOriginAccessControl.cpp
+--- webkitgtk-2.3.5a-orig/Source/WebCore/loader/CrossOriginAccessControl.cpp	2014-02-04 17:38:03.000000000 +0100
++++ webkitgtk-2.3.5a/Source/WebCore/loader/CrossOriginAccessControl.cpp	2017-02-05 17:42:34.830251145 +0100
+@@ -32,6 +32,7 @@
+ #include "ResourceResponse.h"
+ #include "SecurityOrigin.h"
+ #include <mutex>
++#include "mingw.mutex.h"
+ #include <wtf/text/AtomicString.h>
+ #include <wtf/text/StringBuilder.h>
+ 
+diff -ruN webkitgtk-2.3.5a-orig/Source/WebCore/Modules/webdatabase/DatabaseManager.h webkitgtk-2.3.5a/Source/WebCore/Modules/webdatabase/DatabaseManager.h
+--- webkitgtk-2.3.5a-orig/Source/WebCore/Modules/webdatabase/DatabaseManager.h	2014-01-21 15:06:51.000000000 +0100
++++ webkitgtk-2.3.5a/Source/WebCore/Modules/webdatabase/DatabaseManager.h	2017-02-05 17:42:05.462977592 +0100
+@@ -32,6 +32,7 @@
+ #include "DatabaseDetails.h"
+ #include "DatabaseError.h"
+ #include <mutex>
++#include "mingw.mutex.h"
+ #include <wtf/Assertions.h>
+ #include <wtf/HashMap.h>
+ #include <wtf/HashSet.h>
+diff -ruN webkitgtk-2.3.5a-orig/Source/WebCore/platform/graphics/freetype/FontPlatformDataFreeType.cpp webkitgtk-2.3.5a/Source/WebCore/platform/graphics/freetype/FontPlatformDataFreeType.cpp
+--- webkitgtk-2.3.5a-orig/Source/WebCore/platform/graphics/freetype/FontPlatformDataFreeType.cpp	2014-01-23 20:33:19.000000000 +0100
++++ webkitgtk-2.3.5a/Source/WebCore/platform/graphics/freetype/FontPlatformDataFreeType.cpp	2017-02-05 17:42:05.462977592 +0100
+@@ -37,6 +37,9 @@
+ #include <gdk/gdk.h>
+ #endif
+ 
++// Taken from mingw64's math.h
++#define M_PI_2    1.57079632679489661923
++
+ namespace WebCore {
+ 
+ cairo_subpixel_order_t convertFontConfigSubpixelOrder(int fontConfigOrder)
+diff -ruN webkitgtk-2.3.5a-orig/Source/WebCore/platform/gtk/FileSystemGtk.cpp webkitgtk-2.3.5a/Source/WebCore/platform/gtk/FileSystemGtk.cpp
+--- webkitgtk-2.3.5a-orig/Source/WebCore/platform/gtk/FileSystemGtk.cpp	2014-01-30 08:20:13.000000000 +0100
++++ webkitgtk-2.3.5a/Source/WebCore/platform/gtk/FileSystemGtk.cpp	2017-02-05 17:42:05.462977592 +0100
+@@ -22,6 +22,7 @@
+ 
+ #include "config.h"
+ #include "FileSystem.h"
++#include <libloaderapi.h>
+ 
+ #include "FileMetadata.h"
+ #include "UUID.h"
+diff -ruN webkitgtk-2.3.5a-orig/Source/WebCore/platform/gtk/GtkClickCounter.cpp webkitgtk-2.3.5a/Source/WebCore/platform/gtk/GtkClickCounter.cpp
+--- webkitgtk-2.3.5a-orig/Source/WebCore/platform/gtk/GtkClickCounter.cpp	2014-01-23 20:33:19.000000000 +0100
++++ webkitgtk-2.3.5a/Source/WebCore/platform/gtk/GtkClickCounter.cpp	2017-02-05 17:42:05.462977592 +0100
+@@ -85,8 +85,8 @@
+     guint32 eventTime = getEventTime(event);
+ 
+     if ((event->type == GDK_2BUTTON_PRESS || event->type == GDK_3BUTTON_PRESS)
+-        || ((abs(buttonEvent->x - m_previousClickPoint.x()) < doubleClickDistance)
+-            && (abs(buttonEvent->y - m_previousClickPoint.y()) < doubleClickDistance)
++        || ((std::abs(buttonEvent->x - m_previousClickPoint.x()) < doubleClickDistance)
++            && (std::abs(buttonEvent->y - m_previousClickPoint.y()) < doubleClickDistance)
+             && (eventTime - m_previousClickTime < static_cast<guint>(doubleClickTime))
+             && (buttonEvent->button == m_previousClickButton)))
+         m_currentClickCount++;
+diff -ruN webkitgtk-2.3.5a-orig/Source/WebCore/platform/network/NetworkStateNotifier.cpp webkitgtk-2.3.5a/Source/WebCore/platform/network/NetworkStateNotifier.cpp
+--- webkitgtk-2.3.5a-orig/Source/WebCore/platform/network/NetworkStateNotifier.cpp	2014-01-21 15:06:51.000000000 +0100
++++ webkitgtk-2.3.5a/Source/WebCore/platform/network/NetworkStateNotifier.cpp	2017-02-05 17:42:05.462977592 +0100
+@@ -27,6 +27,7 @@
+ #include "NetworkStateNotifier.h"
+ 
+ #include <mutex>
++#include "mingw.mutex.h"
+ #include <wtf/Assertions.h>
+ #include <wtf/StdLibExtras.h>
+ 
+diff -ruN webkitgtk-2.3.5a-orig/Source/WebCore/platform/sql/SQLiteDatabase.cpp webkitgtk-2.3.5a/Source/WebCore/platform/sql/SQLiteDatabase.cpp
+--- webkitgtk-2.3.5a-orig/Source/WebCore/platform/sql/SQLiteDatabase.cpp	2014-01-28 14:43:44.000000000 +0100
++++ webkitgtk-2.3.5a/Source/WebCore/platform/sql/SQLiteDatabase.cpp	2017-02-05 17:42:05.462977592 +0100
+@@ -33,6 +33,7 @@
+ #include "SQLiteStatement.h"
+ #include <sqlite3.h>
+ #include <thread>
++#include "mingw.thread.h"
+ #include <wtf/Threading.h>
+ #include <wtf/text/CString.h>
+ #include <wtf/text/WTFString.h>
+diff -ruN webkitgtk-2.3.5a-orig/Source/WebCore/platform/sql/SQLiteDatabaseTracker.cpp webkitgtk-2.3.5a/Source/WebCore/platform/sql/SQLiteDatabaseTracker.cpp
+--- webkitgtk-2.3.5a-orig/Source/WebCore/platform/sql/SQLiteDatabaseTracker.cpp	2014-01-28 14:43:44.000000000 +0100
++++ webkitgtk-2.3.5a/Source/WebCore/platform/sql/SQLiteDatabaseTracker.cpp	2017-02-05 21:27:26.068985846 +0100
+@@ -27,6 +27,7 @@
+ #include "SQLiteDatabaseTracker.h"
+ 
+ #include <mutex>
++#include "mingw.mutex.h"
+ #include <wtf/NeverDestroyed.h>
+ 
+ namespace WebCore {
+diff -ruN webkitgtk-2.3.5a-orig/Source/WebCore/platform/text/TextEncodingRegistry.cpp webkitgtk-2.3.5a/Source/WebCore/platform/text/TextEncodingRegistry.cpp
+--- webkitgtk-2.3.5a-orig/Source/WebCore/platform/text/TextEncodingRegistry.cpp	2014-01-28 14:43:44.000000000 +0100
++++ webkitgtk-2.3.5a/Source/WebCore/platform/text/TextEncodingRegistry.cpp	2017-02-05 17:42:05.462977592 +0100
+@@ -34,6 +34,7 @@
+ #include "TextCodecUTF8.h"
+ #include "TextEncoding.h"
+ #include <mutex>
++#include "mingw.mutex.h"
+ #include <wtf/ASCIICType.h>
+ #include <wtf/HashMap.h>
+ #include <wtf/HashSet.h>
+diff -ruN webkitgtk-2.3.5a-orig/Source/WTF/wtf/ByteSpinLock.h webkitgtk-2.3.5a/Source/WTF/wtf/ByteSpinLock.h
+--- webkitgtk-2.3.5a-orig/Source/WTF/wtf/ByteSpinLock.h	2014-01-21 15:06:51.000000000 +0100
++++ webkitgtk-2.3.5a/Source/WTF/wtf/ByteSpinLock.h	2017-02-05 17:42:05.462977592 +0100
+@@ -26,6 +26,7 @@
+ #ifndef ByteSpinLock_h
+ #define ByteSpinLock_h
+ 
++#include "mingw.thread.h"
+ #include <thread>
+ #include <wtf/Assertions.h>
+ #include <wtf/Atomics.h>
+diff -ruN webkitgtk-2.3.5a-orig/Source/WTF/wtf/CompilationThread.cpp webkitgtk-2.3.5a/Source/WTF/wtf/CompilationThread.cpp
+--- webkitgtk-2.3.5a-orig/Source/WTF/wtf/CompilationThread.cpp	2014-01-21 15:06:51.000000000 +0100
++++ webkitgtk-2.3.5a/Source/WTF/wtf/CompilationThread.cpp	2017-02-05 17:42:05.462977592 +0100
+@@ -30,6 +30,7 @@
+ #include "ThreadSpecific.h"
+ #include "Threading.h"
+ #include <mutex>
++#include "mingw.mutex.h"
+ 
+ namespace WTF {
+ 
+diff -ruN webkitgtk-2.3.5a-orig/Source/WTF/wtf/CryptographicallyRandomNumber.cpp webkitgtk-2.3.5a/Source/WTF/wtf/CryptographicallyRandomNumber.cpp
+--- webkitgtk-2.3.5a-orig/Source/WTF/wtf/CryptographicallyRandomNumber.cpp	2014-01-29 17:33:49.000000000 +0100
++++ webkitgtk-2.3.5a/Source/WTF/wtf/CryptographicallyRandomNumber.cpp	2017-02-05 17:42:05.462977592 +0100
+@@ -33,6 +33,7 @@
+ #include "NeverDestroyed.h"
+ #include "OSRandomSource.h"
+ #include <mutex>
++#include "mingw.mutex.h"
+ 
+ namespace WTF {
+ 
+diff -ruN webkitgtk-2.3.5a-orig/Source/WTF/wtf/MainThread.cpp webkitgtk-2.3.5a/Source/WTF/wtf/MainThread.cpp
+--- webkitgtk-2.3.5a-orig/Source/WTF/wtf/MainThread.cpp	2014-02-04 17:38:03.000000000 +0100
++++ webkitgtk-2.3.5a/Source/WTF/wtf/MainThread.cpp	2017-02-05 17:42:05.462977592 +0100
+@@ -34,6 +34,7 @@
+ #include "Functional.h"
+ #include "StdLibExtras.h"
+ #include <mutex>
++#include "mingw.mutex.h"
+ #include <wtf/NeverDestroyed.h>
+ #include <wtf/ThreadSpecific.h>
+ 
+diff -ruN webkitgtk-2.3.5a-orig/Source/WTF/wtf/threads/BinarySemaphore.cpp webkitgtk-2.3.5a/Source/WTF/wtf/threads/BinarySemaphore.cpp
+--- webkitgtk-2.3.5a-orig/Source/WTF/wtf/threads/BinarySemaphore.cpp	2013-08-03 18:10:38.000000000 +0200
++++ webkitgtk-2.3.5a/Source/WTF/wtf/threads/BinarySemaphore.cpp	2017-02-05 17:42:05.462977592 +0100
+@@ -26,7 +26,7 @@
+ #include "config.h"
+ #include "BinarySemaphore.h"
+ 
+-#if !PLATFORM(WIN)
++#if !OS(WINDOWS)
+ 
+ namespace WTF {
+ 
+diff -ruN webkitgtk-2.3.5a-orig/Source/WTF/wtf/unicode/icu/CollatorICU.cpp webkitgtk-2.3.5a/Source/WTF/wtf/unicode/icu/CollatorICU.cpp
+--- webkitgtk-2.3.5a-orig/Source/WTF/wtf/unicode/icu/CollatorICU.cpp	2014-01-28 14:43:43.000000000 +0100
++++ webkitgtk-2.3.5a/Source/WTF/wtf/unicode/icu/CollatorICU.cpp	2017-02-05 17:42:05.462977592 +0100
+@@ -32,6 +32,7 @@
+ #if !UCONFIG_NO_COLLATION
+ 
+ #include <mutex>
++#include "mingw.mutex.h"
+ #include <wtf/Assertions.h>
+ #include <wtf/StringExtras.h>
+ #include <unicode/ucol.h>

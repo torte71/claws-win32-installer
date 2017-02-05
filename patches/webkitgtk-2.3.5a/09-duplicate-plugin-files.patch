@@ -1,0 +1,103 @@
+#! /bin/sh
+patch -p1 -f $* < $0
+exit $?
+
+diff -ruN webkitgtk-2.3.5a-orig/GNUmakefile.in webkitgtk-2.3.5a/GNUmakefile.in
+--- webkitgtk-2.3.5a-orig/GNUmakefile.in	2014-02-05 12:08:09.000000000 +0100
++++ webkitgtk-2.3.5a/GNUmakefile.in	2017-02-05 23:23:57.206141200 +0100
+@@ -210,9 +210,7 @@
+ @TARGET_X11_TRUE@@USE_GLX_TRUE@	Source/WebCore/platform/graphics/glx/GLContextGLX.cpp \
+ @TARGET_X11_TRUE@@USE_GLX_TRUE@	Source/WebCore/platform/graphics/glx/GLContextGLX.h
+ 
+-@TARGET_X11_FALSE@am__append_8 = \
+-@TARGET_X11_FALSE@	Source/WebCore/plugins/PluginPackageNone.cpp \
+-@TARGET_X11_FALSE@	Source/WebCore/plugins/PluginViewNone.cpp
++@TARGET_X11_FALSE@am__append_8 =
+ 
+ @TARGET_X11_OR_WAYLAND_TRUE@am__append_9 = \
+ @TARGET_X11_OR_WAYLAND_TRUE@	Source/WebCore/platform/cairo/WidgetBackingStoreCairo.h \
+@@ -251,9 +249,7 @@
+ @TARGET_WIN32_TRUE@@TARGET_X11_OR_WAYLAND_FALSE@	Source/WebCore/platform/cairo/WidgetBackingStoreCairo.h \
+ @TARGET_WIN32_TRUE@@TARGET_X11_OR_WAYLAND_FALSE@	Source/WebCore/plugins/win/PluginViewWin.cpp
+ 
+-@TARGET_WIN32_FALSE@@TARGET_X11_OR_WAYLAND_FALSE@am__append_14 = \
+-@TARGET_WIN32_FALSE@@TARGET_X11_OR_WAYLAND_FALSE@	Source/WebCore/plugins/PluginPackageNone.cpp \
+-@TARGET_WIN32_FALSE@@TARGET_X11_OR_WAYLAND_FALSE@	Source/WebCore/plugins/PluginViewNone.cpp
++@TARGET_WIN32_FALSE@@TARGET_X11_OR_WAYLAND_FALSE@am__append_14 =
+ 
+ @USE_GLES2_TRUE@am__append_15 = \
+ @USE_GLES2_TRUE@	Source/WebCore/platform/graphics/opengl/Extensions3DOpenGLES.cpp \
+@@ -5126,8 +5122,6 @@
+ 	Source/WebCore/xml/XSLTProcessorLibxslt.cpp \
+ 	Source/WebCore/xml/XSLTUnicodeSort.cpp \
+ 	Source/WebCore/xml/XSLTUnicodeSort.h \
+-	Source/WebCore/plugins/PluginPackageNone.cpp \
+-	Source/WebCore/plugins/PluginViewNone.cpp \
+ 	Source/WebCore/platform/graphics/win/DIBPixelData.cpp \
+ 	Source/WebCore/platform/graphics/win/DIBPixelData.h \
+ 	Source/WebCore/platform/graphics/win/GraphicsContextCairoWin.cpp \
+@@ -5180,8 +5174,7 @@
+ 	Source/WebCore/platform/graphics/texmap/TextureMapperTile.h \
+ 	Source/WebCore/platform/graphics/texmap/TextureMapperTiledBackingStore.cpp \
+ 	Source/WebCore/platform/graphics/texmap/TextureMapperTiledBackingStore.h
+-@TARGET_X11_FALSE@am__objects_17 = Source/WebCore/plugins/libWebCore_la-PluginPackageNone.lo \
+-@TARGET_X11_FALSE@	Source/WebCore/plugins/libWebCore_la-PluginViewNone.lo
++@TARGET_X11_FALSE@am__objects_17 =
+ @TARGET_WIN32_TRUE@@TARGET_X11_OR_WAYLAND_FALSE@am__objects_18 = Source/WebCore/platform/graphics/win/libWebCore_la-DIBPixelData.lo \
+ @TARGET_WIN32_TRUE@@TARGET_X11_OR_WAYLAND_FALSE@	Source/WebCore/platform/graphics/win/libWebCore_la-GraphicsContextCairoWin.lo \
+ @TARGET_WIN32_TRUE@@TARGET_X11_OR_WAYLAND_FALSE@	Source/WebCore/platform/graphics/win/libWebCore_la-GraphicsContextWin.lo \
+@@ -5192,8 +5185,7 @@
+ @TARGET_WIN32_TRUE@@TARGET_X11_OR_WAYLAND_FALSE@	Source/WebCore/plugins/win/libWebCore_la-PluginDatabaseWin.lo \
+ @TARGET_WIN32_TRUE@@TARGET_X11_OR_WAYLAND_FALSE@	Source/WebCore/plugins/win/libWebCore_la-PluginMessageThrottlerWin.lo \
+ @TARGET_WIN32_TRUE@@TARGET_X11_OR_WAYLAND_FALSE@	Source/WebCore/plugins/win/libWebCore_la-PluginPackageWin.lo
+-@TARGET_WIN32_FALSE@@TARGET_X11_OR_WAYLAND_FALSE@am__objects_19 = Source/WebCore/plugins/libWebCore_la-PluginPackageNone.lo \
+-@TARGET_WIN32_FALSE@@TARGET_X11_OR_WAYLAND_FALSE@	Source/WebCore/plugins/libWebCore_la-PluginViewNone.lo
++@TARGET_WIN32_FALSE@@TARGET_X11_OR_WAYLAND_FALSE@am__objects_19 = 
+ @USE_GLES2_TRUE@am__objects_20 = Source/WebCore/platform/graphics/opengl/libWebCore_la-Extensions3DOpenGLES.lo \
+ @USE_GLES2_TRUE@	Source/WebCore/platform/graphics/opengl/libWebCore_la-GraphicsContext3DOpenGLES.lo
+ @USE_GLES2_FALSE@am__objects_21 = Source/WebCore/platform/graphics/opengl/libWebCore_la-Extensions3DOpenGL.lo \
+@@ -32387,12 +32379,6 @@
+ Source/WebCore/xml/libWebCore_la-XSLTUnicodeSort.lo:  \
+ 	Source/WebCore/xml/$(am__dirstamp) \
+ 	Source/WebCore/xml/$(DEPDIR)/$(am__dirstamp)
+-Source/WebCore/plugins/libWebCore_la-PluginPackageNone.lo:  \
+-	Source/WebCore/plugins/$(am__dirstamp) \
+-	Source/WebCore/plugins/$(DEPDIR)/$(am__dirstamp)
+-Source/WebCore/plugins/libWebCore_la-PluginViewNone.lo:  \
+-	Source/WebCore/plugins/$(am__dirstamp) \
+-	Source/WebCore/plugins/$(DEPDIR)/$(am__dirstamp)
+ Source/WebCore/platform/graphics/win/$(am__dirstamp):
+ 	@$(MKDIR_P) Source/WebCore/platform/graphics/win
+ 	@: > Source/WebCore/platform/graphics/win/$(am__dirstamp)
+@@ -45267,10 +45253,8 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@Source/WebCore/plugins/$(DEPDIR)/libWebCore_la-PluginDebug.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@Source/WebCore/plugins/$(DEPDIR)/libWebCore_la-PluginMainThreadScheduler.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@Source/WebCore/plugins/$(DEPDIR)/libWebCore_la-PluginPackage.Plo@am__quote@
+-@AMDEP_TRUE@@am__include@ @am__quote@Source/WebCore/plugins/$(DEPDIR)/libWebCore_la-PluginPackageNone.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@Source/WebCore/plugins/$(DEPDIR)/libWebCore_la-PluginStream.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@Source/WebCore/plugins/$(DEPDIR)/libWebCore_la-PluginView.Plo@am__quote@
+-@AMDEP_TRUE@@am__include@ @am__quote@Source/WebCore/plugins/$(DEPDIR)/libWebCore_la-PluginViewNone.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@Source/WebCore/plugins/$(DEPDIR)/libWebCore_la-npapi.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@Source/WebCore/plugins/gtk/$(DEPDIR)/libWebCoreGtk2_la-PluginPackageGtk.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@Source/WebCore/plugins/gtk/$(DEPDIR)/libWebCoreGtk2_la-PluginViewGtk.Plo@am__quote@
+@@ -61074,20 +61058,6 @@
+ @AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+ @am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWebCore_la_CPPFLAGS) $(CPPFLAGS) $(libWebCore_la_CXXFLAGS) $(CXXFLAGS) -c -o Source/WebCore/xml/libWebCore_la-XSLTUnicodeSort.lo `test -f 'Source/WebCore/xml/XSLTUnicodeSort.cpp' || echo '$(srcdir)/'`Source/WebCore/xml/XSLTUnicodeSort.cpp
+ 
+-Source/WebCore/plugins/libWebCore_la-PluginPackageNone.lo: Source/WebCore/plugins/PluginPackageNone.cpp
+-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWebCore_la_CPPFLAGS) $(CPPFLAGS) $(libWebCore_la_CXXFLAGS) $(CXXFLAGS) -MT Source/WebCore/plugins/libWebCore_la-PluginPackageNone.lo -MD -MP -MF Source/WebCore/plugins/$(DEPDIR)/libWebCore_la-PluginPackageNone.Tpo -c -o Source/WebCore/plugins/libWebCore_la-PluginPackageNone.lo `test -f 'Source/WebCore/plugins/PluginPackageNone.cpp' || echo '$(srcdir)/'`Source/WebCore/plugins/PluginPackageNone.cpp
+-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) Source/WebCore/plugins/$(DEPDIR)/libWebCore_la-PluginPackageNone.Tpo Source/WebCore/plugins/$(DEPDIR)/libWebCore_la-PluginPackageNone.Plo
+-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='Source/WebCore/plugins/PluginPackageNone.cpp' object='Source/WebCore/plugins/libWebCore_la-PluginPackageNone.lo' libtool=yes @AMDEPBACKSLASH@
+-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWebCore_la_CPPFLAGS) $(CPPFLAGS) $(libWebCore_la_CXXFLAGS) $(CXXFLAGS) -c -o Source/WebCore/plugins/libWebCore_la-PluginPackageNone.lo `test -f 'Source/WebCore/plugins/PluginPackageNone.cpp' || echo '$(srcdir)/'`Source/WebCore/plugins/PluginPackageNone.cpp
+-
+-Source/WebCore/plugins/libWebCore_la-PluginViewNone.lo: Source/WebCore/plugins/PluginViewNone.cpp
+-@am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWebCore_la_CPPFLAGS) $(CPPFLAGS) $(libWebCore_la_CXXFLAGS) $(CXXFLAGS) -MT Source/WebCore/plugins/libWebCore_la-PluginViewNone.lo -MD -MP -MF Source/WebCore/plugins/$(DEPDIR)/libWebCore_la-PluginViewNone.Tpo -c -o Source/WebCore/plugins/libWebCore_la-PluginViewNone.lo `test -f 'Source/WebCore/plugins/PluginViewNone.cpp' || echo '$(srcdir)/'`Source/WebCore/plugins/PluginViewNone.cpp
+-@am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) Source/WebCore/plugins/$(DEPDIR)/libWebCore_la-PluginViewNone.Tpo Source/WebCore/plugins/$(DEPDIR)/libWebCore_la-PluginViewNone.Plo
+-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	$(AM_V_CXX)source='Source/WebCore/plugins/PluginViewNone.cpp' object='Source/WebCore/plugins/libWebCore_la-PluginViewNone.lo' libtool=yes @AMDEPBACKSLASH@
+-@AMDEP_TRUE@@am__fastdepCXX_FALSE@	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCXX_FALSE@	$(AM_V_CXX@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWebCore_la_CPPFLAGS) $(CPPFLAGS) $(libWebCore_la_CXXFLAGS) $(CXXFLAGS) -c -o Source/WebCore/plugins/libWebCore_la-PluginViewNone.lo `test -f 'Source/WebCore/plugins/PluginViewNone.cpp' || echo '$(srcdir)/'`Source/WebCore/plugins/PluginViewNone.cpp
+-
+ Source/WebCore/platform/graphics/win/libWebCore_la-DIBPixelData.lo: Source/WebCore/platform/graphics/win/DIBPixelData.cpp
+ @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(LIBTOOL) $(AM_V_lt) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(libWebCore_la_CPPFLAGS) $(CPPFLAGS) $(libWebCore_la_CXXFLAGS) $(CXXFLAGS) -MT Source/WebCore/platform/graphics/win/libWebCore_la-DIBPixelData.lo -MD -MP -MF Source/WebCore/platform/graphics/win/$(DEPDIR)/libWebCore_la-DIBPixelData.Tpo -c -o Source/WebCore/platform/graphics/win/libWebCore_la-DIBPixelData.lo `test -f 'Source/WebCore/platform/graphics/win/DIBPixelData.cpp' || echo '$(srcdir)/'`Source/WebCore/platform/graphics/win/DIBPixelData.cpp
+ @am__fastdepCXX_TRUE@	$(AM_V_at)$(am__mv) Source/WebCore/platform/graphics/win/$(DEPDIR)/libWebCore_la-DIBPixelData.Tpo Source/WebCore/platform/graphics/win/$(DEPDIR)/libWebCore_la-DIBPixelData.Plo
