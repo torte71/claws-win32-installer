@@ -41,8 +41,10 @@ stamps/stamp-directories:
 	$(MKDIR) playground
 	$(MKDIR) $(bdir)
 	$(MKDIR) $(idir)
+	$(MKDIR) $(idir)/include
 	$(MKDIR) $(ipdir)
 	touch $(bdir)/versioninfo.txt
+	cp ${top_srcdir}/src/mingw.*.h $(idir)/include
 	touch stamps/stamp-directories
 
 

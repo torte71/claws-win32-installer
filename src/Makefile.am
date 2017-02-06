@@ -24,6 +24,7 @@ EXTRA_DIST = pkg-config claws-mail.nsi \
 				gnupg-uninst.nsi \
 				sections-installer.nsi sections-uninstaller.nsi \
         libiconv.def libintl.def \
+				mingw.condition_variable.h mingw.mutex.h mingw.thread.h \
         Memento.nsh Toolchain-mingw32.cmake.in
 
 SUBDIRS = dictionaries
