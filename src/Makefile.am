@@ -356,9 +356,9 @@ cm_pkg_webkitgtk_configure = \
 								--disable-debug \
 								--disable-accelerated-compositing \
 								--enable-silent-rules \
-               CFLAGS=\"-I$(idir)/include -g -O2 -std=gnu99 -mms-bitfields\" \
-               CXXFLAGS=\"-I$(idir)/include -g -O2 -std=gnu++98 -mms-bitfields -fexceptions\" \
-               CPPFLAGS=\"-I$(idir)/include -g -O2 -std=gnu++98 -mms-bitfields\" \
+               CFLAGS=\"-I$(idir)/include -g0 -O2 -mms-bitfields\" \
+               CXXFLAGS=\"-I$(idir)/include -g0 -O2 -std=gnu++98 -mms-bitfields -fexceptions\" \
+               CPPFLAGS=\"-I$(idir)/include -g0 -O2 -std=gnu++98 -mms-bitfields\" \
          CC=$(CC) LIBS=\"-L$(idir)/lib\"
 
 cm_pkg_libical_cmake_args = \
