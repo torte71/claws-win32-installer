@@ -41,7 +41,7 @@ cm_spkgs = glib libffi gdk-pixbuf gtk+ expat \
 		libtasn1 opencdk gnutls curl libxml2 libxslt sqlite-autoconf \
 		jpeg glib-networking libsoup libwebp webkitgtk gmp nettle \
 		harfbuzz pango pixman cairo libetpan claws-mail \
-		libgcrypt libassuan cyrus-sasl icu4c \
+		libgcrypt libassuan cyrus-sasl icu4c ytnef \
 		w32pth regex libiconv gettext libical
 
 # Extra options to configure for individual packages.
@@ -83,6 +83,7 @@ cm_pkg_pixman_make_args = -j$(NUMPROC)
 cm_pkg_cairo_make_args = -j$(NUMPROC)
 cm_pkg_cyrus_sasl_make_args = -j$(NUMPROC)
 cm_pkg_libical_make_args = -j$(NUMPROC)
+cm_pkg_ytnef_make_args = -j$(NUMPROC)
 
 cm_pkg_libical_cmake = yes
 
@@ -298,7 +299,7 @@ cm_pkg_claws_mail_configure = \
   --disable-acpi_notifier-plugin --disable-clamd-plugin \
   --disable-perl-plugin --disable-python-plugin --disable-demo-plugin \
   --disable-newmail-plugin --disable-mailmbox-plugin \
-	--disable-dillo-plugin \
+	--disable-dillo-plugin --enable-tnef_parse-plugin \
 	--with-password-encryption=gnutls \
 	CFLAGS=\"-g -O2 \" \
 	CPPFLAGS=\"-g -O2 -I$(idir)/include -D_POSIX_C_SOURCE\" \

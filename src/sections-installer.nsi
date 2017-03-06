@@ -501,6 +501,11 @@ File ${prefix}/bin/libicalss.dll
 File ${prefix}/bin/libicalvcal.dll
 
 #######################################
+### ytnef
+!insertmacro SetPrefix ytnef
+File ${prefix}/bin/libytnef-0.dll
+
+#######################################
 ### claws-mail
 !insertmacro SetPrefix2 claws_mail claws-mail
 SetOutPath "$INSTDIR"
@@ -530,6 +535,7 @@ File ${prefix}/lib/claws-mail/plugins/tnef_parse.dll
 File ${prefix}/lib/claws-mail/plugins/rssyl.dll
 File ${prefix}/lib/claws-mail/plugins/spamreport.dll
 File ${prefix}/lib/claws-mail/plugins/vcalendar.dll
+File ${prefix}/lib/claws-mail/plugins/tnef_parse.dll
 File ${prefix}/lib/claws-mail/plugins/managesieve.dll
 
 #SetOutPath "$INSTDIR\share\locale\bg\LC_MESSAGES"

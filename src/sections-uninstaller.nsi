@@ -31,6 +31,7 @@ Delete "$INSTDIR\lib\claws-mail\plugins\tnef_parse.dll"
 Delete "$INSTDIR\lib\claws-mail\plugins\rssyl.dll"
 Delete "$INSTDIR\lib\claws-mail\plugins\spamreport.dll"
 Delete "$INSTDIR\lib\claws-mail\plugins\vcalendar.dll"
+Delete "$INSTDIR\lib\claws-mail\plugins\tnef_parse.dll"
 Delete "$INSTDIR\lib\claws-mail\plugins\managesieve.dll"
 RMDir "$INSTDIR\lib\claws-mail\plugins"
 RMDir "$INSTDIR\lib\claws-mail"
@@ -60,6 +61,10 @@ Delete "$INSTDIR\share\locale\sk\LC_MESSAGES\claws-mail.mo"
 Delete "$INSTDIR\share\locale\sv\LC_MESSAGES\claws-mail.mo"
 Delete "$INSTDIR\share\locale\tr\LC_MESSAGES\claws-mail.mo"
 Delete "$INSTDIR\share\locale\zh_TW\LC_MESSAGES\claws-mail.mo"
+
+#######################################
+### ytnef
+Delete "$INSSTDIR\libytnef-0.dll"
 
 #######################################
 ### libical

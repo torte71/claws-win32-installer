@@ -91,6 +91,9 @@ chk  fe718884dd7ca0652613a2cb5c302ac6323605d8
 file jpeg-9.tar.gz
 chk  724987e7690ca3d74d6ab7c1f1b6854e88ca204b
 
+file ytnef-1.9.1.tar.xz
+chk  5b2c1dcd9184fd2aef9d26ef09e73f224dd4727f
+
 #
 # curl for Claws plugins
 #
