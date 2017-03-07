@@ -199,3 +199,7 @@
 !define cm_pkg_libical @cm_pkg_libical@
 !define cm_pkg_libical_version @cm_pkg_libical_version@
 !define cm_pkg_libical_src @cm_pkg_libical_src@
+
+!define cm_pkg_ytnef @cm_pkg_ytnef@
+!define cm_pkg_ytnef_version @cm_pkg_ytnef_version@
+!define cm_pkg_ytnef_src @cm_pkg_ytnef_src@
