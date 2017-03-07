@@ -64,7 +64,7 @@ Delete "$INSTDIR\share\locale\zh_TW\LC_MESSAGES\claws-mail.mo"
 
 #######################################
 ### ytnef
-Delete "$INSTDIR\libytnef-0.dll"
+Delete "$INSSTDIR\libytnef-0.dll"
 
 #######################################
 ### libical
