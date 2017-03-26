@@ -342,7 +342,6 @@ cm_pkg_webkitgtk_configure = \
                 --disable-gtk-doc-html \
 								--disable-svg-fonts \
 								--disable-jit \
-                --disable-silent-rules \
                 --disable-video \
 								--disable-web-audio \
 								--disable-battery-status \
