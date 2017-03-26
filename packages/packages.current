@@ -59,8 +59,8 @@ chk 3adf0db008a0a2ee40dd016c137e0abd8b320933
 
 server http://www.claws-mail.org/releases
 
-file   claws-mail-3.14.1.tar.xz
-chk    9705b0c28c48ee705ae128a570dba6c465a345eb
+file   claws-mail-3.15.0.tar.xz
+chk    5aa83c79091e1a612eed5de8ddad7c078af15978
 
 #
 # Various libraries, mostly those from sf.net
