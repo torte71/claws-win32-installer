@@ -14,7 +14,13 @@
 configure_ac="configure.ac"
 
 if [ $# -eq 0 ]; then
-	clawsver=$(echo $(basename $(ls -1 packages/claws-mail-*.*.*.tar.*)) | sed 's/claws-mail-\(.*\)\.tar\..*/\1/')
+	clawspkg=$(ls -1 packages/claws-mail-*.*.*.tar.* | head -n 1)
+	if [ -z "${clawspkg}" ]; then
+		echo "No Claws Mail source tarball found in packages/ dir, exiting..."
+		exit 1
+	fi
+	clawspkg=$(basename ${clawspkg})
+	clawsver=$(echo ${clawspkg} | sed 's/claws-mail-\(.*\)\.tar\..*/\1/')
 	clawsver_nogit=$(echo $clawsver | sed 's/git.*//')
 
 	gitrev=""
@@ -30,6 +36,7 @@ if [ $# -eq 0 ]; then
 		-e "s/^m4_define(\[my_gitrev\].*/m4_define([my_gitrev], [$gitrev])/" \
 		-e "$gitsed" \
 		${configure_ac}.template >${configure_ac}
+	touch stamp-autogen-1stpass
 fi
 
 cvtver () {
@@ -125,6 +132,10 @@ elif [ "$myhost" = "w64" ]; then
 fi
 
 if [ -n "$myhost" ]; then
+		if [ ! -f stamp-autogen-1stpass ]; then
+			echo "You need to succesfully run autogen.sh with no parameters first..."
+			exit 1
+		fi
     tmp=`dirname $0`
     tsdir=`cd "$tmp"; pwd`
     if [ ! -f $tsdir/config.guess ]; then

@@ -21,6 +21,8 @@ ACLOCAL_AMFLAGS = -I m4
 AUTOMAKE_OPTIONS = dist-bzip2 no-dist-gzip
 DISTCHECK_CONFIGURE_FLAGS = --host=i686-w64-mingw32
 
+DISTCLEANFILES = stamp-autogen-1stpass
+
 SUBDIRS = doc packages src
 
 # find patches -type f | sort | sed 's/$/ \\/' | sed 's/^/             /'
