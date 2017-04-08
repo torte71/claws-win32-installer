@@ -67,8 +67,8 @@ chk    5aa83c79091e1a612eed5de8ddad7c078af15978
 # (Kept on our own mirror due to Sourceforge/github peculiarities.)
 server http://www.claws-mail.org/win32
 
-file   libetpan-1.6.tar.gz
-chk    54d0c6d612e3981cc71e52e3c9e04d5805d9917f
+file   libetpan-1.7.tar.gz
+chk    37a866f4724b0406a725d924cf5252e9add07cef
 
 file   expat-2.2.0.tar.bz2
 chk    8453bc52324be4c796fd38742ec48470eef358b3

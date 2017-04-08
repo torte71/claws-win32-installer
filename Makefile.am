@@ -29,10 +29,11 @@ SUBDIRS = doc packages src
 
 EXTRA_DIST = autogen.sh \
         doc/license-page doc/GPLv3 \
-				patches/libetpan-1.6/ipv6.patch \
-				patches/libetpan-1.6/sasl_set_path.patch \
-				patches/libetpan-1.6/mingw-closesocket-include.patch \
-				patches/libetpan-1.6/ipv6-wsock.patch \
+				patches/libetpan-1.7/ipv6.patch \
+				patches/libetpan-1.7/sasl_set_path.patch \
+				patches/libetpan-1.7/mingw-closesocket-include.patch \
+				patches/libetpan-1.7/ipv6-wsock.patch \
+				patches/libetpan-1.7/send_wouldblock.patch \
 				patches/libsoup-2.40.3/01-no-docs-no-tests.patch \
 				patches/glib-2.49.2/03-wchar64.patch \
 				patches/glib-2.49.2/01-socket.patch \

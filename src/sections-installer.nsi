@@ -123,7 +123,7 @@ SetOutPath "$INSTDIR"
 #######################################
 ### libetpan
 !insertmacro SetPrefix libetpan
-File ${prefix}/bin/libetpan-17.dll
+File ${prefix}/bin/libetpan-20.dll
 
 #######################################
 ### libassuan

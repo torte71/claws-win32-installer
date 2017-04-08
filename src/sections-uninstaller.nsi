@@ -363,7 +363,7 @@ RMDir "$INSTDIR\lib"
 
 #######################################
 ### libetpan
-Delete "$INSTDIR\libetpan-17.dll"
+Delete "$INSTDIR\libetpan-20.dll"
 
 #######################################
 ### enchant
