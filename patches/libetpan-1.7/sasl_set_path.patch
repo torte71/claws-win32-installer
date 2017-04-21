@@ -3,10 +3,10 @@ patch -p1 -f $* < $0
 exit $?
 
 diff -ruN libetpan-1.7-orig/src/data-types/mailsasl.c libetpan-1.7/src/data-types/mailsasl.c
---- libetpan-1.7-orig/src/data-types/mailsasl.c	2016-05-26 07:27:47.000000000 +0200
-+++ libetpan-1.7/src/data-types/mailsasl.c	2016-11-24 21:54:00.031162371 +0100
-@@ -140,4 +140,11 @@
- {
+--- libetpan-1.7-orig/src/data-types/mailsasl.c	2017-04-21 15:32:20.432729431 +0200
++++ libetpan-1.7/src/data-types/mailsasl.c	2017-04-21 15:33:24.015481671 +0200
+@@ -126,6 +126,13 @@
+   UNLOCK_SASL();
  }
  
 +void mailsasl_set_plugin_path(char *path)
@@ -16,10 +16,21 @@ diff -ruN libetpan-1.7-orig/src/data-types/mailsasl.c libetpan-1.7/src/data-type
 +	UNLOCK_SASL();
 +}
 +
+ #else
+ 
+ void mailsasl_external_ref(void)
+@@ -140,4 +147,8 @@
+ {
+ }
+ 
++void mailsasl_set_plugin_path(char *path)
++{
++}
++
  #endif
 diff -ruN libetpan-1.7-orig/src/data-types/mailsasl.h libetpan-1.7/src/data-types/mailsasl.h
---- libetpan-1.7-orig/src/data-types/mailsasl.h	2016-05-26 07:27:47.000000000 +0200
-+++ libetpan-1.7/src/data-types/mailsasl.h	2016-11-24 21:54:14.602846406 +0100
+--- libetpan-1.7-orig/src/data-types/mailsasl.h	2017-04-21 15:32:20.436729353 +0200
++++ libetpan-1.7/src/data-types/mailsasl.h	2017-04-21 15:32:33.080481220 +0200
 @@ -41,6 +41,7 @@
  
  void mailsasl_ref(void);
@@ -29,8 +40,8 @@ diff -ruN libetpan-1.7-orig/src/data-types/mailsasl.h libetpan-1.7/src/data-type
  #ifdef __cplusplus
  }
 diff -ruN libetpan-1.7-orig/src/low-level/imap/mailimap_socket.c libetpan-1.7/src/low-level/imap/mailimap_socket.c
---- libetpan-1.7-orig/src/low-level/imap/mailimap_socket.c	2016-05-26 07:27:47.000000000 +0200
-+++ libetpan-1.7/src/low-level/imap/mailimap_socket.c	2016-11-24 21:51:16.502707970 +0100
+--- libetpan-1.7-orig/src/low-level/imap/mailimap_socket.c	2017-04-21 15:32:20.436729353 +0200
++++ libetpan-1.7/src/low-level/imap/mailimap_socket.c	2017-04-21 15:32:33.080481220 +0200
 @@ -53,6 +53,10 @@
  
  #include "mailstream_cfstream.h"
@@ -43,8 +54,8 @@ diff -ruN libetpan-1.7-orig/src/low-level/imap/mailimap_socket.c libetpan-1.7/sr
  #define SERVICE_NAME_IMAP "imap2"
  #define SERVICE_TYPE_TCP "tcp"
 diff -ruN libetpan-1.7-orig/src/low-level/imap/mailimap_ssl.c libetpan-1.7/src/low-level/imap/mailimap_ssl.c
---- libetpan-1.7-orig/src/low-level/imap/mailimap_ssl.c	2016-05-26 07:27:47.000000000 +0200
-+++ libetpan-1.7/src/low-level/imap/mailimap_ssl.c	2016-11-24 21:51:26.098499929 +0100
+--- libetpan-1.7-orig/src/low-level/imap/mailimap_ssl.c	2017-04-21 15:32:20.436729353 +0200
++++ libetpan-1.7/src/low-level/imap/mailimap_ssl.c	2017-04-21 15:32:33.080481220 +0200
 @@ -53,6 +53,10 @@
  
  #include "mailstream_cfstream.h"
@@ -57,8 +68,8 @@ diff -ruN libetpan-1.7-orig/src/low-level/imap/mailimap_ssl.c libetpan-1.7/src/l
  #define SERVICE_NAME_IMAPS "imaps"
  #define SERVICE_TYPE_TCP "tcp"
 diff -ruN libetpan-1.7-orig/src/low-level/nntp/newsnntp_socket.c libetpan-1.7/src/low-level/nntp/newsnntp_socket.c
---- libetpan-1.7-orig/src/low-level/nntp/newsnntp_socket.c	2016-05-26 07:27:47.000000000 +0200
-+++ libetpan-1.7/src/low-level/nntp/newsnntp_socket.c	2016-11-24 21:51:55.529861834 +0100
+--- libetpan-1.7-orig/src/low-level/nntp/newsnntp_socket.c	2017-04-21 15:32:20.436729353 +0200
++++ libetpan-1.7/src/low-level/nntp/newsnntp_socket.c	2017-04-21 15:32:33.080481220 +0200
 @@ -51,6 +51,10 @@
  #	include <unistd.h>
  #endif
@@ -71,8 +82,8 @@ diff -ruN libetpan-1.7-orig/src/low-level/nntp/newsnntp_socket.c libetpan-1.7/sr
  #define SERVICE_NAME_NNTP "nntp"
  #define SERVICE_TYPE_TCP "tcp"
 diff -ruN libetpan-1.7-orig/src/low-level/nntp/newsnntp_ssl.c libetpan-1.7/src/low-level/nntp/newsnntp_ssl.c
---- libetpan-1.7-orig/src/low-level/nntp/newsnntp_ssl.c	2016-05-26 07:27:47.000000000 +0200
-+++ libetpan-1.7/src/low-level/nntp/newsnntp_ssl.c	2016-11-24 21:52:05.333649276 +0100
+--- libetpan-1.7-orig/src/low-level/nntp/newsnntp_ssl.c	2017-04-21 15:32:20.436729353 +0200
++++ libetpan-1.7/src/low-level/nntp/newsnntp_ssl.c	2017-04-21 15:32:33.080481220 +0200
 @@ -50,6 +50,10 @@
  #	include <unistd.h>
  #endif
@@ -85,8 +96,8 @@ diff -ruN libetpan-1.7-orig/src/low-level/nntp/newsnntp_ssl.c libetpan-1.7/src/l
  #define SERVICE_NAME_NNTPS "nntps"
  #define SERVICE_TYPE_TCP "tcp"
 diff -ruN libetpan-1.7-orig/src/low-level/pop3/mailpop3_socket.c libetpan-1.7/src/low-level/pop3/mailpop3_socket.c
---- libetpan-1.7-orig/src/low-level/pop3/mailpop3_socket.c	2016-05-26 07:27:47.000000000 +0200
-+++ libetpan-1.7/src/low-level/pop3/mailpop3_socket.c	2016-11-24 21:52:17.069394830 +0100
+--- libetpan-1.7-orig/src/low-level/pop3/mailpop3_socket.c	2017-04-21 15:32:20.436729353 +0200
++++ libetpan-1.7/src/low-level/pop3/mailpop3_socket.c	2017-04-21 15:32:33.080481220 +0200
 @@ -51,6 +51,10 @@
  #endif
  #include <stdlib.h>
@@ -99,8 +110,8 @@ diff -ruN libetpan-1.7-orig/src/low-level/pop3/mailpop3_socket.c libetpan-1.7/sr
  #define SERVICE_NAME_POP3 "pop3"
  #define SERVICE_TYPE_TCP "tcp"
 diff -ruN libetpan-1.7-orig/src/low-level/pop3/mailpop3_ssl.c libetpan-1.7/src/low-level/pop3/mailpop3_ssl.c
---- libetpan-1.7-orig/src/low-level/pop3/mailpop3_ssl.c	2016-05-26 07:27:47.000000000 +0200
-+++ libetpan-1.7/src/low-level/pop3/mailpop3_ssl.c	2016-11-24 21:52:23.301259715 +0100
+--- libetpan-1.7-orig/src/low-level/pop3/mailpop3_ssl.c	2017-04-21 15:32:20.436729353 +0200
++++ libetpan-1.7/src/low-level/pop3/mailpop3_ssl.c	2017-04-21 15:32:33.080481220 +0200
 @@ -51,6 +51,10 @@
  #endif
  #include <stdlib.h>
@@ -113,8 +124,8 @@ diff -ruN libetpan-1.7-orig/src/low-level/pop3/mailpop3_ssl.c libetpan-1.7/src/l
  #define SERVICE_NAME_POP3S "pop3s"
  #define SERVICE_TYPE_TCP "tcp"
 diff -ruN libetpan-1.7-orig/src/low-level/smtp/mailsmtp_socket.c libetpan-1.7/src/low-level/smtp/mailsmtp_socket.c
---- libetpan-1.7-orig/src/low-level/smtp/mailsmtp_socket.c	2016-05-26 07:27:47.000000000 +0200
-+++ libetpan-1.7/src/low-level/smtp/mailsmtp_socket.c	2016-11-24 21:52:35.540994336 +0100
+--- libetpan-1.7-orig/src/low-level/smtp/mailsmtp_socket.c	2017-04-21 15:32:20.440729274 +0200
++++ libetpan-1.7/src/low-level/smtp/mailsmtp_socket.c	2017-04-21 15:32:33.080481220 +0200
 @@ -52,6 +52,10 @@
  #	include <unistd.h>
  #endif
@@ -127,8 +138,8 @@ diff -ruN libetpan-1.7-orig/src/low-level/smtp/mailsmtp_socket.c libetpan-1.7/sr
  #define SERVICE_NAME_SMTP "smtp"
  #define SERVICE_TYPE_TCP "tcp"
 diff -ruN libetpan-1.7-orig/src/low-level/smtp/mailsmtp_ssl.c libetpan-1.7/src/low-level/smtp/mailsmtp_ssl.c
---- libetpan-1.7-orig/src/low-level/smtp/mailsmtp_ssl.c	2016-05-26 07:27:47.000000000 +0200
-+++ libetpan-1.7/src/low-level/smtp/mailsmtp_ssl.c	2016-11-24 21:52:41.256870406 +0100
+--- libetpan-1.7-orig/src/low-level/smtp/mailsmtp_ssl.c	2017-04-21 15:32:20.440729274 +0200
++++ libetpan-1.7/src/low-level/smtp/mailsmtp_ssl.c	2017-04-21 15:32:33.080481220 +0200
 @@ -52,6 +52,10 @@
  #	include <unistd.h>
  #endif
