@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: gpg4win 2.1.1-svn\n"
 "Report-Msgid-Bugs-To: ticho@claws-mail.org\n"
-"POT-Creation-Date: 2016-01-21 09:20+0100\n"
+"POT-Creation-Date: 2017-05-04 00:06+0200\n"
 "PO-Revision-Date: 2011-07-08 12:21+0100\n"
 "Last-Translator: Mariano MARINI <mariano.marini@gmail.com>\n"
 "Language-Team: Italian\n"
@@ -113,7 +113,7 @@ msgstr ""
 
 #, fuzzy
 msgctxt "T_AboutVersion"
-msgid "This is Claws Mail version ${VERSION}"
+msgid "This is Claws Mail version ${VERSION_NO_REL}${GIT_REVISION}-${RELEASE}"
 msgstr "Questa è la versione ${VERSION} di Claws Mail"
 
 #, fuzzy

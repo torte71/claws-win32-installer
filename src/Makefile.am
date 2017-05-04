@@ -23,6 +23,7 @@ EXTRA_DIST = pkg-config claws-mail.nsi \
 				functions.nsi strings.nsi \
 				gnupg-uninst.nsi \
 				sections-installer.nsi sections-uninstaller.nsi \
+				installer-options.ini installer-setdefaultclient.ini \
         libiconv.def libintl.def \
 				mingw.condition_variable.h mingw.mutex.h mingw.thread.h \
         Memento.nsh Toolchain-mingw32.cmake.in
