@@ -42,15 +42,16 @@ EXTRA_DIST = autogen.sh \
         patches/w32pth-2.0.5/99-autogen.sh.patch \
         patches/w32pth-2.0.5/01-def-fix.patch \
         patches/webkitgtk-2.3.5a/00-srcdir-rename.patch \
-        patches/webkitgtk-2.3.5a/09-duplicate-plugin-files.patch \
-        patches/webkitgtk-2.3.5a/07-GDIObject-h.patch \
-        patches/webkitgtk-2.3.5a/03-std-threads.patch \
-        patches/webkitgtk-2.3.5a/04-no-msvc-asm.patch \
         patches/webkitgtk-2.3.5a/01-gcc-check-bypass.patch \
         patches/webkitgtk-2.3.5a/02-WTFHeaderDetection-be-gone.patch \
+        patches/webkitgtk-2.3.5a/03-std-threads.patch \
+        patches/webkitgtk-2.3.5a/04-no-msvc-asm.patch \
         patches/webkitgtk-2.3.5a/05-no-class-size-check.patch \
-        patches/webkitgtk-2.3.5a/08-no-opengl.patch \
         patches/webkitgtk-2.3.5a/06-LLIntAssembly-hack.patch \
+        patches/webkitgtk-2.3.5a/07-GDIObject-h.patch \
+        patches/webkitgtk-2.3.5a/08-no-opengl.patch \
+        patches/webkitgtk-2.3.5a/09-duplicate-plugin-files.patch \
+				patches/webkitgtk-2.3.5a/10-print-size.patch \
         patches/libical-2.0.0/01-gmtime_r.patch \
         patches/regex-20090805/01-no-large-offsets.patch \
         patches/libetpan-1.7/send_wouldblock.patch \
