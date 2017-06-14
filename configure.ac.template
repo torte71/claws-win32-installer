@@ -25,7 +25,7 @@ min_automake_version="1.9.3"
 # This version is here mostly for 'make dist', actual Claws Mail
 # version is controlled by what is in packages/
 m4_define([my_version], [3.15.0])
-m4_define([my_release], [1])
+m4_define([my_release], [2])
 m4_define([my_gitrev], [])
 
 AC_INIT([Claws Mail Win32],
@@ -263,7 +263,9 @@ CM_SPKG([expat])
 CM_SPKG([pixman], [libpng pkgconfig])
 CM_SPKG([cairo], [zlib libpng glib pkgconfig])
 CM_SPKG([atk], [glib pkgconfig])
-CM_SPKG([fontconfig], [pkgconfig zlib expat freetype libiconv])
+CM_SPKG([libxml2], [zlib])
+CM_SPKG([libxslt], [libxml2])
+CM_SPKG([fontconfig], [pkgconfig zlib expat freetype libiconv libxml2])
 CM_SPKG([freetype], [pkgconfig zlib bzip2])
 CM_SPKG([gdk-pixbuf], [glib])
 CM_SPKG([libpng], [pkgconfig])
@@ -273,8 +275,6 @@ CM_SPKG([libgpg-error], [libiconv gettext])
 CM_SPKG([libgcrypt], [libgpg-error])
 CM_SPKG([libassuan], [libgpg-error w32pth])
 CM_SPKG([gpgme], [libgpg-error libassuan glib])
-CM_SPKG([libxml2], [zlib])
-CM_SPKG([libxslt], [libxml2])
 CM_SPKG([libtasn1])
 CM_SPKG([nettle], [gmp])
 CM_SPKG([gnutls], [gmp nettle libtasn1 libgcrypt])

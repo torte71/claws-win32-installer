@@ -150,6 +150,7 @@ cm_pkg_freetype_configure = \
 
 cm_pkg_fontconfig_configure = \
 	--enable-iconv --disable-docs \
+	--enable-libxml2 \
 	CPPFLAGS=\"-I$(idir)/include\" \
 	LDFLAGS=\"-L$(idir)/lib\"
 
@@ -165,7 +166,7 @@ cm_pkg_atk_configure = \
 	LDFLAGS=\"-L$(idir)/lib\"
 
 cm_pkg_pixman_configure = \
-	--enable-libpng --disable-gtk \
+	--enable-libpng --disable-sse2 \
 	CPPFLAGS=\"-I$(idir)/include\" \
 	LDFLAGS=\"-L$(idir)/lib\"
 
@@ -239,6 +240,7 @@ cm_pkg_gnutls_configure = \
   --disable-cxx \
   --with-libgcrypt \
   --without-p11-kit \
+	--with-included-unistring \
 	--disable-gtk-doc-html \
 	--disable-tests \
   --with-libtasn1-prefix=$(idir) \

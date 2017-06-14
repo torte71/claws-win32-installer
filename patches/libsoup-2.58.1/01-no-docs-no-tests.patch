@@ -9,9 +9,8 @@ diff -ruN libsoup-2.40.3-orig/Makefile.in libsoup-2.40.3/Makefile.in
  top_builddir = @top_builddir@
  top_srcdir = @top_srcdir@
  ACLOCAL_AMFLAGS = -I m4 ${ACLOCAL_FLAGS}
--SUBDIRS = libsoup po tests docs
-+SUBDIRS = libsoup po
+-SUBDIRS = libsoup po tests examples docs win32
++SUBDIRS = libsoup po win32
  EXTRA_DIST = \
  	data/effective_tld_names.dat	\
  	libsoup-2.4.pc.in		\
-Binary files libsoup-2.40.3-orig/.Makefile.in.swp and libsoup-2.40.3/.Makefile.in.swp differ
