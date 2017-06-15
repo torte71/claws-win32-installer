@@ -1,0 +1,27 @@
+#! /bin/sh
+patch -p1 -f $* < $0
+exit $?
+
+commit c8f81c20077ce5d2d3dd3b41065f707ae0ad2596
+Author: Andrej Kacian <ticho@claws-mail.org>
+Date:   Fri Apr 28 13:38:54 2017 +0200
+
+    Use g_strndup() instead of strndup() for better portability.
+    
+    Fix by Abhay S. Kushwaha.
+
+diff --git a/src/ssl_manager.c b/src/ssl_manager.c
+index 270f1d7b5..4a7db9d70 100644
+--- a/src/ssl_manager.c
++++ b/src/ssl_manager.c
+@@ -227,8 +227,8 @@ static gboolean get_serverport(const gchar *str, gchar **server, gchar **port)
+ 			prevpos = pos, pos = strstr(pos+1, ".")) {
+ 		if (!strcmp(pos, ".cert")) {
+ 			if (prevpos > str) {
+-				*server = strndup(str, prevpos - str);
+-				*port = strndup(prevpos+1, pos - prevpos - 1);
++				*server = g_strndup(str, prevpos - str);
++				*port = g_strndup(prevpos+1, pos - prevpos - 1);
+ 			} else {
+ 				*server = *port = NULL;
+ 			}
