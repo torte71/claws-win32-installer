@@ -89,7 +89,7 @@ File /oname=intl.dll ${prefix}/bin/libintl-9.dll
 #######################################
 ### libpng
 !insertmacro SetPrefix libpng
-File ${prefix}/bin/libpng14-14.dll
+File ${prefix}/bin/libpng16-16.dll
 
 #######################################
 ### enchant

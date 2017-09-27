@@ -384,7 +384,7 @@ RMDir "$INSTDIR\share"
 
 #######################################
 ### libpng
-Delete /REBOOTOK "$INSTDIR\libpng14-14.dll"
+Delete /REBOOTOK "$INSTDIR\libpng16-16.dll"
 
 #######################################
 ### gettext

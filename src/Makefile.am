@@ -211,7 +211,9 @@ cm_pkg_libgcrypt_configure = \
 	--disable-tests \
   --disable-aesni-support
 
-cm_pkg_libpng_configure = HAVE_SOLARIS_LD_FALSE=yes CPPFLAGS=\"-I$(idir)/include -DPNG_BUILD_DLL\" LDFLAGS=\"-L$(idir)/lib\" LIBPNG_DEFINES=\"-DPNG_BUILD_DLL\"
+cm_pkg_libpng_configure = \
+	CPPFLAGS=\"-I$(idir)/include\" \
+	LDFLAGS=\"-L$(idir)/lib\"
 
 cm_pkg_enchant_configure = \
 	--enable-ispell \
