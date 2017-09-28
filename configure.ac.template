@@ -284,7 +284,7 @@ CM_SPKG([libsoup], [gnutls libxml2 glib-networking sqlite-autoconf])
 CM_SPKG([libwebp], [zlib])
 CM_SPKG([icu4c])
 CM_SPKG([harfbuzz], [glib cairo icu4c])
-CM_SPKG([pango], [harfbuzz fontconfig glib pkgconfig])
+CM_SPKG([pango], [harfbuzz fontconfig glib pkgconfig cairo])
 CM_SPKG([gtk+], [libiconv gettext pkgconfig atk pango dnl
                       glib gdk-pixbuf cairo])
 CM_SPKG([webkitgtk], [jpeg libpng glib gtk+ libsoup libxml2 libxslt libwebp icu4c harfbuzz])
