@@ -145,11 +145,11 @@ chk  8caa99dbbb143cddbb896bf35e01da717bb1479f
 
 # Can't upgrade here, since newer pango requires newer cairo. See
 # cairo note below.
-file pango/1.40/pango-1.40.6.tar.xz
-chk  83125850255f78f2130aa373d3fe46f61d064dab
+file pango/1.34/pango-1.34.1.tar.xz
+chk  a6c224424eb3f0dcc231a8000591c05a85df689c
 
-file atk/2.25/atk-2.25.2.tar.xz
-chk  db35a790afc30a164789560dae5ea1ff1f561ff8
+file atk/2.20/atk-2.20.0.tar.xz
+chk  5d4d699721fee8bcecd3edf1361e89af1db06148
 
 file glib-networking/2.50/glib-networking-2.50.0.tar.xz
 chk  d8f6a52fd977acc0ff32fe3152ad4cb3f699c053
@@ -170,11 +170,11 @@ chk  37c00f40e18387900cdfe221a04353dbeef7bcb3
 # it is too slow. See https://bugs.freedesktop.org/show_bug.cgi?id=71833
 server http://cairographics.org/releases
 
-file cairo-1.14.8.tar.xz
-chk  c6f7b99986f93c9df78653c3e6a3b5043f65145e
+file cairo-1.10.2.tar.gz
+chk  ccce5ae03f99c505db97c286a0c9a90a926d3c6e
 
-file pixman-0.34.0.tar.gz
-chk  a1b1683c1a55acce9d928fea1ab6ceb79142ddc7
+file pixman-0.32.6.tar.gz
+chk  8791343cbf6d99451f4d08e8209d6ac11bf96df2
 
 # Freetype
 server http://download.savannah.gnu.org/releases/freetype
