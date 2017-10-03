@@ -119,8 +119,6 @@ chk    edcaeabb3555ae44853bdc406ee9521fb65c620d
 # Enchant for Claws
 #
 server http://www.abisource.com/downloads/enchant/1.6.0
-
-# checked: 2014-06-20 ah
 file   enchant-1.6.0.tar.gz
 chk    321f9cf0abfa1937401676ce60976d8779c39536
 
@@ -144,7 +142,7 @@ file gdk-pixbuf/2.36/gdk-pixbuf-2.36.6.tar.xz
 chk  8caa99dbbb143cddbb896bf35e01da717bb1479f
 
 # Can't upgrade here, since newer pango requires newer cairo. See
-# cairo note below.
+# cairo note below. -andrej
 file pango/1.34/pango-1.34.1.tar.xz
 chk  a6c224424eb3f0dcc231a8000591c05a85df689c
 
@@ -188,9 +186,7 @@ server http://www.fontconfig.org/release
 file fontconfig-2.11.1.tar.bz2
 chk  08565feea5a4e6375f9d8a7435dac04e52620ff2
 
-#
-# GIMP stuff for W32
-#
+# pkgconfig for W32
 server http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies
 
 name pkgconfig-0.23.tar.gz
@@ -212,9 +208,6 @@ chk 7dbe6a5088b938545fc0857c507d4e0cf5d9023e
 # LibFFI
 #
 server ftp://sourceware.org/pub/libffi
-
-# checked: 2013-04-29 wk - updated from 3.0.10.
-# checked: 2014-07-16 ah - only rc availble from 3.0.14
 file libffi-3.0.13.tar.gz
 chk  f5230890dc0be42fb5c58fbf793da253155de106
 
@@ -225,7 +218,6 @@ chk  f5230890dc0be42fb5c58fbf793da253155de106
 
 server ftp://ftp.g10code.com/g10code/w32pth
 
-# checked: 2014-07-16 ah
 file w32pth-2.0.5.tar.bz2
 chk  d648b98ce215f81e901f3f982470d37c704433a6
 
@@ -234,8 +226,6 @@ chk  d648b98ce215f81e901f3f982470d37c704433a6
 # (full source at http://bzip.org)
 #
 server ftp://ftp.g10code.com/g10code/bzip2
-
-# checked: 2014-07-16 ah
 file bzip2-1.0.6-g10.tar.gz
 chk  6e38be3377340a21a1f13ff84b5e6adce97cd1d4
 
@@ -283,3 +273,8 @@ chk d6669fb91434192529bd13ee95737a8a5040241c
 server https://github.com/libical/libical/releases/download
 file v2.0.0/libical-2.0.0.tar.gz
 chk 8540d5d73422496e1d350b86ff32333daa08144c
+
+# librsvg
+server http://ftp.gnome.org/pub/gnome/sources
+file librsvg/2.41/librsvg-2.41.1.tar.xz
+chk  e00ad09cb8ea6a7666182910e482ea24a125053a
