@@ -26,6 +26,11 @@ if [ $ret -ne 0 ]; then
 	exit 1
 fi
 make -j8
+ret=$?
+if [ $ret -ne 0 ]; then
+	echo compilation of linux ICU build failed
+	exit 1
+fi
 
 # Now for windows
 cd ../..
