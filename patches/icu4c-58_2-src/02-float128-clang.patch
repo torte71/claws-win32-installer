@@ -1,0 +1,17 @@
+#! /bin/sh
+cd playground/build
+patch -p0 -f $* < $0
+exit $?
+
+diff -ruN icu-orig/source/tools/pkgdata/pkgdata.cpp icu/source/tools/pkgdata/pkgdata.cpp
+--- icu-orig/source/tools/pkgdata/pkgdata.cpp	2017-10-08 18:10:20.520980763 +0200
++++ icu/source/tools/pkgdata/pkgdata.cpp	2017-10-08 18:15:49.090645113 +0200
+@@ -28,7 +28,7 @@
+ #if U_HAVE_POPEN
+ #if (U_PF_MINGW <= U_PLATFORM || U_PLATFORM <= U_PF_CYGWIN) && defined(__STRICT_ANSI__)
+ /* popen/pclose aren't defined in strict ANSI on Cygwin and MinGW */
+-#undef __STRICT_ANSI__
++//#undef __STRICT_ANSI__
+ #endif
+ #endif
+ 
