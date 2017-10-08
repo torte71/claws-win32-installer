@@ -10,6 +10,7 @@ config.status.lineno
 configure.lineno
 configure
 stamp-h1
+stamp-autogen-1stpass
 /*.tar.bz2
 src/config.nsi
 po/POTFILES
