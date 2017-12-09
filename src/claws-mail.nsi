@@ -11,8 +11,8 @@
 !define PRETTY_PACKAGE_SHORT "ClawsMail"
 !define COMPANY "claws-mail.org"
 !define WEBSITE "http://www.claws-mail.org"
-!define COPYRIGHT "Copyright (C) 1999-2015 Hiroyuki Yamamoto and the Claws Mail team"
-!define DESCRIPTION "Claws Mail for Windows"
+!define COPYRIGHT "Copyright (C) 1999-2017 Hiroyuki Yamamoto and the Claws Mail team"
+!define DESCRIPTION "Claws Mail for Windows Installation Package"
 
 # Admin privileges are required for installation
 RequestExecutionLevel admin

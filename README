@@ -16,7 +16,7 @@ Instructions:
 
    $ ./autogen.sh --build-w32
 	 or
-	 $ ./autogen.sh --build-w64
+   $ ./autogen.sh --build-w64
 
 3. Build the installer:
 
@@ -113,7 +113,7 @@ Copyright
 
 The entire Claws Mail package is
 
-  Copyright (C) 1999-2016 Hiroyuki Yamamoto <hiro-y@kcn.ne.jp> and the
+  Copyright (C) 1999-2017 Hiroyuki Yamamoto <hiro-y@kcn.ne.jp> and the
 	Claws Mail Team
 
   Claws Mail is free software; you can redistribute it and/or modify it
