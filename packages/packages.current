@@ -100,8 +100,8 @@ chk  d56e2c337a97e02c9f0eb51e3784a06e1d833c7e
 
 server http://curl.haxx.se/download
 
-file  curl-7.54.1.tar.bz2
-chk   f5193316e4b5ff23505cb09bc946763d35d02cd6
+file  curl-7.57.0.tar.bz2
+chk   7f47469324bf22cc9ffd1d3a201aa3c76ab626b8
 
 
 #
@@ -132,14 +132,14 @@ chk  31f52169bcfeef9efb61480d0950e928ad059552
 #
 server http://ftp.gnome.org/pub/gnome/sources
 
-file glib/2.52/glib-2.52.2.tar.xz
-chk  50a5af7569af1a489e17f207142cd5a4cdefbf68
+file glib/2.54/glib-2.54.2.tar.xz
+chk  85b5d649fc3d18f8d8197bd971dfbebd94b5f96d
 
 file gtk+/2.24/gtk+-2.24.31.tar.xz
 chk  c3d828135994a52cc9428a60175bd2b294656611
 
-file gdk-pixbuf/2.36/gdk-pixbuf-2.36.6.tar.xz
-chk  8caa99dbbb143cddbb896bf35e01da717bb1479f
+file gdk-pixbuf/2.36/gdk-pixbuf-2.36.11.tar.xz
+chk  445bb95b234c3b3cea273353b7464f3b796dbd0e
 
 # Can't upgrade here, since newer pango requires newer cairo. See
 # cairo note below. -andrej
@@ -234,17 +234,17 @@ chk  6e38be3377340a21a1f13ff84b5e6adce97cd1d4
 #
 server ftp://ftp.gnupg.org/gcrypt
 
-file libgpg-error/libgpg-error-1.25.tar.bz2
-chk  8ab7494e40f80f4138edc9516981bf4afe7d9dbf
+file libgpg-error/libgpg-error-1.27.tar.bz2
+chk  a428758999ff573e62d06892e3d2c0b0f335787c
 
-file libgcrypt/libgcrypt-1.7.3.tar.bz2
-chk  5a034291e7248592605db448481478e6c963aa9c
+file libgcrypt/libgcrypt-1.8.2.tar.bz2
+chk  c3d39d616202dca6ffd810c8b8cf532b3efeeb21
 
 file libassuan/libassuan-2.4.3.tar.bz2
-chk  27391cf4a820b5350ea789c30661830c9a271518
+chk  c8432695bf1daa914a92f51e911881ed93d50604
 
-file gpgme/gpgme-1.8.0.tar.bz2
-chk  efa043064dbf675fd713228c6fcfcc4116feb221
+file gpgme/gpgme-1.9.0.tar.bz2
+chk  870719cd3d2ef6a7fcb1d6af9ce5446edba7bfc3
 
 # libwebp
 server http://downloads.webmproject.org/releases/webp
@@ -277,4 +277,4 @@ chk 8540d5d73422496e1d350b86ff32333daa08144c
 # librsvg
 server http://ftp.gnome.org/pub/gnome/sources
 file librsvg/2.41/librsvg-2.41.1.tar.xz
-chk  e00ad09cb8ea6a7666182910e482ea24a125053a
+chk  902af9cc73a4541dc3d33a6691fe70e465f32595
