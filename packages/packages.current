@@ -17,8 +17,8 @@
 
 server http://www.claws-mail.org/releases
 
-file   claws-mail-3.15.0.tar.xz
-chk    5aa83c79091e1a612eed5de8ddad7c078af15978
+file   claws-mail-3.16.0.tar.xz
+chk    74bf5c3c8e125864a4e8429d681a9178e8d44c38
 
 
 #

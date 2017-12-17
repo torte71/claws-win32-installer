@@ -62,8 +62,8 @@ EXTRA_DIST = autogen.sh \
         patches/libiconv-1.14/01-aliases2_lookup-no-inline.patch \
         patches/crypt-1.1/01-build-dll.patch \
         patches/gnutls-3.5.2/01-no-endservent.patch \
-        patches/claws-mail-3.15.0/00-undirty-version-file.patch \
-        patches/claws-mail-3.15.0/01-etpan-sasl-plugin-path.patch \
+        patches/claws-mail-3.16.0/00-undirty-version-file.patch \
+        patches/claws-mail-3.16.0/01-etpan-sasl-plugin-path.patch \
         patches/cyrus-sasl-2.1.26/14-MinGW-w64-add-LIBSASL_API-to-function-definitions.patch \
         patches/cyrus-sasl-2.1.26/10-MinGW-w64-already-has-getopt.patch \
         patches/cyrus-sasl-2.1.26/03-fix-plugins.patch \
