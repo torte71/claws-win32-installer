@@ -238,9 +238,9 @@ file libgpg-error/libgpg-error-1.27.tar.bz2
 chk  a428758999ff573e62d06892e3d2c0b0f335787c
 
 file libgcrypt/libgcrypt-1.8.2.tar.bz2
-chk  c3d39d616202dca6ffd810c8b8cf532b3efeeb21
+chk  ab8aae5d7a68f8e0988f90e11e7f6a4805af5c8d
 
-file libassuan/libassuan-2.4.3.tar.bz2
+file libassuan/libassuan-2.5.1.tar.bz2
 chk  c8432695bf1daa914a92f51e911881ed93d50604
 
 file gpgme/gpgme-1.9.0.tar.bz2
@@ -276,5 +276,5 @@ chk 8540d5d73422496e1d350b86ff32333daa08144c
 
 # librsvg
 server http://ftp.gnome.org/pub/gnome/sources
-file librsvg/2.41/librsvg-2.41.1.tar.xz
+file librsvg/2.41/librsvg-2.41.2.tar.xz
 chk  902af9cc73a4541dc3d33a6691fe70e465f32595
