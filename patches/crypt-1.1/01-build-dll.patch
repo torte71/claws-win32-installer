@@ -3,8 +3,8 @@ patch -p1 -f $* < $0
 exit $?
 
 diff -ruN crypt-1.1-orig/Makefile crypt-1.1/Makefile
---- crypt-1.1-orig/Makefile	2016-05-29 15:47:02.313564468 +0200
-+++ crypt-1.1/Makefile	2016-05-29 15:50:16.764485805 +0200
+--- crypt-1.1-orig/Makefile	2010-05-11 03:55:02.000000000 +0200
++++ crypt-1.1/Makefile	2017-12-30 19:57:53.483406595 +0100
 @@ -16,7 +16,7 @@
  IMPORTLIB=libcrypt.dll.a
  
@@ -14,13 +14,17 @@ diff -ruN crypt-1.1-orig/Makefile crypt-1.1/Makefile
  
  %.o : %.c
  	$(CC) $(CPPFLAGS) $(CFLAGS) -o $@ -c $<
-@@ -48,7 +48,7 @@
- 	install -m 755 -s $(APPS)      $(DESTDIR)$(bindir)
+@@ -45,10 +45,10 @@
+ 	install -d $(DESTDIR)$(libdir)
+ 	install -d $(DESTDIR)$(incdir)
+ 	install -d $(DESTDIR)$(docdir)
+-	install -m 755 -s $(APPS)      $(DESTDIR)$(bindir)
++	install -m 755 $(APPS)         $(DESTDIR)$(bindir)
  	install -m 644 encrypt.h       $(DESTDIR)$(incdir)/crypt.h
  	install -m 644 $(STATICLIB)    $(DESTDIR)$(libdir)
 -#	install -m 644 $(IMPORTLIB)    $(DESTDIR)$(libdir)
 -#	install -m 755 -s $(SHAREDLIB) $(DESTDIR)$(bindir)
 +	install -m 644 $(IMPORTLIB)    $(DESTDIR)$(libdir)
-+	install -m 755 -s $(SHAREDLIB) $(DESTDIR)$(bindir)
++	install -m 755 $(SHAREDLIB)    $(DESTDIR)$(bindir)
  	install -m 644 crypt.README    $(DESTDIR)$(docdir)
  
