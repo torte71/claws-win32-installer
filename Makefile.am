@@ -36,6 +36,7 @@ EXTRA_DIST = autogen.sh \
 				patches/cairo-1.10.2/99-libtoolize.patch \
 				patches/claws-mail-3.16.0/00-undirty-version-file.patch \
 				patches/claws-mail-3.16.0/01-etpan-sasl-plugin-path.patch \
+				patches/claws-mail-3.16.0/02-missing-gerror-init.patch \
 				patches/crypt-1.1/01-build-dll.patch \
 				patches/cyrus-sasl-2.1.26/01-no-undefined.patch \
 				patches/cyrus-sasl-2.1.26/02-exeext.patch \

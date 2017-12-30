@@ -1,0 +1,23 @@
+#! /bin/sh
+patch -p1 -f $* < $0
+exit $?
+
+commit b190f09ab3534533751306dd4c2529aabc387ad4
+Author: Andrej Kacian <ticho@claws-mail.org>
+Date:   Wed Dec 20 10:45:24 2017 +0100
+
+    Fix missing GError initialization in compose_draft().
+
+diff --git a/src/compose.c b/src/compose.c
+index 3841d828b..878e88caa 100644
+--- a/src/compose.c
++++ b/src/compose.c
+@@ -10526,7 +10526,7 @@ warn_err:
+ 		GFile *f;
+ 		GFileInfo *fi;
+ 		GTimeVal tv;
+-		GError *error;
++		GError *error = NULL;
+ #else
+ 		GStatBuf s;
+ #endif
