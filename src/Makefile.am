@@ -306,8 +306,8 @@ cm_pkg_claws_mail_configure = \
   --disable-newmail-plugin --disable-mailmbox-plugin \
 	--disable-dillo-plugin --enable-tnef_parse-plugin \
 	--with-password-encryption=gnutls \
-	CFLAGS=\"-g -O2 \" \
-	CPPFLAGS=\"-g -O2 -I$(idir)/include -D_POSIX_C_SOURCE\" \
+	CFLAGS=\"-O2 \" \
+	CPPFLAGS=\"-O2 -I$(idir)/include -D_POSIX_C_SOURCE\" \
 	LDFLAGS=\"-L$(idir)/lib\" LIBS=\"-lexpat\"
 
 cm_pkg_jpeg_configure = \
@@ -361,9 +361,9 @@ cm_pkg_webkitgtk_configure = \
 								--disable-debug \
 								--disable-accelerated-compositing \
 								--enable-silent-rules \
-               CFLAGS=\"-I$(idir)/include -g0 -O2 -mms-bitfields\" \
-               CXXFLAGS=\"-I$(idir)/include -g0 -O2 -std=gnu++98 -mms-bitfields -fexceptions\" \
-               CPPFLAGS=\"-I$(idir)/include -g0 -O2 -std=gnu++98 -mms-bitfields\" \
+               CFLAGS=\"-I$(idir)/include -O2 -mms-bitfields\" \
+               CXXFLAGS=\"-I$(idir)/include -O2 -std=gnu++98 -mms-bitfields -fexceptions\" \
+               CPPFLAGS=\"-I$(idir)/include -O2 -std=gnu++98 -mms-bitfields\" \
          CC=$(CC) LIBS=\"-L$(idir)/lib\"
 
 cm_pkg_libical_cmake_args = \

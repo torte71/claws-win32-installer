@@ -110,8 +110,12 @@ define STRIP_macro
 	if test -z '$(DEBUG)'; then			\
 	  (cd $(1);					\
 	   for f in `find . -name \*.exe -o -name \*.dll`; do		\
-	   echo Calling $(STRIP) "$$$${pkg_version}/$$$${f}"; \
-	   $(STRIP) "$$$${f}"; done);			\
+	   	echo Stripping "$$$${pkg_version}/$$$${f}"; \
+			$(STRIP) --only-keep-debug -o "$$$${f}.debug" "$$$${f}"; \
+	   	$(STRIP) "$$$${f}"; \
+			$(OBJCOPY) --add-gnu-debuglink="$$$${f}.debug" "$$$${f}"; \
+		 done; \
+		); \
 	fi
 endef
 
@@ -154,7 +158,7 @@ stamps/stamp-$(1)-02-configure: stamps/stamp-$(1)-01-patch
 			--prefix="$$$${pkgidir}"		\
 			--host=$(host)				\
 			--build=$(build)			\
-			$$$${pkgcfg} CFLAGS=\"-mms-bitfields $$$${pkgextracflags}\"; \
+			$$$${pkgcfg} CFLAGS=\"-mms-bitfields -g $$$${pkgextracflags}\"; \
 		shopt -s nullglob;					\
 		for pfile in "$$$${pkgpbdir}"/*.postcfg       		\
 	                       "$$$${pkgpdir}"/*.postcfg ; do  		\
