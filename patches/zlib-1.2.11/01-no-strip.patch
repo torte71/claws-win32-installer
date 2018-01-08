@@ -1,0 +1,51 @@
+#! /bin/sh
+patch -p1 -f $* < $0
+exit $?
+
+diff -ruN zlib-1.2.11-orig/configure.log zlib-1.2.11/configure.log
+--- zlib-1.2.11-orig/configure.log	1970-01-01 01:00:00.000000000 +0100
++++ zlib-1.2.11/configure.log	2018-01-08 18:25:06.722905564 +0100
+@@ -0,0 +1,7 @@
++--------------------
++./configure --help
++Po jan  8 18:25:06 CET 2018
++usage:
++  configure [--const] [--zprefix] [--prefix=PREFIX]  [--eprefix=EXPREFIX]
++    [--static] [--64] [--libdir=LIBDIR] [--sharedlibdir=LIBDIR]
++    [--includedir=INCLUDEDIR] [--archs="-arch i386 -arch x86_64"]
+diff -ruN zlib-1.2.11-orig/win32/Makefile.gcc zlib-1.2.11/win32/Makefile.gcc
+--- zlib-1.2.11-orig/win32/Makefile.gcc	2015-07-29 07:44:31.000000000 +0200
++++ zlib-1.2.11/win32/Makefile.gcc	2018-01-08 18:26:23.221515186 +0100
+@@ -57,8 +57,6 @@
+ RC = $(PREFIX)windres
+ RCFLAGS = --define GCC_WINDRES
+ 
+-STRIP = $(PREFIX)strip
+-
+ CP = cp -fp
+ # If GNU install is available, replace $(CP) with install.
+ INSTALL = $(CP)
+@@ -95,23 +93,18 @@
+ $(SHAREDLIB): win32/zlib.def $(OBJS) $(OBJA) zlibrc.o
+ 	$(CC) -shared -Wl,--out-implib,$(IMPLIB) $(LDFLAGS) \
+ 	-o $@ win32/zlib.def $(OBJS) $(OBJA) zlibrc.o
+-	$(STRIP) $@
+ 
+ example.exe: example.o $(STATICLIB)
+ 	$(LD) $(LDFLAGS) -o $@ example.o $(STATICLIB)
+-	$(STRIP) $@
+ 
+ minigzip.exe: minigzip.o $(STATICLIB)
+ 	$(LD) $(LDFLAGS) -o $@ minigzip.o $(STATICLIB)
+-	$(STRIP) $@
+ 
+ example_d.exe: example.o $(IMPLIB)
+ 	$(LD) $(LDFLAGS) -o $@ example.o $(IMPLIB)
+-	$(STRIP) $@
+ 
+ minigzip_d.exe: minigzip.o $(IMPLIB)
+ 	$(LD) $(LDFLAGS) -o $@ minigzip.o $(IMPLIB)
+-	$(STRIP) $@
+ 
+ example.o: test/example.c zlib.h zconf.h
+ 	$(CC) $(CFLAGS) -I. -c -o $@ test/example.c

@@ -92,4 +92,5 @@ EXTRA_DIST = autogen.sh \
 				patches/webkitgtk-2.3.5a/07-GDIObject-h.patch \
 				patches/webkitgtk-2.3.5a/08-no-opengl.patch \
 				patches/webkitgtk-2.3.5a/09-duplicate-plugin-files.patch \
-				patches/webkitgtk-2.3.5a/10-print-size.patch
+				patches/webkitgtk-2.3.5a/10-print-size.patch \
+				patches/zlib-1.2.11/01-no-strip.patch
