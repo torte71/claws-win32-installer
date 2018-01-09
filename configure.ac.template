@@ -142,7 +142,7 @@ AC_SUBST(NUMPROC)
 
 changequote(,)dnl
 gcc_major_minor=$($CC --version \
-									| awk 'NR==1 {split($3,a,"."); print a[1] "." a[2]}')
+									| awk 'NR==1 {split($3,a,"-"); split(a[1],b,"."); print b[1] "." b[2]}')
 changequote([,])dnl
 
 missing_opt_tools=""
