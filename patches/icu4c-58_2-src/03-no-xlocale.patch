@@ -1,0 +1,21 @@
+#! /bin/sh
+cd playground/build
+patch -p0 -f $* < $0
+exit $?
+
+diff -ruN icu-orig/source/i18n/digitlst.cpp icu/source/i18n/digitlst.cpp
+--- icu-orig/source/i18n/digitlst.cpp	2016-10-27 03:37:56.000000000 +0200
++++ icu/source/i18n/digitlst.cpp	2018-01-14 00:00:12.283367683 +0100
+@@ -61,11 +61,7 @@
+ #endif
+ 
+ #if U_USE_STRTOD_L
+-# if U_PLATFORM_USES_ONLY_WIN32_API || U_PLATFORM == U_PF_CYGWIN
+-#   include <locale.h>
+-# else
+-#   include <xlocale.h>
+-# endif
++# include <locale.h>
+ #endif
+ 
+ // ***************************************************************************

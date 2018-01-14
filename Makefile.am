@@ -70,6 +70,7 @@ EXTRA_DIST = autogen.sh \
 				patches/gtk+-2.24.31/00-fix-private-defs.patch \
 				patches/icu4c-58_2-src/01-libnames.patch \
 				patches/icu4c-58_2-src/02-float128-clang.patch \
+				patches/icu4c-58_2-src/03-no-xlocale.patch \
 				patches/icu4c-58_2-src/99-build.patch \
 				patches/libetpan-1.7/ipv6.patch \
 				patches/libetpan-1.7/mingw-closesocket-include.patch \
