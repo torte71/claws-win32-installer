@@ -27,6 +27,10 @@ The installer will be made available in two files:
 src/claws-mail-X.Y.Z-R.exe
 src/claws-mail-src-X.Y.Z-R.exe
 
+To collect files with debug symbols:
+
+$ find src/playground/install/pkgs/ -name '*.debug' | grep /bin/ | xargs zip -j debug-files.zip
+
 
 Basic requirements
 ==================
