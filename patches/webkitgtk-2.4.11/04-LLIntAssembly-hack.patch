@@ -2,9 +2,24 @@
 patch -p1 -f $* < $0
 exit $?
 
+diff -ruN webkitgtk-2.4.11-orig/GNUmakefile.in webkitgtk-2.4.11/GNUmakefile.in
+--- webkitgtk-2.4.11-orig/GNUmakefile.in	2016-04-10 11:00:18.000000000 +0200
++++ webkitgtk-2.4.11/GNUmakefile.in	2018-01-28 23:02:53.992849368 +0100
+@@ -82019,9 +82019,8 @@
+ 
+ $(Programs_LLIntOffsetsExtractor_OBJECTS): DerivedSources/JavaScriptCore/LLIntDesiredOffsets.h
+ 
+-DerivedSources/JavaScriptCore/LLIntAssembly.h: Programs/LLIntOffsetsExtractor$(EXEEXT)
+-	$(AM_V_GEN)$(RUBY) $(srcdir)/Source/JavaScriptCore/offlineasm/asm.rb $(srcdir)/Source/JavaScriptCore/llint/LowLevelInterpreter.asm Programs/LLIntOffsetsExtractor$(EXEEXT) $@
+-	$(AM_V_at)touch $@
++DerivedSources/JavaScriptCore/LLIntAssembly.h:
++	cp -fp $(srcdir)/Source/JavaScriptCore/llint/LLIntAssembly.h DerivedSources/JavaScriptCore/
+ 
+ $(libjavascriptcoregtk_@WEBKITGTK_API_MAJOR_VERSION@_@WEBKITGTK_API_MINOR_VERSION@_la_OBJECTS): DerivedSources/JavaScriptCore/LLIntAssembly.h
+ 
 diff -ruN webkitgtk-2.4.11-orig/Source/JavaScriptCore/llint/LLIntAssembly.h webkitgtk-2.4.11/Source/JavaScriptCore/llint/LLIntAssembly.h
 --- webkitgtk-2.4.11-orig/Source/JavaScriptCore/llint/LLIntAssembly.h	1970-01-01 01:00:00.000000000 +0100
-+++ webkitgtk-2.4.11/Source/JavaScriptCore/llint/LLIntAssembly.h	2018-01-28 20:32:33.203047912 +0100
++++ webkitgtk-2.4.11/Source/JavaScriptCore/llint/LLIntAssembly.h	2018-01-28 22:54:39.958387610 +0100
 @@ -0,0 +1,6375 @@
 +// offlineasm input hash: 355ddfb8b888ef836aa1a26ec493ab5b4e0a48da 0f12f4f7cad36884177c69a4418e3ab9559eff4d 6b2c4655da75c4709c729f40d002936f5f5ca1f0
 +//#if !OFFLINE_ASM_ARMv7s && OFFLINE_ASM_JSVALUE64 && !OFFLINE_ASM_BIG_ENDIAN && OFFLINE_ASM_C_LOOP && !OFFLINE_ASM_ASSERT_ENABLED && !OFFLINE_ASM_ARM && !OFFLINE_ASM_ARMv7 && !OFFLINE_ASM_ARMv7_TRADITIONAL && !OFFLINE_ASM_ARM64 && !OFFLINE_ASM_MIPS && !OFFLINE_ASM_SH4 && !OFFLINE_ASM_X86 && !OFFLINE_ASM_X86_64 && !OFFLINE_ASM_EXECUTION_TRACING && !OFFLINE_ASM_ALWAYS_ALLOCATE_SLOW && !OFFLINE_ASM_GGC
@@ -6383,7 +6398,7 @@ diff -ruN webkitgtk-2.4.11-orig/Source/JavaScriptCore/llint/LLIntAssembly.h webk
 +//#endif
 diff -ruN webkitgtk-2.4.11-orig/Source/JavaScriptCore/llint/LowLevelInterpreter.cpp webkitgtk-2.4.11/Source/JavaScriptCore/llint/LowLevelInterpreter.cpp
 --- webkitgtk-2.4.11-orig/Source/JavaScriptCore/llint/LowLevelInterpreter.cpp	2016-04-10 08:48:36.000000000 +0200
-+++ webkitgtk-2.4.11/Source/JavaScriptCore/llint/LowLevelInterpreter.cpp	2018-01-28 20:32:40.238911258 +0100
++++ webkitgtk-2.4.11/Source/JavaScriptCore/llint/LowLevelInterpreter.cpp	2018-01-28 22:54:39.958387610 +0100
 @@ -150,7 +150,7 @@
      union {
          intptr_t i;
@@ -6467,7 +6482,7 @@ diff -ruN webkitgtk-2.4.11-orig/Source/JavaScriptCore/llint/LowLevelInterpreter.
  
 diff -ruN webkitgtk-2.4.11-orig/Source/WTF/wtf/InlineASM.h webkitgtk-2.4.11/Source/WTF/wtf/InlineASM.h
 --- webkitgtk-2.4.11-orig/Source/WTF/wtf/InlineASM.h	2016-04-10 08:48:36.000000000 +0200
-+++ webkitgtk-2.4.11/Source/WTF/wtf/InlineASM.h	2018-01-28 00:06:28.585853086 +0100
++++ webkitgtk-2.4.11/Source/WTF/wtf/InlineASM.h	2018-01-28 22:54:39.994386915 +0100
 @@ -69,7 +69,8 @@
       || OS(OPENBSD)             \
       || OS(SOLARIS)             \
