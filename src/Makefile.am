@@ -363,7 +363,7 @@ cm_pkg_webkitgtk_configure = \
 								--enable-silent-rules \
                CFLAGS=\"-I$(idir)/include -O2 -mms-bitfields\" \
                CXXFLAGS=\"-I$(idir)/include -O2 -std=gnu++98 -mms-bitfields -fexceptions\" \
-               CPPFLAGS=\"-I$(idir)/include -O2 -std=gnu++98 -mms-bitfields\" \
+               CPPFLAGS=\"-I$(idir)/include -O2 -mms-bitfields -Wno-expansion-to-defined\" \
          CC=$(CC) LIBS=\"-L$(idir)/lib\"
 
 cm_pkg_libical_cmake_args = \

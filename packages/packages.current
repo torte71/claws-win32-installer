@@ -260,8 +260,8 @@ chk  b67913c90a484c59fda011797c6f3959d84bdc7c
 # webkitgtk
 server http://webkitgtk.org/releases
 
-file webkitgtk-2.3.5a.tar.xz
-chk  a29620aa248fb1c440a09ad418bf0675276da139
+file webkitgtk-2.4.11.tar.xz
+chk  e425ae86084ab6335dadb368c9e8f53600665d54
 
 # cyrus-sasl
 server ftp://ftp.cyrusimap.org/cyrus-sasl
