@@ -59,8 +59,8 @@ chk 9dc6981197a7d92f339192eea974f5eca48fcffe
 # gnutls
 server ftp://ftp.gnutls.org/gcrypt
 
-file gnutls/v3.5/gnutls-3.5.9.tar.xz
-chk f3f184a92f128af1c2fb29b29a4d325af65694a5
+file gnutls/v3.5/gnutls-3.5.17.tar.xz
+chk d843a34e386dd82861a9fd64b8d4e2e77fe9d991
 
 #
 # Various libraries, mostly those from sf.net

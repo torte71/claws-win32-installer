@@ -66,7 +66,6 @@ EXTRA_DIST = autogen.sh \
 				patches/glib-2.54.2/02-folder-icons.patch \
 				patches/glib-2.54.2/03-wchar64.patch \
 				patches/glib-networking-2.50.0/01-giomoduledir.patch \
-				patches/gnutls-3.5.2/01-no-endservent.patch \
 				patches/gtk+-2.24.31/00-fix-private-defs.patch \
 				patches/icu4c-58_2-src/01-libnames.patch \
 				patches/icu4c-58_2-src/02-float128-clang.patch \
