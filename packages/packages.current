@@ -100,8 +100,8 @@ chk  d56e2c337a97e02c9f0eb51e3784a06e1d833c7e
 
 server http://curl.haxx.se/download
 
-file  curl-7.58.0.tar.xz
-chk   edbc1a5a558b091e3c75987d26a4667ef20af84d
+file  curl-7.59.0.tar.xz
+chk   f6ec54869dce33abcba4e6d919165fe3c9e1dff5
 
 
 #
