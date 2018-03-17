@@ -25,7 +25,7 @@ min_automake_version="1.9.3"
 # This version is here mostly for 'make dist', actual Claws Mail
 # version is controlled by what is in packages/
 m4_define([my_version], [3.16.0])
-m4_define([my_release], [1])
+m4_define([my_release], [2])
 m4_define([my_gitrev], [])
 
 AC_INIT([Claws Mail Win32],
