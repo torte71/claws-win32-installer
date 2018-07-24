@@ -70,8 +70,8 @@ file libexpat/libexpat/releases/download/R_2_2_5/expat-2.2.5.tar.bz2
 # (Kept on our own mirror due to Sourceforge/github peculiarities.)
 server http://www.claws-mail.org/win32
 
-file   libetpan-1.7.tar.gz
-chk    37a866f4724b0406a725d924cf5252e9add07cef
+file   libetpan-1.8.tar.gz
+chk    66ae6d8e0eb4095725fca1e44e6049ae5620aec4
 
 file   regex-20090805.tar.gz
 chk    56c87366f49916997729fc335747a6a55a2bacc3
