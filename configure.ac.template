@@ -297,7 +297,7 @@ CM_SPKG([libical])
 CM_SPKG([ytnef])
 CM_SPKG([claws-mail], [libiconv gettext zlib gtk+ libpng enchant glib dnl
                             gpgme crypt regex libetpan gnutls ytnef dnl
-                            libxml2 expat webkitgtk curl libical])
+                            libxml2 expat webkitgtk curl libical nettle])
 
 
 CM_FINALIZE
