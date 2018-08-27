@@ -1,6 +1,0 @@
-#!/bin/bash
-
-# 3.15.0 contains "3.15.0-dirty" as its version string by mistake,
-# so we have to get rid of the -dirty suffix.
-
-sed -i -e 's:-dirty::' version src/common/version.h
