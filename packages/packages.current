@@ -59,12 +59,13 @@ chk 9dc6981197a7d92f339192eea974f5eca48fcffe
 # gnutls
 server ftp://ftp.gnutls.org/gcrypt
 
-file gnutls/v3.5/gnutls-3.5.18.tar.xz
-chk 3f56903c4eba1af9440c64ef86688f984834f0d5
+file gnutls/v3.6/gnutls-3.6.3.tar.xz
+chk  ac96787a7fbd550a2b201e64c0e752821e90fed7
 
 # expat
 server https://github.com
-file libexpat/libexpat/releases/download/R_2_2_5/expat-2.2.5.tar.bz2
+file libexpat/libexpat/releases/download/R_2_2_6/expat-2.2.6.tar.bz2
+chk  c8947fc3119a797b55485f2f7bdaaeb49cc9df01
 
 # Various libraries, mostly those from sf.net
 # (Kept on our own mirror due to Sourceforge/github peculiarities.)

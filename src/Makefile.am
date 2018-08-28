@@ -245,6 +245,8 @@ cm_pkg_gnutls_configure = \
 	--with-included-unistring \
 	--disable-gtk-doc-html \
 	--disable-tests \
+	--disable-doc \
+	--disable-tools \
   --with-libtasn1-prefix=$(idir) \
   --with-libgcrypt-prefix=$(idir) \
 	CPPFLAGS=\"-I$(idir)/include\" LDFLAGS=\"-L$(idir)/lib\"
@@ -277,6 +279,9 @@ cm_pkg_libxml2_configure = \
 
 cm_pkg_libxslt_configure = \
 	--enable-shared --without-python
+
+cm_pkg_expat_configure = \
+	--without-docbook
 
 cm_pkg_cyrus_sasl_configure = \
 	--without-openssl --disable-ldapd --without-saslauthd \
