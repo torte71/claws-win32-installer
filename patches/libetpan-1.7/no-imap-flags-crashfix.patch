@@ -1,0 +1,20 @@
+#! /bin/sh
+patch -p1 -f $* < $0
+exit $?
+
+diff -ruN libetpan-1.8-orig/src/low-level/imap/mailimap_types.c libetpan-1.8/src/low-level/imap/mailimap_types.c
+--- libetpan-1.8-orig/src/low-level/imap/mailimap_types.c	2017-05-08 05:27:35.000000000 +0200
++++ libetpan-1.8/src/low-level/imap/mailimap_types.c	2018-07-24 20:09:24.308423667 +0200
+@@ -1201,8 +1201,10 @@
+ LIBETPAN_EXPORT
+ void mailimap_flag_list_free(struct mailimap_flag_list * flag_list)
+ {
+-  clist_foreach(flag_list->fl_list, (clist_func) mailimap_flag_free, NULL);
+-  clist_free(flag_list->fl_list);
++	if (flag_list->fl_list) {
++    clist_foreach(flag_list->fl_list, (clist_func) mailimap_flag_free, NULL);
++    clist_free(flag_list->fl_list);
++	}
+   free(flag_list);
+ }
+ 
