@@ -182,6 +182,7 @@ cm_pkg_cairo_configure = \
 #cm_pkg_libgpg_error_configure = \
 #  --with-libiconv-prefix=$(idir) --with-libintl-prefix=$(idir)
 cm_pkg_libgpg_error_configure = --silent \
+	--disable-doc \
   --enable-static \
   CPPFLAGS=-I$(idir)/include LDFLAGS=\"-L$(idir)/lib\"
 

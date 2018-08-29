@@ -1,0 +1,16 @@
+#! /bin/sh
+patch -p1 -l -f $* < $0
+exit $?
+
+diff -ruN harfbuzz-1.8.8-orig/Makefile.in harfbuzz-1.8.8/Makefile.in
+--- harfbuzz-1.8.8-orig/Makefile.in	2018-08-14 19:57:45.000000000 +0200
++++ harfbuzz-1.8.8/Makefile.in	2018-08-29 17:46:37.220656377 +0200
+@@ -398,7 +398,7 @@
+ top_srcdir = @top_srcdir@
+ NULL = 
+ ACLOCAL_AMFLAGS = -I m4
+-SUBDIRS = src util test docs
++SUBDIRS = src
+ EXTRA_DIST = \
+ 	autogen.sh \
+ 	harfbuzz.doap \

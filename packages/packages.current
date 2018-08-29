@@ -133,8 +133,8 @@ chk  31f52169bcfeef9efb61480d0950e928ad059552
 #
 server http://ftp.gnome.org/pub/gnome/sources
 
-file glib/2.54/glib-2.54.3.tar.xz
-chk  12d7466550156ac8a765f603b0df7604cdf34cfd
+file glib/2.56/glib-2.56.2.tar.xz
+chk  8b18a92f81a8d033abfb43a628bae3bbaf71800c
 
 file gtk+/2.24/gtk+-2.24.32.tar.xz
 chk  c885ade62b06854590822c8eb906daf7dd15d90a
@@ -159,8 +159,8 @@ chk  8161819ccb9afe77f24b38fd6fd99c7239b7c17a
 # harfbuzz
 server http://www.freedesktop.org/software/harfbuzz/release
 
-file harfbuzz-1.3.3.tar.bz2
-chk  37c00f40e18387900cdfe221a04353dbeef7bcb3
+file harfbuzz-1.8.8.tar.bz2
+chk  be496408b2bb3dc794891e8b0e977cd75f02d71d
 
 #
 # CAIRO
@@ -202,8 +202,8 @@ chk  d063e705812e1ee7feb8f35d51b3cad04ca13b0d
 # libpng
 
 server ftp://ftp.simplesystems.org/pub/png/src
-file libpng16/libpng-1.6.29.tar.xz
-chk 7dbe6a5088b938545fc0857c507d4e0cf5d9023e
+file libpng16/libpng-1.6.34.tar.xz
+chk  45de4ec996ffcc3e18037e7c128abe95f4d0292a
 
 #
 # LibFFI
@@ -235,11 +235,11 @@ chk  6e38be3377340a21a1f13ff84b5e6adce97cd1d4
 #
 server ftp://ftp.gnupg.org/gcrypt
 
-file libgpg-error/libgpg-error-1.27.tar.bz2
-chk  a428758999ff573e62d06892e3d2c0b0f335787c
+file libgpg-error/libgpg-error-1.29.tar.bz2
+chk  a56241d60bb7d810fdb478463b1732b134a52a19
 
-file libgcrypt/libgcrypt-1.8.2.tar.bz2
-chk  ab8aae5d7a68f8e0988f90e11e7f6a4805af5c8d
+file libgcrypt/libgcrypt-1.8.3.tar.bz2
+chk  13bd2ce69e59ab538e959911dfae80ea309636e3
 
 file libassuan/libassuan-2.5.1.tar.bz2
 chk  c8432695bf1daa914a92f51e911881ed93d50604

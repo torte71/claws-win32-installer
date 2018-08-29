@@ -1,0 +1,22 @@
+#! /bin/sh
+patch -p1 -l -f $* < $0
+exit $?
+
+The configure test that sets BROKEN_IP_MREQ_SOURCE_STRUCT is
+itself broken on Windows, our struct ip_mreq_source is fine.
+
+diff -ruN glib-2.56.2-orig/gio/gsocket.c glib-2.56.2/gio/gsocket.c
+--- glib-2.56.2-orig/gio/gsocket.c	2018-08-17 02:03:20.000000000 +0200
++++ glib-2.56.2/gio/gsocket.c	2018-08-29 17:12:43.611462343 +0200
+@@ -2381,11 +2381,7 @@
+       {
+ #ifdef IP_ADD_SOURCE_MEMBERSHIP
+ 
+-#ifdef BROKEN_IP_MREQ_SOURCE_STRUCT
+-#define S_ADDR_FIELD(src) src.imr_interface
+-#else
+ #define S_ADDR_FIELD(src) src.imr_interface.s_addr
+-#endif
+ 
+         gint optname;
+         struct ip_mreq_source mc_req_src;
