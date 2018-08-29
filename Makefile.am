@@ -36,13 +36,15 @@ EXTRA_DIST = autogen.sh \
         patches/enchant-1.6.0/01-no-tests.patch \
         patches/enchant-1.6.0/99-autogen.sh.patch \
         patches/libsoup-2.60.3/01-no-docs-no-tests.patch \
+        patches/glib-2.56.2/02-broken-ip-mreq-source-struct.patch \
+        patches/glib-2.56.2/03-no-tests.patch \
+        patches/glib-2.56.2/01-socket.patch \
         patches/webkitgtk-2.4.11/05-print-size.patch \
         patches/webkitgtk-2.4.11/01-std-threads.patch \
         patches/webkitgtk-2.4.11/04-LLIntAssembly-hack.patch \
         patches/webkitgtk-2.4.11/03-missing-RenderBox-include.patch \
         patches/webkitgtk-2.4.11/02-no-class-size-check.patch \
-        patches/glib-2.54.3/03-wchar64.patch \
-        patches/glib-2.54.3/01-socket.patch \
+        patches/fontconfig-2.11.1/01-no-fluff.patch \
         patches/zlib-1.2.11/01-no-strip.patch \
         patches/icu4c-58_2-src/02-float128-clang.patch \
         patches/icu4c-58_2-src/01-libnames.patch \
@@ -51,6 +53,7 @@ EXTRA_DIST = autogen.sh \
         patches/w32pth-2.0.5/99-autogen.sh.patch \
         patches/w32pth-2.0.5/01-def-fix.patch \
         patches/gdk-pixbuf-2.36.11/01-fix-build.patch \
+        patches/gdk-pixbuf-2.36.11/02-no-tests.patch \
         patches/libical-2.0.0/01-gmtime_r.patch \
         patches/glib-networking-2.54.1/01-giomoduledir.patch \
         patches/regex-20090805/01-no-large-offsets.patch \
@@ -62,7 +65,9 @@ EXTRA_DIST = autogen.sh \
         patches/libetpan-1.7/no-imap-flags-crashfix.patch \
         patches/libiconv-1.14/01-aliases2_lookup-no-inline.patch \
         patches/crypt-1.1/01-build-dll.patch \
+        patches/harfbuzz-1.8.8/01-no-tests-utils-docs.patch \
         patches/gtk+-2.24.32/00-fix-private-defs.patch \
+        patches/gtk+-2.24.32/01-no-tests-demos.patch \
         patches/cyrus-sasl-2.1.26/14-MinGW-w64-add-LIBSASL_API-to-function-definitions.patch \
         patches/cyrus-sasl-2.1.26/10-MinGW-w64-already-has-getopt.patch \
         patches/cyrus-sasl-2.1.26/03-fix-plugins.patch \

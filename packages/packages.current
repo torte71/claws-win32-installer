@@ -274,8 +274,3 @@ chk d6669fb91434192529bd13ee95737a8a5040241c
 server https://github.com/libical/libical/releases/download
 file v2.0.0/libical-2.0.0.tar.gz
 chk 8540d5d73422496e1d350b86ff32333daa08144c
-
-# librsvg
-server http://ftp.gnome.org/pub/gnome/sources
-file librsvg/2.41/librsvg-2.41.2.tar.xz
-chk  902af9cc73a4541dc3d33a6691fe70e465f32595
