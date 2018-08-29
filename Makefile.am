@@ -30,13 +30,12 @@ SUBDIRS = doc packages po src
 EXTRA_DIST = autogen.sh \
         configure.ac.template \
         doc/license-page doc/GPLv3 \
+        patches/claws-mail-3.17.1/99-manual.patch \
+        patches/claws-mail-3.17.1/01-etpan-sasl-plugin-path.patch \
         patches/pixman-0.32.6/01-no-tests.patch \
         patches/enchant-1.6.0/01-no-tests.patch \
         patches/enchant-1.6.0/99-autogen.sh.patch \
         patches/libsoup-2.60.3/01-no-docs-no-tests.patch \
-        patches/claws-mail-3.16.0/00-undirty-version-file.patch \
-        patches/claws-mail-3.16.0/02-missing-gerror-init.patch \
-        patches/claws-mail-3.16.0/01-etpan-sasl-plugin-path.patch \
         patches/webkitgtk-2.4.11/05-print-size.patch \
         patches/webkitgtk-2.4.11/01-std-threads.patch \
         patches/webkitgtk-2.4.11/04-LLIntAssembly-hack.patch \
@@ -52,17 +51,6 @@ EXTRA_DIST = autogen.sh \
         patches/w32pth-2.0.5/99-autogen.sh.patch \
         patches/w32pth-2.0.5/01-def-fix.patch \
         patches/gdk-pixbuf-2.36.11/01-fix-build.patch \
-        patches/webkitgtk-2.3.5a/00-srcdir-rename.patch \
-        patches/webkitgtk-2.3.5a/09-duplicate-plugin-files.patch \
-        patches/webkitgtk-2.3.5a/07-GDIObject-h.patch \
-        patches/webkitgtk-2.3.5a/03-std-threads.patch \
-        patches/webkitgtk-2.3.5a/04-no-msvc-asm.patch \
-        patches/webkitgtk-2.3.5a/01-gcc-check-bypass.patch \
-        patches/webkitgtk-2.3.5a/02-WTFHeaderDetection-be-gone.patch \
-        patches/webkitgtk-2.3.5a/05-no-class-size-check.patch \
-        patches/webkitgtk-2.3.5a/08-no-opengl.patch \
-        patches/webkitgtk-2.3.5a/06-LLIntAssembly-hack.patch \
-        patches/webkitgtk-2.3.5a/10-print-size.patch \
         patches/libical-2.0.0/01-gmtime_r.patch \
         patches/glib-networking-2.54.1/01-giomoduledir.patch \
         patches/regex-20090805/01-no-large-offsets.patch \
