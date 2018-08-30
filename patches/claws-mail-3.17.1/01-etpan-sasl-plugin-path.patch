@@ -2,10 +2,10 @@
 patch -p1 -f $* < $0
 exit $?
 
-diff -ruN claws-mail-3.13.2git142-orig/src/main.c claws-mail-3.13.2git142/src/main.c
---- claws-mail-3.13.2git142-orig/src/main.c	2016-05-29 18:22:35.230016702 +0200
-+++ claws-mail-3.13.2git142/src/main.c	2016-05-29 18:28:15.729204613 +0200
-@@ -131,7 +131,9 @@
+diff -ruN claws-mail-3.17.1-orig/src/main.c claws-mail-3.17.1/src/main.c
+--- claws-mail-3.17.1-orig/src/main.c	2018-08-26 13:25:23.000000000 +0200
++++ claws-mail-3.17.1/src/main.c	2018-08-30 19:45:26.588272531 +0200
+@@ -136,7 +136,9 @@
  #ifdef HAVE_LIBETPAN
  #include "imap-thread.h"
  #include "nntp-thread.h"
@@ -15,8 +15,8 @@ diff -ruN claws-mail-3.13.2git142-orig/src/main.c claws-mail-3.13.2git142/src/ma
  #include "stock_pixmap.h"
  #ifdef USE_GNUTLS
  #  include "ssl.h"
-@@ -1307,6 +1309,13 @@
- 	account_read_config_all();
+@@ -1343,6 +1345,13 @@
+ 	}
  
  #ifdef HAVE_LIBETPAN
 +	/* Following block utilizes unofficial libetpan API, added
