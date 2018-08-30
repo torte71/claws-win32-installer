@@ -4,7 +4,7 @@ exit $?
 
 diff -ruN harfbuzz-1.8.8-orig/Makefile.in harfbuzz-1.8.8/Makefile.in
 --- harfbuzz-1.8.8-orig/Makefile.in	2018-08-14 19:57:45.000000000 +0200
-+++ harfbuzz-1.8.8/Makefile.in	2018-08-29 17:46:37.220656377 +0200
++++ harfbuzz-1.8.8/Makefile.in	2018-08-30 13:17:18.726944115 +0200
 @@ -398,7 +398,7 @@
  top_srcdir = @top_srcdir@
  NULL = 
@@ -14,3 +14,16 @@ diff -ruN harfbuzz-1.8.8-orig/Makefile.in harfbuzz-1.8.8/Makefile.in
  EXTRA_DIST = \
  	autogen.sh \
  	harfbuzz.doap \
+diff -ruN harfbuzz-1.8.8-orig/src/Makefile.in harfbuzz-1.8.8/src/Makefile.in
+--- harfbuzz-1.8.8-orig/src/Makefile.in	2018-08-14 19:57:46.000000000 +0200
++++ harfbuzz-1.8.8/src/Makefile.in	2018-08-30 13:18:20.181802500 +0200
+@@ -165,9 +165,6 @@
+ @HAVE_GOBJECT_TRUE@	$(NULL)
+ 
+ @HAVE_GOBJECT_TRUE@am__append_49 = harfbuzz-gobject.def
+-noinst_PROGRAMS = main$(EXEEXT) test$(EXEEXT) \
+-	test-buffer-serialize$(EXEEXT) test-size-params$(EXEEXT) \
+-	test-would-substitute$(EXEEXT) $(am__EXEEXT_1)
+ bin_PROGRAMS =
+ @WITH_LIBSTDCXX_FALSE@am__append_50 = \
+ @WITH_LIBSTDCXX_FALSE@	check-libstdc++.sh \
