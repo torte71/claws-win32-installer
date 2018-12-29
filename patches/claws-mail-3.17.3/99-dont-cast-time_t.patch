@@ -1,0 +1,92 @@
+#! /bin/sh
+patch -p1 -f $* < $0
+exit $?
+
+commit 6a1521ae3
+Author: Andrej Kacian <ticho@claws-mail.org>
+Date:   Sat Dec 29 14:26:26 2018 +0100
+
+    Do not needlessly cast time_t to long long int for debug_print()
+
+diff --git a/src/plugins/libravatar/libravatar_missing.c b/src/plugins/libravatar/libravatar_missing.c
+index 0ff67f011..8f3ebde8d 100644
+--- a/src/plugins/libravatar/libravatar_missing.c
++++ b/src/plugins/libravatar/libravatar_missing.c
+@@ -83,7 +83,7 @@ close_exit:
+ static void missing_save_item(gpointer key, gpointer value, gpointer data)
+ {
+ 	FILE *file = (FILE *)data;
+-	gchar *line = g_strdup_printf("%s %llu\n", (gchar *)key, *((long long unsigned *)value));
++	gchar *line = g_strdup_printf("%s %lu\n", (gchar *)key, *(time_t *)value);
+ 	if (claws_fputs(line, file) < 0)
+ 		g_warning("error saving missing item");
+ 	g_free(line);
+@@ -138,10 +138,10 @@ void missing_add_md5(GHashTable *table, const gchar *md5)
+ 		seen = g_malloc0(sizeof(time_t));
+ 		*seen = t;
+ 		g_hash_table_insert(table, g_strdup(md5), seen);
+-		debug_print("New md5 %s added with time %llu\n", md5, (long long unsigned)t);
++		debug_print("New md5 %s added with time %lu\n", md5, t);
+ 	} else {
+ 		*seen = t; /* just update */
+-		debug_print("Updated md5 %s with time %llu\n", md5, (long long unsigned)t);
++		debug_print("Updated md5 %s with time %lu\n", md5, t);
+ 	}
+ }
+ 
+diff --git a/src/plugins/rssyl/parse822.c b/src/plugins/rssyl/parse822.c
+index 3f124146c..9190889a8 100644
+--- a/src/plugins/rssyl/parse822.c
++++ b/src/plugins/rssyl/parse822.c
+@@ -137,7 +137,7 @@ FeedItem *rssyl_parse_folder_item_file(gchar *path)
+ 				/* Last-Seen timestamp */
+ 				if( !strcmp(line[0], "X-RSSyl-Last-Seen") ) {
+ 					ctx->last_seen = atol(line[1]);
+-					debug_print("RSSyl: got last_seen timestamp %lld\n", (long long)ctx->last_seen);
++					debug_print("RSSyl: got last_seen timestamp %ld\n", ctx->last_seen);
+ 				}
+ 
+ 				/* ID */
+diff --git a/src/plugins/vcalendar/vcal_folder.c b/src/plugins/vcalendar/vcal_folder.c
+index 21a922757..db6acf36f 100644
+--- a/src/plugins/vcalendar/vcal_folder.c
++++ b/src/plugins/vcalendar/vcal_folder.c
+@@ -1170,8 +1170,8 @@ static void vcal_set_mtime(Folder *folder, FolderItem *item)
+ 	}
+ 
+ 	item->mtime = s.st_mtime;
+-	debug_print("VCAL: forced mtime of %s to %lld\n",
+-			item->name?item->name:"(null)", (long long)item->mtime);
++	debug_print("VCAL: forced mtime of %s to %ld\n",
++			item->name?item->name:"(null)", item->mtime);
+ 	g_free(path);
+ }
+ 
+diff --git a/src/plugins/vcalendar/vcal_manager.c b/src/plugins/vcalendar/vcal_manager.c
+index 073fd36d6..d2e8dae33 100644
+--- a/src/plugins/vcalendar/vcal_manager.c
++++ b/src/plugins/vcalendar/vcal_manager.c
+@@ -926,7 +926,7 @@ void vcal_manager_save_event (VCalEvent *event, gboolean export_after)
+ 	xml_tag_add_attr(tag, xml_attr_new("type", tmp));
+ 	g_free(tmp);
+ 	
+-	tmp = g_strdup_printf("%lld", (long long)event->postponed);
++	tmp = g_strdup_printf("%ld", event->postponed);
+ 	xml_tag_add_attr(tag, xml_attr_new("postponed", tmp));
+ 	g_free(tmp);
+ 	
+diff --git a/src/plugins/vcalendar/vcal_meeting_gtk.c b/src/plugins/vcalendar/vcal_meeting_gtk.c
+index c5ff05b9e..fd808f88e 100644
+--- a/src/plugins/vcalendar/vcal_meeting_gtk.c
++++ b/src/plugins/vcalendar/vcal_meeting_gtk.c
+@@ -1824,8 +1824,8 @@ void multisync_export(void)
+ 	list = vcal_folder_get_waiting_events();
+ 	for (cur = list; cur; cur = cur->next) {
+ 		VCalEvent *event = (VCalEvent *)cur->data;
+-		file = g_strdup_printf("multisync%lld-%d",
+-				(long long)time(NULL), i);
++		file = g_strdup_printf("multisync%ld-%d",
++				time(NULL), i);
+ 
+ 		i++;
+ 

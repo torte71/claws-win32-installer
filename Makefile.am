@@ -30,9 +30,15 @@ SUBDIRS = doc packages po src
 EXTRA_DIST = autogen.sh \
         configure.ac.template \
         doc/license-page doc/GPLv3 \
-        patches/claws-mail-3.17.1/99-manual.patch \
-        patches/claws-mail-3.17.1/01-etpan-sasl-plugin-path.patch \
         patches/pixman-0.32.6/01-no-tests.patch \
+        patches/claws-mail-3.17.3/99-printf-formats.patch \
+        patches/claws-mail-3.17.3/99-utils-c-include-fix.patch \
+        patches/claws-mail-3.17.3/99-strftime-r.patch \
+        patches/claws-mail-3.17.3/99-mimeview-alertpanel-api-fix.patch \
+        patches/claws-mail-3.17.3/99-sieve-hhu-format.patch \
+        patches/claws-mail-3.17.3/99-pid.patch \
+        patches/claws-mail-3.17.3/99-dont-cast-time_t.patch \
+        patches/claws-mail-3.17.3/01-etpan-sasl-plugin-path.patch \
         patches/enchant-1.6.0/01-no-tests.patch \
         patches/enchant-1.6.0/99-autogen.sh.patch \
         patches/libsoup-2.60.3/01-no-docs-no-tests.patch \
