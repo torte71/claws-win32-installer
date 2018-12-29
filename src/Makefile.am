@@ -300,13 +300,14 @@ cm_pkg_libetpan_configure = --with-gnutls --enable-threads \
 # -D_POSIX_C_SOURCE is there so that time.h from mingw64-4.x
 # actually gives us gmtime_r() and localtime_r() prototype declarations
 cm_pkg_claws_mail_configure = \
+  --enable-silent-rules \
   --with-lib-prefix=$(idir) --with-libiconv-prefix=$(idir) \
-  --with-gpg-error-prefix=$(idir) --with-gpgme-prefix=$(idir) \
+  --with-gpgme-prefix=$(idir) \
   --enable-pthread --enable-gnutls \
   --enable-libetpan --disable-dbus --disable-valgrind --enable-ipv6 \
   --disable-jpilot --disable-startup-notification \
   --disable-spamassassin-plugin --disable-bogofilter-plugin \
-  --enable-fancy-plugin --disable-geolocation-plugin \
+  --enable-fancy-plugin \
   --disable-acpi_notifier-plugin --disable-clamd-plugin \
   --disable-perl-plugin --disable-python-plugin --disable-demo-plugin \
   --disable-newmail-plugin --disable-mailmbox-plugin \
