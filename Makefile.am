@@ -35,6 +35,7 @@ EXTRA_DIST = autogen.sh \
         patches/claws-mail-3.17.3/99-utils-c-include-fix.patch \
         patches/claws-mail-3.17.3/99-strftime-r.patch \
         patches/claws-mail-3.17.3/99-mimeview-alertpanel-api-fix.patch \
+        patches/claws-mail-3.17.3/99-file-open-dialog-fix.patch \
         patches/claws-mail-3.17.3/99-sieve-hhu-format.patch \
         patches/claws-mail-3.17.3/99-pid.patch \
         patches/claws-mail-3.17.3/99-dont-cast-time_t.patch \
