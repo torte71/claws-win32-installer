@@ -1,0 +1,136 @@
+#! /bin/sh
+patch -p1 -f $* < $0
+exit $?
+
+diff --git a/src/common/utils.c b/src/common/utils.c
+index 110817a73..5cb55153c 100644
+--- a/src/common/utils.c
++++ b/src/common/utils.c
+@@ -4715,3 +4715,10 @@ gboolean get_serverportfp_from_filename(const gchar *str, gchar **server, gchar
+ 		return TRUE;
+ }
+ 
++#ifdef G_OS_WIN32
++gchar *win32_debug_log_path(void)
++{
++	return g_strconcat(g_get_tmp_dir(), G_DIR_SEPARATOR_S,
++			"claws-win32.log", NULL);
++}
++#endif
+diff --git a/src/common/utils.h b/src/common/utils.h
+index d51cc00e1..c06359294 100644
+--- a/src/common/utils.h
++++ b/src/common/utils.h
+@@ -544,4 +544,8 @@ gboolean get_random_bytes(void *buf, size_t count);
+ 
+ gboolean get_serverportfp_from_filename(const gchar *str, gchar **server, gchar **port, gchar **fp);
+ 
++#ifdef G_OS_WIN32
++gchar *win32_debug_log_path(void);
++#endif
++
+ #endif /* __UTILS_H__ */
+diff --git a/src/main.c b/src/main.c
+index 069a229e5..f01ea5ea4 100644
+--- a/src/main.c
++++ b/src/main.c
+@@ -735,8 +735,8 @@ static void win32_log(const gchar *log_domain, GLogLevelFlags log_level, const g
+ 
+ static void win32_open_log(void)
+ {
+-	gchar *logfile = g_strconcat(g_get_tmp_dir(), G_DIR_SEPARATOR_S, "claws-win32.log", NULL);
+-	gchar *oldlogfile = g_strconcat(g_get_tmp_dir(), G_DIR_SEPARATOR_S, "claws-win32.log.bak", NULL);
++	gchar *logfile = win32_debug_log_path();
++	gchar *oldlogfile = g_strconcat(logfile, ".bak", NULL);
+ 
+ 	if (is_file_exist(logfile)) {
+ 		if (rename_force(logfile, oldlogfile) < 0)
+diff --git a/src/mainwindow.c b/src/mainwindow.c
+index a1814ffb1..60fa66d29 100644
+--- a/src/mainwindow.c
++++ b/src/mainwindow.c
+@@ -18,6 +18,11 @@
+ 
+ #include "defs.h"
+ 
++#ifdef G_OS_WIN32
++#define UNICODE
++#define _UNICODE
++#endif
++
+ #include <glib.h>
+ #include <glib/gi18n.h>
+ #include <gdk/gdkkeysyms.h>
+@@ -187,6 +192,9 @@ static void log_window_show_cb	(GtkAction	*action,
+ 				  gpointer	 data);
+ static void filtering_debug_window_show_cb	(GtkAction	*action,
+ 				  gpointer	 data);
++#ifdef G_OS_WIN32
++static void debug_log_show_cb(GtkAction *action, gpointer data);
++#endif
+ 
+ static void inc_cancel_cb		(GtkAction	*action,
+ 				  gpointer	 data);
+@@ -779,6 +787,9 @@ static GtkActionEntry mainwin_entries[] =
+ 	/* {"Tools/---",                             NULL, "---", NULL, NULL, NULL }, */
+ 	{"Tools/FilteringLog",                       NULL, N_("Filtering Lo_g"), NULL, NULL, G_CALLBACK(filtering_debug_window_show_cb) }, 
+ 	{"Tools/NetworkLog",                         NULL, N_("Network _Log"), "<shift><control>L", NULL, G_CALLBACK(log_window_show_cb) }, 
++#ifdef G_OS_WIN32
++	{"Tools/DebugLog",                           NULL, N_("Debug _Log"), NULL, NULL, G_CALLBACK(debug_log_show_cb) },
++#endif
+ 	/* {"Tools/---",                             NULL, "---", NULL, NULL, NULL }, */
+ 	{"Tools/ForgetSessionPasswords",             NULL, N_("_Forget all session passwords"), NULL, NULL, G_CALLBACK(forget_session_passwords_cb) }, 
+ #ifndef PASSWORD_CRYPTO_OLD
+@@ -1839,6 +1850,9 @@ MainWindow *main_window_create()
+ 	MENUITEM_ADDUI_MANAGER(mainwin->ui_manager, "/Menu/Tools", "Separator7", "Tools/---", GTK_UI_MANAGER_SEPARATOR)
+ 	MENUITEM_ADDUI_MANAGER(mainwin->ui_manager, "/Menu/Tools", "FilteringLog", "Tools/FilteringLog", GTK_UI_MANAGER_MENUITEM)
+ 	MENUITEM_ADDUI_MANAGER(mainwin->ui_manager, "/Menu/Tools", "NetworkLog", "Tools/NetworkLog", GTK_UI_MANAGER_MENUITEM)
++#ifdef G_OS_WIN32
++	MENUITEM_ADDUI_MANAGER(mainwin->ui_manager, "/Menu/Tools", "DebugLog", "Tools/DebugLog", GTK_UI_MANAGER_MENUITEM)
++#endif
+ 	MENUITEM_ADDUI_MANAGER(mainwin->ui_manager, "/Menu/Tools", "Separator8", "Tools/---", GTK_UI_MANAGER_SEPARATOR)
+ 	MENUITEM_ADDUI_MANAGER(mainwin->ui_manager, "/Menu/Tools", "ForgetSessionPasswords", "Tools/ForgetSessionPasswords", GTK_UI_MANAGER_MENUITEM)
+ #ifndef PASSWORD_CRYPTO_OLD
+@@ -3094,6 +3108,7 @@ SensitiveCondMask main_window_get_current_state(MainWindow *mainwin)
+ 		UPDATE_STATE(M_MASTER_PASSPHRASE);
+ 	}
+ #endif
++
+ #undef UPDATE_STATE
+ 
+ 	return state;
+@@ -4340,6 +4355,34 @@ static void filtering_debug_window_show_cb(GtkAction *action, gpointer data)
+ 	log_window_show(mainwin->filtering_debugwin);
+ }
+ 
++#ifdef G_OS_WIN32
++static void debug_log_show_cb(GtkAction *action, gpointer data)
++{
++	GError *error = NULL;
++	gchar *logpath8 = win32_debug_log_path();
++	gunichar2 *logpath16;
++
++	debug_print("opening '%s'\n", logpath8);
++
++	logpath16 = g_utf8_to_utf16(logpath8, -1, NULL, NULL, &error);
++
++	if (error != NULL) {
++		g_warning("couldn't convert debug log path '%s' to UTF-16: %s",
++				logpath8, error->message);
++		g_error_free(error);
++		g_free(logpath16);
++		return;
++	}
++
++	HINSTANCE ret = ShellExecute(NULL, NULL, (LPCWSTR)logpath16,
++			NULL, NULL, SW_SHOW);
++
++	g_free(logpath8);
++	g_free(logpath16);
++	debug_print("ShellExecute result: %"G_GSIZE_FORMAT"\n", (gsize)ret);
++}
++#endif
++
+ static void inc_cancel_cb(GtkAction *action, gpointer data)
+ {
+ 	inc_cancel_all();
