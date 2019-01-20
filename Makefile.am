@@ -31,6 +31,7 @@ EXTRA_DIST = autogen.sh \
         configure.ac.template \
         doc/license-page doc/GPLv3 \
         patches/pixman-0.32.6/01-no-tests.patch \
+        patches/claws-mail-3.17.3/99-session-proxy.patch \
         patches/claws-mail-3.17.3/99-printf-formats.patch \
         patches/claws-mail-3.17.3/99-utils-c-include-fix.patch \
         patches/claws-mail-3.17.3/99-strftime-r.patch \
