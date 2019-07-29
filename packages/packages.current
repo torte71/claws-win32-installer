@@ -274,3 +274,8 @@ chk d6669fb91434192529bd13ee95737a8a5040241c
 server https://github.com/libical/libical/releases/download
 file v2.0.0/libical-2.0.0.tar.gz
 chk 8540d5d73422496e1d350b86ff32333daa08144c
+
+# gumbo-parser
+server https://github.com/google/gumbo-parser/archive/
+name gumbo-parser-0.10.1.tar.gz
+file v0.10.1.tar.gz

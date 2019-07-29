@@ -203,3 +203,7 @@
 !define cm_pkg_ytnef @cm_pkg_ytnef@
 !define cm_pkg_ytnef_version @cm_pkg_ytnef_version@
 !define cm_pkg_ytnef_src @cm_pkg_ytnef_src@
+
+!define cm_pkg_gumbo @cm_pkg_gumbo@
+!define cm_pkg_gumbo_version @cm_pkg_gumbo_version@
+!define cm_pkg_gumbo_src @cm_pkg_gumbo_src@

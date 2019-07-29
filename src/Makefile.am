@@ -43,7 +43,7 @@ cm_spkgs = glib libffi gdk-pixbuf gtk+ expat \
 		jpeg glib-networking libsoup libwebp webkitgtk gmp nettle \
 		harfbuzz pango pixman cairo libetpan claws-mail \
 		libgcrypt libassuan cyrus-sasl icu4c ytnef \
-		w32pth regex libiconv gettext libical
+		w32pth regex libiconv gettext libical gumbo
 
 # Extra options to configure for individual packages.
 # We can use $(idir) here for the installation prefix.
@@ -85,6 +85,7 @@ cm_pkg_cairo_make_args = -j$(NUMPROC)
 cm_pkg_cyrus_sasl_make_args = -j$(NUMPROC)
 cm_pkg_libical_make_args = -j$(NUMPROC)
 cm_pkg_ytnef_make_args = -j$(NUMPROC)
+cm_pkg_gumbo_make_args = -j$(NUMPROC)
 
 cm_pkg_libical_cmake = yes
 
@@ -375,6 +376,10 @@ cm_pkg_webkitgtk_configure = \
 
 cm_pkg_libical_cmake_args = \
 											 -DCMAKE_TOOLCHAIN_FILE=$(tsdir)/src/Toolchain-mingw32.cmake
+
+cm_pkg_gumbo_configure = \
+	LDFLAGS=\"-L$(idir)/lib\" \
+	CPPFLAGS=\"-I$(idir)/include\"
 
 # This is not anymore needed sinces 3.8.0 already builds a PDF version.
 # define cm_pkg_claws_mail_post_install

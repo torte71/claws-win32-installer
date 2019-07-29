@@ -295,8 +295,9 @@ CM_SPKG([libetpan], [gnutls cyrus-sasl])
 CM_BPKG_GNUWIN32([bsfilter])
 CM_SPKG([libical])
 CM_SPKG([ytnef])
+CM_SPKG([gumbo])
 CM_SPKG([claws-mail], [libiconv gettext zlib gtk+ libpng enchant glib dnl
-                            gpgme crypt regex libetpan gnutls ytnef dnl
+                            gpgme crypt regex libetpan gnutls ytnef gumbo dnl
                             libxml2 expat webkitgtk curl libical nettle])
 
 

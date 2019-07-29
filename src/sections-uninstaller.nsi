@@ -64,6 +64,10 @@ Delete "$INSTDIR\share\locale\tr\LC_MESSAGES\claws-mail.mo"
 Delete "$INSTDIR\share\locale\zh_TW\LC_MESSAGES\claws-mail.mo"
 
 #######################################
+### gumbo
+Delete "$INSTDIR\libgumbo-1.dll"
+
+#######################################
 ### ytnef
 Delete "$INSTDIR\libytnef-0.dll"
 
