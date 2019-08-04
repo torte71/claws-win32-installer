@@ -142,7 +142,7 @@ stamps/stamp-$(1)-01-patch: stamps/stamp-$(1)-00-unpack
 	(shopt -s nullglob;				\
 	 $(call SETVARS,$(1));				\
 	 for pfile in "$$$${pkgpbdir}"/*.patch "$$$${pkgpdir}"/*.patch ; do  \
-	   (cd "$$$${pkgsdir}"; "$$$${pfile}")		\
+	   (cd "$$$${pkgsdir}"; echo -e "\nExecuting $$$${pfile}"; "$$$${pfile}")		\
 	 done)
 	touch stamps/stamp-$(1)-01-patch
 
