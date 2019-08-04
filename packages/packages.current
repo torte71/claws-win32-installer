@@ -38,8 +38,8 @@ file libtasn1/libtasn1-4.13.tar.gz
 chk  a84afb4cd8187c1fa5901c6bc1cf1486eea66635
 
 # nettle
-file nettle/nettle-3.4.tar.gz
-chk  f3c8495b7c43cba9cdd19503e7567095c680b490
+file nettle/nettle-3.5.1.tar.gz
+chk  077a71eef4a62acc4480ff7e2051f806b1724ea2
 
 #
 # zlib
@@ -59,8 +59,8 @@ chk 9dc6981197a7d92f339192eea974f5eca48fcffe
 # gnutls
 server ftp://ftp.gnutls.org/gcrypt
 
-file gnutls/v3.6/gnutls-3.6.3.tar.xz
-chk  ac96787a7fbd550a2b201e64c0e752821e90fed7
+file gnutls/v3.6/gnutls-3.6.9.tar.xz
+chk  4a12757b129562ae92a01ca890ed282050595296
 
 # expat
 server https://github.com
@@ -101,8 +101,8 @@ chk  d56e2c337a97e02c9f0eb51e3784a06e1d833c7e
 
 server http://curl.haxx.se/download
 
-file  curl-7.61.0.tar.xz
-chk   9fda7fc5e94337a25166e885e9abe05e0adace53
+file  curl-7.65.3.tar.xz
+chk   49e8ffc2601cc204f4544087a8e2da9e01313d29
 
 
 #
@@ -133,8 +133,8 @@ chk  31f52169bcfeef9efb61480d0950e928ad059552
 #
 server http://ftp.gnome.org/pub/gnome/sources
 
-file glib/2.56/glib-2.56.2.tar.xz
-chk  8b18a92f81a8d033abfb43a628bae3bbaf71800c
+file glib/2.56/glib-2.56.4.tar.xz
+chk  4064eb1eb5ff626c211e86bc939f8b743ceafaba
 
 file gtk+/2.24/gtk+-2.24.32.tar.xz
 chk  c885ade62b06854590822c8eb906daf7dd15d90a
