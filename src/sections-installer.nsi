@@ -786,8 +786,8 @@ File ${prefix}/bin/libgmp-10.dll
 #######################################
 ### nettle
 !insertmacro SetPrefix nettle
-File ${prefix}/bin/libnettle-6.dll
-File ${prefix}/bin/libhogweed-4.dll
+File ${prefix}/bin/libnettle-7.dll
+File ${prefix}/bin/libhogweed-5.dll
 
 #######################################
 ### libical
