@@ -315,7 +315,7 @@ cm_pkg_claws_mail_configure = \
 	--disable-dillo-plugin --enable-tnef_parse-plugin \
 	--with-password-encryption=gnutls \
 	CFLAGS=\"-O2 \" \
-	CPPFLAGS=\"-O2 -I$(idir)/include -D_POSIX_C_SOURCE\" \
+	CPPFLAGS=\"-O2 -I$(idir)/include -D_POSIX_C_SOURCE -DLITEHTML_UTF8\" \
 	LDFLAGS=\"-L$(idir)/lib\" LIBS=\"-lexpat\"
 
 cm_pkg_jpeg_configure = \

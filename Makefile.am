@@ -31,7 +31,11 @@ EXTRA_DIST = autogen.sh \
         configure.ac.template \
         doc/license-page doc/GPLv3 \
         patches/pixman-0.32.6/01-no-tests.patch \
-        patches/claws-mail-3.17.3/01-etpan-sasl-plugin-path.patch \
+        patches/claws-mail-3.17.4/01-etpan-sasl-plugin-path.patch \
+        patches/claws-mail-3.17.4/99-clawsdef-litehtml.patch \
+        patches/claws-mail-3.17.4/99-clawsdef.patch \
+        patches/claws-mail-3.17.4/99-litehtml-makefile-in.patch \
+        patches/claws-mail-3.17.4/99-litehtml-os-types.patch \
         patches/enchant-1.6.0/01-no-tests.patch \
         patches/enchant-1.6.0/99-autogen.sh.patch \
         patches/libsoup-2.60.3/01-no-docs-no-tests.patch \
