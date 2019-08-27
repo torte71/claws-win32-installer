@@ -46,7 +46,7 @@ to be installed:
 ***AKacian: This list is not necessarily up to date***
 
 build-essential (libc6-dev, gcc, g++, make)
- automake 1.11, autoconf (if building from GIT)
+ automake 1.11, autoconf
  mingw-w64
  mingw-w64-i686-dev
  mingw-w64-x86-64-dev
@@ -57,15 +57,10 @@ build-essential (libc6-dev, gcc, g++, make)
  imagemagick
  gs-common (gs)
  docbook-utils
- sharutils (uudecode for claws icon patch)
  gettext (msgfmt, dcgettext, gmsgfmt, xgettext for glib)
  libglib2.0-dev (glib-genmarshal, glib-compile-{resources,schemas})
  libgdk-pixbuf2.0-dev (gdk-pixbuf-csource)
  docbook-utils, ghostscript (claws-mail manual)
- texlive (you need most modules)
- texlive-latex-extra
- latex-xcolor (for the compendium)
- libqt4-dev-bin (in case pinentry-qt needs moc)
 
 
 Adding new packages to the installer:
