@@ -802,8 +802,8 @@ File ${prefix}/bin/libicalvcal.dll
 File ${prefix}/bin/libytnef-0.dll
 
 #######################################
-### gumbo
-!insertmacro SetPrefix gumbo
+### gumbo-parser
+!insertmacro SetPrefix gumbo-parser
 File ${prefix}/bin/libgumbo-1.dll
 
 #######################################
