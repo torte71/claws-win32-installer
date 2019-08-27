@@ -151,7 +151,7 @@ stamps/stamp-$(1)-02-configure: stamps/stamp-$(1)-01-patch
 	mkdir "$$$${pkgbdir}";				\
 	cd "$$$${pkgbdir}";				\
 	if [ "$$$${pkgcmake}" = "yes" ]; then \
-		eval "cmake $$$${pkgcfg} -DCMAKE_INSTALL_PREFIX=$$$${pkgidir} ../$$$${pkg_version}"; \
+		eval "$(CMAKE) $$$${pkgcfg} -DCMAKE_INSTALL_PREFIX=$$$${pkgidir} ../$$$${pkg_version}"; \
 	else \
 		eval "../$$$${pkg_version}/configure"		\
 			--prefix="$$$${pkgidir}"		\

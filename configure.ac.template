@@ -121,12 +121,13 @@ AC_CHECK_PROGS(CONVERT, convert)
 AC_CHECK_PROGS(SHA1SUM, sha1sum)
 AC_CHECK_PROGS(MSGFMT, msgfmt)
 AC_CHECK_PROGS(BUILD_CC, gcc cc)
+AC_CHECK_PROGS(CMAKE, cmake)
 AC_PROG_INSTALL
 
 missing_tools=
 for i in DLLTOOL MAKE UNZIP TAR MKDIR CP RM BISON FLEX PKG_CONFIG GPERF \
 	INTLTOOL_MERGE STOW MAKENSIS ZCAT TEXI2DVI DVIPDF CONVERT SHA1SUM MSGFMT \
-	BUILD_CC; do
+	BUILD_CC CMAKE; do
    eval tmp='$'$i
    if test -z "$tmp"; then
       missing_tools="$missing_tools `echo $i | tr 'A-Z' 'a-z'`"
