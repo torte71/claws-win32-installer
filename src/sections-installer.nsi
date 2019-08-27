@@ -803,7 +803,7 @@ File ${prefix}/bin/libytnef-0.dll
 
 #######################################
 ### gumbo-parser
-!insertmacro SetPrefix gumbo-parser
+!insertmacro SetPrefix2 gumbo_parser gumbo-parser
 File ${prefix}/bin/libgumbo-1.dll
 
 #######################################
