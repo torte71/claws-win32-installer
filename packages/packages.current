@@ -265,7 +265,7 @@ file webkitgtk-2.4.11.tar.xz
 chk  e425ae86084ab6335dadb368c9e8f53600665d54
 
 # cyrus-sasl
-server ftp://ftp.cyrusimap.org/cyrus-sasl
+server https://www.cyrusimap.org/releases/
 
 file cyrus-sasl-2.1.26.tar.gz
 chk d6669fb91434192529bd13ee95737a8a5040241c
