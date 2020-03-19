@@ -36,32 +36,62 @@ Basic requirements
 ==================
 
 A decent POSIX system is required for building this software as well
-as GNU make.  We are using Debian GNU/Linux 9 (Stretch), any other
+as GNU make.  We are using Debian GNU/Linux 10 (Buster), any other
 POSIX system should work as well but you may run into problems due to
 different toolchain versions.
 
-To satisfy all needs of configure at least the following packages need
-to be installed:
+To finish the build, following packages need to be installed on a
+Debian Buster system.
 
-***AKacian: This list is not necessarily up to date***
+automake
+autoconf
+mingw-w64
+nsis
+stow
+unzip
+texinfo
+imagemagick
+docbook-utils
+libglib2.0-dev
+libgdk-pixbuf2.0-dev
+ghostscript
+git
+binutils
+make
+cmake
+bison
+flex
+gperf
+intltool
+gcc
+g++
+libtool
 
-build-essential (libc6-dev, gcc, g++, make)
- automake 1.11, autoconf
- mingw-w64
- mingw-w64-i686-dev
- mingw-w64-x86-64-dev
- nsis
- stow
- unzip
- texinfo
- imagemagick
- gs-common (gs)
- docbook-utils
- gettext (msgfmt, dcgettext, gmsgfmt, xgettext for glib)
- libglib2.0-dev (glib-genmarshal, glib-compile-{resources,schemas})
- libgdk-pixbuf2.0-dev (gdk-pixbuf-csource)
- docbook-utils, ghostscript (claws-mail manual)
+Building in a Docker container
+==============================
 
+A good way to create an isolated environment for the build is to
+use a Docker container. An image built from following Dockerfile
+is sufficient:
+
+--------8<---------8<---------8<--------
+FROM debian:buster
+RUN apt-get update && apt-get -y install automake autoconf mingw-w64 nsis stow unzip texinfo imagemagick docbook-utils libglib2.0-dev libgdk-pixbuf2.0-dev ghostscript git binutils make cmake bison flex gperf intltool gcc g++ libtool && apt-get clean
+--------8<---------8<---------8<--------
+
+To build the image locally (run in the directory with Dockerfile
+with above content:
+# docker image build -t claws-win32-builder:0.1 .
+
+To launch a container based on the image, with the claws-win32-installer
+cloned repository mounted inside it:
+# docker run -ti --name mybuilder \
+  -v /path/to/claws-win32-installer:/build \
+	claws-win32-builder:0.1
+
+In the shell inside the running container, switch to /build directory
+and build the Claws Mail package according to the instructions above
+in this README files.
 
 Adding new packages to the installer:
 =====================================
