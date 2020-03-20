@@ -583,7 +583,7 @@ Delete /REBOOTOK "$INSTDIR\libpng16-16.dll"
 
 #######################################
 ### gettext
-Delete /REBOOTOK "$INSTDIR\libintl-9.dll"
+Delete /REBOOTOK "$INSTDIR\libintl-8.dll"
 Delete /REBOOTOK "$INSTDIR\intl.dll"
 
 #######################################
@@ -615,8 +615,6 @@ Delete "$INSTDIR\libtasn1-6.dll"
 #######################################
 ### libiconv
 Delete /REBOOTOK "$INSTDIR\libiconv-2.dll"
-Delete "$INSTDIR\lib\charset.alias"
-RMDir "$INSTDIR\lib"
 
 #######################################
 ### crypt

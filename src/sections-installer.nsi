@@ -32,10 +32,6 @@ ifErrors 0 +3
 	File /oname=libiconv-2.dll.tmp "${prefix}/bin/libiconv-2.dll"
 	Rename /REBOOTOK libiconv-2.dll.tmp libiconv-2.dll
 
-SetOutPath "$INSTDIR\lib"
-File "${prefix}/lib/charset.alias"
-SetOutPath "$INSTDIR"
-
 #######################################
 ### libtasn1
 !insertmacro SetPrefix libtasn1
@@ -83,8 +79,8 @@ ifErrors 0 +3
 #######################################
 ### gettext
 !insertmacro SetPrefix gettext
-File ${prefix}/bin/libintl-9.dll
-File /oname=intl.dll ${prefix}/bin/libintl-9.dll
+File ${prefix}/bin/libintl-8.dll
+File /oname=intl.dll ${prefix}/bin/libintl-8.dll
 
 #######################################
 ### libpng

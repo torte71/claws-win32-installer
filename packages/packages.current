@@ -27,15 +27,15 @@ chk    5534900f498137e126d4e25c7d1199d1d87e33a4
 server http://ftp.gnu.org/pub/gnu
 
 # gettext & support
-file gettext/gettext-0.19.8.tar.xz
-chk dc551d4783edf691c1f0095ca927d3128b5093e8
+file gettext/gettext-0.20.1.tar.xz
+chk 62f4a6a2fd5f80bfd0e66c497a04094fa3e07b90
 
-file libiconv/libiconv-1.15.tar.gz
-chk  7af3149fa7c4bd1d3a36a30f02e95a0ebfd6b18f
+file libiconv/libiconv-1.16.tar.gz
+chk  2d9d1d8fa9f7859b181de984d60eacd2499a5701
 
 # GNU TLS and support libraries
-file libtasn1/libtasn1-4.13.tar.gz
-chk  a84afb4cd8187c1fa5901c6bc1cf1486eea66635
+file libtasn1/libtasn1-4.16.0.tar.gz
+chk  f4f1fc301c0835389d9db7754815e48f4f57937a
 
 # nettle
 file nettle/nettle-3.5.1.tar.gz
