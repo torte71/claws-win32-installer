@@ -64,8 +64,8 @@ chk  4a12757b129562ae92a01ca890ed282050595296
 
 # expat
 server https://github.com
-file libexpat/libexpat/releases/download/R_2_2_6/expat-2.2.6.tar.bz2
-chk  c8947fc3119a797b55485f2f7bdaaeb49cc9df01
+file libexpat/libexpat/releases/download/R_2_2_9/expat-2.2.9.tar.bz2
+chk  ef5c1c55913a6ab18496ee99166f86269c7cdc31
 
 # Various libraries, mostly those from sf.net
 # (Kept on our own mirror due to Sourceforge/github peculiarities.)
