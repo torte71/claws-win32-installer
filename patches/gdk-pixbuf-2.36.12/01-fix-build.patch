@@ -2,9 +2,9 @@
 patch -p1 -f $* < $0
 exit $?
 
-diff -ruN gdk-pixbuf-2.36.6-orig/gdk-pixbuf/Makefile.in gdk-pixbuf-2.36.6/gdk-pixbuf/Makefile.in
---- gdk-pixbuf-2.36.6-orig/gdk-pixbuf/Makefile.in	2017-06-16 11:44:11.294968574 +0200
-+++ gdk-pixbuf-2.36.6/gdk-pixbuf/Makefile.in	2017-06-16 11:44:36.846390453 +0200
+diff -ruN gdk-pixbuf-2.36.12-orig/gdk-pixbuf/Makefile.in gdk-pixbuf-2.36.12/gdk-pixbuf/Makefile.in
+--- gdk-pixbuf-2.36.12-orig/gdk-pixbuf/Makefile.in	2017-06-16 11:44:11.294968574 +0200
++++ gdk-pixbuf-2.36.12/gdk-pixbuf/Makefile.in	2017-06-16 11:44:36.846390453 +0200
 @@ -2651,7 +2651,7 @@
  uninstall-local:
  	rm -f $(DESTDIR)$(libdir)/gdk-pixbuf-2.0/$(GDK_PIXBUF_BINARY_VERSION)/loaders.cache

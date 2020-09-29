@@ -133,14 +133,14 @@ chk  106a2c48c7f75a298a7557bcc0d5f4f454e5b43811cc738b7ca294d6956bbb15
 #
 server http://ftp.gnome.org/pub/gnome/sources
 
-file glib/2.66/glib-2.66.0.tar.xz
-chk  c5a66bf143065648c135da4c943d2ac23cce15690fc91c358013b2889111156c
+file glib/2.56/glib-2.56.4.tar.xz
+chk  27f703d125efb07f8a743666b580df0b4095c59fc8750e8890132c91d437504c
 
 file gtk+/2.24/gtk+-2.24.32.tar.xz
 chk  b6c8a93ddda5eabe3bfee1eb39636c9a03d2a56c7b62828b359bf197943c582e
 
-file gdk-pixbuf/2.40/gdk-pixbuf-2.40.0.tar.xz
-chk  1582595099537ca8ff3b99c6804350b4c058bb8ad67411bbaae024ee7cead4e6
+file gdk-pixbuf/2.36/gdk-pixbuf-2.36.12.tar.xz
+chk  fff85cf48223ab60e3c3c8318e2087131b590fd6f1737e42cb3759a3b427a334
 
 # Can't upgrade here, since newer pango requires newer cairo. See
 # cairo note below. -andrej
@@ -150,11 +150,11 @@ chk  1aea30df34a8ae4fcce71afd22aa5b57224b52916d46e3ea81ff9f1eb130e64c
 file atk/2.36/atk-2.36.0.tar.xz
 chk  fb76247e369402be23f1f5c65d38a9639c1164d934e40f6a9cf3c9e96b652788
 
-file glib-networking/2.66/glib-networking-2.66.0.tar.xz
-chk  c5d7be2437fdd196eebfb70c4517b96d3ba7ec13bd496318b8f02dea383e0099
+file glib-networking/2.54/glib-networking-2.54.1.tar.xz
+chk  eaa787b653015a0de31c928e9a17eb57b4ce23c8cf6f277afaec0d685335012f
 
-file libsoup/2.72/libsoup-2.72.0.tar.xz
-chk  170c3f8446b0f65f8e4b93603349172b1085fb8917c181d10962f02bb85f5387
+file libsoup/2.60/libsoup-2.60.3.tar.xz
+chk  1b0dc762f23abe4e0d29b77370e539fd35f31d8e8e0318d6ddccff395be68a22
 
 # harfbuzz
 server http://www.freedesktop.org/software/harfbuzz/release

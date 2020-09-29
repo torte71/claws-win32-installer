@@ -1,0 +1,31 @@
+#! /bin/sh
+patch -p1 -l -f $* < $0
+exit $?
+
+diff -ruN harfbuzz-2.6.7-orig/Makefile.in harfbuzz-2.6.7/Makefile.in
+--- harfbuzz-2.6.7-orig/Makefile.in     2020-06-03 10:09:05.000000000 +0100
++++ harfbuzz-2.6.7/Makefile.in  2020-09-29 13:21:30.270976571 +0100
+@@ -404,7 +404,7 @@
+ top_srcdir = @top_srcdir@
+ NULL = 
+ ACLOCAL_AMFLAGS = -I m4
+-SUBDIRS = src util test docs
++SUBDIRS = src
+ EXTRA_DIST = \
+        autogen.sh \
+        harfbuzz.doap \
+diff -ruN harfbuzz-2.6.7-orig/src/Makefile.in harfbuzz-2.6.7/src/Makefile.in
+--- harfbuzz-2.6.7-orig/src/Makefile.in 2020-06-03 10:09:05.000000000 +0100
++++ harfbuzz-2.6.7/src/Makefile.in      2020-09-29 13:22:04.931766227 +0100
+@@ -154,11 +154,6 @@
+ @HAVE_GOBJECT_TRUE@    $(NULL)
+ 
+ @HAVE_GOBJECT_TRUE@am__append_47 = harfbuzz-gobject.def
+-noinst_PROGRAMS = main$(EXEEXT) test$(EXEEXT) \
+-       test-buffer-serialize$(EXEEXT) test-ot-meta$(EXEEXT) \
+-       test-ot-name$(EXEEXT) test-ot-glyphname$(EXEEXT) \
+-       test-gpos-size-params$(EXEEXT) \
+-       test-gsub-would-substitute$(EXEEXT) $(am__EXEEXT_1)
+ bin_PROGRAMS =
+ @WITH_LIBSTDCXX_FALSE@am__append_48 = \
+ @WITH_LIBSTDCXX_FALSE@ check-libstdc++.py \

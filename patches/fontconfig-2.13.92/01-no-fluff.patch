@@ -1,0 +1,22 @@
+#! /bin/sh
+patch -p1 -l -f $* < $0
+exit $?
+
+We only need the library DLL built, nothing else.
+
+diff -ruN fontconfig-2.13.92-orig/Makefile.in fontconfig-2.13.92/Makefile.in
+--- fontconfig-2.13.92-orig/Makefile.in 2019-08-09 12:11:37.000000000 +0100
++++ fontconfig-2.13.92/Makefile.in      2020-09-29 12:44:07.169352863 +0100
+@@ -452,9 +452,8 @@
+ top_build_prefix = @top_build_prefix@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+-SUBDIRS = fontconfig fc-case fc-lang src fc-cache fc-cat fc-conflist \
+-       fc-list fc-match fc-pattern fc-query fc-scan fc-validate \
+-       conf.d its po po-conf test $(am__append_1)
++SUBDIRS = fontconfig src \
++        $(am__append_1)
+ ACLOCAL_AMFLAGS = -I m4
+ EXTRA_DIST = config.rpath fontconfig.pc.in fonts.conf.in fonts.dtd \
+        fontconfig.spec.in fontconfig.spec fontconfig-zip.in \
+

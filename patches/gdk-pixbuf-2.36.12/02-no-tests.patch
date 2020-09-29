@@ -2,9 +2,9 @@
 patch -p1 -f $* < $0
 exit $?
 
-diff -ruN gdk-pixbuf-2.36.11-orig/Makefile.in gdk-pixbuf-2.36.11/Makefile.in
---- gdk-pixbuf-2.36.11-orig/Makefile.in	2017-10-02 17:32:15.000000000 +0200
-+++ gdk-pixbuf-2.36.11/Makefile.in	2018-08-29 18:11:13.403632935 +0200
+diff -ruN gdk-pixbuf-2.36.12-orig/Makefile.in gdk-pixbuf-2.36.12/Makefile.in
+--- gdk-pixbuf-2.36.12-orig/Makefile.in	2017-10-02 17:32:15.000000000 +0200
++++ gdk-pixbuf-2.36.12/Makefile.in	2018-08-29 18:11:13.403632935 +0200
 @@ -450,7 +450,7 @@
  top_build_prefix = @top_build_prefix@
  top_builddir = @top_builddir@
