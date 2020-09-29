@@ -8,17 +8,17 @@
 # rest of the line will be taken as the base URL for following file
 # commands.  If the first word of a line is "file" the rest of the
 # line will be appended to the current base URL (with a / as
-# delimiter).  The statement "chk" is followed by the SHA1 checksum of
+# delimiter).  The statement "chk" is followed by the SHA256 checksum of
 # the last file.
 
 #
 # claws-mail itself
 #
 
-server http://www.claws-mail.org/releases
+server https://www.claws-mail.org/releases
 
-file   claws-mail-3.17.5.tar.xz
-chk    5534900f498137e126d4e25c7d1199d1d87e33a4
+file claws-mail-3.17.7.tar.xz
+chk 60b94649bc30ae79e057054e44afbe5fe29de0e77614b81505cff2204c02ddc8
 
 
 #
@@ -27,19 +27,19 @@ chk    5534900f498137e126d4e25c7d1199d1d87e33a4
 server http://ftp.gnu.org/pub/gnu
 
 # gettext & support
-file gettext/gettext-0.20.1.tar.xz
-chk 62f4a6a2fd5f80bfd0e66c497a04094fa3e07b90
+file gettext/gettext-0.21.tar.xz
+chk d20fcbb537e02dcf1383197ba05bd0734ef7bf5db06bdb241eb69b7d16b73192
 
 file libiconv/libiconv-1.16.tar.gz
-chk  2d9d1d8fa9f7859b181de984d60eacd2499a5701
+chk  e6a1b1b589654277ee790cce3734f07876ac4ccfaecbee8afa0b649cf529cc04
 
 # GNU TLS and support libraries
 file libtasn1/libtasn1-4.16.0.tar.gz
-chk  f4f1fc301c0835389d9db7754815e48f4f57937a
+chk 0e0fb0903839117cb6e3b56e68222771bebf22ad7fc2295a0ed7d576e8d4329d
 
 # nettle
-file nettle/nettle-3.5.1.tar.gz
-chk  077a71eef4a62acc4480ff7e2051f806b1724ea2
+file nettle/nettle-3.6.tar.gz
+chk d24c0d0f2abffbc8f4f34dcf114b0f131ec3774895f3555922fe2f40f3d5e3f1
 
 #
 # zlib
@@ -47,53 +47,53 @@ chk  077a71eef4a62acc4480ff7e2051f806b1724ea2
 server http://zlib.net
 
 file zlib-1.2.11.tar.gz
-chk  e6d119755acdf9104d7ba236b1242696940ed6dd
+chk c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1
 
 
 # gmp
 server https://gmplib.org/download/gmp
 
-file gmp-6.1.2.tar.xz
-chk 9dc6981197a7d92f339192eea974f5eca48fcffe
+file gmp-6.2.0.tar.xz
+chk 258e6cd51b3fbdfc185c716d55f82c08aff57df0c6fbd143cf6ed561267a1526
 
 # gnutls
 server ftp://ftp.gnutls.org/gcrypt
 
-file gnutls/v3.6/gnutls-3.6.9.tar.xz
-chk  4a12757b129562ae92a01ca890ed282050595296
+file gnutls/v3.6/gnutls-3.6.15.tar.xz
+chk 0ea8c3283de8d8335d7ae338ef27c53a916f15f382753b174c18b45ffd481558
 
 # expat
 server https://github.com
-file libexpat/libexpat/releases/download/R_2_2_9/expat-2.2.9.tar.bz2
-chk  ef5c1c55913a6ab18496ee99166f86269c7cdc31
+file libexpat/libexpat/releases/download/R_2_2_9/expat-2.2.9.tar.xz
+chk  1ea6965b15c2106b6bbe883397271c80dfa0331cdf821b2c319591b55eadc0a4
 
 # Various libraries, mostly those from sf.net
 # (Kept on our own mirror due to Sourceforge/github peculiarities.)
 server http://www.claws-mail.org/win32
 
-file   libetpan-1.7.tar.gz
-chk    37a866f4724b0406a725d924cf5252e9add07cef
+file   libetpan-1.9.4.tar.gz
+chk   82ec8ea11d239c9967dbd1717cac09c8330a558e025b3e4dc6a7594e80d13bb1
 
 file   regex-20090805.tar.gz
-chk    56c87366f49916997729fc335747a6a55a2bacc3
+chk    199bbf3fca3bcee826b10d718f556485c3e1d031af21252ed58a8cb83cf3b493
 
 file   crypt-1.1.tar.gz
-chk    04b4c2ac296499d378f4a35bbeb1b129165b2e61
+chk    72ceda37a1c5619b5e4d60b787458c1c94a9c4b791467d1f1f9a09ad664827a1
 
 file bsfilter-1.0.16-bin.tar.gz
-chk  f096be4677607bc3effd865f6159a89c6260932c
+chk  d95938a0af1a55f69d0f24d500b663529af122a651a06e0eb046b44064f37d85
 
 file bsfilter-1.0.16-lib.tar.gz
-chk  c7fa5ec9c70c75b7b1bc852bac8eb0a5ec9e01ea
+chk  7891a679c1d199a7cf0ad480de031ac2cf00ac8ce51da6bfc5d5be1e183546e5
 
 file bsfilter-1.0.16-src.tar.gz
-chk  fe718884dd7ca0652613a2cb5c302ac6323605d8
+chk  ddb7a8a8f92d8791dee8d3701fa21f2cf91bb5bf730fc62d0836cfa4c66e8141
 
 file jpeg-9.tar.gz
-chk  724987e7690ca3d74d6ab7c1f1b6854e88ca204b
+chk  c4e29e9375aaf60b4b79db87a58b063fb5b84f923bee97a88280b3d159e7e535
 
-file ytnef-1.9.1.tar.xz
-chk  d56e2c337a97e02c9f0eb51e3784a06e1d833c7e
+file ytnef-1.9.3.tar.gz
+chk  41a0033bde33c86a7e4aa4e14bb822dd03084098638e7d6557263e47e80b4f4f
 
 #
 # curl for Claws plugins
@@ -101,8 +101,8 @@ chk  d56e2c337a97e02c9f0eb51e3784a06e1d833c7e
 
 server http://curl.haxx.se/download
 
-file  curl-7.65.3.tar.xz
-chk   49e8ffc2601cc204f4544087a8e2da9e01313d29
+file  curl-7.72.0.tar.xz
+chk   0ded0808c4d85f2ee0db86980ae610cc9d165e9ca9da466196cc73c346513713
 
 
 #
@@ -110,57 +110,57 @@ chk   49e8ffc2601cc204f4544087a8e2da9e01313d29
 
 server ftp://xmlsoft.org/libxml2
 
-file   libxml2-2.9.7.tar.gz
-chk    ab3325e6cdda50ab2382fdfe0bdb6f7d1b9224a6
+file   libxml2-2.9.10.tar.gz
+chk    aafee193ffb8fe0c82d4afef6ef91972cbaf5feea100edc2f262750611b4be1f
 
-file   libxslt-1.1.32.tar.gz
-chk    c47969f16747a72f9095b6a7a56d3afdd1e6e9ac
+file   libxslt-1.1.34.tar.gz
+chk    98b1bd46d6792925ad2dfe9a87452ea2adebf69dcb9919ffd55bf926a7f93f7f
 
 #
 # Enchant for Claws
 #
 server http://www.abisource.com/downloads/enchant/1.6.0
 file   enchant-1.6.0.tar.gz
-chk    321f9cf0abfa1937401676ce60976d8779c39536
+chk    2fac9e7be7e9424b2c5570d8affe568db39f7572c10ed48d4e13cddf03f7097f
 
 # sqlite for libsoup
-server http://sqlite.org/2016
-file sqlite-autoconf-3150200.tar.gz
-chk  31f52169bcfeef9efb61480d0950e928ad059552
+server https://sqlite.org/2020
+file sqlite-autoconf-3330000.tar.gz
+chk  106a2c48c7f75a298a7557bcc0d5f4f454e5b43811cc738b7ca294d6956bbb15
 
 #
 # GLIB & friends
 #
 server http://ftp.gnome.org/pub/gnome/sources
 
-file glib/2.56/glib-2.56.4.tar.xz
-chk  4064eb1eb5ff626c211e86bc939f8b743ceafaba
+file glib/2.66/glib-2.66.0.tar.xz
+chk  c5a66bf143065648c135da4c943d2ac23cce15690fc91c358013b2889111156c
 
 file gtk+/2.24/gtk+-2.24.32.tar.xz
-chk  c885ade62b06854590822c8eb906daf7dd15d90a
+chk  b6c8a93ddda5eabe3bfee1eb39636c9a03d2a56c7b62828b359bf197943c582e
 
-file gdk-pixbuf/2.36/gdk-pixbuf-2.36.11.tar.xz
-chk  445bb95b234c3b3cea273353b7464f3b796dbd0e
+file gdk-pixbuf/2.40/gdk-pixbuf-2.40.0.tar.xz
+chk  1582595099537ca8ff3b99c6804350b4c058bb8ad67411bbaae024ee7cead4e6
 
 # Can't upgrade here, since newer pango requires newer cairo. See
 # cairo note below. -andrej
 file pango/1.34/pango-1.34.1.tar.xz
-chk  a6c224424eb3f0dcc231a8000591c05a85df689c
+chk  1aea30df34a8ae4fcce71afd22aa5b57224b52916d46e3ea81ff9f1eb130e64c
 
-file atk/2.26/atk-2.26.1.tar.xz
-chk  78f33bdbacbc447c86a357690417c1b70e7664fc
+file atk/2.36/atk-2.36.0.tar.xz
+chk  fb76247e369402be23f1f5c65d38a9639c1164d934e40f6a9cf3c9e96b652788
 
-file glib-networking/2.54/glib-networking-2.54.1.tar.xz
-chk  7d518a829b41a5d6dd122f0c924cbf56ba416e8a
+file glib-networking/2.66/glib-networking-2.66.0.tar.xz
+chk  c5d7be2437fdd196eebfb70c4517b96d3ba7ec13bd496318b8f02dea383e0099
 
-file libsoup/2.60/libsoup-2.60.3.tar.xz
-chk  8161819ccb9afe77f24b38fd6fd99c7239b7c17a
+file libsoup/2.72/libsoup-2.72.0.tar.xz
+chk  170c3f8446b0f65f8e4b93603349172b1085fb8917c181d10962f02bb85f5387
 
 # harfbuzz
 server http://www.freedesktop.org/software/harfbuzz/release
 
-file harfbuzz-1.8.8.tar.bz2
-chk  be496408b2bb3dc794891e8b0e977cd75f02d71d
+file harfbuzz-2.6.7.tar.xz
+chk  49e481d06cdff97bf68d99fa26bdf785331f411614485d892ea4c78eb479b218
 
 #
 # CAIRO
@@ -170,47 +170,46 @@ chk  be496408b2bb3dc794891e8b0e977cd75f02d71d
 server http://cairographics.org/releases
 
 file cairo-1.10.2.tar.gz
-chk  ccce5ae03f99c505db97c286a0c9a90a926d3c6e
+chk  32018c7998358eebc2ad578ff8d8559d34fc80252095f110a572ed23d989fc41
 
 file pixman-0.32.6.tar.gz
-chk  8791343cbf6d99451f4d08e8209d6ac11bf96df2
+chk  3dfed13b8060eadabf0a4945c7045b7793cc7e3e910e748a8bb0f0dc3e794904
 
 # Freetype
 server http://download.savannah.gnu.org/releases/freetype
 
-file freetype-2.6.tar.bz2
-chk  cd2b144205dd2c61693e2d861069367aa3dde1bc
+file freetype-2.10.2.tar.xz
+chk  1543d61025d2e6312e0a1c563652555f17378a204a61e99928c9fcef030a2d8b
 
 # Fontconfig
 server http://www.fontconfig.org/release
 
-file fontconfig-2.11.1.tar.bz2
-chk  08565feea5a4e6375f9d8a7435dac04e52620ff2
+file fontconfig-2.13.92.tar.xz
+chk  506e61283878c1726550bc94f2af26168f1e9f2106eac77eaaf0b2cdfad66e4e
 
 # pkgconfig for W32
 server http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies
 
-name pkgconfig-0.23.tar.gz
-file pkg-config-0.23.tar.gz
-chk  b59dddd6b5320bd74c0f74b3339618a327096b2a
+file pkg-config-0.25.tar.gz
+chk  3ba691ee2431f32ccb8efa131e59bf23e37f122dc66791309023ca6dcefcd10e
 
-name pkgconfig-0.23.zip
-file pkg-config_0.23-3_win32.zip
-chk  d063e705812e1ee7feb8f35d51b3cad04ca13b0d
+name pkgconfig-0.25.zip
+file pkg-config_0.25-1_win32.zip
+chk  7b1b056a783eb18edcf6fac0a129b50a5b814a0e19756283255e531e242bba4f
 
 
 # libpng
 
 server ftp://ftp.simplesystems.org/pub/png/src
-file libpng16/libpng-1.6.34.tar.xz
-chk  45de4ec996ffcc3e18037e7c128abe95f4d0292a
+file libpng16/libpng-1.6.37.tar.xz
+chk  505e70834d35383537b6491e7ae8641f1a4bed1876dbfe361201fc80868d88ca
 
 #
 # LibFFI
 #
 server ftp://sourceware.org/pub/libffi
 file libffi-3.0.13.tar.gz
-chk  f5230890dc0be42fb5c58fbf793da253155de106
+chk  1dddde1400c3bcb7749d398071af88c3e4754058d2d4c0b3696c2f82dc5cf11c
 
 
 #
@@ -220,7 +219,7 @@ chk  f5230890dc0be42fb5c58fbf793da253155de106
 server ftp://ftp.g10code.com/g10code/w32pth
 
 file w32pth-2.0.5.tar.bz2
-chk  d648b98ce215f81e901f3f982470d37c704433a6
+chk  5e462d06ed50e9e961546ab5264258e606b101860a74c1e410d086432ec27a06
 
 #
 # Stripped down version of BZIP2
@@ -228,54 +227,56 @@ chk  d648b98ce215f81e901f3f982470d37c704433a6
 #
 server ftp://ftp.g10code.com/g10code/bzip2
 file bzip2-1.0.6-g10.tar.gz
-chk  6e38be3377340a21a1f13ff84b5e6adce97cd1d4
+chk  c2a9b3aec1a38d34b66106116a39f64b01d84f475fef75c40ea0bda0ea67ed07
 
 #
 # gpgme and dependencies
 #
 server ftp://ftp.gnupg.org/gcrypt
 
-file libgpg-error/libgpg-error-1.29.tar.bz2
-chk  a56241d60bb7d810fdb478463b1732b134a52a19
+file libgpg-error/libgpg-error-1.39.tar.bz2
+chk  4a836edcae592094ef1c5a4834908f44986ab2b82e0824a0344b49df8cdb298f
 
-file libgcrypt/libgcrypt-1.8.3.tar.bz2
-chk  13bd2ce69e59ab538e959911dfae80ea309636e3
+file libgcrypt/libgcrypt-1.8.6.tar.bz2
+chk  0cba2700617b99fc33864a0c16b1fa7fdf9781d9ed3509f5d767178e5fd7b975
 
-file libassuan/libassuan-2.5.1.tar.bz2
-chk  c8432695bf1daa914a92f51e911881ed93d50604
+file libassuan/libassuan-2.5.3.tar.bz2
+chk  91bcb0403866b4e7c4bc1cc52ed4c364a9b5414b3994f718c70303f7f765e702
 
 file gpgme/gpgme-1.9.0.tar.bz2
-chk  870719cd3d2ef6a7fcb1d6af9ce5446edba7bfc3
+chk  1b29fedb8bfad775e70eafac5b0590621683b2d9869db994568e6401f4034ceb
 
 # libwebp
 server http://downloads.webmproject.org/releases/webp
 
 file libwebp-0.5.1.tar.gz
-chk  66efb2213015ad3460bef64b4fb218fdc10ce83f
+chk  6ad66c6fcd60a023de20b6856b03da8c7d347269d76b1fd9c3287e8b5e8813df
 
 # icu4c
-server http://download.icu-project.org/files/icu4c
-file 58.2/icu4c-58_2-src.tgz
-chk  b67913c90a484c59fda011797c6f3959d84bdc7c
+server https://github.com/unicode-org/icu/releases/download
+file release-58-3/icu4c-58_3-src.tgz
+chk  2680f3c547cd26cba1d7ebd819cd336ff92cf444a270e195fd3b10bfdf22276c
 
 # webkitgtk
 server http://webkitgtk.org/releases
 
 file webkitgtk-2.4.11.tar.xz
-chk  e425ae86084ab6335dadb368c9e8f53600665d54
+chk  588aea051bfbacced27fdfe0335a957dca839ebe36aa548df39c7bbafdb65bf7
 
 # cyrus-sasl
-server https://www.cyrusimap.org/releases/
+server https://github.com/cyrusimap/cyrus-sasl/releases/download
 
-file cyrus-sasl-2.1.26.tar.gz
-chk d6669fb91434192529bd13ee95737a8a5040241c
+file cyrus-sasl-2.1.27/cyrus-sasl-2.1.27.tar.gz
+chk 26866b1549b00ffd020f188a43c258017fa1c382b3ddadd8201536f72efb05d5
 
 # libical
 server https://github.com/libical/libical/releases/download
 file v2.0.0/libical-2.0.0.tar.gz
-chk 8540d5d73422496e1d350b86ff32333daa08144c
+chk 654c11f759c19237be39f6ad401d917e5a05f36f1736385ed958e60cf21456da
 
 # gumbo-parser
 server https://github.com/google/gumbo-parser/archive/
 name gumbo-parser-0.10.1.tar.gz
 file v0.10.1.tar.gz
+chk 28463053d44a5dfbc4b77bcf49c8cee119338ffa636cc17fc3378421d714efad
+
