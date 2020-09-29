@@ -265,10 +265,10 @@ file webkitgtk-2.4.11.tar.xz
 chk  588aea051bfbacced27fdfe0335a957dca839ebe36aa548df39c7bbafdb65bf7
 
 # cyrus-sasl
-server https://github.com/cyrusimap/cyrus-sasl/releases/download
+server https://github.com/cyrusimap/cyrus-sasl/archive
 
-file cyrus-sasl-2.1.27/cyrus-sasl-2.1.27.tar.gz
-chk 26866b1549b00ffd020f188a43c258017fa1c382b3ddadd8201536f72efb05d5
+file cyrus-sasl-2.1.26.tar.gz
+chk 7c14d1b5bd1434adf2dd79f70538617e6aa2a7bde447454b90b84ac5c4d034ba5
 
 # libical
 server https://github.com/libical/libical/releases/download
