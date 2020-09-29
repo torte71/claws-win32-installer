@@ -557,12 +557,12 @@ $(eval $(call INCLUDE_BY_MAKE,claws-mail.mk))
 # duplicate entries in case one package has been rebuild (which is
 # common when developing a new version).
 versioninfo.txt:
-	$(SHA1SUM) $(pkg_files) </dev/null > versioninfo.tmp
+	$(SHA256SUM) $(pkg_files) </dev/null > versioninfo.tmp
 	set -e; \
 	( while read a b; do echo "$$a $$(basename $$b)"; \
             done < versioninfo.tmp \
           | sort -k2 -sf | tac | uniq -f1 ; \
-          echo '=========== SHA-1 checksum ============= == package ==' \
+          echo '=========== SHA-256 checksum ============= == package ==' \
          ) | tac | awk '{printf "%s\r\n", $$0}' > versioninfo.txt
 	-rm versioninfo.tmp
 
