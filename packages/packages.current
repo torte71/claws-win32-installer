@@ -190,6 +190,7 @@ chk  506e61283878c1726550bc94f2af26168f1e9f2106eac77eaaf0b2cdfad66e4e
 # pkgconfig for W32
 server http://ftp.gnome.org/pub/gnome/binaries/win32/dependencies
 
+name pkgconfig-0.25.tar.gz
 file pkg-config-0.25.tar.gz
 chk  3ba691ee2431f32ccb8efa131e59bf23e37f122dc66791309023ca6dcefcd10e
 
