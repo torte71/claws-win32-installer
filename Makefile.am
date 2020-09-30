@@ -31,11 +31,7 @@ EXTRA_DIST = autogen.sh \
         configure.ac.template \
         doc/license-page doc/GPLv3 \
         patches/pixman-0.32.6/01-no-tests.patch \
-        patches/claws-mail-3.17.4/01-etpan-sasl-plugin-path.patch \
-        patches/claws-mail-3.17.4/99-clawsdef-litehtml.patch \
-        patches/claws-mail-3.17.4/99-clawsdef.patch \
-        patches/claws-mail-3.17.4/99-litehtml-makefile-in.patch \
-        patches/claws-mail-3.17.4/99-litehtml-os-types.patch \
+        patches/claws-mail-3.17.7/01-etpan-sasl-plugin-path.patch \
         patches/enchant-1.6.0/01-no-tests.patch \
         patches/enchant-1.6.0/99-autogen.sh.patch \
         patches/libsoup-2.60.3/01-no-docs-no-tests.patch \
@@ -47,16 +43,16 @@ EXTRA_DIST = autogen.sh \
         patches/webkitgtk-2.4.11/04-LLIntAssembly-hack.patch \
         patches/webkitgtk-2.4.11/03-missing-RenderBox-include.patch \
         patches/webkitgtk-2.4.11/02-no-class-size-check.patch \
-        patches/fontconfig-2.11.1/01-no-fluff.patch \
+        patches/fontconfig-2.13.92/01-no-fluff.patch \
         patches/zlib-1.2.11/01-no-strip.patch \
-        patches/icu4c-58_2-src/02-float128-clang.patch \
-        patches/icu4c-58_2-src/01-libnames.patch \
-        patches/icu4c-58_2-src/99-build.patch \
-        patches/icu4c-58_2-src/03-no-xlocale.patch \
+        patches/icu4c-58_3-src/02-float128-clang.patch \
+        patches/icu4c-58_3-src/01-libnames.patch \
+        patches/icu4c-58_3-src/99-build.patch \
+        patches/icu4c-58_3-src/03-no-xlocale.patch \
         patches/w32pth-2.0.5/99-autogen.sh.patch \
         patches/w32pth-2.0.5/01-def-fix.patch \
-        patches/gdk-pixbuf-2.36.11/01-fix-build.patch \
-        patches/gdk-pixbuf-2.36.11/02-no-tests.patch \
+        patches/gdk-pixbuf-2.36.12/01-fix-build.patch \
+        patches/gdk-pixbuf-2.36.12/02-no-tests.patch \
         patches/libical-2.0.0/01-gmtime_r.patch \
         patches/glib-networking-2.54.1/01-giomoduledir.patch \
         patches/regex-20090805/01-no-large-offsets.patch \
@@ -68,30 +64,30 @@ EXTRA_DIST = autogen.sh \
         patches/libetpan-1.7/no-imap-flags-crashfix.patch \
         patches/libiconv-1.14/01-aliases2_lookup-no-inline.patch \
         patches/crypt-1.1/01-build-dll.patch \
-        patches/harfbuzz-1.8.8/01-no-tests-utils-docs.patch \
+        patches/harfbuzz-2.6.7/01-no-tests-utils-docs.patch \
         patches/gtk+-2.24.32/00-fix-private-defs.patch \
         patches/gtk+-2.24.32/01-no-tests-demos.patch \
-        patches/cyrus-sasl-2.1.26/14-MinGW-w64-add-LIBSASL_API-to-function-definitions.patch \
-        patches/cyrus-sasl-2.1.26/10-MinGW-w64-already-has-getopt.patch \
-        patches/cyrus-sasl-2.1.26/03-fix-plugins.patch \
-        patches/cyrus-sasl-2.1.26/19-paths-relocation.patch \
-        patches/cyrus-sasl-2.1.26/12-MinGW-w64-uses-ws2_32-not-socket.patch \
-        patches/cyrus-sasl-2.1.26/06-fix-sqlite-search.patch \
-        patches/cyrus-sasl-2.1.26/01-no-undefined.patch \
-        patches/cyrus-sasl-2.1.26/07-fix-pkgconfig.patch \
-        patches/cyrus-sasl-2.1.26/20-makemd5.patch \
-        patches/cyrus-sasl-2.1.26/08-cyrus-sasl-2.1.26-size_t.patch \
-        patches/cyrus-sasl-2.1.26/15-MinGW-w64-define-LIBSASL_EXPORTS_eq_1-for-sasldb.patch \
-        patches/cyrus-sasl-2.1.26/05-remove-warnings.patch \
-        patches/cyrus-sasl-2.1.26/16-MinGW-w64-define-WIN32_LEAN_AND_MEAN-avoiding-handle_t-redef.patch \
-        patches/cyrus-sasl-2.1.26/09-cyrus-sasl-2.1.26-msys2.patch \
-        patches/cyrus-sasl-2.1.26/02-exeext.patch \
-        patches/cyrus-sasl-2.1.26/11-MinGW-w64-add-disable-win32-reg-option.patch \
-        patches/cyrus-sasl-2.1.26/17-MinGW-w64-define-S_IRUSR-and-S_IWUSR.patch \
-        patches/cyrus-sasl-2.1.26/13-plugins-COMPAT_OBJS_REAL.patch \
-        patches/cyrus-sasl-2.1.26/18-MinGW-w64-use-windlopen.c-not-dlopen.c.patch \
-        patches/cyrus-sasl-2.1.26/99-reautomagic.patch \
-        patches/cyrus-sasl-2.1.26/04-manpage-paths.patch \
+        patches/cyrus-sasl-2.1.27/14-MinGW-w64-add-LIBSASL_API-to-function-definitions.patch \
+        patches/cyrus-sasl-2.1.27/10-MinGW-w64-already-has-getopt.patch \
+        patches/cyrus-sasl-2.1.27/03-fix-plugins.patch \
+        patches/cyrus-sasl-2.1.27/19-paths-relocation.patch \
+        patches/cyrus-sasl-2.1.27/12-MinGW-w64-uses-ws2_32-not-socket.patch \
+        patches/cyrus-sasl-2.1.27/06-fix-sqlite-search.patch \
+        patches/cyrus-sasl-2.1.27/01-no-undefined.patch \
+        patches/cyrus-sasl-2.1.27/07-fix-pkgconfig.patch \
+        patches/cyrus-sasl-2.1.27/20-makemd5.patch \
+        patches/cyrus-sasl-2.1.27/08-cyrus-sasl-2.1.26-size_t.patch \
+        patches/cyrus-sasl-2.1.27/15-MinGW-w64-define-LIBSASL_EXPORTS_eq_1-for-sasldb.patch \
+        patches/cyrus-sasl-2.1.27/05-remove-warnings.patch \
+        patches/cyrus-sasl-2.1.27/16-MinGW-w64-define-WIN32_LEAN_AND_MEAN-avoiding-handle_t-redef.patch \
+        patches/cyrus-sasl-2.1.27/09-cyrus-sasl-2.1.26-msys2.patch \
+        patches/cyrus-sasl-2.1.27/02-exeext.patch \
+        patches/cyrus-sasl-2.1.27/11-MinGW-w64-add-disable-win32-reg-option.patch \
+        patches/cyrus-sasl-2.1.27/17-MinGW-w64-define-S_IRUSR-and-S_IWUSR.patch \
+        patches/cyrus-sasl-2.1.27/13-plugins-COMPAT_OBJS_REAL.patch \
+        patches/cyrus-sasl-2.1.27/18-MinGW-w64-use-windlopen.c-not-dlopen.c.patch \
+        patches/cyrus-sasl-2.1.27/99-reautomagic.patch \
+        patches/cyrus-sasl-2.1.27/04-manpage-paths.patch \
         patches/cairo-1.10.2/03-fix-ffs.patch \
         patches/cairo-1.10.2/99-libtoolize.patch \
         patches/cairo-1.10.2/02-reset-clip-region.patch \
