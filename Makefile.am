@@ -67,27 +67,7 @@ EXTRA_DIST = autogen.sh \
         patches/harfbuzz-2.6.7/01-no-tests-utils-docs.patch \
         patches/gtk+-2.24.32/00-fix-private-defs.patch \
         patches/gtk+-2.24.32/01-no-tests-demos.patch \
-        patches/cyrus-sasl-2.1.27/14-MinGW-w64-add-LIBSASL_API-to-function-definitions.patch \
-        patches/cyrus-sasl-2.1.27/10-MinGW-w64-already-has-getopt.patch \
-        patches/cyrus-sasl-2.1.27/03-fix-plugins.patch \
-        patches/cyrus-sasl-2.1.27/19-paths-relocation.patch \
-        patches/cyrus-sasl-2.1.27/12-MinGW-w64-uses-ws2_32-not-socket.patch \
-        patches/cyrus-sasl-2.1.27/06-fix-sqlite-search.patch \
-        patches/cyrus-sasl-2.1.27/01-no-undefined.patch \
-        patches/cyrus-sasl-2.1.27/07-fix-pkgconfig.patch \
-        patches/cyrus-sasl-2.1.27/20-makemd5.patch \
-        patches/cyrus-sasl-2.1.27/08-cyrus-sasl-2.1.26-size_t.patch \
-        patches/cyrus-sasl-2.1.27/15-MinGW-w64-define-LIBSASL_EXPORTS_eq_1-for-sasldb.patch \
-        patches/cyrus-sasl-2.1.27/05-remove-warnings.patch \
-        patches/cyrus-sasl-2.1.27/16-MinGW-w64-define-WIN32_LEAN_AND_MEAN-avoiding-handle_t-redef.patch \
-        patches/cyrus-sasl-2.1.27/09-cyrus-sasl-2.1.26-msys2.patch \
-        patches/cyrus-sasl-2.1.27/02-exeext.patch \
-        patches/cyrus-sasl-2.1.27/11-MinGW-w64-add-disable-win32-reg-option.patch \
-        patches/cyrus-sasl-2.1.27/17-MinGW-w64-define-S_IRUSR-and-S_IWUSR.patch \
-        patches/cyrus-sasl-2.1.27/13-plugins-COMPAT_OBJS_REAL.patch \
-        patches/cyrus-sasl-2.1.27/18-MinGW-w64-use-windlopen.c-not-dlopen.c.patch \
         patches/cyrus-sasl-2.1.27/99-reautomagic.patch \
-        patches/cyrus-sasl-2.1.27/04-manpage-paths.patch \
         patches/cairo-1.10.2/03-fix-ffs.patch \
         patches/cairo-1.10.2/99-libtoolize.patch \
         patches/cairo-1.10.2/02-reset-clip-region.patch \
