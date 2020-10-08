@@ -14,6 +14,8 @@ Instructions:
 2. Configure the source tree for cross compilation, for either
    32-bit or 64-bit release:
 
+   $ ./autogen.sh
+
    $ ./autogen.sh --build-w32
 	 or
    $ ./autogen.sh --build-w64
@@ -66,6 +68,10 @@ intltool
 gcc
 g++
 libtool
+libgettextpo-dev
+meson
+pkg-config-mingw-w64-x86-64
+gobject-introspection
 
 Building in a Docker container
 ==============================
@@ -76,7 +82,7 @@ is sufficient:
 
 --------8<---------8<---------8<--------
 FROM debian:buster
-RUN apt-get update && apt-get -y install automake autoconf mingw-w64 nsis stow unzip texinfo imagemagick docbook-utils libglib2.0-dev libgdk-pixbuf2.0-dev ghostscript git binutils make cmake bison flex gperf intltool gcc g++ libtool && apt-get clean
+RUN apt-get update && apt-get -y install automake autoconf mingw-w64 nsis stow unzip texinfo imagemagick docbook-utils libglib2.0-dev libgdk-pixbuf2.0-dev ghostscript git binutils make cmake bison flex gperf intltool gcc g++ libtool libgettextpo-dev meson pkg-config-mingw-w64-x86-64 gobject-introspection && apt-get clean
 --------8<---------8<---------8<--------
 
 To build the image locally (run in the directory with Dockerfile
