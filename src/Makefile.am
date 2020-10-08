@@ -286,11 +286,11 @@ cm_pkg_expat_configure = \
 	--without-docbook
 
 cm_pkg_cyrus_sasl_configure = \
-	--without-openssl --disable-ldapd --without-saslauthd \
+	--without-openssl --disable-ldapdb --without-saslauthd \
 	--without-pwcheck --without-des --without-authdaemond \
 	--enable-cram --enable-digest \
 	--enable-plain --enable-anon --enable-login \
-	--disable-static --enable-shared \
+	--disable-static --enable-shared --disable-sample \
 	CPPFLAGS=\"-I$(idir)/include\" LIBS=\"-L$(idir)/lib\"
 
 cm_pkg_libetpan_configure = --with-gnutls --enable-threads \

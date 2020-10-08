@@ -67,6 +67,10 @@ EXTRA_DIST = autogen.sh \
         patches/harfbuzz-2.6.7/01-no-tests-utils-docs.patch \
         patches/gtk+-2.24.32/00-fix-private-defs.patch \
         patches/gtk+-2.24.32/01-no-tests-demos.patch \
+        patches/cyrus-sasl-2.1.27/01-md5-typedef.patch \
+        patches/cyrus-sasl-2.1.27/02-tchar.patch \
+        patches/cyrus-sasl-2.1.27/03-exports.patch \
+        patches/cyrus-sasl-2.1.27/04-paths-relocation.patch \
         patches/cyrus-sasl-2.1.27/99-reautomagic.patch \
         patches/cairo-1.10.2/03-fix-ffs.patch \
         patches/cairo-1.10.2/99-libtoolize.patch \

@@ -1,0 +1,18 @@
+#! /bin/sh
+patch -p1 -f $* < $0
+exit $?
+
+--- a/include/md5global.h	2020-10-09 22:48:48.000124777 -0700
++++ b/include/md5global.h	2020-10-09 22:49:06.228463290 -0700
+@@ -18,11 +18,9 @@
+ typedef signed char INT1;		/*  8 bits */
+ typedef short INT2;			/* 16 bits */
+ typedef int INT4;			/* 32 bits */
+-typedef long INT8;			/* 64 bits */
+ typedef unsigned char UINT1;		/*  8 bits */
+ typedef unsigned short UINT2;		/* 16 bits */
+ typedef unsigned int UINT4;		/* 32 bits */
+-typedef unsigned long UINT8;		/* 64 bits */
+ 
+ /* PROTO_LIST is defined depending on how PROTOTYPES is defined above.
+ If using PROTOTYPES, then PROTO_LIST returns the list, otherwise it

@@ -1,0 +1,29 @@
+#! /bin/sh
+patch -p1 -f $* <$0
+exit $?
+
+diff -urN a/lib/common.c b/lib/common.c
+--- a/lib/common.c	2020-10-09 23:52:17.832429540 -0700
++++ b/lib/common.c	2020-10-09 23:35:25.361093239 -0700
+@@ -46,6 +46,9 @@
+ #include <config.h>
+ #include <stdio.h>
+ #include <string.h>
++#ifdef WIN32
++#include <tchar.h>
++#endif
+ #include <stdlib.h>
+ #include <limits.h>
+ #ifdef HAVE_SYSLOG
+
+diff -urN a/lib/windlopen.c b/lib/windlopen.c
+--- a/lib/windlopen.c	2020-10-09 23:55:07.481598581 -0700
++++ b/lib/windlopen.c	2020-10-09 23:23:46.696832995 -0700
+@@ -45,6 +45,7 @@
+ #include <stdio.h>
+ #include <io.h>
+ #include <sys/stat.h>
++#include <tchar.h>
+ 
+ #include <config.h>
+ #include <sasl.h>

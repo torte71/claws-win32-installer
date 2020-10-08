@@ -1,12 +1,11 @@
-sed 's/AM_CONFIG_HEADER/AC_CONFIG_HEADERS/' -i configure.ac
 sed 's/AM_INIT_AUTOMAKE(\[1.11/AM_INIT_AUTOMAKE(\[1.16/' -i configure.ac
 
 rm -f config/config.guess config/config.sub
-rm -f config/ltconfig config/ltmain.sh config/libtool.m4
+rm -f config/ltmain.sh
 rm -fr autom4te.cache
 
 libtoolize -c
-aclocal -I config -I cmulocal
+aclocal -I config
 automake -a -c
 autoheader
 autoconf
