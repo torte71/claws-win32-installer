@@ -144,7 +144,7 @@ cm_pkg_harfbuzz_configure = \
 	--with-cairo \
 	--with-icu=yes \
 	CPPFLAGS=\"-I$(idir)/include\" \
-	LDFLAGS=\"-L$(idir)/lib\"
+	LDFLAGS=\"-L$(idir)/lib\" LIBS=\"-lpthread\"
 
 cm_pkg_freetype_configure = \
 	--with-png --without-bzip2 --with-zlib \
