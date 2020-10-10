@@ -1,0 +1,15 @@
+#! /bin/sh
+patch -p1 -f $* < $0
+exit $?
+
+diff -urN a/meson.build b/meson.build
+--- a/meson.build	2020-04-02 02:43:35.000000000 -0700
++++ b/meson.build	2020-10-10 06:49:12.038382688 -0700
+@@ -110,7 +110,6 @@
+ atk_inc = include_directories('atk')
+ 
+ subdir('atk')
+-subdir('tests')
+ subdir('po')
+ 
+ if get_option('docs')

@@ -89,6 +89,8 @@ cm_pkg_gumbo_parser_make_args = -j$(NUMPROC)
 
 cm_pkg_libical_cmake = yes
 
+cm_pkg_atk_meson = yes
+
 cm_pkg_libiconv_configure = \
 	--enable-shared=yes --enable-static=no
 
@@ -161,10 +163,7 @@ cm_pkg_pango_configure = \
 	CPPFLAGS=\"-I$(idir)/include\" \
 	LDFLAGS=\"-L$(idir)/lib\"
 
-cm_pkg_atk_configure = \
-	--disable-gtk-doc-html --disable-glibtest \
-	CPPFLAGS=\"-I$(idir)/include\" \
-	LDFLAGS=\"-L$(idir)/lib\"
+cm_pkg_atk_meson_args = --libdir=lib -Dintrospection=false
 
 cm_pkg_pixman_configure = \
 	--enable-libpng --disable-sse2 \

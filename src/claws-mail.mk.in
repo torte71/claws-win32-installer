@@ -73,6 +73,9 @@ define SETVARS
 	if [ "x$(call GETVAR,cm_pkg_$(1)_cmake)" = "xyes" ]; then \
 		pkgcmake="yes"; \
 		pkgcfg="$(call GETVAR,cm_pkg_$(1)_cmake_args)"; \
+	elif [ "x$(call GETVAR,cm_pkg_$(1)_meson)" = "xyes" ]; then \
+		pkgmeson="yes"; \
+		pkgcfg="$(call GETVAR,cm_pkg_$(1)_meson_args)"; \
 	else \
 		pkgcfg="$(call GETVAR,cm_pkg_$(1)_configure)";		\
 	fi; \
@@ -152,6 +155,8 @@ stamps/stamp-$(1)-02-configure: stamps/stamp-$(1)-01-patch
 	cd "$$$${pkgbdir}";				\
 	if [ "$$$${pkgcmake}" = "yes" ]; then \
 		eval "$(CMAKE) $$$${pkgcfg} -DCMAKE_INSTALL_PREFIX=$$$${pkgidir} ../$$$${pkg_version}"; \
+	elif [ "$$$${pkgmeson}" = "yes" ]; then \
+		eval "$(MESON) --prefix=$$$${pkgidir} $$$${pkgcfg} --cross-file $$$${pkgsdir}/cross-$(host).txt $$$${pkgsdir} $$$${pkgbdir}"; \
 	else \
 		eval "../$$$${pkg_version}/configure"		\
 			--prefix="$$$${pkgidir}"		\
@@ -174,9 +179,13 @@ stamps/stamp-$(1)-03-make: stamps/stamp-$(1)-02-configure
 	($(call SETVARS,$(1));				\
 	  cd "$$$${pkgbdir}";				\
 	  test -n "$$$${pkgmkdir}" && cd "$$$${pkgmkdir}";	\
-	  $(MAKE) $(AM_MAKEFLAGS) $(GPG4WIN_PARALLEL) $$$${pkgmkargs} || \
-	  $(MAKE) $(AM_MAKEFLAGS) $(GPG4WIN_PARALLEL) $$$${pkgmkargs} || \
-	  $(MAKE) $(AM_MAKEFLAGS) $$$${pkgmkargs})
+	  if [ "$$$${pkgmeson}" = "yes" ]; then \
+	    $(NINJA) -C $$$${pkgbdir}; \
+	  else \
+	    $(MAKE) $(AM_MAKEFLAGS) $(GPG4WIN_PARALLEL) $$$${pkgmkargs} || \
+	    $(MAKE) $(AM_MAKEFLAGS) $(GPG4WIN_PARALLEL) $$$${pkgmkargs} || \
+	    $(MAKE) $(AM_MAKEFLAGS) $$$${pkgmkargs} ;\
+	  fi)
 	touch stamps/stamp-$(1)-03-make
 
 # Note that post_install must come last because it may be empty and
@@ -185,7 +194,11 @@ stamps/stamp-$(1)-04-install: stamps/stamp-$(1)-03-make
 	($(call SETVARS,$(1));				\
 	  cd "$$$${pkgbdir}";				\
 	  cd "$$$${pkgmkdir_inst}";			\
-	  $(MAKE) $(AM_MAKEFLAGS) $$$${pkgmkargs_inst} install; \
+	  if [ "$$$${pkgmeson}" = "yes" ]; then \
+	    $(NINJA) -C $$$${pkgbdir} install; \
+	  else \
+	    $(MAKE) $(AM_MAKEFLAGS) $$$${pkgmkargs_inst} install; \
+	  fi; \
 	  $(call STRIP_macro,"$$$${pkgidir}");		\
 	  rm -f "$$$${pkgidir}/share/info/dir";		\
 	  $(call cm_pkg_$(call FROB_macro,$(1))_post_install))
