@@ -76,4 +76,7 @@ EXTRA_DIST = autogen.sh \
         patches/cairo-1.10.2/99-libtoolize.patch \
         patches/cairo-1.10.2/02-reset-clip-region.patch \
         patches/cairo-1.10.2/01-fix-A1-surfaces.patch \
-        patches/gumbo-parser-0.10.1/99-autotools.patch
+        patches/gumbo-parser-0.10.1/99-autotools.patch \
+        patches/ytnef-1.9.3/01-malloc.patch \
+        patches/ytnef-1.9.3/02-no-undefined.patch \
+        patches/ytnef-1.9.3/99-autotools.patch
