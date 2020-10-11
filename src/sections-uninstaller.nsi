@@ -80,8 +80,8 @@ Delete "$INSTDIR\libicalvcal.dll"
 
 #######################################
 ### nettle
-Delete "$INSTDIR\libhogweed-5.dll"
-Delete "$INSTDIR\libnettle-7.dll"
+Delete "$INSTDIR\libhogweed-6.dll"
+Delete "$INSTDIR\libnettle-8.dll"
 
 #######################################
 ### gmp
