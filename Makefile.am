@@ -56,12 +56,11 @@ EXTRA_DIST = autogen.sh \
         patches/libical-2.0.0/01-gmtime_r.patch \
         patches/glib-networking-2.54.1/01-giomoduledir.patch \
         patches/regex-20090805/01-no-large-offsets.patch \
-        patches/libetpan-1.7/send_wouldblock.patch \
-        patches/libetpan-1.7/ipv6.patch \
-        patches/libetpan-1.7/notests.patch \
-        patches/libetpan-1.7/sasl_set_path.patch \
-        patches/libetpan-1.7/mingw-closesocket-include.patch \
-        patches/libetpan-1.7/no-imap-flags-crashfix.patch \
+        patches/libetpan-1.9.4/01-no-tests.patch \
+        patches/libetpan-1.9.4/02-wsaewouldblock.patch \
+        patches/libetpan-1.9.4/03-sasl-set-path.patch \
+        patches/libetpan-1.9.4/04-closesocket.patch \
+        patches/libetpan-1.9.4/99-autogen.patch \
         patches/libiconv-1.14/01-aliases2_lookup-no-inline.patch \
         patches/crypt-1.1/01-build-dll.patch \
         patches/harfbuzz-2.6.7/01-no-tests-utils-docs.patch \
