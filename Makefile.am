@@ -30,7 +30,7 @@ SUBDIRS = doc packages po src
 EXTRA_DIST = autogen.sh \
         configure.ac.template \
         doc/license-page doc/GPLv3 \
-        patches/pixman-0.32.6/01-no-tests.patch \
+        patches/pixman-0.40.0/01-no-tests.patch \
         patches/claws-mail-3.17.7/01-etpan-sasl-plugin-path.patch \
         patches/enchant-1.6.0/01-no-tests.patch \
         patches/enchant-1.6.0/99-autogen.sh.patch \
@@ -68,10 +68,6 @@ EXTRA_DIST = autogen.sh \
         patches/cyrus-sasl-2.1.27/03-exports.patch \
         patches/cyrus-sasl-2.1.27/04-paths-relocation.patch \
         patches/cyrus-sasl-2.1.27/99-reautomagic.patch \
-        patches/cairo-1.10.2/03-fix-ffs.patch \
-        patches/cairo-1.10.2/99-libtoolize.patch \
-        patches/cairo-1.10.2/02-reset-clip-region.patch \
-        patches/cairo-1.10.2/01-fix-A1-surfaces.patch \
         patches/gumbo-parser-0.10.1/99-autotools.patch \
         patches/ytnef-1.9.3/01-malloc.patch \
         patches/ytnef-1.9.3/02-no-undefined.patch \

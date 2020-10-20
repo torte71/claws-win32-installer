@@ -94,6 +94,7 @@ cm_pkg_libical_cmake = yes
 
 cm_pkg_atk_meson = yes
 cm_pkg_glib_meson = yes
+cm_pkg_pixman_meson = yes
 
 cm_pkg_libiconv_configure = \
 	--enable-shared=yes --enable-static=no
@@ -167,10 +168,8 @@ cm_pkg_atk_meson_args = -Dintrospection=false
 cm_pkg_atk_meson_c_args = [ '-I$(idir)/include' ]
 cm_pkg_atk_meson_c_link_args = [ '-L$(idir)/lib' ]
 
-cm_pkg_pixman_configure = \
-	--enable-libpng --disable-sse2 \
-	CPPFLAGS=\"-I$(idir)/include\" \
-	LDFLAGS=\"-L$(idir)/lib\"
+cm_pkg_pixman_meson_c_args = [ '-I$(idir)/include' ]
+cm_pkg_pixman_meson_c_link_args = [ '-L$(idir)/lib' ]
 
 cm_pkg_cairo_configure = \
 	--enable-win32 --enable-win32-font \

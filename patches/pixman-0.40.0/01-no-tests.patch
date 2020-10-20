@@ -1,0 +1,16 @@
+#! /bin/sh
+patch -p1 -f $* < $0
+exit $?
+
+diff -urN a/meson.build b/meson.build
+--- a/meson.build	2020-10-20 14:38:59.058596262 -0700
++++ b/meson.build	2020-10-20 14:39:10.804924648 -0700
+@@ -528,8 +528,6 @@
+ add_project_arguments('-DHAVE_CONFIG_H', language : ['c'])
+ 
+ subdir('pixman')
+-subdir('test')
+-subdir('demos')
+ 
+ pkg = import('pkgconfig')
+ pkg.generate(
