@@ -76,5 +76,4 @@ EXTRA_DIST = autogen.sh \
         patches/ytnef-1.9.3/01-malloc.patch \
         patches/ytnef-1.9.3/02-no-undefined.patch \
         patches/ytnef-1.9.3/99-autotools.patch \
-        patches/atk-2.36.0/01-cross-build.patch \
-        patches/atk-2.36.0/02-meson-build.patch
+        patches/atk-2.36.0/01-meson-build.patch

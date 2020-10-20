@@ -163,7 +163,9 @@ cm_pkg_pango_configure = \
 	CPPFLAGS=\"-I$(idir)/include\" \
 	LDFLAGS=\"-L$(idir)/lib\"
 
-cm_pkg_atk_meson_args = --libdir=lib -Dintrospection=false
+cm_pkg_atk_meson_args = -Dintrospection=false
+cm_pkg_atk_meson_c_args = [ '-I$(idir)/include' ]
+cm_pkg_atk_meson_c_link_args = [ '-L$(idir)/lib' ]
 
 cm_pkg_pixman_configure = \
 	--enable-libpng --disable-sse2 \
