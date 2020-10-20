@@ -92,6 +92,19 @@ define SETVARS
 	export CONFIG_SITE="$(tsdir)/src/config.site"
 endef
 
+# Set up meson crossbuild file
+define MESON_CROSSFILE
+	cp "$(tsdir)/src/meson-cross-$(host).txt" "$$$${pkgsdir}"; \
+	meson_c_args="$(call GETVAR,cm_pkg_$(1)_meson_c_args)"; \
+	meson_c_link_args="$(call GETVAR,cm_pkg_$(1)_meson_c_link_args)"; \
+	if [ "x$$$${meson_c_args}" != "x" ]; then \
+		echo "c_args = $$$${meson_c_args}" >> "$$$${pkgsdir}/meson-cross-$(host).txt"; \
+	fi; \
+	if [ "x$$$${meson_c_link_args}" != "x" ]; then \
+		echo "c_link_args = $$$${meson_c_link_args}" >> "$$$${pkgsdir}/meson-cross-$(host).txt"; \
+	fi
+endef
+
 # Support macro.  Unpack the archive $(1).
 define DEFLATE_macro
 	case "$(1)" in			\
@@ -156,7 +169,9 @@ stamps/stamp-$(1)-02-configure: stamps/stamp-$(1)-01-patch
 	if [ "$$$${pkgcmake}" = "yes" ]; then \
 		eval "$(CMAKE) $$$${pkgcfg} -DCMAKE_INSTALL_PREFIX=$$$${pkgidir} ../$$$${pkg_version}"; \
 	elif [ "$$$${pkgmeson}" = "yes" ]; then \
-		eval "$(MESON) --prefix=$$$${pkgidir} $$$${pkgcfg} --cross-file $$$${pkgsdir}/cross-$(host).txt $$$${pkgsdir} $$$${pkgbdir}"; \
+		$(call MESON_CROSSFILE,$(1)); \
+		eval "PKG_CONFIG_LIBDIR=$$$${PKG_CONFIG_PATH} $(MESON) \
+			--prefix=$$$${pkgidir} $$$${pkgcfg} --cross-file $$$${pkgsdir}/meson-cross-$(host).txt $$$${pkgsdir} $$$${pkgbdir}"; \
 	else \
 		eval "../$$$${pkg_version}/configure"		\
 			--prefix="$$$${pkgidir}"		\
