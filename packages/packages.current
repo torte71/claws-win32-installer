@@ -153,8 +153,8 @@ chk  1aea30df34a8ae4fcce71afd22aa5b57224b52916d46e3ea81ff9f1eb130e64c
 file atk/2.36/atk-2.36.0.tar.xz
 chk  fb76247e369402be23f1f5c65d38a9639c1164d934e40f6a9cf3c9e96b652788
 
-file glib-networking/2.54/glib-networking-2.54.1.tar.xz
-chk  eaa787b653015a0de31c928e9a17eb57b4ce23c8cf6f277afaec0d685335012f
+file glib-networking/2.66/glib-networking-2.66.0.tar.xz
+chk  c5d7be2437fdd196eebfb70c4517b96d3ba7ec13bd496318b8f02dea383e0099
 
 file libsoup/2.60/libsoup-2.60.3.tar.xz
 chk  1b0dc762f23abe4e0d29b77370e539fd35f31d8e8e0318d6ddccff395be68a22

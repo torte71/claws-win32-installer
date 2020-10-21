@@ -95,6 +95,7 @@ cm_pkg_libical_cmake = yes
 cm_pkg_atk_meson = yes
 cm_pkg_glib_meson = yes
 cm_pkg_pixman_meson = yes
+cm_pkg_glib_networking_meson = yes
 
 cm_pkg_libiconv_configure = \
 	--enable-shared=yes --enable-static=no
@@ -305,14 +306,9 @@ cm_pkg_jpeg_configure = \
 cm_pkg_sqlite_autoconf_configure = \
 	--disable-static-shell
 
-cm_pkg_glib_networking_configure = \
-  --disable-glibtest \
-	--without-libproxy \
-	--without-gnome-proxy \
-	--with-gnutls \
-	--without-pkcs11 \
-	LDFLAGS=\"-L$(idir)/lib\" \
-	CPPFLAGS=\"-I$(idir)/include\"
+cm_pkg_glib_networking_meson_args = -Dgnutls=enabled -Dopenssl=disabled -Dlibproxy=disabled -Dgnome_proxy=disabled
+cm_pkg_glib_networking_meson_c_args = [ '-I$(idir)/include' ]
+cm_pkg_glib_networking_meson_c_link_args = [ '-L$(idir)/lib' ]
 
 cm_pkg_libsoup_configure = \
 	--without-gnome \

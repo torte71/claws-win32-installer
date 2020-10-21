@@ -51,7 +51,6 @@ EXTRA_DIST = autogen.sh \
         patches/gdk-pixbuf-2.36.12/01-fix-build.patch \
         patches/gdk-pixbuf-2.36.12/02-no-tests.patch \
         patches/libical-2.0.0/01-gmtime_r.patch \
-        patches/glib-networking-2.54.1/01-giomoduledir.patch \
         patches/regex-20090805/01-no-large-offsets.patch \
         patches/libetpan-1.9.4/01-no-tests.patch \
         patches/libetpan-1.9.4/02-wsaewouldblock.patch \
