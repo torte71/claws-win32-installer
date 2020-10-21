@@ -93,6 +93,7 @@ cm_pkg_gettext_make_args = -j$(NUMPROC)
 cm_pkg_libical_cmake = yes
 
 cm_pkg_atk_meson = yes
+cm_pkg_glib_meson = yes
 
 cm_pkg_libiconv_configure = \
 	--enable-shared=yes --enable-static=no
@@ -112,13 +113,9 @@ cm_pkg_gettext_make_dir_inst = gettext-runtime
 cm_pkg_gettext_ex_make_dir = gettext-runtime
 cm_pkg_gettext_ex_make_dir_inst = gettext-runtime
 
-cm_pkg_glib_configure = \
-	--disable-gtk-doc-html \
-	--with-pcre=internal \
-  CPPFLAGS=-I$(idir)/include \
-	LDFLAGS=\"-L$(idir)/lib\" \
-	CCC=$(host)-g++
-#cm_pkg_glib_extracflags = -march=i486
+cm_pkg_glib_meson_args = -Dinternal_pcre=true
+cm_pkg_glib_meson_c_args = [ '-I$(idir)/include' ]
+cm_pkg_glib_meson_c_link_args = [ '-L$(idir)/lib' ]
 
 cm_pkg_gdk_pixbuf_configure = \
   --with-lib-prefix=$(idir) --with-libiconv-prefix=$(idir) \
@@ -448,14 +445,6 @@ endef
 
 # We need to fix the prefix in the various packages using pkgconfig,
 # or we can't substitute it properly in our pkg-config wrapper.
-# glib also installs an empty charset.alias for mingw which creates
-# a stow conflict with the one from iconv.
-define cm_pkg_glib_post_install
- (cd $$$${pkgidir};							\
- perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`; \
- rm $$$${pkgidir}/lib/charset.alias)
-endef
-
 define cm_pkg_gdk_pixbuf_post_install
  (cd $$$${pkgidir};							\
  perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)

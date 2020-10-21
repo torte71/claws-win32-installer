@@ -134,10 +134,10 @@ chk  106a2c48c7f75a298a7557bcc0d5f4f454e5b43811cc738b7ca294d6956bbb15
 #
 # GLIB & friends
 #
-server http://ftp.gnome.org/pub/gnome/sources
+server https://ftp.gnome.org/pub/gnome/sources
 
-file glib/2.56/glib-2.56.4.tar.xz
-chk  27f703d125efb07f8a743666b580df0b4095c59fc8750e8890132c91d437504c
+file glib/2.66/glib-2.66.2.tar.xz
+chk  ec390bed4e8dd0f89e918f385e8d4cfd7470b1ef7c1ce93ec5c4fc6e3c6a17c4
 
 file gtk+/2.24/gtk+-2.24.32.tar.xz
 chk  b6c8a93ddda5eabe3bfee1eb39636c9a03d2a56c7b62828b359bf197943c582e
