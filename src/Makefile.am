@@ -39,7 +39,7 @@ SUBDIRS = dictionaries
 # Supported source packages.
 cm_spkgs = glib libffi gdk-pixbuf gtk+ expat \
 		libgpg-error gpgme libpng enchant atk fontconfig freetype \
-		libtasn1 opencdk gnutls curl libxml2 libxslt sqlite-autoconf \
+		libtasn1 gnutls curl libxml2 libxslt sqlite-autoconf \
 		jpeg glib-networking libsoup libwebp webkitgtk gmp nettle \
 		harfbuzz pango pixman cairo libetpan claws-mail \
 		libassuan cyrus-sasl icu4c ytnef \
@@ -62,7 +62,6 @@ cm_pkg_expat_make_args = -j$(NUMPROC)
 cm_pkg_libpng_make_args = -j$(NUMPROC)
 cm_pkg_enchant_make_args = -j$(NUMPROC)
 cm_pkg_libtasn1_make_args = -j$(NUMPROC)
-cm_pkg_opencdk_make_args = -j$(NUMPROC)
 cm_pkg_curl_make_args = -j$(NUMPROC)
 cm_pkg_libxslt_make_args = -j$(NUMPROC)
 cm_pkg_libxml2_make_args = -j$(NUMPROC)
@@ -85,6 +84,11 @@ cm_pkg_cyrus_sasl_make_args = -j$(NUMPROC)
 cm_pkg_libical_make_args = -j$(NUMPROC)
 cm_pkg_ytnef_make_args = -j$(NUMPROC)
 cm_pkg_gumbo_parser_make_args = -j$(NUMPROC)
+cm_pkg_libffi_make_args = -j$(NUMPROC)
+cm_pkg_gnutls_make_args = -j$(NUMPROC)
+cm_pkg_libiconv_make_args = -j$(NUMPROC)
+cm_pkg_regex_make_args = -j$(NUMPROC)
+cm_pkg_gettext_make_args = -j$(NUMPROC)
 
 cm_pkg_libical_cmake = yes
 
