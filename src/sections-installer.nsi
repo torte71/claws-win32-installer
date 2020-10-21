@@ -174,7 +174,7 @@ SetOutPath "$INSTDIR"
 #######################################
 ### libffi
 !insertmacro SetPrefix libffi
-File ${prefix}/bin/libffi-6.dll
+File ${prefix}/bin/libffi-7.dll
 
 #######################################
 ### glib

@@ -212,8 +212,8 @@ chk  505e70834d35383537b6491e7ae8641f1a4bed1876dbfe361201fc80868d88ca
 # LibFFI
 #
 server ftp://sourceware.org/pub/libffi
-file libffi-3.0.13.tar.gz
-chk  1dddde1400c3bcb7749d398071af88c3e4754058d2d4c0b3696c2f82dc5cf11c
+file libffi-3.3.tar.gz
+chk  72fba7922703ddfa7a028d513ac15a85c8d54c8d67f55fa5a4802885dc652056
 
 
 #

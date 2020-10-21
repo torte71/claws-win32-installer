@@ -452,11 +452,6 @@ define cm_pkg_glib_post_install
  rm $$$${pkgidir}/lib/charset.alias)
 endef
 
-define cm_pkg_libffi_post_install
- (cd $$$${pkgidir};							\
- perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)
-endef
-
 define cm_pkg_gdk_pixbuf_post_install
  (cd $$$${pkgidir};							\
  perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)

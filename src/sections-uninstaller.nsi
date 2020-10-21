@@ -514,7 +514,7 @@ RMDir "$INSTDIR\lib\gio"
 
 #######################################
 ### libffi
-Delete /REBOOTOK "$INSTDIR\libffi-6.dll"
+Delete /REBOOTOK "$INSTDIR\libffi-7.dll"
 
 #######################################
 ### libgpg-error
