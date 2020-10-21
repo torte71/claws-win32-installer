@@ -96,6 +96,7 @@ cm_pkg_atk_meson = yes
 cm_pkg_glib_meson = yes
 cm_pkg_pixman_meson = yes
 cm_pkg_glib_networking_meson = yes
+cm_pkg_gdk_pixbuf_meson = yes
 
 cm_pkg_libiconv_configure = \
 	--enable-shared=yes --enable-static=no
@@ -119,14 +120,16 @@ cm_pkg_glib_meson_args = -Dinternal_pcre=true
 cm_pkg_glib_meson_c_args = [ '-I$(idir)/include' ]
 cm_pkg_glib_meson_c_link_args = [ '-L$(idir)/lib' ]
 
-cm_pkg_gdk_pixbuf_configure = \
-  --with-lib-prefix=$(idir) --with-libiconv-prefix=$(idir) \
-  --with-included-loaders=yes \
-	--with-gdiplus \
-	--without-libjasper \
-	--disable-gtk-doc-html \
-	--disable-glibtest \
-  CPPFLAGS=-I$(idir)/include LDFLAGS=\"-L$(idir)/lib\"
+cm_pkg_gdk_pixbuf_meson_args = \
+  -Dx11=false \
+  -Drelocatable=true \
+  -Dbuiltin_loaders=all \
+  -Dnative_windows_loaders=true \
+  -Dgir=false \
+  -Dinstalled_tests=false \
+  -Dman=false
+cm_pkg_gdk_pixbuf_meson_c_args = [ '-I$(idir)/include' ]
+cm_pkg_gdk_pixbuf_meson_c_link_args = [ '-L$(idir)/lib' ]
 
 cm_pkg_gtk__configure = \
 	--with-gdktarget=win32 \
@@ -442,11 +445,6 @@ endef
 
 # We need to fix the prefix in the various packages using pkgconfig,
 # or we can't substitute it properly in our pkg-config wrapper.
-define cm_pkg_gdk_pixbuf_post_install
- (cd $$$${pkgidir};							\
- perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)
-endef
-
 define cm_pkg_atk_post_install
  (cd $$$${pkgidir_dev};							\
  perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)
