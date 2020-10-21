@@ -182,8 +182,6 @@ stamps/stamp-$(1)-03-make: stamps/stamp-$(1)-02-configure
 	  if [ "$$$${pkgmeson}" = "yes" ]; then \
 	    $(NINJA) -C $$$${pkgbdir}; \
 	  else \
-	    $(MAKE) $(AM_MAKEFLAGS) $(GPG4WIN_PARALLEL) $$$${pkgmkargs} || \
-	    $(MAKE) $(AM_MAKEFLAGS) $(GPG4WIN_PARALLEL) $$$${pkgmkargs} || \
 	    $(MAKE) $(AM_MAKEFLAGS) $$$${pkgmkargs} ;\
 	  fi)
 	touch stamps/stamp-$(1)-03-make
