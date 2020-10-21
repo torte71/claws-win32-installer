@@ -179,8 +179,8 @@ chk  6d200dec3740d9ec4ec8d1180e25779c00bc749f94278c8b9021f5534db223fc
 # Freetype
 server http://download.savannah.gnu.org/releases/freetype
 
-file freetype-2.10.2.tar.xz
-chk  1543d61025d2e6312e0a1c563652555f17378a204a61e99928c9fcef030a2d8b
+file freetype-2.10.4.tar.xz
+chk  86a854d8905b19698bbc8f23b860bc104246ce4854dcea8e3b0fb21284f75784
 
 # Fontconfig
 server http://www.fontconfig.org/release
