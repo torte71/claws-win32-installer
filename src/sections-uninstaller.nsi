@@ -471,11 +471,6 @@ Delete /REBOOTOK "$INSTDIR\libfreetype-6.dll"
 ### expat
 Delete /REBOOTOK "$INSTDIR\libexpat-1.dll"
 
-#######################################
-### libgcrypt
-Delete "$INSTDIR\libgcrypt-20.dll"
-Delete "$INSTDIR\lib\libgcrypt.imp"
-Delete "$INSTDIR\include\gcrypt.h"
 RMDir "$INSTDIR\lib"
 RMDir "$INSTDIR\include"
 

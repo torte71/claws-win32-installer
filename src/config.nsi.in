@@ -67,9 +67,6 @@
 !define cm_pkg_libassuan @cm_pkg_libassuan@
 !define cm_pkg_libassuan_version @cm_pkg_libassuan_version@
 
-!define cm_pkg_libgcrypt @cm_pkg_libgcrypt@
-!define cm_pkg_libgcrypt_version @cm_pkg_libgcrypt_version@
-
 !define cm_pkg_gpgme @cm_pkg_gpgme@
 !define cm_pkg_gpgme_version @cm_pkg_gpgme_version@
 

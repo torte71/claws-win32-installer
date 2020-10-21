@@ -1,0 +1,16 @@
+#! /bin/sh
+patch -p1 -f $* < $0
+exit $?
+
+diff -urN a/configure.ac b/configure.ac
+--- a/configure.ac	2020-10-21 12:12:59.411533914 -0700
++++ b/configure.ac	2020-10-21 12:13:49.375998806 -0700
+@@ -255,7 +255,7 @@
+ if test "x$with_gnutls" = "xyes"; then
+   AC_DEFINE([USE_GNUTLS],1, [Define to use GnuTLS])
+   AC_DEFINE([USE_SSL], 1, [Define to use OpenSSL])
+-  GNUTLSLIB="-lgnutls -lgcrypt -lgpg-error -lz"
++  GNUTLSLIB="-lgnutls"
+ else
+   GNUTLSLIB=""
+ fi

@@ -42,7 +42,7 @@ cm_spkgs = glib libffi gdk-pixbuf gtk+ expat \
 		libtasn1 opencdk gnutls curl libxml2 libxslt sqlite-autoconf \
 		jpeg glib-networking libsoup libwebp webkitgtk gmp nettle \
 		harfbuzz pango pixman cairo libetpan claws-mail \
-		libgcrypt libassuan cyrus-sasl icu4c ytnef \
+		libassuan cyrus-sasl icu4c ytnef \
 		w32pth regex libiconv gettext libical gumbo-parser
 
 # Extra options to configure for individual packages.
@@ -69,7 +69,6 @@ cm_pkg_libxml2_make_args = -j$(NUMPROC)
 cm_pkg_libetpan_make_args = -j$(NUMPROC)
 cm_pkg_claws_mail_make_args = -j$(NUMPROC)
 cm_pkg_libassuan_make_args = -j$(NUMPROC)
-cm_pkg_libgcrypt_make_args = -j$(NUMPROC)
 cm_pkg_w32pth_make_args = -j$(NUMPROC)
 cm_pkg_jpeg_make_args = -j$(NUMPROC)
 cm_pkg_glib_networking_make_args = -j$(NUMPROC)
@@ -203,15 +202,6 @@ cm_pkg_libgpg_error_ex_configure = --silent \
 
 cm_pkg_libassuan_configure =  --silent --enable-static
 
-# Using gpgsm with VirtualBox on AES-NI hardware crashes gpg-agent.
-# However, the Libgcrypt's regression tests work just fine.  I don't
-# have a windows instance on AES-NI, thus I can't currently debug
-# this. As a workaround we disable AES-NI for now.
-cm_pkg_libgcrypt_configure = \
-  --with-gpg-error-prefix=$(idir) \
-	--disable-tests \
-  --disable-aesni-support
-
 cm_pkg_libpng_configure = \
 	CPPFLAGS=\"-I$(idir)/include\" \
 	LDFLAGS=\"-L$(idir)/lib\"
@@ -237,19 +227,16 @@ cm_pkg_gpgme_configure = --silent \
   `test -n "@HAVE_PKG_GLIB@" && echo "--enable-w32-glib"` \
   --disable-w32-qt LDFLAGS=\"-L$(idir)/lib\"
 
-# We want to build with libgcrypt
-# We can't use pkcs11 tue to tto much additional dependencies.
+# We can't use pkcs11 due to too much additional dependencies.
 cm_pkg_gnutls_configure = \
-  --disable-cxx \
-  --with-libgcrypt \
-  --without-p11-kit \
+	--disable-cxx \
+	--without-p11-kit \
+	--without-included-libtasn1 \
 	--with-included-unistring \
 	--disable-gtk-doc-html \
 	--disable-tests \
 	--disable-doc \
 	--disable-tools \
-  --with-libtasn1-prefix=$(idir) \
-  --with-libgcrypt-prefix=$(idir) \
 	CPPFLAGS=\"-I$(idir)/include\" LDFLAGS=\"-L$(idir)/lib\"
 
 cm_pkg_gmp_configure = \
@@ -261,13 +248,6 @@ cm_pkg_nettle_configure = \
   --enable-public-key \
 	CPPFLAGS=\"-I$(idir)/include\" \
 	LDFLAGS=\"-L$(idir)/lib\"
-
-# In 2.12.21 gnutls_openssl is not linked to libtasn1, thus we use
-# this hack to here.  (Using the included minitasn does work either
-# due to a missing soruce file.)
-cm_pkg_gnutls_make_args = \
-   LTLIBTASN1=-ltasn1
-
 
 cm_pkg_curl_configure = \
   --with-gnutls --with-winssl --with-winidn\

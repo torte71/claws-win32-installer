@@ -241,9 +241,6 @@ server ftp://ftp.gnupg.org/gcrypt
 file libgpg-error/libgpg-error-1.39.tar.bz2
 chk  4a836edcae592094ef1c5a4834908f44986ab2b82e0824a0344b49df8cdb298f
 
-file libgcrypt/libgcrypt-1.8.6.tar.bz2
-chk  0cba2700617b99fc33864a0c16b1fa7fdf9781d9ed3509f5d767178e5fd7b975
-
 file libassuan/libassuan-2.5.3.tar.bz2
 chk  91bcb0403866b4e7c4bc1cc52ed4c364a9b5414b3994f718c70303f7f765e702
 
