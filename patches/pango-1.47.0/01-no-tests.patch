@@ -1,0 +1,15 @@
+#! /bin/sh
+patch -p1 -f $* < $0
+exit $?
+
+diff -urN a/meson.build b/meson.build
+--- a/meson.build	2020-10-21 19:06:48.398098277 -0700
++++ b/meson.build	2020-10-21 19:10:17.611450847 -0700
+@@ -575,7 +575,6 @@
+ subdir('pango')
+ subdir('utils')
+ subdir('examples')
+-subdir('tests')
+ subdir('tools')
+ 
+ if get_option('gtk_doc')
