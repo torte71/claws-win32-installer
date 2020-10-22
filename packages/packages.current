@@ -157,6 +157,12 @@ chk  c5d7be2437fdd196eebfb70c4517b96d3ba7ec13bd496318b8f02dea383e0099
 file libsoup/2.60/libsoup-2.60.3.tar.xz
 chk  1b0dc762f23abe4e0d29b77370e539fd35f31d8e8e0318d6ddccff395be68a22
 
+# fribidi
+server https://github.com/fribidi/fribidi/releases/download
+
+file v1.0.10/fribidi-1.0.10.tar.xz
+chk  7f1c687c7831499bcacae5e8675945a39bacbad16ecaa945e9454a32df653c01
+
 # harfbuzz
 server http://www.freedesktop.org/software/harfbuzz/release
 

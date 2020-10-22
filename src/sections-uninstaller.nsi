@@ -442,6 +442,10 @@ Delete /REBOOTOK "$INSTDIR\libpangowin32-1.0-0.dll"
 Delete /REBOOTOK "$INSTDIR\libpangocairo-1.0-0.dll"
 
 #######################################
+### fribidi
+Delete /REBOOTOK "$INSTDIR\libfribidi-0.dll"
+
+#######################################
 ### harfbuzz
 Delete "$INSTDIR\libharfbuzz-0.dll"
 Delete "$INSTDIR\libharfbuzz-icu-0.dll"

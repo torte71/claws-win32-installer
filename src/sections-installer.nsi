@@ -259,6 +259,11 @@ File ${prefix}/bin/libharfbuzz-0.dll
 File ${prefix}/bin/libharfbuzz-icu-0.dll
 
 #######################################
+### fribidi
+!insertmacro SetPrefix fribidi
+File ${prefix}/bin/libfribidi-0.dll
+
+#######################################
 ### pango
 !insertmacro SetPrefix pango
 File ${prefix}/bin/libpango-1.0-0.dll

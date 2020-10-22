@@ -177,6 +177,9 @@
 !define cm_pkg_fontconfig @cm_pkg_fontconfig@
 !define cm_pkg_fontconfig_version @cm_pkg_fontconfig_version@
 
+!define cm_pkg_fribidi @cm_pkg_fribidi@
+!define cm_pkg_fribidi_version @cm_pkg_fribidi_version@
+
 !define cm_pkg_pango @cm_pkg_pango@
 !define cm_pkg_pango_version @cm_pkg_pango_version@
 

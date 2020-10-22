@@ -41,7 +41,7 @@ cm_spkgs = glib libffi gdk-pixbuf gtk+ expat \
 		libgpg-error gpgme libpng enchant atk fontconfig freetype \
 		libtasn1 gnutls curl libxml2 libxslt sqlite-autoconf \
 		jpeg glib-networking libsoup libwebp webkitgtk gmp nettle \
-		harfbuzz pango pixman cairo libetpan claws-mail \
+		harfbuzz fribidi pango pixman cairo libetpan claws-mail \
 		libassuan cyrus-sasl icu4c ytnef \
 		w32pth regex libiconv gettext libical gumbo-parser
 
@@ -51,6 +51,7 @@ cm_spkgs = glib libffi gdk-pixbuf gtk+ expat \
 cm_pkg_harfbuzz_make_args = -j$(NUMPROC)
 cm_pkg_freetype_make_args = -j$(NUMPROC)
 cm_pkg_fontconfig_make_args = -j$(NUMPROC)
+cm_pkg_fribidi_make_args = -j$(NUMPROC)
 cm_pkg_pango_make_args = -j$(NUMPROC)
 cm_pkg_atk_make_args = -j$(NUMPROC)
 cm_pkg_gdk_pixbuf_make_args = -j$(NUMPROC)
@@ -97,6 +98,7 @@ cm_pkg_glib_meson = yes
 cm_pkg_pixman_meson = yes
 cm_pkg_glib_networking_meson = yes
 cm_pkg_gdk_pixbuf_meson = yes
+cm_pkg_fribidi_meson = yes
 cm_pkg_pango_meson = yes
 
 cm_pkg_libiconv_configure = \
@@ -162,6 +164,8 @@ cm_pkg_fontconfig_configure = \
 	--enable-libxml2 \
 	CPPFLAGS=\"-I$(idir)/include\" \
 	LDFLAGS=\"-L$(idir)/lib\"
+
+cm_pkg_fribidi_meson_args = -Ddocs=false -Dtests=false
 
 cm_pkg_pango_meson_args = \
 	-Dcairo=enabled \
