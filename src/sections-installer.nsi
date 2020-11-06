@@ -33,10 +33,6 @@ ifErrors 0 +3
 File ${prefix}/bin/libtasn1-6.dll
 
 #######################################
-### pkgconfig
-# Nothing here.
-
-#######################################
 ### regex
 !insertmacro SetPrefix regex
 File ${prefix}/bin/libregex-1.dll

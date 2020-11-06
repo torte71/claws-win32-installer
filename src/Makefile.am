@@ -396,7 +396,7 @@ cm_pkg_zlib_make_args_inst = -fwin32/Makefile.gcc install \
 	LIBRARY_PATH=$$$${pkgidir}/lib SHARED_MODE=1 IMPLIB=libz.dll.a
 
 # Supported binary packages.
-cm_bpkgs = pkgconfig bsfilter
+cm_bpkgs = bsfilter
 
 # libiconv needs some special magic to generate a usable import
 # library.

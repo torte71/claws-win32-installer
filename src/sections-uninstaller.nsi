@@ -604,10 +604,6 @@ Delete "$INSTDIR\libw32pth-0.dll"
 Delete "$INSTDIR\libregex-1.dll"
 
 #######################################
-### pkgconfig
-# Nothing to uninstall
-
-#######################################
 ### libtasn1
 Delete "$INSTDIR\libtasn1-6.dll"
 
