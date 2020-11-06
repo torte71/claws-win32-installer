@@ -228,8 +228,8 @@ server ftp://ftp.gnupg.org/gcrypt
 file libgpg-error/libgpg-error-1.39.tar.bz2
 chk  4a836edcae592094ef1c5a4834908f44986ab2b82e0824a0344b49df8cdb298f
 
-file libassuan/libassuan-2.5.3.tar.bz2
-chk  91bcb0403866b4e7c4bc1cc52ed4c364a9b5414b3994f718c70303f7f765e702
+file libassuan/libassuan-2.5.4.tar.bz2
+chk  c080ee96b3bd519edd696cfcebdecf19a3952189178db9887be713ccbcb5fbf0
 
 file gpgme/gpgme-1.9.0.tar.bz2
 chk  1b29fedb8bfad775e70eafac5b0590621683b2d9869db994568e6401f4034ceb
