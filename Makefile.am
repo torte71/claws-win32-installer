@@ -49,7 +49,6 @@ EXTRA_DIST = autogen.sh \
         patches/icu4c-58_3-src/03-no-xlocale.patch \
         patches/w32pth-2.0.5/99-autogen.sh.patch \
         patches/w32pth-2.0.5/01-def-fix.patch \
-        patches/libical-2.0.0/01-gmtime_r.patch \
         patches/regex-20090805/01-no-large-offsets.patch \
         patches/libetpan-1.9.4/01-no-tests.patch \
         patches/libetpan-1.9.4/02-wsaewouldblock.patch \
