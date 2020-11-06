@@ -99,10 +99,10 @@ chk 26866b1549b00ffd020f188a43c258017fa1c382b3ddadd8201536f72efb05d5
 # curl for Claws plugins
 #
 
-server http://curl.haxx.se/download
+server https://curl.haxx.se/download
 
-file  curl-7.72.0.tar.xz
-chk   0ded0808c4d85f2ee0db86980ae610cc9d165e9ca9da466196cc73c346513713
+file  curl-7.73.0.tar.xz
+chk   7c4c7ca4ea88abe00fea4740dcf81075c031b1d0bb23aff2d5efde20a3c2408a
 
 
 #
