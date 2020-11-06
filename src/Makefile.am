@@ -378,7 +378,7 @@ cm_pkg_gumbo_parser_configure = \
 
 
 # Supported make-only source packages.
-cm_mpkgs = bzip2 zlib crypt
+cm_mpkgs = bzip2 zlib
 
 # Extra options for the make invocations for individual packages.
 # make_flags is used for building, make_args_inst is used for installing.
@@ -387,12 +387,6 @@ cm_pkg_bzip2_make_args = -j$(NUMPROC) \
 
 cm_pkg_bzip2_make_args_inst = \
   PREFIX=$$$${pkgidir} CC=$(CC) AR=$(AR) RANLIB=$(RANLIB)
-
-cm_pkg_crypt_make_args = -j$(NUMPROC) \
-  CC=$(CC) AR=$(AR)
-
-cm_pkg_crypt_make_args_inst = \
-  prefix=$$$${pkgidir}
 
 cm_pkg_zlib_make_args = -j$(NUMPROC) \
   -fwin32/Makefile.gcc PREFIX=$(host)- IMPLIB=libz.dll.a
@@ -443,12 +437,6 @@ echo "dlopen=''" >> lib/libz.la;			\
 echo "dlpreopen=''" >> lib/libz.la;			\
 echo "libdir=\"$$$${pkgidir}/lib\"" >> lib/libz.la)
 endef
-
-# To make sure that we link against the static versions we need
-# remove the import libs from crypt
-#define cm_pkg_crypt_post_install
-#(cd $$$${pkgidir}/lib && rm libcrypt.dll.a libcrypt.lib)
-#endef
 
 # We need to fix the prefix in the various packages using pkgconfig,
 # or we can't substitute it properly in our pkg-config wrapper.

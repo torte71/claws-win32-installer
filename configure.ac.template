@@ -254,7 +254,6 @@ CM_SPKG([w32pth])
 CM_SPKG([jpeg])
 CM_SPKG([gmp])
 CM_SPKG([regex])
-CM_SPKG([crypt])
 CM_SPKG([fribidi])
 
 CM_BPKG_GTK([pkgconfig])
@@ -300,7 +299,7 @@ CM_SPKG([libical])
 CM_SPKG([ytnef])
 CM_SPKG([gumbo-parser])
 CM_SPKG([claws-mail], [libiconv gettext zlib gtk+ libpng enchant glib dnl
-                            gpgme crypt regex libetpan gnutls ytnef gumbo-parser dnl
+                            gpgme regex libetpan gnutls ytnef gumbo-parser dnl
                             libxml2 expat webkitgtk curl libical nettle])
 
 

@@ -616,10 +616,6 @@ Delete "$INSTDIR\libtasn1-6.dll"
 Delete /REBOOTOK "$INSTDIR\libiconv-2.dll"
 
 #######################################
-### crypt
-Delete /REBOOTOK "$INSTDIR\crypt-0.dll"
-
-#######################################
 ### bzip2
 # Nothing to uninstall, as we link statically
 

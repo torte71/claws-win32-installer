@@ -57,7 +57,6 @@ EXTRA_DIST = autogen.sh \
         patches/libetpan-1.9.4/04-closesocket.patch \
         patches/libetpan-1.9.4/05-no-unnecessary-linkage.patch \
         patches/libetpan-1.9.4/99-autogen.patch \
-        patches/crypt-1.1/01-build-dll.patch \
         patches/harfbuzz-2.6.7/01-no-tests-utils-docs.patch \
         patches/gtk+-2.24.32/00-fix-private-defs.patch \
         patches/gtk+-2.24.32/01-no-tests-demos.patch \

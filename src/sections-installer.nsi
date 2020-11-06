@@ -17,11 +17,6 @@ File /oname=libwinpthread-1.dll "${BUILD_DIR}/libwinpthread-1.dll-x"
 # Nothing to install, as we link statically
 
 #######################################
-### crypt
-!insertmacro SetPrefix crypt
-File ${prefix}/bin/crypt-0.dll
-
-#######################################
 ### libiconv
 !insertmacro SetPrefix libiconv
 ClearErrors
