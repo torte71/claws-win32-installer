@@ -227,10 +227,10 @@ cm_pkg_enchant_configure = \
 	LDFLAGS=\"-L$(idir)/lib\"
 
 # The LDFLAGS is needed for -lintl for glib.
-cm_pkg_gpgme_configure = --silent \
-  --with-gpg-error-prefix=$(idir) --enable-static \
-  `test -n "@HAVE_PKG_GLIB@" && echo "--enable-w32-glib"` \
-  --disable-w32-qt LDFLAGS=\"-L$(idir)/lib\"
+cm_pkg_gpgme_configure = \
+  --enable-static \
+  --enable-w32-glib \
+  LDFLAGS=\"-L$(idir)/lib\"
 
 # We can't use pkcs11 due to too much additional dependencies.
 cm_pkg_gnutls_configure = \
