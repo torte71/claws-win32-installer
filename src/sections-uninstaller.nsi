@@ -115,7 +115,7 @@ Delete "$INSTDIR\libsqlite3-0.dll"
 
 #######################################
 ### libwebp
-Delete "$INSTDIR\libwebp-6.dll"
+Delete "$INSTDIR\libwebp-7.dll"
 
 #######################################
 ### icu4c

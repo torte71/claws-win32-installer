@@ -711,7 +711,7 @@ SetOutPath "$INSTDIR"
 ### libwebp
 !insertmacro SetPrefix libwebp
 SetOutPath "$INSTDIR"
-File ${prefix}/bin/libwebp-6.dll
+File ${prefix}/bin/libwebp-7.dll
 
 #######################################
 ### icu4c
