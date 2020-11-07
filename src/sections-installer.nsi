@@ -747,6 +747,11 @@ File ${prefix}/lib/gio/modules/libgiognutls.dll
 SetOutPath "$INSTDIR"
 
 #######################################
+### libpsl
+!insertmacro SetPrefix libpsl
+File ${prefix}/bin/libpsl-5.dll
+
+#######################################
 ### libsoup
 !insertmacro SetPrefix libsoup
 File ${prefix}/bin/libsoup-2.4-1.dll

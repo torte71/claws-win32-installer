@@ -42,7 +42,7 @@ cm_spkgs = glib libffi gdk-pixbuf gtk+ expat \
 		libtasn1 gnutls curl libxml2 libxslt sqlite-autoconf \
 		jpeg glib-networking libsoup libwebp webkitgtk gmp nettle \
 		harfbuzz fribidi pango pixman cairo libetpan claws-mail \
-		libassuan cyrus-sasl icu4c ytnef \
+		libassuan cyrus-sasl icu4c ytnef libpsl \
 		w32pth regex libiconv gettext libical gumbo-parser
 
 # Extra options to configure for individual packages.
@@ -92,6 +92,8 @@ cm_pkg_glib_networking_meson = yes
 cm_pkg_gdk_pixbuf_meson = yes
 cm_pkg_fribidi_meson = yes
 cm_pkg_pango_meson = yes
+cm_pkg_libsoup_meson = yes
+cm_pkg_libpsl_meson = yes
 
 cm_pkg_libiconv_configure = \
 	--enable-shared=yes --enable-static=no
@@ -312,11 +314,17 @@ cm_pkg_glib_networking_meson_args = -Dgnutls=enabled -Dopenssl=disabled -Dlibpro
 cm_pkg_glib_networking_meson_c_args = [ '-I$(idir)/include' ]
 cm_pkg_glib_networking_meson_c_link_args = [ '-L$(idir)/lib' ]
 
-cm_pkg_libsoup_configure = \
-	--without-gnome \
-	--without-apache-httpd \
-	--without-gssapi \
-	CPPFLAGS=\"-I$(idir)/include\" LIBS=\"-L$(idir)/lib\"
+cm_pkg_libpsl_meson_c_args = [ '-I$(idir)/include' ]
+
+cm_pkg_libsoup_meson_args = \
+	-Dgnome=false \
+	-Dgssapi=disabled \
+	-Dtests=false \
+	-Dsysprof=disabled \
+	-Dtls_check=false \
+	-Dintrospection=disabled
+cm_pkg_libsoup_meson_c_args = [ '-I$(idir)/include' ]
+cm_pkg_libsoup_meson_c_link_args = [ '-L$(idir)/lib' ]
 
 cm_pkg_libwebp_configure = \
 	LDFLAGS=\"-L$(idir)/lib\" \

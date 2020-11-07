@@ -130,6 +130,9 @@
 !define cm_pkg_glib_networking @cm_pkg_glib_networking@
 !define cm_pkg_glib_networking_version @cm_pkg_glib_networking_version@
 
+!define cm_pkg_libpsl @cm_pkg_libpsl@
+!define cm_pkg_libpsl_version @cm_pkg_libpsl_version@
+
 !define cm_pkg_libsoup @cm_pkg_libsoup@
 !define cm_pkg_libsoup_version @cm_pkg_libsoup_version@
 

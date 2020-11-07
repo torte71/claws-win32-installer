@@ -128,6 +128,11 @@ server https://sqlite.org/2020
 file sqlite-autoconf-3330000.tar.gz
 chk  106a2c48c7f75a298a7557bcc0d5f4f454e5b43811cc738b7ca294d6956bbb15
 
+# libpsl
+server https://github.com/rockdaboot/libpsl/releases/download
+file   0.21.1/libpsl-0.21.1.tar.gz
+chk    ac6ce1e1fbd4d0254c4ddb9d37f1fa99dec83619c1253328155206b896210d4c
+
 #
 # GLIB & friends
 #
@@ -151,8 +156,8 @@ chk  fb76247e369402be23f1f5c65d38a9639c1164d934e40f6a9cf3c9e96b652788
 file glib-networking/2.66/glib-networking-2.66.0.tar.xz
 chk  c5d7be2437fdd196eebfb70c4517b96d3ba7ec13bd496318b8f02dea383e0099
 
-file libsoup/2.60/libsoup-2.60.3.tar.xz
-chk  1b0dc762f23abe4e0d29b77370e539fd35f31d8e8e0318d6ddccff395be68a22
+file libsoup/2.72/libsoup-2.72.0.tar.xz
+chk  170c3f8446b0f65f8e4b93603349172b1085fb8917c181d10962f02bb85f5387
 
 # fribidi
 server https://github.com/fribidi/fribidi/releases/download

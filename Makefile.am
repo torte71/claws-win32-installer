@@ -35,7 +35,6 @@ EXTRA_DIST = autogen.sh \
         patches/claws-mail-3.17.8/02-quote-fmt-parse.patch \
         patches/enchant-1.6.0/01-no-tests.patch \
         patches/enchant-1.6.0/99-autogen.sh.patch \
-        patches/libsoup-2.60.3/01-no-docs-no-tests.patch \
         patches/webkitgtk-2.4.11/05-print-size.patch \
         patches/webkitgtk-2.4.11/01-std-threads.patch \
         patches/webkitgtk-2.4.11/04-LLIntAssembly-hack.patch \

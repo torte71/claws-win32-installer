@@ -92,6 +92,10 @@ Delete "$INSTDIR\libgmp-10.dll"
 Delete "$INSTDIR\libsoup-2.4-1.dll"
 
 #######################################
+### libpsl
+Delete "$INSTDIR\libpsl-5.dll"
+
+#######################################
 ### glib-networking
 Delete "$INSTDIR\lib\gio\modules\libgiognutls.dll"
 
