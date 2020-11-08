@@ -6,8 +6,6 @@ SET(CMAKE_C_COMPILER @host@-gcc)
 SET(CMAKE_CXX_COMPILER @host@-g++)
 SET(CMAKE_RC_COMPILER @host@-windres)
 
-SET(PKG_CONFIG_EXECUTABLE @host@-pkg-config)
-
 # here is the target environment located
 SET(CMAKE_FIND_ROOT_PATH @abs_top_builddir@/src/playground/install)
 

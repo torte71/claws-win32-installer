@@ -445,58 +445,6 @@ echo "dlpreopen=''" >> lib/libz.la;			\
 echo "libdir=\"$$$${pkgidir}/lib\"" >> lib/libz.la)
 endef
 
-# We need to fix the prefix in the various packages using pkgconfig,
-# or we can't substitute it properly in our pkg-config wrapper.
-define cm_pkg_atk_post_install
- (cd $$$${pkgidir_dev};							\
- perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)
-endef
-
-define cm_pkg_freetype_post_install
- (cd $$$${pkgidir_dev};							\
- perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)
-endef
-
-define cm_pkg_fontconfig_post_install
- (cd $$$${pkgidir_dev};							\
- perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)
-endef
-
-define cm_pkg_cairo_post_install
- (cd $$$${pkgidir_dev};							\
- perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)
-endef
-
-define cm_pkg_pango_post_install
- (cd $$$${pkgidir_dev};							\
- perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)
-endef
-
-define cm_pkg_gtk__post_install
- (cd $$$${pkgidir_dev};							\
- perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)
-endef
-
-define cm_pkg_libpng_post_install
- (cd $$$${pkgidir};							\
- perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)
-endef
-
-define cm_pkg_enchant_post_install
- (cd $$$${pkgidir};							\
- perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)
-endef
-
-define cm_pkg_libtasn1_post_install
- (cd $$$${pkgidir};							\
- perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)
-endef
-
-define cm_pkg_gnutls_post_install
- (cd $$$${pkgidir};							\
- perl -pi -e 's/^prefix=.*$$$$/prefix=\/usr/' `find . -name \*.pc`)
-endef
-
 #define cm_pkg_libiconv_post_install
 #(cp $(srcdir)/libiconv.def $$$${pkgidir}/lib;		\
 #cd $$$${pkgidir}/lib;					\

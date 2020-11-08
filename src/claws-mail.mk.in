@@ -84,9 +84,9 @@ define SETVARS
 	pkgmkargs_inst="$(call GETVAR,cm_pkg_$(1)_make_args_inst)";\
 	pkgmkdir="$(call GETVAR,cm_pkg_$(1)_make_dir)";             \
 	pkgmkdir_inst="$(call GETVAR,cm_pkg_$(1)_make_dir)";        \
-	export PKG_CONFIG="$(tsdir)/src/pkg-config";			\
+	export PKG_CONFIG="pkg-config";				\
 	export PKG_CONFIG_PATH="$(idir)/lib/pkgconfig";			\
-	export PKG_CONFIG_LIBDIR="";					\
+	export PKG_CONFIG_LIBDIR="$(idir)/lib/pkgconfig";		\
 	export PATH="$(idir)/bin:$${PATH}";				\
 	export SYSROOT="$(idir)";					\
 	export CONFIG_SITE="$(tsdir)/src/config.site"
@@ -170,8 +170,8 @@ stamps/stamp-$(1)-02-configure: stamps/stamp-$(1)-01-patch
 		eval "$(CMAKE) $$$${pkgcfg} -DCMAKE_INSTALL_PREFIX=$$$${pkgidir} ../$$$${pkg_version}"; \
 	elif [ "$$$${pkgmeson}" = "yes" ]; then \
 		$(call MESON_CROSSFILE,$(1)); \
-		eval "PKG_CONFIG_LIBDIR=$$$${PKG_CONFIG_PATH} $(MESON) \
-			--prefix=$$$${pkgidir} $$$${pkgcfg} --cross-file $$$${pkgsdir}/meson-cross.txt $$$${pkgsdir} $$$${pkgbdir}"; \
+		eval "$(MESON) --prefix=$$$${pkgidir} $$$${pkgcfg} \
+			--cross-file $$$${pkgsdir}/meson-cross.txt $$$${pkgsdir} $$$${pkgbdir}"; \
 	else \
 		eval "../$$$${pkg_version}/configure"		\
 			--prefix="$$$${pkgidir}"		\
