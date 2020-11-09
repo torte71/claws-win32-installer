@@ -1,0 +1,17 @@
+[host_machine]
+system = 'windows'
+cpu_family = '@meson_cpu_family@'
+cpu = '@host_cpu@'
+endian = 'little'
+
+[binaries]
+c = '@host@-gcc'
+cpp = '@host@-g++'
+ar = '@host@-ar'
+ld = '@host@-ld'
+objcopy = '@host@-objcopy'
+strip = '@host@-strip'
+pkgconfig = '@host@-pkg-config'
+windres = '@host@-windres'
+
+[properties]

@@ -9,6 +9,7 @@ config.status
 config.status.lineno
 configure.lineno
 configure
+configure.ac
 stamp-h1
 stamp-autogen-1stpass
 /*.tar.bz2
@@ -62,3 +63,4 @@ src/claws-mail.mk
 /src/license.blurb
 /src/mkportable.exe
 /src/Toolchain-mingw32.cmake
+/src/meson-cross.txt

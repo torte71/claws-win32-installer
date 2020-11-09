@@ -219,18 +219,22 @@ else
   fi
 fi
 
-# Set correct variables for the installer, based on arch
+# Set variables based on arch
 if test "$host" = "i686-w64-mingw32"; then
 	gpg_dll_num=""
 	w64="no"
+	meson_cpu_family="x86"
 elif test "$host" = "x86_64-w64-mingw32"; then
 	gpg_dll_num="6"
 	w64="yes"
+	meson_cpu_family="x86_64"
 fi
 AC_SUBST(gpg_dll_num)
 AC_SUBST(libgcc_dll)
 AC_SUBST(w64)
 AC_SUBST(host)
+AC_SUBST(host_cpu)
+AC_SUBST(meson_cpu_family)
 
 # For the manual we need:
 AC_CHECK_PROGS(DOCBOOK2HTML, docbook2html)
@@ -330,6 +334,7 @@ fi
 AC_CONFIG_FILES(Makefile)
 AC_CONFIG_FILES(packages/Makefile src/Makefile po/Makefile.in)
 AC_CONFIG_FILES(src/Toolchain-mingw32.cmake)
+AC_CONFIG_FILES(src/meson-cross.txt)
 AC_CONFIG_FILES(po/build-cc)
 AC_CONFIG_FILES(src/config.nsi src/claws-mail.mk)
 AC_CONFIG_FILES(doc/Makefile)

@@ -26,7 +26,7 @@ EXTRA_DIST = pkg-config claws-mail.nsi \
 				installer-options.ini installer-setdefaultclient.ini \
         libiconv.def libintl.def \
 				mingw.condition_variable.h mingw.mutex.h mingw.thread.h \
-        Memento.nsh Toolchain-mingw32.cmake.in
+        Memento.nsh Toolchain-mingw32.cmake.in meson-cross.txt.in
 
 SUBDIRS = dictionaries
 
