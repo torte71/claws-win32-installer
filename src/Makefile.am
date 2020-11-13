@@ -341,7 +341,7 @@ cm_pkg_webkitgtk_configure = \
          CC=$(CC) LIBS=\"-L$(idir)/lib\"
 
 cm_pkg_libical_cmake_args = \
-	-DCMAKE_TOOLCHAIN_FILE=$(tsdir)/src/Toolchain-mingw32.cmake \
+	-DCMAKE_TOOLCHAIN_FILE=$(abs_top_srcdir)/src/Toolchain-mingw32.cmake \
 	-DCMAKE_VERBOSE_MAKEFILE=ON \
 	-DCMAKE_PREFIX_PATH=$(idir) \
 	-DPKG_CONFIG_USE_CMAKE_PREFIX_PATH=True \

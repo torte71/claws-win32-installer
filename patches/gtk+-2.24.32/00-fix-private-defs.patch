@@ -2,7 +2,7 @@
 
 # Find out which arch we're building for
 topdir=`dirname $0`
-topdir=${topdir/\/src*/}
+topdir=${topdir/\/patches*/}
 if [ -f ${topdir}/src/libgcc_s_seh-1.dll-x ]; then
 	arch=x86_64
 else

@@ -28,8 +28,7 @@ root := $(shell pwd)/playground
 bdir := $(root)/build
 idir := $(root)/install
 ipdir := $(root)/install/pkgs
-tsdir := $(shell pwd)/${top_srcdir}
-pdir := $(shell pwd)/${top_srcdir}/patches
+pdir := $(abs_top_srcdir)/patches
 
 # We collect the names of all pkg files used.
 pkg_files =
@@ -89,12 +88,12 @@ define SETVARS
 	export PKG_CONFIG_LIBDIR="$(idir)/lib/pkgconfig";		\
 	export PATH="$(idir)/bin:$${PATH}";				\
 	export SYSROOT="$(idir)";					\
-	export CONFIG_SITE="$(tsdir)/src/config.site"
+	export CONFIG_SITE="$(abs_top_srcdir)/src/config.site"
 endef
 
 # Set up meson crossbuild file
 define MESON_CROSSFILE
-	cp "$(tsdir)/src/meson-cross.txt" "$$$${pkgsdir}"; \
+	cp "$(abs_top_srcdir)/src/meson-cross.txt" "$$$${pkgsdir}"; \
 	meson_c_args="$(call GETVAR,cm_pkg_$(1)_meson_c_args)"; \
 	meson_c_link_args="$(call GETVAR,cm_pkg_$(1)_meson_c_link_args)"; \
 	if [ "x$$$${meson_c_args}" != "x" ]; then \
