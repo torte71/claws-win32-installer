@@ -102,16 +102,10 @@ cm_pkg_gettext_configure = \
   --with-lib-prefix=$(idir) \
   CPPFLAGS=-I$(idir)/include CFLAGS=-O2 LDFLAGS=\"-L$(idir)/lib\"
 
-cm_pkg_gettext_ex_configure = \
-  --with-lib-prefix=$(ex_idir) \
-  CPPFLAGS=-I$(ex_idir)/include CFLAGS=-O2 LDFLAGS=\"-L$(ex_idir)/lib\"
-
 # We only need gettext-runtime and there is sadly no top level
 # configure option for this
 cm_pkg_gettext_make_dir = gettext-runtime
 cm_pkg_gettext_make_dir_inst = gettext-runtime
-cm_pkg_gettext_ex_make_dir = gettext-runtime
-cm_pkg_gettext_ex_make_dir_inst = gettext-runtime
 
 cm_pkg_glib_meson_args = -Dinternal_pcre=true
 cm_pkg_glib_meson_c_args = [ '-I$(idir)/include' ]
@@ -186,10 +180,6 @@ cm_pkg_libgpg_error_configure = \
 	--disable-doc \
 	--enable-static \
 	CPPFLAGS=-I$(idir)/include LDFLAGS=\"-L$(idir)/lib\"
-
-cm_pkg_libgpg_error_ex_configure = \
-  CPPFLAGS=-I$(idir)/include LDFLAGS=\"-L$(idir)/lib\" \
-  --enable-static
 
 # We convert the PO files to UTF-8.  FIXME: This should be done in
 # libgpg-error proper.
