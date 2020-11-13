@@ -182,12 +182,12 @@ cm_pkg_cairo_configure = \
 	CPPFLAGS=\"-I$(idir)/include\" \
 	LDFLAGS=\"-L$(idir)/lib\"
 
-cm_pkg_libgpg_error_configure = --silent \
+cm_pkg_libgpg_error_configure = \
 	--disable-doc \
-  --enable-static \
-  CPPFLAGS=-I$(idir)/include LDFLAGS=\"-L$(idir)/lib\"
+	--enable-static \
+	CPPFLAGS=-I$(idir)/include LDFLAGS=\"-L$(idir)/lib\"
 
-cm_pkg_libgpg_error_ex_configure = --silent \
+cm_pkg_libgpg_error_ex_configure = \
   CPPFLAGS=-I$(idir)/include LDFLAGS=\"-L$(idir)/lib\" \
   --enable-static
 
@@ -202,7 +202,7 @@ cm_pkg_libgpg_error_ex_configure = --silent \
 # done)
 #endef
 
-cm_pkg_libassuan_configure =  --silent --enable-static
+cm_pkg_libassuan_configure =  --enable-static
 
 cm_pkg_libpng_configure = \
 	CPPFLAGS=\"-I$(idir)/include\" \
