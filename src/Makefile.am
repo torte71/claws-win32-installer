@@ -99,11 +99,11 @@ cm_pkg_libiconv_configure = \
 	--enable-shared=yes --enable-static=no
 
 cm_pkg_gettext_configure = \
-  --with-lib-prefix=$(idir) --with-libiconv-prefix=$(idir) \
+  --with-lib-prefix=$(idir) \
   CPPFLAGS=-I$(idir)/include CFLAGS=-O2 LDFLAGS=\"-L$(idir)/lib\"
 
 cm_pkg_gettext_ex_configure = \
-  --with-lib-prefix=$(ex_idir) --with-libiconv-prefix=$(ex_idir) \
+  --with-lib-prefix=$(ex_idir) \
   CPPFLAGS=-I$(ex_idir)/include CFLAGS=-O2 LDFLAGS=\"-L$(ex_idir)/lib\"
 
 # We only need gettext-runtime and there is sadly no top level
@@ -182,11 +182,6 @@ cm_pkg_cairo_configure = \
 	CPPFLAGS=\"-I$(idir)/include\" \
 	LDFLAGS=\"-L$(idir)/lib\"
 
-# We would like to use --with-libiconv-prefix and
-# --with-libintl-prefix, but these don't work with the cheesy
-# non-"libfoo.la" versions of iconv and gettext that we are using.
-#cm_pkg_libgpg_error_configure = \
-#  --with-libiconv-prefix=$(idir) --with-libintl-prefix=$(idir)
 cm_pkg_libgpg_error_configure = --silent \
 	--disable-doc \
   --enable-static \
@@ -259,7 +254,6 @@ cm_pkg_nettle_configure = \
 cm_pkg_curl_configure = \
   --with-gnutls --with-winssl --with-winidn\
 	--without-ca-bundle --without-ca-path \
-	--with-libiconv-prefix=$(idir) \
   CPPFLAGS=\"-I$(idir)/include\" LIBS=\"-L$(idir)/lib\"
 
 cm_pkg_libxml2_configure = \
@@ -288,8 +282,7 @@ cm_pkg_libetpan_configure = --with-gnutls --enable-threads \
 # actually gives us gmtime_r() and localtime_r() prototype declarations
 cm_pkg_claws_mail_configure = \
   --enable-silent-rules \
-  --with-lib-prefix=$(idir) --with-libiconv-prefix=$(idir) \
-  --with-gpgme-prefix=$(idir) \
+  --with-lib-prefix=$(idir) \
   --enable-pthread --enable-gnutls \
   --enable-libetpan --disable-dbus --disable-valgrind --enable-ipv6 \
   --disable-jpilot --disable-startup-notification \
@@ -303,9 +296,6 @@ cm_pkg_claws_mail_configure = \
 	CFLAGS=\"-O2 \" \
 	CPPFLAGS=\"-O2 -I$(idir)/include -D_POSIX_C_SOURCE -DLITEHTML_UTF8\" \
 	LDFLAGS=\"-L$(idir)/lib\" LIBS=\"-lexpat\"
-
-cm_pkg_jpeg_configure = \
-							--with-libiconv-prefix=$(idir)
 
 cm_pkg_sqlite_autoconf_configure = \
 	--disable-static-shell
