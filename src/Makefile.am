@@ -24,7 +24,6 @@ EXTRA_DIST = pkg-config claws-mail.nsi \
 				gnupg-uninst.nsi \
 				sections-installer.nsi sections-uninstaller.nsi \
 				installer-options.ini installer-setdefaultclient.ini \
-        libiconv.def libintl.def \
 				mingw.condition_variable.h mingw.mutex.h mingw.thread.h \
         Memento.nsh Toolchain-mingw32.cmake.in meson-cross.txt.in
 
@@ -385,30 +384,6 @@ cm_pkg_zlib_make_args_inst = -fwin32/Makefile.gcc install \
 
 # Supported binary packages.
 cm_bpkgs = bsfilter
-
-# libiconv needs some special magic to generate a usable import
-# library.
-# define cm_pkg_libiconv_post_install
-# (cp $(srcdir)/libiconv.def $$$${pkgidir}/lib;		\
-# cd $$$${pkgidir}/lib;					\
-# $(DLLTOOL) --output-lib libiconv.dll.a --def libiconv.def)
-# endef
-
-# libiconv needs some special magic to generate a usable import
-# library.  Note that we include some internal symbols that are not
-# actually part of the DLL.  They are needed by the AM_GNU_GETTEXT
-# configure test, but not used otherwise.
-# define cm_pkg_gettext_post_install
-# (cp $(srcdir)/libintl.def $$$${pkgidir}/lib;		\
-# cd $$$${pkgidir}/lib;					\
-# $(DLLTOOL) --output-lib libintl.dll.a --def libintl.def)
-# endef
-
-#define cm_pkg_libiconv_post_install
-#(cp $(srcdir)/libiconv.def $$$${pkgidir}/lib;		\
-#cd $$$${pkgidir}/lib;					\
-#$(DLLTOOL) --output-lib libiconv.dll.a --def libiconv.def)
-#endef
 
 # Now do the bunch of the work.  This is a bunch of dirty magic to
 # integrate our special makefile into automake, while not actually
