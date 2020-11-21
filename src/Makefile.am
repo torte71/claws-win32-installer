@@ -19,21 +19,21 @@
 
 
 EXTRA_DIST = pkg-config claws-mail.nsi \
-				config.site config.nsi.in \
-				functions.nsi strings.nsi \
-				gnupg-uninst.nsi \
-				sections-installer.nsi sections-uninstaller.nsi \
-				installer-options.ini installer-setdefaultclient.ini \
-				mingw.condition_variable.h mingw.mutex.h mingw.thread.h \
-        Memento.nsh Toolchain-mingw32.cmake.in meson-cross.txt.in
+	config.site config.nsi.in \
+	functions.nsi strings.nsi \
+	gnupg-uninst.nsi \
+	sections-installer.nsi sections-uninstaller.nsi \
+	installer-options.ini installer-setdefaultclient.ini \
+	mingw.condition_variable.h mingw.mutex.h mingw.thread.h \
+	Memento.nsh Toolchain-mingw32.cmake.in meson-cross.txt.in
 
 SUBDIRS = dictionaries
 
 # Need to clean the dll because we bypassed automake.
 #CLEANFILES = g4wihelp.dll versioninfo.txt \
 #             NEWS.tmp COMPONENTS-list.tmp \
-#	     license.blurb cdversioninfo.tmp \
-#	     gpgwrap.exe gpgwrap-2.exe
+#             license.blurb cdversioninfo.tmp \
+#             gpgwrap.exe gpgwrap-2.exe
 
 # Supported source packages.
 cm_spkgs = glib libffi gdk-pixbuf gtk+ expat \
@@ -98,8 +98,8 @@ cm_pkg_libiconv_configure = \
 	--enable-shared=yes --enable-static=no
 
 cm_pkg_gettext_configure = \
-  --with-lib-prefix=$(idir) \
-  CPPFLAGS=-I$(idir)/include CFLAGS=-O2 LDFLAGS=\"-L$(idir)/lib\"
+	--with-lib-prefix=$(idir) \
+	CPPFLAGS=-I$(idir)/include CFLAGS=-O2 LDFLAGS=\"-L$(idir)/lib\"
 
 # We only need gettext-runtime and there is sadly no top level
 # configure option for this
@@ -111,13 +111,13 @@ cm_pkg_glib_meson_c_args = [ '-I$(idir)/include' ]
 cm_pkg_glib_meson_c_link_args = [ '-L$(idir)/lib' ]
 
 cm_pkg_gdk_pixbuf_meson_args = \
-  -Dx11=false \
-  -Drelocatable=true \
-  -Dbuiltin_loaders=all \
-  -Dnative_windows_loaders=true \
-  -Dgir=false \
-  -Dinstalled_tests=false \
-  -Dman=false
+	-Dx11=false \
+	-Drelocatable=true \
+	-Dbuiltin_loaders=all \
+	-Dnative_windows_loaders=true \
+	-Dgir=false \
+	-Dinstalled_tests=false \
+	-Dman=false
 cm_pkg_gdk_pixbuf_meson_c_args = [ '-I$(idir)/include' ]
 cm_pkg_gdk_pixbuf_meson_c_link_args = [ '-L$(idir)/lib' ]
 
@@ -128,7 +128,7 @@ cm_pkg_gtk__configure = \
 	--disable-gtk-doc \
 	--disable-static \
 	--disable-glibtest \
-  CPPFLAGS=-I$(idir)/include LDFLAGS=\"-L$(idir)/lib\"
+	CPPFLAGS=-I$(idir)/include LDFLAGS=\"-L$(idir)/lib\"
 
 cm_pkg_harfbuzz_configure = \
 	--disable-gtk-doc-html \
@@ -214,9 +214,9 @@ cm_pkg_enchant_configure = \
 
 # The LDFLAGS is needed for -lintl for glib.
 cm_pkg_gpgme_configure = \
-  --enable-static \
-  --enable-w32-glib \
-  LDFLAGS=\"-L$(idir)/lib\"
+	--enable-static \
+	--enable-w32-glib \
+	LDFLAGS=\"-L$(idir)/lib\"
 
 # We can't use pkcs11 due to too much additional dependencies.
 cm_pkg_gnutls_configure = \
@@ -231,22 +231,22 @@ cm_pkg_gnutls_configure = \
 	CPPFLAGS=\"-I$(idir)/include\" LDFLAGS=\"-L$(idir)/lib\"
 
 cm_pkg_gmp_configure = \
-  --disable-static \
+	--disable-static \
 	--enable-shared \
 	--disable-cxx
 
 cm_pkg_nettle_configure = \
-  --enable-public-key \
+	--enable-public-key \
 	CPPFLAGS=\"-I$(idir)/include\" \
 	LDFLAGS=\"-L$(idir)/lib\"
 
 cm_pkg_curl_configure = \
-  --with-gnutls --with-winssl --with-winidn\
+	--with-gnutls --with-winssl --with-winidn\
 	--without-ca-bundle --without-ca-path \
-  CPPFLAGS=\"-I$(idir)/include\" LIBS=\"-L$(idir)/lib\"
+	CPPFLAGS=\"-I$(idir)/include\" LIBS=\"-L$(idir)/lib\"
 
 cm_pkg_libxml2_configure = \
-  --enable-shared --without-python --with-iconv=$(idir)
+	--enable-shared --without-python --with-iconv=$(idir)
 
 cm_pkg_libxslt_configure = \
 	--enable-shared --without-python
@@ -264,22 +264,22 @@ cm_pkg_cyrus_sasl_configure = \
 
 cm_pkg_libetpan_configure = --with-gnutls --enable-threads \
 	--enable-ipv6 \
-  CPPFLAGS=\"-I$(idir)/include\" \
-  LDFLAGS=\"-L$(idir)/lib\" LIBS=\"-lpthread\"
+	CPPFLAGS=\"-I$(idir)/include\" \
+	LDFLAGS=\"-L$(idir)/lib\" LIBS=\"-lpthread\"
 
 # -D_POSIX_C_SOURCE is there so that time.h from mingw64-4.x
 # actually gives us gmtime_r() and localtime_r() prototype declarations
 cm_pkg_claws_mail_configure = \
-  --enable-silent-rules \
-  --with-lib-prefix=$(idir) \
-  --enable-pthread --enable-gnutls \
-  --enable-libetpan --disable-dbus --disable-valgrind --enable-ipv6 \
-  --disable-jpilot --disable-startup-notification \
-  --disable-spamassassin-plugin --disable-bogofilter-plugin \
-  --enable-fancy-plugin \
-  --disable-acpi_notifier-plugin --disable-clamd-plugin \
-  --disable-perl-plugin --disable-python-plugin --disable-demo-plugin \
-  --disable-newmail-plugin --disable-mailmbox-plugin \
+	--enable-silent-rules \
+	--with-lib-prefix=$(idir) \
+	--enable-pthread --enable-gnutls \
+	--enable-libetpan --disable-dbus --disable-valgrind --enable-ipv6 \
+	--disable-jpilot --disable-startup-notification \
+	--disable-spamassassin-plugin --disable-bogofilter-plugin \
+	--enable-fancy-plugin \
+	--disable-acpi_notifier-plugin --disable-clamd-plugin \
+	--disable-perl-plugin --disable-python-plugin --disable-demo-plugin \
+	--disable-newmail-plugin --disable-mailmbox-plugin \
 	--disable-dillo-plugin --enable-tnef_parse-plugin \
 	--with-password-encryption=gnutls \
 	CFLAGS=\"-O2 \" \
@@ -310,35 +310,35 @@ cm_pkg_libwebp_configure = \
 	CPPFLAGS=\"-I$(idir)/include\"
 
 cm_pkg_webkitgtk_configure = \
-								--disable-webkit2 \
-								--enable-webkit1 \
-								--with-gtk=2.0 \
-								--disable-x11-target \
-								--disable-wayland-target \
-								--enable-win32-target \
-								--disable-spellcheck \
-								--disable-credential-storage \
-                --disable-gtk-doc-html \
-								--disable-svg-fonts \
-								--disable-jit \
-                --disable-video \
-								--disable-web-audio \
-								--disable-battery-status \
-								--disable-geolocation \
-								--disable-coverage \
-								--disable-glx \
-								--disable-egl \
-								--disable-gles2 \
-								--disable-gamepad \
-								--disable-webgl \
-								--disable-glibtest \
-								--disable-debug \
-								--disable-accelerated-compositing \
-								--enable-silent-rules \
-               CFLAGS=\"-I$(idir)/include -O2 -mms-bitfields\" \
-               CXXFLAGS=\"-I$(idir)/include -O2 -std=gnu++98 -mms-bitfields -fexceptions\" \
-               CPPFLAGS=\"-I$(idir)/include -O2 -mms-bitfields -Wno-expansion-to-defined\" \
-         CC=$(CC) LIBS=\"-L$(idir)/lib\"
+	--disable-webkit2 \
+	--enable-webkit1 \
+	--with-gtk=2.0 \
+	--disable-x11-target \
+	--disable-wayland-target \
+	--enable-win32-target \
+	--disable-spellcheck \
+	--disable-credential-storage \
+	--disable-gtk-doc-html \
+	--disable-svg-fonts \
+	--disable-jit \
+	--disable-video \
+	--disable-web-audio \
+	--disable-battery-status \
+	--disable-geolocation \
+	--disable-coverage \
+	--disable-glx \
+	--disable-egl \
+	--disable-gles2 \
+	--disable-gamepad \
+	--disable-webgl \
+	--disable-glibtest \
+	--disable-debug \
+	--disable-accelerated-compositing \
+	--enable-silent-rules \
+	CFLAGS=\"-I$(idir)/include -O2 -mms-bitfields\" \
+	CXXFLAGS=\"-I$(idir)/include -O2 -std=gnu++98 -mms-bitfields -fexceptions\" \
+	CPPFLAGS=\"-I$(idir)/include -O2 -mms-bitfields -Wno-expansion-to-defined\" \
+	CC=$(CC) LIBS=\"-L$(idir)/lib\"
 
 cm_pkg_libical_cmake_args = \
 	-DCMAKE_TOOLCHAIN_FILE=$(abs_top_srcdir)/src/Toolchain-mingw32.cmake \
@@ -369,13 +369,13 @@ cm_mpkgs = bzip2 zlib
 # Extra options for the make invocations for individual packages.
 # make_flags is used for building, make_args_inst is used for installing.
 cm_pkg_bzip2_make_args = -j$(NUMPROC) \
-  CC=$(CC) AR=$(AR) RANLIB=$(RANLIB)
+	CC=$(CC) AR=$(AR) RANLIB=$(RANLIB)
 
 cm_pkg_bzip2_make_args_inst = \
-  PREFIX=$$$${pkgidir} CC=$(CC) AR=$(AR) RANLIB=$(RANLIB)
+	PREFIX=$$$${pkgidir} CC=$(CC) AR=$(AR) RANLIB=$(RANLIB)
 
 cm_pkg_zlib_make_args = -j$(NUMPROC) \
-  -fwin32/Makefile.gcc PREFIX=$(host)-
+	-fwin32/Makefile.gcc PREFIX=$(host)-
 
 cm_pkg_zlib_make_args_inst = -fwin32/Makefile.gcc install \
 	prefix=$$$${pkgidir} \
