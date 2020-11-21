@@ -99,18 +99,18 @@ cm_pkg_libiconv_configure = \
 
 cm_pkg_gettext_configure = \
 	--with-lib-prefix=$(idir) \
-	CPPFLAGS=-I$(idir)/include CFLAGS=-O2 LDFLAGS=\"-L$(idir)/lib\"
+	CPPFLAGS=-I$(idir)/include LDFLAGS=\"-L$(idir)/lib\"
 
 # We only need gettext-runtime and there is sadly no top level
 # configure option for this
 cm_pkg_gettext_make_dir = gettext-runtime
 cm_pkg_gettext_make_dir_inst = gettext-runtime
 
-cm_pkg_glib_meson_args = -Dinternal_pcre=true
-cm_pkg_glib_meson_c_args = [ '-I$(idir)/include' ]
-cm_pkg_glib_meson_c_link_args = [ '-L$(idir)/lib' ]
+cm_pkg_glib_configure = -Dinternal_pcre=true
+cm_pkg_glib_meson_cppflags = -I$(idir)/include
+cm_pkg_glib_meson_ldflags = -L$(idir)/lib
 
-cm_pkg_gdk_pixbuf_meson_args = \
+cm_pkg_gdk_pixbuf_configure = \
 	-Dx11=false \
 	-Drelocatable=true \
 	-Dbuiltin_loaders=all \
@@ -118,8 +118,8 @@ cm_pkg_gdk_pixbuf_meson_args = \
 	-Dgir=false \
 	-Dinstalled_tests=false \
 	-Dman=false
-cm_pkg_gdk_pixbuf_meson_c_args = [ '-I$(idir)/include' ]
-cm_pkg_gdk_pixbuf_meson_c_link_args = [ '-L$(idir)/lib' ]
+cm_pkg_gdk_pixbuf_meson_cppflags = -I$(idir)/include
+cm_pkg_gdk_pixbuf_meson_ldflags = -L$(idir)/lib
 
 cm_pkg_gtk__configure = \
 	--with-gdktarget=win32 \
@@ -152,22 +152,22 @@ cm_pkg_fontconfig_configure = \
 	CPPFLAGS=\"-I$(idir)/include\" \
 	LDFLAGS=\"-L$(idir)/lib\"
 
-cm_pkg_fribidi_meson_args = -Ddocs=false -Dtests=false
+cm_pkg_fribidi_configure = -Ddocs=false -Dtests=false
 
-cm_pkg_pango_meson_args = \
+cm_pkg_pango_configure = \
 	-Dcairo=enabled \
 	-Dfontconfig=enabled \
 	-Dfreetype=enabled \
 	-Dgtk_doc=false \
 	-Dintrospection=false
-cm_pkg_pango_meson_c_link_args = [ '-L$(idir)/lib' ]
+cm_pkg_pango_meson_ldflags = -L$(idir)/lib
 
-cm_pkg_atk_meson_args = -Dintrospection=false
-cm_pkg_atk_meson_c_args = [ '-I$(idir)/include' ]
-cm_pkg_atk_meson_c_link_args = [ '-L$(idir)/lib' ]
+cm_pkg_atk_configure = -Dintrospection=false
+cm_pkg_atk_meson_cppflags = -I$(idir)/include
+cm_pkg_atk_meson_ldflags = -L$(idir)/lib
 
-cm_pkg_pixman_meson_c_args = [ '-I$(idir)/include' ]
-cm_pkg_pixman_meson_c_link_args = [ '-L$(idir)/lib' ]
+cm_pkg_pixman_meson_cppflags = -I$(idir)/include
+cm_pkg_pixman_meson_ldflags = -L$(idir)/lib
 
 cm_pkg_cairo_configure = \
 	--enable-win32 --enable-win32-font \
@@ -282,28 +282,27 @@ cm_pkg_claws_mail_configure = \
 	--disable-newmail-plugin --disable-mailmbox-plugin \
 	--disable-dillo-plugin --enable-tnef_parse-plugin \
 	--with-password-encryption=gnutls \
-	CFLAGS=\"-O2 \" \
-	CPPFLAGS=\"-O2 -I$(idir)/include -D_POSIX_C_SOURCE -DLITEHTML_UTF8\" \
+	CPPFLAGS=\"-I$(idir)/include -D_POSIX_C_SOURCE -DLITEHTML_UTF8\" \
 	LDFLAGS=\"-L$(idir)/lib\" LIBS=\"-lexpat\"
 
 cm_pkg_sqlite_autoconf_configure = \
 	--disable-static-shell
 
-cm_pkg_glib_networking_meson_args = -Dgnutls=enabled -Dopenssl=disabled -Dlibproxy=disabled -Dgnome_proxy=disabled
-cm_pkg_glib_networking_meson_c_args = [ '-I$(idir)/include' ]
-cm_pkg_glib_networking_meson_c_link_args = [ '-L$(idir)/lib' ]
+cm_pkg_glib_networking_configure = -Dgnutls=enabled -Dopenssl=disabled -Dlibproxy=disabled -Dgnome_proxy=disabled
+cm_pkg_glib_networking_meson_cppflags = -I$(idir)/include
+cm_pkg_glib_networking_meson_ldflags = -L$(idir)/lib
 
-cm_pkg_libpsl_meson_c_args = [ '-I$(idir)/include' ]
+cm_pkg_libpsl_meson_cppflags = -I$(idir)/include
 
-cm_pkg_libsoup_meson_args = \
+cm_pkg_libsoup_configure = \
 	-Dgnome=false \
 	-Dgssapi=disabled \
 	-Dtests=false \
 	-Dsysprof=disabled \
 	-Dtls_check=false \
 	-Dintrospection=disabled
-cm_pkg_libsoup_meson_c_args = [ '-I$(idir)/include' ]
-cm_pkg_libsoup_meson_c_link_args = [ '-L$(idir)/lib' ]
+cm_pkg_libsoup_meson_cppflags = -I$(idir)/include
+cm_pkg_libsoup_meson_ldflags = -L$(idir)/lib
 
 cm_pkg_libwebp_configure = \
 	LDFLAGS=\"-L$(idir)/lib\" \
@@ -335,12 +334,15 @@ cm_pkg_webkitgtk_configure = \
 	--disable-debug \
 	--disable-accelerated-compositing \
 	--enable-silent-rules \
-	CFLAGS=\"-I$(idir)/include -O2 -mms-bitfields\" \
-	CXXFLAGS=\"-I$(idir)/include -O2 -std=gnu++98 -mms-bitfields -fexceptions\" \
-	CPPFLAGS=\"-I$(idir)/include -O2 -mms-bitfields -Wno-expansion-to-defined\" \
+	CPPFLAGS=\"-I$(idir)/include -Wno-expansion-to-defined\" \
 	CC=$(CC) LIBS=\"-L$(idir)/lib\"
+# -ggdb causes an ICE with gcc-8.3 / webkit-2.4.11
+cm_pkg_webkitgtk_cflags = \
+	-O2 -pipe -mms-bitfields
+cm_pkg_webkitgtk_cxxflags = \
+	-O2 -pipe -mms-bitfields -std=gnu++98 -fexceptions
 
-cm_pkg_libical_cmake_args = \
+cm_pkg_libical_configure = \
 	-DCMAKE_TOOLCHAIN_FILE=$(abs_top_srcdir)/src/Toolchain-mingw32.cmake \
 	-DCMAKE_VERBOSE_MAKEFILE=ON \
 	-DCMAKE_PREFIX_PATH=$(idir) \

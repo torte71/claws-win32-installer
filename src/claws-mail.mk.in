@@ -71,14 +71,18 @@ define SETVARS
 	pkgidir_dev="$(ipdir)/$$$${pkg_version_dev}";			\
 	if [ "x$(call GETVAR,cm_pkg_$(1)_cmake)" = "xyes" ]; then \
 		pkgcmake="yes"; \
-		pkgcfg="$(call GETVAR,cm_pkg_$(1)_cmake_args)"; \
 	elif [ "x$(call GETVAR,cm_pkg_$(1)_meson)" = "xyes" ]; then \
 		pkgmeson="yes"; \
-		pkgcfg="$(call GETVAR,cm_pkg_$(1)_meson_args)"; \
-	else \
-		pkgcfg="$(call GETVAR,cm_pkg_$(1)_configure)";		\
 	fi; \
-	pkgextracflags="$(call GETVAR,cm_pkg_$(1)_extracflags)";	\
+	pkgcfg="$(call GETVAR,cm_pkg_$(1)_configure)";		\
+	pkgcflags="$(call GETVAR,cm_pkg_$(1)_cflags)";	\
+	if [ "x$$$${pkgcflags}" = "x" ]; then \
+		pkgcflags="@CM_DEFAULT_CFLAGS@"; \
+	fi; \
+	pkgcxxflags="$(call GETVAR,cm_pkg_$(1)_cxxflags)";	\
+	if [ "x$$$${pkgcxxflags}" = "x" ]; then \
+		pkgcxxflags="@CM_DEFAULT_CXXFLAGS@"; \
+	fi; \
 	pkgmkargs="$(call GETVAR,cm_pkg_$(1)_make_args)";          \
 	pkgmkargs_inst="$(call GETVAR,cm_pkg_$(1)_make_args_inst)";\
 	pkgmkdir="$(call GETVAR,cm_pkg_$(1)_make_dir)";             \
@@ -89,19 +93,6 @@ define SETVARS
 	export PATH="$(idir)/bin:$${PATH}";				\
 	export SYSROOT="$(idir)";					\
 	export CONFIG_SITE="$(abs_top_srcdir)/src/config.site"
-endef
-
-# Set up meson crossbuild file
-define MESON_CROSSFILE
-	cp "$(abs_top_srcdir)/src/meson-cross.txt" "$$$${pkgsdir}"; \
-	meson_c_args="$(call GETVAR,cm_pkg_$(1)_meson_c_args)"; \
-	meson_c_link_args="$(call GETVAR,cm_pkg_$(1)_meson_c_link_args)"; \
-	if [ "x$$$${meson_c_args}" != "x" ]; then \
-		echo "c_args = $$$${meson_c_args}" >> "$$$${pkgsdir}/meson-cross.txt"; \
-	fi; \
-	if [ "x$$$${meson_c_link_args}" != "x" ]; then \
-		echo "c_link_args = $$$${meson_c_link_args}" >> "$$$${pkgsdir}/meson-cross.txt"; \
-	fi
 endef
 
 # Support macro.  Unpack the archive $(1).
@@ -168,15 +159,24 @@ stamps/stamp-$(1)-02-configure: stamps/stamp-$(1)-01-patch
 	if [ "$$$${pkgcmake}" = "yes" ]; then \
 		eval "$(CMAKE) $$$${pkgcfg} -DCMAKE_INSTALL_PREFIX=$$$${pkgidir} ../$$$${pkg_version}"; \
 	elif [ "$$$${pkgmeson}" = "yes" ]; then \
-		$(call MESON_CROSSFILE,$(1)); \
-		eval "$(MESON) --prefix=$$$${pkgidir} $$$${pkgcfg} \
-			--cross-file $$$${pkgsdir}/meson-cross.txt $$$${pkgsdir} $$$${pkgbdir}"; \
+		meson_cppflags="$(call GETVAR,cm_pkg_$(1)_meson_cppflags)"; \
+		meson_ldflags="$(call GETVAR,cm_pkg_$(1)_meson_ldflags)"; \
+		eval "$(MESON) \
+			--prefix=$$$${pkgidir} \
+			--buildtype plain \
+			-Dc_args=\"$$$${pkgcflags} $$$${meson_cppflags}\" \
+			-Dc_link_args=\"$$$${pkgcflags} $$$${meson_ldflags}\" \
+			-Dcpp_args=\"$$$${pkgcxxflags} $$$${meson_cppflags}\" \
+			-Dcpp_link_args=\"$$$${pkgcxxflags} $$$${meson_ldflags}\" \
+			$$$${pkgcfg} \
+			--cross-file "$(abs_top_srcdir)/src/meson-cross.txt" \
+			$$$${pkgsdir} $$$${pkgbdir}"; \
 	else \
 		eval "../$$$${pkg_version}/configure"		\
 			--prefix="$$$${pkgidir}"		\
 			--host=$(host)				\
 			--build=$(build)			\
-			$$$${pkgcfg} CFLAGS=\"-mms-bitfields -ggdb $$$${pkgextracflags}\"; \
+			$$$${pkgcfg} CFLAGS=\"$$$${pkgcflags}\" CXXFLAGS=\"$$$${pkgcxxflags}\"; \
 		shopt -s nullglob;					\
 		for pfile in "$$$${pkgpbdir}"/*.postcfg "$$$${pkgpdir}"/*.postcfg ; do  		\
 			(cd "$$$${pkgsdir}"; "$$$${pfile}")			\
@@ -192,7 +192,7 @@ stamps/stamp-$(1)-03-make: stamps/stamp-$(1)-02-configure
 	  cd "$$$${pkgbdir}";				\
 	  test -n "$$$${pkgmkdir}" && cd "$$$${pkgmkdir}";	\
 	  if [ "$$$${pkgmeson}" = "yes" ]; then \
-	    $(NINJA) -C $$$${pkgbdir}; \
+	    $(NINJA) -v -C $$$${pkgbdir}; \
 	  else \
 	    $(MAKE) $(AM_MAKEFLAGS) $$$${pkgmkargs} ;\
 	  fi)
