@@ -343,11 +343,6 @@ cm_pkg_webkitgtk_cxxflags = \
 	-O2 -pipe -mms-bitfields -std=gnu++98 -fexceptions
 
 cm_pkg_libical_configure = \
-	-DCMAKE_TOOLCHAIN_FILE=$(abs_top_srcdir)/src/Toolchain-mingw32.cmake \
-	-DCMAKE_VERBOSE_MAKEFILE=ON \
-	-DCMAKE_PREFIX_PATH=$(idir) \
-	-DPKG_CONFIG_USE_CMAKE_PREFIX_PATH=True \
-	-DCMAKE_BUILD_TYPE=RelWithDebInfo \
 	-DICAL_BUILD_DOCS=OFF \
 	-DICAL_GLIB=OFF \
 	-DLIBICAL_BUILD_TESTING=OFF

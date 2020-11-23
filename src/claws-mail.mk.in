@@ -157,7 +157,17 @@ stamps/stamp-$(1)-02-configure: stamps/stamp-$(1)-01-patch
 	mkdir "$$$${pkgbdir}";				\
 	cd "$$$${pkgbdir}";				\
 	if [ "$$$${pkgcmake}" = "yes" ]; then \
-		eval "$(CMAKE) $$$${pkgcfg} -DCMAKE_INSTALL_PREFIX=$$$${pkgidir} ../$$$${pkg_version}"; \
+		eval "$(CMAKE) \
+			-DCMAKE_TOOLCHAIN_FILE=$(abs_top_srcdir)/src/Toolchain-mingw32.cmake \
+			-DCMAKE_INSTALL_PREFIX=$$$${pkgidir} \
+			-DCMAKE_PREFIX_PATH=$(idir) \
+			-DPKG_CONFIG_USE_CMAKE_PREFIX_PATH=True \
+			-DCMAKE_BUILD_TYPE=RelWithDebInfo \
+			-DCMAKE_VERBOSE_MAKEFILE=ON \
+			$$$${pkgcfg} \
+			-DCMAKE_C_FLAGS_RELWITHDEBINFO=\"$$$${pkgcflags} -DNDEBUG\" \
+			-DCMAKE_CXX_FLAGS_RELWITHDEBINFO=\"$$$${pkgcxxflags} -DNDEBUG\" \
+			$$$${pkgsdir}"; \
 	elif [ "$$$${pkgmeson}" = "yes" ]; then \
 		meson_cppflags="$(call GETVAR,cm_pkg_$(1)_meson_cppflags)"; \
 		meson_ldflags="$(call GETVAR,cm_pkg_$(1)_meson_ldflags)"; \
