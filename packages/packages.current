@@ -174,10 +174,12 @@ chk  49e481d06cdff97bf68d99fa26bdf785331f411614485d892ea4c78eb479b218
 #
 # CAIRO
 #
-server https://cairographics.org/releases
+server https://cairographics.org/snapshots
 
-file cairo-1.16.0.tar.xz
-chk  5e7b29b3f113ef870d1e3ecf8adf21f923396401604bda16d44be45e66052331
+file cairo-1.17.4.tar.xz
+chk 74b24c1ed436bbe87499179a3b27c43f4143b8676d8ad237a6fa787401959705
+
+server https://cairographics.org/releases
 
 file pixman-0.40.0.tar.gz
 chk  6d200dec3740d9ec4ec8d1180e25779c00bc749f94278c8b9021f5534db223fc
