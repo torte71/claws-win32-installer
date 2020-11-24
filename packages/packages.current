@@ -141,8 +141,8 @@ server https://ftp.gnome.org/pub/gnome/sources
 file glib/2.66/glib-2.66.2.tar.xz
 chk  ec390bed4e8dd0f89e918f385e8d4cfd7470b1ef7c1ce93ec5c4fc6e3c6a17c4
 
-file gtk+/2.24/gtk+-2.24.32.tar.xz
-chk  b6c8a93ddda5eabe3bfee1eb39636c9a03d2a56c7b62828b359bf197943c582e
+file gtk+/2.24/gtk+-2.24.33.tar.xz
+chk  ac2ac757f5942d318a311a54b0c80b5ef295f299c2a73c632f6bfb1ff49cc6da
 
 file gdk-pixbuf/2.40/gdk-pixbuf-2.40.0.tar.xz
 chk  1582595099537ca8ff3b99c6804350b4c058bb8ad67411bbaae024ee7cead4e6

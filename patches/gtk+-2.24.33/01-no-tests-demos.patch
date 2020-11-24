@@ -1,0 +1,41 @@
+#! /bin/sh
+
+patch -p1 -f $* < $0
+exit $?
+
+diff -ruN a/Makefile.in b/Makefile.in
+--- a/Makefile.in	2020-11-23 21:47:32.528963138 -0700
++++ b/Makefile.in	2020-11-23 21:46:02.695409552 -0700
+@@ -566,7 +566,7 @@
+ 	|| { echo "Gtk+Tests:ERROR: Failed to start Xvfb environment for X11 target tests."; exit 1; } \
+ 	&& DISPLAY=:$$XID && export DISPLAY
+ 
+-SRC_SUBDIRS = gdk gtk modules demos tests perf
++SRC_SUBDIRS = gdk gtk modules perf
+ SUBDIRS = po po-properties $(SRC_SUBDIRS) docs m4macros build
+ 
+ # require automake 1.4
+diff -ruN a/gdk/Makefile.in b/gdk/Makefile.in
+--- a/gdk/Makefile.in	2020-11-23 21:47:33.176315103 -0700
++++ b/gdk/Makefile.in	2020-11-23 21:46:32.669842846 -0700
+@@ -879,7 +879,7 @@
+    --includedir=$(srcdir) \
+    --includedir=.
+ 
+-SUBDIRS = $(gdktarget) . tests
++SUBDIRS = $(gdktarget) .
+ DIST_SUBDIRS = win32 x11 quartz directfb tests
+ CLEANFILES = $(am__append_4)
+ INCLUDES = \
+diff -ruN a/gtk/Makefile.in b/gtk/Makefile.in
+--- a/gtk/Makefile.in	2020-11-23 21:47:33.895597347 -0700
++++ b/gtk/Makefile.in	2020-11-23 21:47:02.427593326 -0700
+@@ -2011,7 +2011,7 @@
+ 
+ @USE_QUARTZ_FALSE@GTK_PRINT_PREVIEW_COMMAND = "evince --unlink-tempfile --preview --print-settings %s %f"
+ @USE_QUARTZ_TRUE@GTK_PRINT_PREVIEW_COMMAND = "open -b com.apple.Preview %f"
+-SUBDIRS = theme-bits . tests
++SUBDIRS = theme-bits .
+ DIST_SUBDIRS = theme-bits tests
+ @HAVE_CUPS_FALSE@@HAVE_PAPI_CUPS_FALSE@@HAVE_PAPI_FALSE@GTK_PRINT_BACKENDS = file,lpr
+ @HAVE_CUPS_FALSE@@HAVE_PAPI_CUPS_FALSE@@HAVE_PAPI_TRUE@GTK_PRINT_BACKENDS = file,papi
