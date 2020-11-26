@@ -1,0 +1,66 @@
+#!/bin/sh
+patch -p1 -f $* < $0
+ret=$?
+NOCONFIGURE=1 ./autogen.sh
+exit $ret
+
+From 4ec95b1335e1683e2d21061eed7e726ffa6c1164 Mon Sep 17 00:00:00 2001
+From: Jonathan Boeing <jonathan.n.boeing@gmail.com>
+Date: Wed, 25 Nov 2020 20:33:19 -0700
+Subject: [PATCH 2/2] Define WIN32 for litehtml
+
+Litehtml has an #ifdef WIN32 for defining the t_xxx string functions.
+The Windows build still gets the desired definitions without it, but
+building claws with -DLITEHTML_UTF8 gives the warning:
+
+warning: "LITEHTML_UTF8" redefined
+---
+ src/plugins/litehtml_viewer/Makefile.am          | 7 ++++++-
+ src/plugins/litehtml_viewer/litehtml/Makefile.am | 2 +-
+ 2 files changed, 7 insertions(+), 2 deletions(-)
+
+diff --git a/src/plugins/litehtml_viewer/Makefile.am b/src/plugins/litehtml_viewer/Makefile.am
+index f91ea5926..c1edfc54e 100644
+--- a/src/plugins/litehtml_viewer/Makefile.am
++++ b/src/plugins/litehtml_viewer/Makefile.am
+@@ -40,10 +40,14 @@ endif
+ 
+ if PLATFORM_WIN32
+ no_undefined = -no-undefined
++lh_def_win32 = -DWIN32
+ else
+ no_undefined =
++lh_def_win32 =
+ endif
+ 
++export lh_def_win32
++
+ if CYGWIN
+ cygwin_export_lib = -L$(top_builddir)/src -lclaws-mail
+ else
+@@ -98,7 +102,8 @@ litehtml_viewer_la_CPPFLAGS = \
+ 	$(FONTCONFIG_CFLAGS) \
+ 	$(CAIRO_CFLAGS) \
+ 	$(CURL_CFLAGS) \
+-	$(LIBGUMBO_CFLAGS)
++	$(LIBGUMBO_CFLAGS) \
++	$(lh_def_win32)
+ 
+ .PHONY: test
+ 
+diff --git a/src/plugins/litehtml_viewer/litehtml/Makefile.am b/src/plugins/litehtml_viewer/litehtml/Makefile.am
+index 025e3152b..cf71613bb 100644
+--- a/src/plugins/litehtml_viewer/litehtml/Makefile.am
++++ b/src/plugins/litehtml_viewer/litehtml/Makefile.am
+@@ -57,7 +57,7 @@ liblitehtml_la_LDFLAGS = \
+         -avoid-version -module \
+         $(LIBGUMBO_LIBS)
+ 
+-liblitehtml_la_CPPFLAGS = \
++liblitehtml_la_CPPFLAGS = $(lh_def_win32) \
+         $(LIBGUMBO_CFLAGS)
+ 
+ EXTRA_DIST = \
+-- 
+2.20.1
+
