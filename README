@@ -45,10 +45,6 @@ different toolchain versions.
 To finish the build, following packages need to be installed on a
 Debian Buster system.
 
-Note - at the time of writing, the meson package in Debian Buster
-(currently 0.49.1) is too old to build pixman, but a sufficiently
-recent version can be installed from buster-backports (currently 0.52.1).
-
 automake
 autoconf
 mingw-w64

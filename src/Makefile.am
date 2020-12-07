@@ -87,7 +87,6 @@ cm_pkg_libical_cmake = yes
 
 cm_pkg_atk_meson = yes
 cm_pkg_glib_meson = yes
-cm_pkg_pixman_meson = yes
 cm_pkg_glib_networking_meson = yes
 cm_pkg_gdk_pixbuf_meson = yes
 cm_pkg_fribidi_meson = yes
@@ -167,8 +166,10 @@ cm_pkg_atk_configure = -Dintrospection=false
 cm_pkg_atk_meson_cppflags = -I$(idir)/include
 cm_pkg_atk_meson_ldflags = -L$(idir)/lib
 
-cm_pkg_pixman_meson_cppflags = -I$(idir)/include
-cm_pkg_pixman_meson_ldflags = -L$(idir)/lib
+cm_pkg_pixman_configure = \
+	--enable-libpng --disable-sse2 \
+	CPPFLAGS=\"-I$(idir)/include\" \
+	LDFLAGS=\"-L$(idir)/lib\"
 
 cm_pkg_cairo_configure = \
 	--enable-win32 --enable-win32-font \

@@ -188,10 +188,8 @@ server http://cairographics.org/releases
 file cairo-1.10.2.tar.gz
 chk  32018c7998358eebc2ad578ff8d8559d34fc80252095f110a572ed23d989fc41
 
-server https://cairographics.org/releases
-
-file pixman-0.40.0.tar.gz
-chk  6d200dec3740d9ec4ec8d1180e25779c00bc749f94278c8b9021f5534db223fc
+file pixman-0.32.6.tar.gz
+chk  3dfed13b8060eadabf0a4945c7045b7793cc7e3e910e748a8bb0f0dc3e794904
 
 # Freetype
 server https://download.savannah.gnu.org/releases/freetype
