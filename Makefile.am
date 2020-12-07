@@ -68,6 +68,10 @@ EXTRA_DIST = autogen.sh \
         patches/cyrus-sasl-2.1.27/03-exports.patch \
         patches/cyrus-sasl-2.1.27/04-paths-relocation.patch \
         patches/cyrus-sasl-2.1.27/99-reautomagic.patch \
+        patches/cairo-1.10.2/03-fix-ffs.patch \
+        patches/cairo-1.10.2/99-libtoolize.patch \
+        patches/cairo-1.10.2/02-reset-clip-region.patch \
+        patches/cairo-1.10.2/01-fix-A1-surfaces.patch \
         patches/gumbo-parser-0.10.1/99-autotools.patch \
         patches/ytnef-1.9.3/01-malloc.patch \
         patches/ytnef-1.9.3/02-no-undefined.patch \
