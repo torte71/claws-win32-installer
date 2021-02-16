@@ -260,8 +260,8 @@ chk  588aea051bfbacced27fdfe0335a957dca839ebe36aa548df39c7bbafdb65bf7
 
 # libical
 server https://github.com/libical/libical/releases/download
-file v3.0.8/libical-3.0.8.tar.gz
-chk 09fecacaf75ba5a242159e3a9758a5446b5ce4d0ab684f98a7040864e1d1286f
+file v3.0.9/libical-3.0.9.tar.gz
+chk bd26d98b7fcb2eb0cd5461747bbb02024ebe38e293ca53a7dfdcb2505265a728
 
 # gumbo-parser
 server https://github.com/google/gumbo-parser/archive/
