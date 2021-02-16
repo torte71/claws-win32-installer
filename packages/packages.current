@@ -144,8 +144,8 @@ chk  09f158769f6f26b31074e15b1ac80ec39b13b53102dfae66cfe826fb2cc65502
 file gtk+/2.24/gtk+-2.24.33.tar.xz
 chk  ac2ac757f5942d318a311a54b0c80b5ef295f299c2a73c632f6bfb1ff49cc6da
 
-file gdk-pixbuf/2.40/gdk-pixbuf-2.40.0.tar.xz
-chk  1582595099537ca8ff3b99c6804350b4c058bb8ad67411bbaae024ee7cead4e6
+file gdk-pixbuf/2.42/gdk-pixbuf-2.42.2.tar.xz
+chk  83c66a1cfd591d7680c144d2922c5955d38b4db336d7cd3ee109f7bcf9afef15
 
 file pango/1.47/pango-1.47.0.tar.xz
 chk  730db8652fc43188e03218c3374db9d152351f51fc7011b9acae6d0a6c92c367
