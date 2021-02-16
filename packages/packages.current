@@ -193,8 +193,8 @@ chk  86a854d8905b19698bbc8f23b860bc104246ce4854dcea8e3b0fb21284f75784
 # Fontconfig
 server https://www.freedesktop.org/software/fontconfig/release
 
-file fontconfig-2.13.92.tar.xz
-chk  506e61283878c1726550bc94f2af26168f1e9f2106eac77eaaf0b2cdfad66e4e
+file fontconfig-2.13.93.tar.xz
+chk  ea968631eadc5739bc7c8856cef5c77da812d1f67b763f5e51b57b8026c1a0a0
 
 # libpng
 

@@ -40,7 +40,7 @@ EXTRA_DIST = autogen.sh \
         patches/webkitgtk-2.4.11/04-LLIntAssembly-hack.patch \
         patches/webkitgtk-2.4.11/03-missing-RenderBox-include.patch \
         patches/webkitgtk-2.4.11/02-no-class-size-check.patch \
-        patches/fontconfig-2.13.92/01-no-fluff.patch \
+        patches/fontconfig-2.13.93/01-no-fluff.patch \
         patches/zlib-1.2.11/01-no-strip.patch \
         patches/icu4c-58_3-src/02-float128-clang.patch \
         patches/icu4c-58_3-src/01-libnames.patch \
