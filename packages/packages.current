@@ -232,8 +232,8 @@ chk  c2a9b3aec1a38d34b66106116a39f64b01d84f475fef75c40ea0bda0ea67ed07
 #
 server https://gnupg.org/ftp/gcrypt
 
-file libgpg-error/libgpg-error-1.39.tar.bz2
-chk  4a836edcae592094ef1c5a4834908f44986ab2b82e0824a0344b49df8cdb298f
+file libgpg-error/libgpg-error-1.41.tar.bz2
+chk  64b078b45ac3c3003d7e352a5e05318880a5778c42331ce1ef33d1a0d9922742
 
 file libassuan/libassuan-2.5.4.tar.bz2
 chk  c080ee96b3bd519edd696cfcebdecf19a3952189178db9887be713ccbcb5fbf0
