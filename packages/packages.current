@@ -124,9 +124,9 @@ file   enchant-1.6.0.tar.gz
 chk    2fac9e7be7e9424b2c5570d8affe568db39f7572c10ed48d4e13cddf03f7097f
 
 # sqlite for libsoup
-server https://sqlite.org/2020
-file sqlite-autoconf-3330000.tar.gz
-chk  106a2c48c7f75a298a7557bcc0d5f4f454e5b43811cc738b7ca294d6956bbb15
+server https://sqlite.org/2021
+file sqlite-autoconf-3340100.tar.gz
+chk  2a3bca581117b3b88e5361d0ef3803ba6d8da604b1c1a47d902ef785c1b53e89
 
 # libpsl
 server https://github.com/rockdaboot/libpsl/releases/download
