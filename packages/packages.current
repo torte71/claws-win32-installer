@@ -38,8 +38,8 @@ file libtasn1/libtasn1-4.16.0.tar.gz
 chk 0e0fb0903839117cb6e3b56e68222771bebf22ad7fc2295a0ed7d576e8d4329d
 
 # nettle
-file nettle/nettle-3.6.tar.gz
-chk d24c0d0f2abffbc8f4f34dcf114b0f131ec3774895f3555922fe2f40f3d5e3f1
+file nettle/nettle-3.7.tar.gz
+chk f001f64eb444bf13dd91bceccbc20acbc60c4311d6e2b20878452eb9a9cec75a
 
 #
 # zlib
