@@ -101,8 +101,8 @@ chk 26866b1549b00ffd020f188a43c258017fa1c382b3ddadd8201536f72efb05d5
 
 server https://curl.se/download
 
-file  curl-7.73.0.tar.xz
-chk   7c4c7ca4ea88abe00fea4740dcf81075c031b1d0bb23aff2d5efde20a3c2408a
+file  curl-7.75.0.tar.xz
+chk   fe0c49d8468249000bda75bcfdf9e30ff7e9a86d35f1a21f428d79c389d55675
 
 
 #
