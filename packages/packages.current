@@ -138,8 +138,8 @@ chk    ac6ce1e1fbd4d0254c4ddb9d37f1fa99dec83619c1253328155206b896210d4c
 #
 server https://download.gnome.org/sources
 
-file glib/2.66/glib-2.66.2.tar.xz
-chk  ec390bed4e8dd0f89e918f385e8d4cfd7470b1ef7c1ce93ec5c4fc6e3c6a17c4
+file glib/2.66/glib-2.66.7.tar.xz
+chk  09f158769f6f26b31074e15b1ac80ec39b13b53102dfae66cfe826fb2cc65502
 
 file gtk+/2.24/gtk+-2.24.33.tar.xz
 chk  ac2ac757f5942d318a311a54b0c80b5ef295f299c2a73c632f6bfb1ff49cc6da
