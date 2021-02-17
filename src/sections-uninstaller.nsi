@@ -565,20 +565,25 @@ Delete "$INSTDIR\libetpan-20.dll"
 
 #######################################
 ### enchant
-Delete "$INSTDIR\libenchant-1.dll"
-Delete "$INSTDIR\lib\enchant\libenchant_myspell.dll"
-RMDir "$INSTDIR\lib\enchant"
+Delete "$INSTDIR\libenchant-2.dll"
+Delete "$INSTDIR\lib\enchant-2\enchant_hunspell.dll"
+RMDir "$INSTDIR\lib\enchant-2"
 RMDir "$INSTDIR\lib"
 
-Delete "$INSTDIR\share\enchant\myspell\en_US.aff"
-Delete "$INSTDIR\share\enchant\myspell\en_US.dic"
-Delete "$INSTDIR\share\enchant\myspell\de.aff"
-Delete "$INSTDIR\share\enchant\myspell\de.dic"
-Delete "$INSTDIR\share\enchant\myspell\fr.aff"
-Delete "$INSTDIR\share\enchant\myspell\fr.dic"
-RMDir "$INSTDIR\share\enchant\myspell"
+Delete "$INSTDIR\share\enchant\enchant.ordering"
+Delete "$INSTDIR\share\enchant\hunspell\en_US.aff"
+Delete "$INSTDIR\share\enchant\hunspell\en_US.dic"
+Delete "$INSTDIR\share\enchant\hunspell\de.aff"
+Delete "$INSTDIR\share\enchant\hunspell\de.dic"
+Delete "$INSTDIR\share\enchant\hunspell\fr.aff"
+Delete "$INSTDIR\share\enchant\hunspell\fr.dic"
+RMDir "$INSTDIR\share\enchant\hunspell"
 RMDir "$INSTDIR\share\enchant"
 RMDir "$INSTDIR\share"
+
+#######################################
+### hunspell
+Delete "$INSTDIR\libhunspell-1.7-0.dll"
 
 #######################################
 ### libpng

@@ -33,8 +33,8 @@ EXTRA_DIST = autogen.sh \
         patches/pixman-0.40.0/01-no-tests.patch \
         patches/claws-mail-3.17.8/01-etpan-sasl-plugin-path.patch \
         patches/claws-mail-3.17.8/02-quote-fmt-parse.patch \
-        patches/enchant-1.6.0/01-no-tests.patch \
-        patches/enchant-1.6.0/99-autogen.sh.patch \
+        patches/enchant-2.2.15/01-fix-relocation.patch \
+        patches/hunspell-1.7.0/99-autoreconf.patch \
         patches/webkitgtk-2.4.11/05-print-size.patch \
         patches/webkitgtk-2.4.11/01-std-threads.patch \
         patches/webkitgtk-2.4.11/04-LLIntAssembly-hack.patch \

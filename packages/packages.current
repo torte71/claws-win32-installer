@@ -122,9 +122,13 @@ chk    98b1bd46d6792925ad2dfe9a87452ea2adebf69dcb9919ffd55bf926a7f93f7f
 #
 # Enchant for Claws
 #
-server http://www.abisource.com/downloads/enchant/1.6.0
-file   enchant-1.6.0.tar.gz
-chk    2fac9e7be7e9424b2c5570d8affe568db39f7572c10ed48d4e13cddf03f7097f
+server https://github.com/AbiWord/enchant/releases/download/v2.2.15
+file   enchant-2.2.15.tar.gz
+chk    3b0f2215578115f28e2a6aa549b35128600394304bd79d6f28b0d3b3d6f46c03
+
+server https://github.com/hunspell/hunspell/files/2573619
+file   hunspell-1.7.0.tar.gz
+chk    57be4e03ae9dd62c3471f667a0d81a14513e314d4d92081292b90435944ff951
 
 # sqlite for libsoup
 server https://sqlite.org/2021

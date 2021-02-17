@@ -149,6 +149,9 @@
 !define cm_pkg_libpng @cm_pkg_libpng@
 !define cm_pkg_libpng_version @cm_pkg_libpng_version@
 
+!define cm_pkg_hunspell @cm_pkg_hunspell2
+!define cm_pkg_hunspell_version @cm_pkg_hunspell_version@
+
 !define cm_pkg_enchant @cm_pkg_enchant@
 !define cm_pkg_enchant_version @cm_pkg_enchant_version@
 

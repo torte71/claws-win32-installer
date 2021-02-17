@@ -79,14 +79,21 @@ File /oname=intl.dll ${prefix}/bin/libintl-8.dll
 File ${prefix}/bin/libpng16-16.dll
 
 #######################################
+### hunspell
+!insertmacro SetPrefix hunspell
+File ${prefix}/bin/libhunspell-1.7-0.dll
+
+#######################################
 ### enchant
 !insertmacro SetPrefix enchant
-File ${prefix}/bin/libenchant-1.dll
-SetOutPath "$INSTDIR\lib\enchant"
-File ${prefix}/lib/enchant/libenchant_myspell.dll
+File ${prefix}/bin/libenchant-2.dll
+SetOutPath "$INSTDIR\lib\enchant-2"
+File ${prefix}/lib/enchant-2/enchant_hunspell.dll
 
 SetShellVarContext all
-SetOutPath "$INSTDIR\share\enchant\myspell"
+SetOutPath "$INSTDIR\share\enchant"
+File ${prefix}/share/enchant/enchant.ordering
+SetOutPath "$INSTDIR\share\enchant\hunspell"
 File dictionaries/en_US.aff
 File dictionaries/en_US.dic
 File dictionaries/de.aff

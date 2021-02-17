@@ -41,7 +41,7 @@ cm_spkgs = glib libffi gdk-pixbuf gtk+ expat \
 		libtasn1 gnutls curl libxml2 libxslt sqlite-autoconf \
 		jpeg glib-networking libsoup libwebp webkitgtk gmp nettle \
 		harfbuzz fribidi pango pixman cairo libetpan claws-mail \
-		libassuan cyrus-sasl icu4c ytnef libpsl \
+		libassuan cyrus-sasl icu4c ytnef libpsl hunspell \
 		w32pth regex libiconv gettext libical gumbo-parser
 
 # Extra options to configure for individual packages.
@@ -56,6 +56,7 @@ cm_pkg_gpgme_make_args = -j$(NUMPROC)
 cm_pkg_expat_make_args = -j$(NUMPROC)
 cm_pkg_libpng_make_args = -j$(NUMPROC)
 cm_pkg_enchant_make_args = -j$(NUMPROC)
+cm_pkg_hunspell_make_args = -j$(NUMPROC)
 cm_pkg_libtasn1_make_args = -j$(NUMPROC)
 cm_pkg_curl_make_args = -j$(NUMPROC)
 cm_pkg_libxslt_make_args = -j$(NUMPROC)
@@ -198,19 +199,19 @@ cm_pkg_libpng_configure = \
 	LDFLAGS=\"-L$(idir)/lib\"
 
 cm_pkg_enchant_configure = \
-	--enable-ispell \
-	--enable-myspell \
-	--enable-aspell \
-	--disable-voikko \
-	--disable-uspell \
-	--disable-hspell \
-	--disable-zemberek \
-	CPPFLAGS=\"-I$(idir)/include \
-	-UENCHANT_GLOBAL_MODULE_DIR \
-	-UENCHANT_GLOBAL_ORDERING \
-	-UENCHANT_MYSPELL_DICT_DIR \
-	-UENCHANT_USPELL_DICT_DIR\" \
+	--enable-relocatable \
+	--with-hunspell \
+	--without-nuspell \
+	--without-aspell \
+	--without-hspell \
+	--without-voikko \
+	--without-applespell \
+	--without-zemberek \
+	CPPFLAGS=\"-I$(idir)/include\" \
 	LDFLAGS=\"-L$(idir)/lib\"
+
+cm_pkg_hunspell_configure = \
+	--disable-rpath
 
 # The LDFLAGS is needed for -lintl for glib.
 cm_pkg_gpgme_configure = \
