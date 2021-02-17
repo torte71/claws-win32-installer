@@ -17,6 +17,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA
 
-EXTRA_DIST = de.aff de.dic README_de.txt \
+EXTRA_DIST = de_DE_frami.aff de_DE_frami.dic README_de_DE_frami.txt \
 	     en_US.aff en_US.dic README_en_US.txt \
 	     fr.aff fr.dic README_fr.txt

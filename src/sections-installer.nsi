@@ -96,8 +96,8 @@ File ${prefix}/share/enchant/enchant.ordering
 SetOutPath "$INSTDIR\share\enchant\hunspell"
 File dictionaries/en_US.aff
 File dictionaries/en_US.dic
-File dictionaries/de.aff
-File dictionaries/de.dic
+File dictionaries/de_DE_frami.aff
+File dictionaries/de_DE_frami.dic
 File dictionaries/fr.aff
 File dictionaries/fr.dic
 SetOutPath "$INSTDIR"
