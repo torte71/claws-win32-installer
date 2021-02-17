@@ -30,6 +30,8 @@ SUBDIRS = doc packages po src
 EXTRA_DIST = autogen.sh \
         configure.ac.template \
         doc/license-page doc/GPLv3 \
+        patches/bzip2-1.0.8/01-g10-bzlib_h.patch \
+        patches/bzip2-1.0.8/02-g10-Makefile.patch \
         patches/pixman-0.40.0/01-no-tests.patch \
         patches/claws-mail-3.17.8/01-etpan-sasl-plugin-path.patch \
         patches/claws-mail-3.17.8/02-quote-fmt-parse.patch \
