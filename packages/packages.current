@@ -183,12 +183,10 @@ chk  49e481d06cdff97bf68d99fa26bdf785331f411614485d892ea4c78eb479b218
 #
 # CAIRO
 #
-# We are keeping cairo on last version older than 1.12.0, since
-# it is too slow. See https://bugs.freedesktop.org/show_bug.cgi?id=71833
-server http://cairographics.org/releases
+server https://cairographics.org/snapshots
 
-file cairo-1.10.2.tar.gz
-chk  32018c7998358eebc2ad578ff8d8559d34fc80252095f110a572ed23d989fc41
+file cairo-1.17.4.tar.xz
+chk 74b24c1ed436bbe87499179a3b27c43f4143b8676d8ad237a6fa787401959705
 
 file pixman-0.32.6.tar.gz
 chk  3dfed13b8060eadabf0a4945c7045b7793cc7e3e910e748a8bb0f0dc3e794904
