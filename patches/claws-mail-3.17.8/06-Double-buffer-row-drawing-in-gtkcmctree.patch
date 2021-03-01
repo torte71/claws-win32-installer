@@ -1,0 +1,81 @@
+#!/bin/sh
+patch -p1 -f $* < $0
+exit $?
+
+From e2df3a7d93b3397b56fd85a87d2ea63ae91b0af3 Mon Sep 17 00:00:00 2001
+From: Jonathan Boeing <jonathan.n.boeing@gmail.com>
+Date: Sun, 28 Feb 2021 18:56:08 -0700
+Subject: [PATCH] Double-buffer row drawing in gtkcmctree
+
+This patch fixes the slowness seen when redrawing the folder tree with
+cairo > 1.10 on Windows.  It also improves the occasionally visible
+flickering in the folder tree on Linux and Windows with older versions
+of cairo.
+---
+ configure.ac         |  2 +-
+ src/gtk/gtkcmctree.c | 21 ++++++++++++++++++++-
+ 2 files changed, 21 insertions(+), 2 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index b39187d72..c1f152e72 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -1234,7 +1234,7 @@ AC_SUBST(GDATA_CFLAGS)
+ AC_SUBST(GDATA_LIBS)
+ 
+ dnl cairo **********************************************************************
+-PKG_CHECK_MODULES(CAIRO, cairo, HAVE_CAIRO=yes, HAVE_CAIRO=no)
++PKG_CHECK_MODULES(CAIRO, cairo >= 1.12.0, HAVE_CAIRO=yes, HAVE_CAIRO=no)
+ AC_SUBST(CAIRO_CFLAGS)
+ AC_SUBST(CAIRO_LIBS)
+ 
+diff --git a/src/gtk/gtkcmctree.c b/src/gtk/gtkcmctree.c
+index a31ed1b03..8a1f14c60 100644
+--- a/src/gtk/gtkcmctree.c
++++ b/src/gtk/gtkcmctree.c
+@@ -599,6 +599,8 @@ draw_row (GtkCMCList     *clist,
+   static GdkColor greybg={0, 0, 0, 0};
+   static gboolean color_change = TRUE;
+   cairo_t *cr;
++  cairo_t *cr_hw;
++  cairo_surface_t *image_surface;
+   GdkColor *fgcolor, *bgcolor;
+ 
+   cm_return_if_fail (clist != NULL);
+@@ -667,7 +669,12 @@ draw_row (GtkCMCList     *clist,
+   }
+   state = clist_row->state;
+ 
+-  cr = gdk_cairo_create(clist->clist_window);
++  cr_hw = gdk_cairo_create(clist->clist_window);
++  image_surface = cairo_surface_create_similar_image(cairo_get_target(cr_hw),
++                                                     CAIRO_FORMAT_RGB24,
++                                                     gdk_window_get_width(clist->clist_window),
++                                                     gdk_window_get_height(clist->clist_window));
++  cr = cairo_create(image_surface);
+   
+   if (clist_row->fg_set && state != GTK_STATE_SELECTED)
+ 	fgcolor = &clist_row->foreground;
+@@ -937,7 +944,19 @@ draw_row (GtkCMCList     *clist,
+ 	    cairo_stroke(cr);
+ 	}
+      }
++
++    cairo_set_operator(cr_hw, CAIRO_OPERATOR_SOURCE);
++    cairo_set_source_surface(cr_hw, image_surface, 0, 0);
++    cairo_rectangle(cr_hw,
++                    row_rectangle.x,
++                    row_rectangle.y - CELL_SPACING,
++                    row_rectangle.width,
++                    row_rectangle.height + CELL_SPACING * 2);
++    cairo_fill(cr_hw);
++
+     cairo_destroy(cr);
++    cairo_surface_destroy(image_surface);
++    cairo_destroy(cr_hw);
+ }
+ 
+ static void
+-- 
+2.20.1
+

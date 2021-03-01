@@ -38,6 +38,7 @@ EXTRA_DIST = autogen.sh \
         patches/claws-mail-3.17.8/03-fd_write.patch \
         patches/claws-mail-3.17.8/04-fclose.patch \
         patches/claws-mail-3.17.8/05-define-WIN32-for-litehtml.patch \
+        patches/claws-mail-3.17.8/06-Double-buffer-row-drawing-in-gtkcmctree.patch \
         patches/enchant-2.2.15/01-fix-relocation.patch \
         patches/hunspell-1.7.0/99-autoreconf.patch \
         patches/webkitgtk-2.4.11/05-print-size.patch \
