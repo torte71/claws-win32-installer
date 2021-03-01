@@ -154,10 +154,8 @@ chk  ac2ac757f5942d318a311a54b0c80b5ef295f299c2a73c632f6bfb1ff49cc6da
 file gdk-pixbuf/2.42/gdk-pixbuf-2.42.2.tar.xz
 chk  83c66a1cfd591d7680c144d2922c5955d38b4db336d7cd3ee109f7bcf9afef15
 
-# Can't upgrade here, since newer pango requires newer cairo. See
-# cairo note below. -andrej
-file pango/1.34/pango-1.34.1.tar.xz
-chk  1aea30df34a8ae4fcce71afd22aa5b57224b52916d46e3ea81ff9f1eb130e64c
+file pango/1.47/pango-1.47.0.tar.xz
+chk  730db8652fc43188e03218c3374db9d152351f51fc7011b9acae6d0a6c92c367
 
 file atk/2.36/atk-2.36.0.tar.xz
 chk  fb76247e369402be23f1f5c65d38a9639c1164d934e40f6a9cf3c9e96b652788

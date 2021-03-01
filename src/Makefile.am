@@ -91,6 +91,7 @@ cm_pkg_pixman_meson = yes
 cm_pkg_glib_networking_meson = yes
 cm_pkg_gdk_pixbuf_meson = yes
 cm_pkg_fribidi_meson = yes
+cm_pkg_pango_meson = yes
 cm_pkg_libsoup_meson = yes
 cm_pkg_libpsl_meson = yes
 
@@ -155,10 +156,12 @@ cm_pkg_fontconfig_configure = \
 cm_pkg_fribidi_configure = -Ddocs=false -Dtests=false
 
 cm_pkg_pango_configure = \
-	--disable-gtk-doc-html --disable-glibtest --disable-doc-cross-references \
-	--with-included-modules=yes \
-	CPPFLAGS=\"-I$(idir)/include\" \
-	LDFLAGS=\"-L$(idir)/lib\"
+	-Dcairo=enabled \
+	-Dfontconfig=enabled \
+	-Dfreetype=enabled \
+	-Dgtk_doc=false \
+	-Dintrospection=false
+cm_pkg_pango_meson_ldflags = -L$(idir)/lib
 
 cm_pkg_atk_configure = -Dintrospection=false
 cm_pkg_atk_meson_cppflags = -I$(idir)/include
