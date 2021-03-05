@@ -18,7 +18,7 @@
 # along with this program; if not, see <http://www.gnu.org/licenses/>.
 
 
-EXTRA_DIST = pkg-config claws-mail.nsi \
+EXTRA_DIST = claws-mail.nsi \
 	config.site config.nsi.in \
 	functions.nsi strings.nsi \
 	gnupg-uninst.nsi \

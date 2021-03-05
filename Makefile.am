@@ -62,8 +62,7 @@ EXTRA_DIST = autogen.sh \
         patches/libetpan-1.9.4/05-no-unnecessary-linkage.patch \
         patches/libetpan-1.9.4/99-autogen.patch \
         patches/harfbuzz-2.6.7/01-no-tests-utils-docs.patch \
-        patches/gtk+-2.24.99/00-autogen.patch \
-        patches/gtk+-2.24.99/01-no-tests-demos.patch \
+        patches/gtk+-2.24.33/01-no-tests-demos.patch \
         patches/cyrus-sasl-2.1.27/01-md5-typedef.patch \
         patches/cyrus-sasl-2.1.27/02-tchar.patch \
         patches/cyrus-sasl-2.1.27/03-exports.patch \
