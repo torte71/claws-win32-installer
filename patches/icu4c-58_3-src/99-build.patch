@@ -37,7 +37,7 @@ cd ../..
 mv icu ${srcdir}-build
 cd ${srcdir}-build
 mv source/* .
-./configure --host=${arch}-w64-mingw32 --build=${arch}-unknown-linux-gnu --prefix=${topdir}/src/playground/install/pkgs/${srcdir} --with-cross-build=${topdir}/src/playground/build/icu-linux/source LIBS=-lmsvcr100 CFLAGS=-mms-bitfields
+./configure --host=${arch}-w64-mingw32 --build=${arch}-unknown-linux-gnu --prefix=${topdir}/src/playground/install/pkgs/${srcdir} --with-cross-build=${topdir}/src/playground/build/icu-linux/source CFLAGS=-mms-bitfields
 ret=$?
 if [ $ret -ne 0 ]; then
 	echo configure for windows ICU build failed
