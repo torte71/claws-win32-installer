@@ -29,7 +29,7 @@ m4_define([my_release], [1])
 m4_define([my_gitrev], [])
 
 AC_INIT([Claws Mail Win32],
-				[my_version]-[my_release],[ticho@claws-mail.org])
+				[my_version]-[my_release],[jonathan@claws-mail.org])
 
 PACKAGE=$PACKAGE_NAME
 VERSION=$PACKAGE_VERSION
