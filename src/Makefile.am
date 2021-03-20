@@ -287,7 +287,7 @@ cm_pkg_claws_mail_configure = \
 	--enable-libetpan --disable-dbus --disable-valgrind --enable-ipv6 \
 	--disable-jpilot --disable-startup-notification \
 	--disable-spamassassin-plugin --disable-bogofilter-plugin \
-	--enable-fancy-plugin \
+	--disable-fancy-plugin \
 	--disable-acpi_notifier-plugin --disable-clamd-plugin \
 	--disable-perl-plugin --disable-python-plugin --disable-demo-plugin \
 	--disable-newmail-plugin --disable-mailmbox-plugin \
