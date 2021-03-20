@@ -124,8 +124,8 @@
 !define cm_pkg_libepoxy @cm_pkg_libepoxy@
 !define cm_pkg_libepoxy_version @cm_pkg_libepoxy_version@
 
-!define cm_pkg_webkitgtk @cm_pkg_webkitgtk@
-!define cm_pkg_webkitgtk_version @cm_pkg_webkitgtk_version@
+#!define cm_pkg_webkitgtk @cm_pkg_webkitgtk@
+#!define cm_pkg_webkitgtk_version @cm_pkg_webkitgtk_version@
 
 !define cm_pkg_jpeg @cm_pkg_jpeg@
 !define cm_pkg_jpeg_version @cm_pkg_jpeg_version@

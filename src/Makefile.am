@@ -39,7 +39,7 @@ SUBDIRS = dictionaries
 cm_spkgs = glib libffi gdk-pixbuf gtk+ expat \
 		libgpg-error gpgme libpng enchant atk fontconfig freetype \
 		libtasn1 gnutls curl libxml2 libxslt sqlite-autoconf \
-		jpeg glib-networking libsoup libwebp webkitgtk gmp nettle \
+		jpeg glib-networking libsoup libwebp gmp nettle \
 		harfbuzz fribidi pango pixman cairo libetpan claws-mail \
 		libassuan cyrus-sasl icu4c ytnef libpsl hunspell \
 		w32pth regex libiconv gettext libical gumbo-parser \
@@ -70,7 +70,6 @@ cm_pkg_jpeg_make_args = -j$(NUMPROC)
 cm_pkg_sqlite_autoconf_make_args = -j$(NUMPROC)
 cm_pkg_libwebp_make_args = -j$(NUMPROC)
 cm_pkg_icu4c_make_args = -j$(NUMPROC)
-cm_pkg_webkitgtk_make_args = -j$(NUMPROC)
 cm_pkg_gmp_make_args = -j$(NUMPROC)
 cm_pkg_nettle_make_args = -j$(NUMPROC)
 cm_pkg_cairo_make_args = -j$(NUMPROC)
@@ -319,39 +318,7 @@ cm_pkg_libwebp_configure = \
 	LDFLAGS=\"-L$(idir)/lib\" \
 	CPPFLAGS=\"-I$(idir)/include\"
 
-cm_pkg_webkitgtk_configure = \
-	--disable-webkit2 \
-	--enable-webkit1 \
-	--with-gtk=2.0 \
-	--disable-x11-target \
-	--disable-wayland-target \
-	--enable-win32-target \
-	--disable-spellcheck \
-	--disable-credential-storage \
-	--disable-gtk-doc-html \
-	--disable-svg-fonts \
-	--disable-jit \
-	--disable-video \
-	--disable-web-audio \
-	--disable-battery-status \
-	--disable-geolocation \
-	--disable-coverage \
-	--disable-glx \
-	--disable-egl \
-	--disable-gles2 \
-	--disable-gamepad \
-	--disable-webgl \
-	--disable-glibtest \
-	--disable-debug \
-	--disable-accelerated-compositing \
-	--enable-silent-rules \
-	CPPFLAGS=\"-I$(idir)/include -Wno-expansion-to-defined\" \
-	CC=$(CC) LIBS=\"-L$(idir)/lib\"
-# -ggdb causes an ICE with gcc-8.3 / webkit-2.4.11
-cm_pkg_webkitgtk_cflags = \
-	-O2 -pipe -mms-bitfields
-cm_pkg_webkitgtk_cxxflags = \
-	-O2 -pipe -mms-bitfields -std=gnu++98 -fexceptions
+#cm_pkg_webkitgtk_configure =
 
 cm_pkg_libical_configure = \
 	-DICAL_BUILD_DOCS=OFF \

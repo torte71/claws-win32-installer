@@ -299,7 +299,7 @@ CM_SPKG([libepoxy])
 CM_SPKG([harfbuzz], [glib cairo icu4c])
 CM_SPKG([pango], [harfbuzz fontconfig glib cairo fribidi])
 CM_SPKG([gtk+], [libiconv gettext atk pango glib gdk-pixbuf cairo])
-CM_SPKG([webkitgtk], [jpeg libpng glib gtk+ libsoup libxml2 libxslt libwebp icu4c harfbuzz])
+#CM_SPKG([webkitgtk], [jpeg libpng glib gtk+ libsoup libxml2 libxslt libwebp icu4c harfbuzz])
 CM_SPKG([curl], [zlib gnutls])
 CM_SPKG([cyrus-sasl])
 CM_SPKG([libetpan], [gnutls cyrus-sasl])
@@ -309,7 +309,8 @@ CM_SPKG([ytnef])
 CM_SPKG([gumbo-parser])
 CM_SPKG([claws-mail], [libiconv gettext zlib gtk+ libpng enchant glib dnl
                             gpgme regex libetpan gnutls ytnef gumbo-parser dnl
-                            libxml2 expat webkitgtk curl libical nettle])
+                            libxml2 expat curl libical nettle])
+# TODO: add webkitgtk2 as claws-mail dependency
 
 
 CM_FINALIZE

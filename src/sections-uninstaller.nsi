@@ -106,8 +106,8 @@ Delete "$INSTDIR\libjpeg-9.dll"
 
 #######################################
 ### webkitgtk
-Delete "$INSTDIR\libwebkitgtk-1.0-0.dll"
-Delete "$INSTDIR\libjavascriptcoregtk-1.0-0.dll"
+#Delete "$INSTDIR\libwebkitgtk-1.0-0.dll"
+#Delete "$INSTDIR\libjavascriptcoregtk-1.0-0.dll"
 
 #######################################
 ### sqlite-autoconf

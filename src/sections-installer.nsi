@@ -742,10 +742,10 @@ File ${prefix}/bin/libsqlite3-0.dll
 
 #######################################
 ### webkit
-!insertmacro SetPrefix webkitgtk
-SetOutPath "$INSTDIR"
-File ${prefix}/bin/libwebkitgtk-1.0-0.dll
-File ${prefix}/bin/libjavascriptcoregtk-1.0-0.dll
+#!insertmacro SetPrefix webkitgtk
+#SetOutPath "$INSTDIR"
+#File ${prefix}/bin/libwebkitgtk-1.0-0.dll
+#File ${prefix}/bin/libjavascriptcoregtk-1.0-0.dll
 
 #######################################
 ### jpeg
