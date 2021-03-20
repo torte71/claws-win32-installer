@@ -299,6 +299,68 @@ File ${prefix}/bin/gdk-pixbuf-query-loaders.exe
 File ${prefix}/bin/gdk-pixbuf-pixdata.exe
 
 #######################################
+### adwaita-icon-theme
+!insertmacro SetPrefix2 adwaita_icon_theme adwaita-icon-theme
+SetOutPath "$INSTDIR\share\icons\Adwaita\16x16\legacy"
+File ${prefix}/share/icons/Adwaita/16x16/legacy/dialog-information.png
+File ${prefix}/share/icons/Adwaita/16x16/legacy/document-properties.png
+File ${prefix}/share/icons/Adwaita/16x16/legacy/edit-clear.png
+File ${prefix}/share/icons/Adwaita/16x16/legacy/edit-copy.png
+File ${prefix}/share/icons/Adwaita/16x16/legacy/edit-delete.png
+File ${prefix}/share/icons/Adwaita/16x16/legacy/edit-find.png
+File ${prefix}/share/icons/Adwaita/16x16/legacy/edit-redo.png
+File ${prefix}/share/icons/Adwaita/16x16/legacy/edit-undo.png
+File ${prefix}/share/icons/Adwaita/16x16/legacy/go-bottom.png
+File ${prefix}/share/icons/Adwaita/16x16/legacy/go-down.png
+File ${prefix}/share/icons/Adwaita/16x16/legacy/go-next.png
+File ${prefix}/share/icons/Adwaita/16x16/legacy/go-previous.png
+File ${prefix}/share/icons/Adwaita/16x16/legacy/go-top.png
+File ${prefix}/share/icons/Adwaita/16x16/legacy/go-up.png
+File ${prefix}/share/icons/Adwaita/16x16/legacy/help-browser.png
+File ${prefix}/share/icons/Adwaita/16x16/legacy/list-add.png
+File ${prefix}/share/icons/Adwaita/16x16/legacy/list-remove.png
+File ${prefix}/share/icons/Adwaita/16x16/legacy/system-help.png
+File ${prefix}/share/icons/Adwaita/16x16/legacy/view-refresh.png
+SetOutPath "$INSTDIR\share\icons\Adwaita\16x16\places"
+File ${prefix}/share/icons/Adwaita/16x16/places/folder.png
+SetOutPath "$INSTDIR\share\icons\Adwaita\16x16\ui"
+File ${prefix}/share/icons/Adwaita/16x16/ui/checkbox-checked-symbolic.symbolic.png
+File ${prefix}/share/icons/Adwaita/16x16/ui/checkbox-mixed-symbolic.symbolic.png
+File ${prefix}/share/icons/Adwaita/16x16/ui/checkbox-symbolic.symbolic.png
+File ${prefix}/share/icons/Adwaita/16x16/ui/focus-legacy-systray-symbolic.symbolic.png
+File ${prefix}/share/icons/Adwaita/16x16/ui/focus-top-bar-symbolic.symbolic.png
+File ${prefix}/share/icons/Adwaita/16x16/ui/focus-windows-symbolic.symbolic.png
+File ${prefix}/share/icons/Adwaita/16x16/ui/list-drag-handle-symbolic.symbolic.png
+File ${prefix}/share/icons/Adwaita/16x16/ui/pan-down-symbolic.symbolic.png
+File ${prefix}/share/icons/Adwaita/16x16/ui/pan-end-symbolic.symbolic.png
+File ${prefix}/share/icons/Adwaita/16x16/ui/pan-end-symbolic-rtl.symbolic.png
+File ${prefix}/share/icons/Adwaita/16x16/ui/pan-start-symbolic.symbolic.png
+File ${prefix}/share/icons/Adwaita/16x16/ui/pan-start-symbolic-rtl.symbolic.png
+File ${prefix}/share/icons/Adwaita/16x16/ui/pan-up-symbolic.symbolic.png
+File ${prefix}/share/icons/Adwaita/16x16/ui/radio-checked-symbolic.symbolic.png
+File ${prefix}/share/icons/Adwaita/16x16/ui/radio-mixed-symbolic.symbolic.png
+File ${prefix}/share/icons/Adwaita/16x16/ui/radio-symbolic.symbolic.png
+File ${prefix}/share/icons/Adwaita/16x16/ui/selection-end-symbolic.symbolic.png
+File ${prefix}/share/icons/Adwaita/16x16/ui/selection-end-symbolic-rtl.symbolic.png
+File ${prefix}/share/icons/Adwaita/16x16/ui/selection-start-symbolic.symbolic.png
+File ${prefix}/share/icons/Adwaita/16x16/ui/selection-start-symbolic-rtl.symbolic.png
+File ${prefix}/share/icons/Adwaita/16x16/ui/tab-new-symbolic.symbolic.png
+File ${prefix}/share/icons/Adwaita/16x16/ui/window-close-symbolic.symbolic.png
+File ${prefix}/share/icons/Adwaita/16x16/ui/window-maximize-symbolic.symbolic.png
+File ${prefix}/share/icons/Adwaita/16x16/ui/window-minimize-symbolic.symbolic.png
+File ${prefix}/share/icons/Adwaita/16x16/ui/window-new-symbolic.symbolic.png
+File ${prefix}/share/icons/Adwaita/16x16/ui/window-restore-symbolic.symbolic.png
+SetOutPath "$INSTDIR\share\icons\Adwaita\256x256\legacy"
+File ${prefix}/share/icons/Adwaita/256x256/legacy/dialog-error.png
+File ${prefix}/share/icons/Adwaita/256x256/legacy/dialog-information.png
+File ${prefix}/share/icons/Adwaita/256x256/legacy/dialog-password.png
+File ${prefix}/share/icons/Adwaita/256x256/legacy/dialog-question.png
+File ${prefix}/share/icons/Adwaita/256x256/legacy/dialog-warning.png
+SetOutPath "$INSTDIR\share\icons\Adwaita"
+File ${prefix}/share/icons/Adwaita/index.theme
+SetOutPath "$INSTDIR"
+
+#######################################
 ### gtk+
 !insertmacro SetPrefix2 gtk_ gtk+
 File ${prefix}/bin/libgdk-3-0.dll

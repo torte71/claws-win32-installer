@@ -197,6 +197,9 @@
 !define cm_pkg_gtk__dev @cm_pkg_gtk__dev@
 !define cm_pkg_gtk__src @cm_pkg_gtk__src@
 
+!define cm_pkg_adwaita_icon_theme @cm_pkg_adwaita_icon_theme@
+!define cm_pkg_adwaita_icon_theme_version @cm_pkg_adwaita_icon_theme_version@
+
 !define cm_pkg_libiconv @cm_pkg_libiconv@
 !define cm_pkg_libiconv_version @cm_pkg_libiconv_version@
 !define cm_pkg_libiconv_src @cm_pkg_libiconv_src@

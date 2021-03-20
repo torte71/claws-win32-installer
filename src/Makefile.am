@@ -43,11 +43,12 @@ cm_spkgs = glib libffi gdk-pixbuf gtk+ expat \
 		harfbuzz fribidi pango pixman cairo libetpan claws-mail \
 		libassuan cyrus-sasl icu4c ytnef libpsl hunspell \
 		w32pth regex libiconv gettext libical gumbo-parser \
-		libepoxy
+		libepoxy adwaita-icon-theme
 
 # Extra options to configure for individual packages.
 # We can use $(idir) here for the installation prefix.
 
+cm_pkg_adwait_icon_theme_make_args = -j$(NUMPROC)
 cm_pkg_harfbuzz_make_args = -j$(NUMPROC)
 cm_pkg_freetype_make_args = -j$(NUMPROC)
 cm_pkg_fontconfig_make_args = -j$(NUMPROC)
@@ -130,6 +131,8 @@ cm_pkg_gtk__configure = \
 	-Dintrospection=false
 cm_pkg_gtk__meson_cppflags = -I$(idir)/include
 cm_pkg_gtk__meson_ldflags = -L$(idir)/lib
+
+#cm_pkg_adwaita_icon_theme_configure =
 
 cm_pkg_libepoxy_configure = \
 	-Dglx=no \
