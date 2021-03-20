@@ -33,12 +33,8 @@ EXTRA_DIST = autogen.sh \
              patches/atk-2.36.0/01-meson-build.patch \
              patches/bzip2-1.0.8/01-g10-bzlib_h.patch \
              patches/bzip2-1.0.8/02-g10-Makefile.patch \
-             patches/claws-mail-3.17.8/01-etpan-sasl-plugin-path.patch \
-             patches/claws-mail-3.17.8/02-quote-fmt-parse.patch \
-             patches/claws-mail-3.17.8/03-fd_write.patch \
-             patches/claws-mail-3.17.8/04-fclose.patch \
-             patches/claws-mail-3.17.8/05-define-WIN32-for-litehtml.patch \
-             patches/claws-mail-3.17.8/06-Double-buffer-row-drawing-in-gtkcmctree.patch \
+             patches/claws-mail/01-etpan-sasl-plugin-path.patch \
+             patches/claws-mail/05-define-WIN32-for-litehtml.patch \
              patches/cyrus-sasl-2.1.27/01-md5-typedef.patch \
              patches/cyrus-sasl-2.1.27/02-tchar.patch \
              patches/cyrus-sasl-2.1.27/03-exports.patch \
@@ -64,11 +60,6 @@ EXTRA_DIST = autogen.sh \
              patches/regex-20090805/01-no-large-offsets.patch \
              patches/w32pth-2.0.5/01-def-fix.patch \
              patches/w32pth-2.0.5/99-autogen.sh.patch \
-             patches/webkitgtk-2.4.11/01-std-threads.patch \
-             patches/webkitgtk-2.4.11/02-no-class-size-check.patch \
-             patches/webkitgtk-2.4.11/03-missing-RenderBox-include.patch \
-             patches/webkitgtk-2.4.11/04-LLIntAssembly-hack.patch \
-             patches/webkitgtk-2.4.11/05-print-size.patch \
              patches/ytnef-1.9.3/01-malloc.patch \
              patches/ytnef-1.9.3/02-no-undefined.patch \
              patches/ytnef-1.9.3/99-autotools.patch \
