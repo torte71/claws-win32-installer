@@ -17,9 +17,10 @@
 
 server https://www.claws-mail.org/releases
 
-file claws-mail-3.17.8.tar.xz
-chk cdb7b2814995d6f4a9c3b1f0bc1467ed5c3cf2a5e0da1730aaa25a8accafddaf
+# file and checksum will be added by getgit-claws-mail.sh / download.sh
 
+#file claws-mail-3.17.8.tar.xz
+#chk cdb7b2814995d6f4a9c3b1f0bc1467ed5c3cf2a5e0da1730aaa25a8accafddaf
 
 #
 # GNU

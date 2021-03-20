@@ -119,6 +119,24 @@ WGET="wget $ipvx"
 # fi
 #fi
 
+
+# To use packages from git repositories, create a script, that fetches
+# the files, creates a tar archive with correct version number and
+# modifies the packages.current file.
+# The scripts should be named "getgit-{packagename}.sh" to get executed
+for fetchscript in getgit-*.sh ; do
+    if ! [ -x $fetchscript ] ; then
+	echo "File not existing or not executable: $fetchscript"
+	exit 1
+    fi
+    echo "Executing $fetchscript"
+    if ! ./$fetchscript ; then
+	echo "Aborting. Script returned an error: $fetchscript"
+	exit 1
+    fi
+done
+
+
 lnr=0
 name=
 [ -f '.#download.failed' ] && rm '.#download.failed'
