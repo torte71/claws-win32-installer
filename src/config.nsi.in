@@ -121,6 +121,9 @@
 !define cm_pkg_icu4c @cm_pkg_icu4c@
 !define cm_pkg_icu4c_version @cm_pkg_icu4c_version@
 
+!define cm_pkg_libepoxy @cm_pkg_libepoxy@
+!define cm_pkg_libepoxy_version @cm_pkg_libepoxy_version@
+
 !define cm_pkg_webkitgtk @cm_pkg_webkitgtk@
 !define cm_pkg_webkitgtk_version @cm_pkg_webkitgtk_version@
 

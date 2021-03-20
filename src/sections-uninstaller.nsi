@@ -124,6 +124,9 @@ Delete "$INSTDIR\icuuc58.dll"
 Delete "$INSTDIR\icudata58.dll"
 
 #######################################
+### libepoxy
+Delete "$INSTDIR\libepoxy-0.dll"
+
 ### gpgme
 Delete /REBOOTOK "$INSTDIR\libgpgme-11.dll"
 Delete /REBOOTOK "$INSTDIR\libgpgme-glib-11.dll"

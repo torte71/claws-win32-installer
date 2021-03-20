@@ -148,6 +148,9 @@ server https://download.gnome.org/sources
 file glib/2.66/glib-2.66.7.tar.xz
 chk  09f158769f6f26b31074e15b1ac80ec39b13b53102dfae66cfe826fb2cc65502
 
+file libepoxy/1.5/libepoxy-1.5.5.tar.xz
+chk  261663db21bcc1cc232b07ea683252ee6992982276536924271535875f5b0556
+
 file gtk+/2.24/gtk+-2.24.33.tar.xz
 chk  ac2ac757f5942d318a311a54b0c80b5ef295f299c2a73c632f6bfb1ff49cc6da
 

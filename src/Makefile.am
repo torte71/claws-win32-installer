@@ -42,7 +42,8 @@ cm_spkgs = glib libffi gdk-pixbuf gtk+ expat \
 		jpeg glib-networking libsoup libwebp webkitgtk gmp nettle \
 		harfbuzz fribidi pango pixman cairo libetpan claws-mail \
 		libassuan cyrus-sasl icu4c ytnef libpsl hunspell \
-		w32pth regex libiconv gettext libical gumbo-parser
+		w32pth regex libiconv gettext libical gumbo-parser \
+		libepoxy
 
 # Extra options to configure for individual packages.
 # We can use $(idir) here for the installation prefix.
@@ -85,6 +86,7 @@ cm_pkg_gettext_make_args = -j$(NUMPROC)
 
 cm_pkg_libical_cmake = yes
 
+cm_pkg_libepoxy_meson = yes
 cm_pkg_atk_meson = yes
 cm_pkg_glib_meson = yes
 cm_pkg_pixman_meson = yes
@@ -130,6 +132,14 @@ cm_pkg_gtk__configure = \
 	--disable-static \
 	--disable-glibtest \
 	CPPFLAGS=-I$(idir)/include LDFLAGS=\"-L$(idir)/lib\"
+
+cm_pkg_libepoxy_configure = \
+	-Dglx=no \
+	-Degl=no \
+	-Dx11=false \
+	-Dtests=false
+cm_pkg_libepoxy_meson_cppflags = -I$(idir)/include
+cm_pkg_libepoxy_meson_ldflags = -L$(idir)/lib
 
 cm_pkg_harfbuzz_configure = \
 	--disable-gtk-doc-html \

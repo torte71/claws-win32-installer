@@ -729,6 +729,12 @@ File ${prefix}/lib/icuuc58.dll
 File ${prefix}/lib/icudata58.dll
 
 #######################################
+### libepoxy
+!insertmacro SetPrefix libepoxy
+SetOutPath "$INSTDIR"
+File ${prefix}/bin/libepoxy-0.dll
+
+#######################################
 ### sqlite-autoconf
 !insertmacro SetPrefix2 sqlite_autoconf sqlite-autoconf
 SetOutPath "$INSTDIR"
