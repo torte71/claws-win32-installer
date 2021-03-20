@@ -46,7 +46,6 @@ EXTRA_DIST = autogen.sh \
              patches/cyrus-sasl-2.1.27/99-reautomagic.patch \
              patches/enchant-2.2.15/01-fix-relocation.patch \
              patches/fontconfig-2.13.93/01-no-fluff.patch \
-             patches/gtk+-2.24.33/01-no-tests-demos.patch \
              patches/gumbo-parser-0.10.1/99-autotools.patch \
              patches/harfbuzz-2.6.7/01-no-tests-utils-docs.patch \
              patches/hunspell-1.7.0/99-autoreconf.patch \

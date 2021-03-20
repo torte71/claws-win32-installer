@@ -51,7 +51,6 @@ cm_spkgs = glib libffi gdk-pixbuf gtk+ expat \
 cm_pkg_harfbuzz_make_args = -j$(NUMPROC)
 cm_pkg_freetype_make_args = -j$(NUMPROC)
 cm_pkg_fontconfig_make_args = -j$(NUMPROC)
-cm_pkg_gtk__make_args = -j$(NUMPROC)
 cm_pkg_libgpg_error_make_args = -j$(NUMPROC)
 cm_pkg_gpgme_make_args = -j$(NUMPROC)
 cm_pkg_expat_make_args = -j$(NUMPROC)
@@ -85,6 +84,7 @@ cm_pkg_gettext_make_args = -j$(NUMPROC)
 
 cm_pkg_libical_cmake = yes
 
+cm_pkg_gtk__meson = yes
 cm_pkg_libepoxy_meson = yes
 cm_pkg_atk_meson = yes
 cm_pkg_glib_meson = yes
@@ -124,13 +124,12 @@ cm_pkg_gdk_pixbuf_meson_cppflags = -I$(idir)/include
 cm_pkg_gdk_pixbuf_meson_ldflags = -L$(idir)/lib
 
 cm_pkg_gtk__configure = \
-	--with-gdktarget=win32 \
-	--with-included-immodules \
-	--disable-cups \
-	--disable-gtk-doc \
-	--disable-static \
-	--disable-glibtest \
-	CPPFLAGS=-I$(idir)/include LDFLAGS=\"-L$(idir)/lib\"
+	-Dx11_backend=false \
+	-Dwin32_backend=true \
+	-Dtests=false \
+	-Dintrospection=false
+cm_pkg_gtk__meson_cppflags = -I$(idir)/include
+cm_pkg_gtk__meson_ldflags = -L$(idir)/lib
 
 cm_pkg_libepoxy_configure = \
 	-Dglx=no \
