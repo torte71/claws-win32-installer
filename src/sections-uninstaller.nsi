@@ -155,6 +155,10 @@ Delete "$INSTDIR\libcurl-4.dll"
 Delete "$INSTDIR\libgnutls-30.dll"
 
 #######################################
+### gtk-add
+Delete "$INSTDIR\etc\gtk-3.0\settings.ini"
+
+#######################################
 ### gtk+
 Delete /REBOOTOK "$INSTDIR\libgdk-3-0.dll"
 Delete /REBOOTOK "$INSTDIR\libgtk-3-0.dll"

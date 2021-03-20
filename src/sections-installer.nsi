@@ -664,6 +664,12 @@ File ${prefix}/share/locale/zh_TW/LC_MESSAGES/gtk30-properties.mo
 SetOutPath "$INSTDIR"
 
 #######################################
+### gtk-add
+SetOutPath "$INSTDIR\etc\gtk-3.0"
+File gtk-add/etc/gtk-3.0/settings.ini
+SetOutPath "$INSTDIR"
+
+#######################################
 ### gnutls
 !insertmacro SetPrefix gnutls
 File ${prefix}/bin/libgnutls-30.dll
