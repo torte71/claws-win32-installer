@@ -40,14 +40,16 @@ Basic requirements
 A decent POSIX system is required for building this software as well
 as GNU make.  We are using Debian GNU/Linux 10 (Buster), any other
 POSIX system should work as well but you may run into problems due to
-different toolchain versions.
+different toolchain versions (MinGW gcc-8 is required, gcc-9 works more
+or less and gcc-10 doesn't work yet).
 
 To finish the build, following packages need to be installed on a
 Debian Buster system.
 
 Note - at the time of writing, the meson package in Debian Buster
-(currently 0.49.1) is too old to build pixman, but a sufficiently
-recent version can be installed from buster-backports (currently 0.52.1).
+(currently 0.49.1) is too old, see below for update instructions.
+
+Building the gtk3 version has additional requirements (see below).
 
 automake
 autoconf
@@ -76,6 +78,9 @@ libgettextpo-dev
 meson
 pkg-config-mingw-w64-x86-64
 gobject-introspection
+wget
+gpg
+sudo
 
 Building in a Docker container
 ==============================
@@ -86,7 +91,7 @@ is sufficient:
 
 --------8<---------8<---------8<--------
 FROM debian:buster
-RUN apt-get update && apt-get -y install automake autoconf mingw-w64 nsis stow unzip texinfo imagemagick docbook-utils libglib2.0-dev libgdk-pixbuf2.0-dev ghostscript git binutils make cmake bison flex gperf intltool gcc g++ libtool libgettextpo-dev meson pkg-config-mingw-w64-x86-64 gobject-introspection && apt-get clean
+RUN apt-get update && apt-get -y install automake autoconf mingw-w64 nsis stow unzip texinfo imagemagick docbook-utils libglib2.0-dev libgdk-pixbuf2.0-dev ghostscript git binutils make cmake bison flex gperf intltool gcc g++ libtool libgettextpo-dev meson pkg-config-mingw-w64-x86-64 gobject-introspection wget gpg sudo && apt-get clean
 --------8<---------8<---------8<--------
 
 To build the image locally (run in the directory with Dockerfile
@@ -145,6 +150,56 @@ This is done via patches held in this repository, since this stuff can
 not go upstream - or at least the Claws Mail patch shouldn't, until
 libetpan provides some way to set the SASL plugin path. I'll consider
 submitting the libetpan patch upstream later.
+
+
+Updating meson
+==============
+
+Currently, the minimum required version of meson is 0.55.
+Debian 10 (Buster) and Ubuntu 20 (Focal) ship with older versions and need
+additional steps to update to a recent version:
+
+* Debian 10 (Buster):
+  Add following line to "/etc/apt/sources.list":
+    deb http://deb.debian.org/debian buster-backports main
+  Then execute
+    sudo apt-get update
+    sudo apt-get -y install -t buster-backports meson
+
+* Ubuntu 20 (Focal)
+  Manually download and install the meson package:
+    wget http://archive.ubuntu.com/ubuntu/pool/universe/m/meson/meson_0.57.0+really0.56.2-0.1_all.deb
+    dpkg -i meson_0.57.0+really0.56.2-0.1_all.deb
+
+
+Building the gtk3 version
+=========================
+
+The gtk3 version needs icons from adwaita-icon-theme, which requires
+"icontool-render" (from package "icontool") and "gtk-encode-symbolic-svg"
+(from package "gtk-3-examples" on Debian or "libgtk-3-bin" on Ubuntu).
+The package "icontool" is not available on Debian (AFAIK) and has to be
+compiled from source (depends on libxml-simple-perl).
+
+The binary packages of adwaita-icon-theme (that I know) don't contain
+the required icons from the 16x16/ui folder, so this is no option
+(e.g. window-close-symbolic.symbolic.png is missing).
+
+Following steps are required (in addition to the apt-get packages
+listed in the docker section above):
+
+  sudo apt-get install -y inkscape gtk-3-examples libxml-simple-perl
+
+On Ubuntu you can simply install icontool:
+
+  sudo apt-get install -y icontool
+
+On Debian, you have to manually fetch and compile icontool:
+
+  wget http://archive.ubuntu.com/ubuntu/pool/universe/i/icontool/icontool_0.1.0.orig.tar.gz
+  tar -xvaf icontool_0.1.0.orig.tar.gz
+  cd icontool-0.1.0
+  ./configure && make && sudo make install
 
 
 Copyright
