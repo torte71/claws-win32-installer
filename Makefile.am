@@ -36,6 +36,7 @@ EXTRA_DIST = autogen.sh \
              patches/cairo-1.17.4/01-nofortify-hack.patch.off \
              patches/claws-mail/01-etpan-sasl-plugin-path.patch \
              patches/claws-mail/05-define-WIN32-for-litehtml.patch \
+             patches/claws-mail/10-Defer-all-painting-outside-of-widget-draw-entrypoint.patch \
              patches/cyrus-sasl-2.1.27/01-md5-typedef.patch \
              patches/cyrus-sasl-2.1.27/02-tchar.patch \
              patches/cyrus-sasl-2.1.27/03-exports.patch \

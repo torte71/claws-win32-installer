@@ -1,0 +1,206 @@
+#! /bin/sh
+patch -p1 -f $* < $0
+exit $?
+
+Taken from
+https://www.thewildbeast.co.uk/claws-mail/bugzilla/show_bug.cgi?id=4366#c10
+
+From 335ce50b853d84bcbd3ce1fed770cf0e93855e9e Mon Sep 17 00:00:00 2001
+From: Manuel Stoeckl <code@mstoeckl.com>
+Date: Fri, 11 Dec 2020 23:10:31 -0500
+Subject: [PATCH] Defer all painting outside of widget draw entrypoint
+
+---
+ src/gtk/gtkcmclist.c | 80 ++++++++++++++++++++++++++++----------------
+ src/gtk/gtkcmclist.h | 16 +++++++++
+ src/gtk/gtkcmctree.c |  6 ++++
+ 3 files changed, 73 insertions(+), 29 deletions(-)
+
+diff -urN claws-mail-3.99.0git63.org/src/gtk/gtkcmclist.c claws-mail-3.99.0git63/src/gtk/gtkcmclist.c
+--- claws-mail-3.99.0git63.org/src/gtk/gtkcmclist.c	2021-03-20 15:47:59.000000000 +0000
++++ claws-mail-3.99.0git63/src/gtk/gtkcmclist.c	2021-03-21 17:51:40.295417192 +0000
+@@ -1124,6 +1124,8 @@
+    * isn't there
+    */
+   column_button_create (clist, 0);
++
++  clist->should_I_be_drawing_now = 0;
+   
+   return object;
+ }
+@@ -4797,6 +4799,7 @@
+   if (gtk_widget_is_drawable (widget))
+     {
+       clist = GTK_CMCLIST (widget);
++      clist->should_I_be_drawing_now = 1;
+ 
+       /* Draw clist_window */
+       if (gtk_cairo_should_draw_window (cr, clist->clist_window))
+@@ -4855,8 +4858,8 @@
+               }
+             }
+         }
++       clist->should_I_be_drawing_now = 0;
+     }
+-
+   return FALSE;
+ }
+ 
+@@ -5668,6 +5671,11 @@
+   cairo_t *cr;
+   cm_return_if_fail (clist != NULL);
+ 
++  if (!clist->should_I_be_drawing_now) {
++      gtk_widget_queue_draw(clist);
++      return;
++  }
++
+   /* bail now if we arn't drawable yet */
+   if (!gtk_widget_is_drawable (GTK_WIDGET(clist)) || row < 0 || row >= clist->rows)
+     return;
+@@ -5948,22 +5956,27 @@
+     }
+ 
+   if (!area) {
+-    int w, h, y;
+-    cairo_t *cr;
+-    w = gdk_window_get_width(clist->clist_window);
+-    h = gdk_window_get_height(clist->clist_window);
+-    cr = gdk_cairo_create(clist->clist_window);
+-    y = ROW_TOP_YPIXEL (clist, i);
+-    gdk_cairo_set_source_color(cr, &gtk_widget_get_style(GTK_WIDGET(clist))->base[GTK_STATE_NORMAL]);
+-    cairo_rectangle(cr, 0, y, w, h - y);
+-    cairo_fill(cr);
+-    cairo_destroy(cr);
++    if (clist->should_I_be_drawing_now) {
++      int w, h, y;
++      cairo_t *cr;
++      w = gdk_window_get_width(clist->clist_window);
++      h = gdk_window_get_height(clist->clist_window);
++      cr = gdk_cairo_create(clist->clist_window);
++      y = ROW_TOP_YPIXEL (clist, i);
++      gdk_cairo_set_source_color(cr, &gtk_widget_get_style(GTK_WIDGET(clist))->base[GTK_STATE_NORMAL]);
++      cairo_rectangle(cr, 0, y, w, h - y);
++      cairo_fill(cr);
++      cairo_destroy(cr);
++    } else {
++      gtk_widget_queue_draw(clist);
++    }
+   }
+ }
+ 
+ static void                          
+ draw_xor_line (GtkCMCList *clist)
+ {
++  // TODO: figure out GTK3 method of drawing this!
+   cairo_t *cr;
+   cr = gdk_cairo_create(clist->clist_window);
+   cairo_set_line_width(cr, 1.0);
+@@ -6234,6 +6247,7 @@
+ 
+   clist->hoffset = -value;
+ 
++  // TODO: figure out GTK3 method of drawing this!
+   cr = gdk_cairo_create(clist->clist_window);
+   cairo_dash_from_add_mode(clist, cr);
+   cairo_set_line_width(cr, 1.0);
+@@ -6521,15 +6535,19 @@
+ 
+   clist = GTK_CMCLIST (widget);
+   if (clist->focus_row >= 0) {
+-    cr = gdk_cairo_create(clist->clist_window);
+-    cairo_dash_from_add_mode(clist, cr);
+-    cairo_set_line_width(cr, 1.0);
+-    cairo_set_antialias(cr, CAIRO_ANTIALIAS_NONE);
+-    cairo_rectangle(cr, 0, ROW_TOP_YPIXEL(clist, clist->focus_row) + 0.5,
+-			clist->clist_window_width + 1,
+-			clist->row_height - 0.5);
+-    cairo_stroke(cr);
+-    cairo_destroy(cr);
++    if (clist->should_I_be_drawing_now) {
++      cr = gdk_cairo_create(clist->clist_window);
++      cairo_dash_from_add_mode(clist, cr);
++      cairo_set_line_width(cr, 1.0);
++      cairo_set_antialias(cr, CAIRO_ANTIALIAS_NONE);
++      cairo_rectangle(cr, 0, ROW_TOP_YPIXEL(clist, clist->focus_row) + 0.5,
++              clist->clist_window_width + 1,
++              clist->row_height - 0.5);
++      cairo_stroke(cr);
++      cairo_destroy(cr);
++    } else {
++      gtk_widget_queue_draw(clist);
++    }
+   }
+ }
+ 
+@@ -6550,15 +6568,19 @@
+ 
+   clist = GTK_CMCLIST (widget);
+   if (clist->focus_row >= 0) {
+-    cairo_t *cr = gdk_cairo_create(clist->clist_window);
+-    cairo_set_line_width(cr, 1.0);
+-    gdk_cairo_set_source_color(cr, &gtk_widget_get_style(widget)->base[GTK_STATE_NORMAL]);
+-    cairo_set_antialias(cr, CAIRO_ANTIALIAS_NONE);
+-    cairo_rectangle(cr, 0, ROW_TOP_YPIXEL(clist, clist->focus_row) + 0.5,
+-			clist->clist_window_width + 1,
+-			clist->row_height - 0.5);
+-    cairo_stroke(cr);
+-    cairo_destroy(cr);
++    if (clist->should_I_be_drawing_now) {
++      cairo_t *cr = gdk_cairo_create(clist->clist_window);
++      cairo_set_line_width(cr, 1.0);
++      gdk_cairo_set_source_color(cr, &gtk_widget_get_style(widget)->base[GTK_STATE_NORMAL]);
++      cairo_set_antialias(cr, CAIRO_ANTIALIAS_NONE);
++      cairo_rectangle(cr, 0, ROW_TOP_YPIXEL(clist, clist->focus_row) + 0.5,
++              clist->clist_window_width + 1,
++              clist->row_height - 0.5);
++      cairo_stroke(cr);
++      cairo_destroy(cr);
++    } else {
++      gtk_widget_queue_draw(clist);
++    }
+   }
+ 
+   row = clist->focus_row;
+diff -urN claws-mail-3.99.0git63.org/src/gtk/gtkcmclist.h claws-mail-3.99.0git63/src/gtk/gtkcmclist.h
+--- claws-mail-3.99.0git63.org/src/gtk/gtkcmclist.h	2021-03-20 15:47:59.000000000 +0000
++++ claws-mail-3.99.0git63/src/gtk/gtkcmclist.h	2021-03-21 17:51:40.295417192 +0000
+@@ -235,6 +235,22 @@
+ 
+   gint drag_highlight_row;
+   GtkCMCListDragPos drag_highlight_pos;
++
++  /*
++   * Pre-GTK3 functions called draw_row, draw_rows, etc. whenever a region of
++   * the widget needed to be updated, so that the region would be immediately
++   * redrawn. Around the GTK3/Qt4 transitions, toolkits moved away from this
++   * immediate-update mode, and started the more efficient approach of tracking
++   * damage and then redrawing only the damaged regions. When this variable
++   * is 0 (most old uses), the 'draw_X' are to be interpreted as requests to
++   * mark damage; when it is 1 (precisely when the widget draw entrypoint is used)
++   * the 'draw_X' actually do the drawing.
++   *
++   * See also:
++   * https://doc.qt.io/archives/qt-4.8/porting4.html#painting-and-redrawing-widgets
++   * https://developer.gnome.org/gtk3/stable/ch26s02.html#id-1.6.3.4.11
++   */
++  int should_I_be_drawing_now;
+ };
+ 
+ struct _GtkCMCListClass
+diff -urN claws-mail-3.99.0git63.org/src/gtk/gtkcmctree.c claws-mail-3.99.0git63/src/gtk/gtkcmctree.c
+--- claws-mail-3.99.0git63.org/src/gtk/gtkcmctree.c	2021-03-20 15:47:59.000000000 +0000
++++ claws-mail-3.99.0git63/src/gtk/gtkcmctree.c	2021-03-21 17:51:40.295417192 +0000
+@@ -604,6 +604,12 @@
+   GdkColor *fgcolor, *bgcolor;
+ 
+   cm_return_if_fail (clist != NULL);
++
++  if (!clist->should_I_be_drawing_now) {
++      gtk_widget_queue_draw(GTK_WIDGET (clist));
++      return;
++  }
++
+   widget = GTK_WIDGET (clist);
+ 
+   /* if the function is passed the pointer to the row instead of null,
