@@ -43,7 +43,10 @@ create_package () {
   git clone https://git.claws-mail.org/readonly/claws.git "$TMPGIT" > "$logfile" 2>&1
   ( cd "$TMPGIT" ;
     [ -z "$REVISION" ] || git checkout $REVISION
-    ./autogen.sh && ./configure && make dist-xz ) > "$logfile" 2>&1
+    GTK_CFLAGS="dummy" GTK_LIBS="dummy" \
+      NETTLE_CFLAGS="dummy" NETTLE_LIBS="dummy" \
+      ./autogen.sh --disable-libetpan --disable-gnutls \
+      && make dist-xz) > "$logfile" 2>&1
   local pkgtmp=$(ls "$TMPGIT"/claws-mail-*.tar.xz)
   PKGNAME=$(basename "$pkgtmp")
   cp "$pkgtmp" .

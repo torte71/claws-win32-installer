@@ -124,7 +124,7 @@ WGET="wget $ipvx"
 # the files, creates a tar archive with correct version number and
 # modifies the packages.current file.
 # The scripts should be named "getgit-{packagename}.sh" to get executed
-for fetchscript in getgit-*.sh ; do
+[ -e getgit-*.sh ] && for fetchscript in getgit-*.sh ; do
     if ! [ -x $fetchscript ] ; then
 	echo "File not existing or not executable: $fetchscript"
 	exit 1
