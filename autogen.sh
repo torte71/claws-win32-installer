@@ -54,6 +54,32 @@ check_version () {
     return 1
 }
 
+check_compiler () {
+  warn=""
+  for prefix in x86_64-w64-mingw32 i686-w64-mingw32 i586-mingw32msvc \
+    i386-mingw32msvc mingw32 ; do
+    if which $prefix-gcc > /dev/null ; then
+      ver=$($prefix-gcc -dumpversion|cut -d "." -f 1)
+      if test "$ver" -gt 8 ; then
+	warn="  $prefix-gcc $ver\n$warn"
+      fi
+    fi
+  done
+  if [ -n "$warn" ] ; then
+    echo
+    echo "Warning: Unrecommended gcc version found on your system!"
+    echo "For building releases, MinGW gcc-8 should be used."
+    echo "Using gcc-9 currently produces less hardened binaries."
+    echo "Following unrecommended versions have been found:"
+    echo "$warn"
+    echo "To use gcc-9, please remove the \".off\" extension from"
+    echo "./patches/cairo-1.17.4/01-nofortify-hack.patch.off"
+    return 1
+  else
+    return 0
+  fi
+}
+
 # Allow to override the default tool names
 AUTOCONF=${AUTOCONF_PREFIX}${AUTOCONF:-autoconf}${AUTOCONF_SUFFIX}
 AUTOHEADER=${AUTOCONF_PREFIX}${AUTOHEADER:-autoheader}${AUTOCONF_SUFFIX}
@@ -258,3 +284,5 @@ echo
 echo "You may now run ./autogen.sh with --build-w32 or --build-w64 switch,"
 echo "followed by \"make\"."
 echo
+
+check_compiler

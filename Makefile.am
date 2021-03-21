@@ -33,6 +33,7 @@ EXTRA_DIST = autogen.sh \
              patches/atk-2.36.0/01-meson-build.patch \
              patches/bzip2-1.0.8/01-g10-bzlib_h.patch \
              patches/bzip2-1.0.8/02-g10-Makefile.patch \
+             patches/cairo-1.17.4/01-nofortify-hack.patch.off \
              patches/claws-mail/01-etpan-sasl-plugin-path.patch \
              patches/claws-mail/05-define-WIN32-for-litehtml.patch \
              patches/cyrus-sasl-2.1.27/01-md5-typedef.patch \
@@ -63,4 +64,4 @@ EXTRA_DIST = autogen.sh \
              patches/ytnef-1.9.3/01-malloc.patch \
              patches/ytnef-1.9.3/02-no-undefined.patch \
              patches/ytnef-1.9.3/99-autotools.patch \
-             patches/zlib-1.2.11/01-no-strip.patch
+             patches/zlib-1.2.11/01-no-strip.patch \
