@@ -301,6 +301,9 @@ File ${prefix}/bin/gdk-pixbuf-pixdata.exe
 #######################################
 ### adwaita-icon-theme
 !insertmacro SetPrefix2 adwaita_icon_theme adwaita-icon-theme
+SetOutPath "$INSTDIR\share\icons\Adwaita\16x16\actions"
+File ${prefix}/share/icons/Adwaita/16x16/actions/list-add-symbolic.symbolic.png
+File ${prefix}/share/icons/Adwaita/16x16/actions/list-remove-symbolic.symbolic.png
 SetOutPath "$INSTDIR\share\icons\Adwaita\16x16\legacy"
 File ${prefix}/share/icons/Adwaita/16x16/legacy/dialog-information.png
 File ${prefix}/share/icons/Adwaita/16x16/legacy/document-properties.png
@@ -317,6 +320,7 @@ File ${prefix}/share/icons/Adwaita/16x16/legacy/go-previous.png
 File ${prefix}/share/icons/Adwaita/16x16/legacy/go-top.png
 File ${prefix}/share/icons/Adwaita/16x16/legacy/go-up.png
 File ${prefix}/share/icons/Adwaita/16x16/legacy/help-browser.png
+File ${prefix}/share/icons/Adwaita/16x16/legacy/image-missing.png
 File ${prefix}/share/icons/Adwaita/16x16/legacy/list-add.png
 File ${prefix}/share/icons/Adwaita/16x16/legacy/list-remove.png
 File ${prefix}/share/icons/Adwaita/16x16/legacy/system-help.png
@@ -350,12 +354,18 @@ File ${prefix}/share/icons/Adwaita/16x16/ui/window-maximize-symbolic.symbolic.pn
 File ${prefix}/share/icons/Adwaita/16x16/ui/window-minimize-symbolic.symbolic.png
 File ${prefix}/share/icons/Adwaita/16x16/ui/window-new-symbolic.symbolic.png
 File ${prefix}/share/icons/Adwaita/16x16/ui/window-restore-symbolic.symbolic.png
+SetOutPath "$INSTDIR\share\icons\Adwaita\32x32\mimetypes"
+File ${prefix}/share/icons/Adwaita/32x32/mimetypes/text-x-generic.png
 SetOutPath "$INSTDIR\share\icons\Adwaita\256x256\legacy"
 File ${prefix}/share/icons/Adwaita/256x256/legacy/dialog-error.png
 File ${prefix}/share/icons/Adwaita/256x256/legacy/dialog-information.png
 File ${prefix}/share/icons/Adwaita/256x256/legacy/dialog-password.png
 File ${prefix}/share/icons/Adwaita/256x256/legacy/dialog-question.png
 File ${prefix}/share/icons/Adwaita/256x256/legacy/dialog-warning.png
+SetOutPath "$INSTDIR\share\icons\Adwaita\cursors"
+File ${prefix}/share/icons/Adwaita/cursors/dnd-copy.cur
+File ${prefix}/share/icons/Adwaita/cursors/dnd-move.cur
+File ${prefix}/share/icons/Adwaita/cursors/dnd-none.cur
 SetOutPath "$INSTDIR\share\icons\Adwaita"
 File ${prefix}/share/icons/Adwaita/index.theme
 SetOutPath "$INSTDIR"
