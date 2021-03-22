@@ -65,4 +65,4 @@ EXTRA_DIST = autogen.sh \
              patches/ytnef-1.9.3/01-malloc.patch \
              patches/ytnef-1.9.3/02-no-undefined.patch \
              patches/ytnef-1.9.3/99-autotools.patch \
-             patches/zlib-1.2.11/01-no-strip.patch \
+             patches/zlib-1.2.11/01-no-strip.patch
