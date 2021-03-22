@@ -156,7 +156,12 @@ Delete "$INSTDIR\libgnutls-30.dll"
 
 #######################################
 ### gtk-add
+# directories "etc" and "themes" are cleaned in gtk+ section
 Delete "$INSTDIR\etc\gtk-3.0\settings.ini"
+Delete "$INSTDIR\share\themes\win71\gtk-3.0\gtk-win32-base.css"
+Delete "$INSTDIR\share\themes\win71\gtk-3.0\gtk.css"
+RMDir "$INSTDIR\share\themes\win71\gtk-3.0"
+RMDir "$INSTDIR\share\themes\win71"
 
 #######################################
 ### gtk+

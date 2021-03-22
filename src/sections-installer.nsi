@@ -739,6 +739,9 @@ SetOutPath "$INSTDIR"
 ### gtk-add
 SetOutPath "$INSTDIR\etc\gtk-3.0"
 File gtk-add/etc/gtk-3.0/settings.ini
+SetOutPath "$INSTDIR\share\themes\win71\gtk-3.0"
+File gtk-add/share/themes/win71/gtk-3.0/gtk-win32-base.css
+File gtk-add/share/themes/win71/gtk-3.0/gtk.css
 SetOutPath "$INSTDIR"
 
 #######################################
