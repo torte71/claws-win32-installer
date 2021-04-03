@@ -1401,3 +1401,9 @@ treeview.view.expander {
 }
 /* TM: END: treeview - show native +/- instead of arrows */
 
+/* TM: START: Only for Claws-Mail */
+treeview.view:selected {
+    background-color: @selected_bg_color;
+}
+/* TM: END: Only for Claws-Mail */
+
