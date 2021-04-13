@@ -20,6 +20,7 @@ Delete "$INSTDIR\lib\claws-mail\plugins\fancy.dll"
 Delete "$INSTDIR\lib\claws-mail\plugins\fetchinfo.dll"
 Delete "$INSTDIR\lib\claws-mail\plugins\libravatar.dll"
 Delete "$INSTDIR\lib\claws-mail\plugins\litehtml_viewer.dll"
+Delete "$INSTDIR\lib\claws-mail\plugins\lua.dll"
 Delete "$INSTDIR\lib\claws-mail\plugins\managesieve.dll"
 Delete "$INSTDIR\lib\claws-mail\plugins\notification.dll"
 Delete "$INSTDIR\lib\claws-mail\plugins\pgpcore.dll"
@@ -142,6 +143,10 @@ Delete "$INSTDIR\libxslt-1.dll"
 #######################################
 ### libxml2
 Delete "$INSTDIR\libxml2-2.dll"
+
+#######################################
+### lua
+Delete "$INSTDIR\lua54.dll"
 
 #######################################
 ### curl

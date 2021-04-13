@@ -42,7 +42,7 @@ cm_spkgs = glib libffi gdk-pixbuf gtk+ expat \
 		jpeg glib-networking libsoup libwebp webkitgtk gmp nettle \
 		harfbuzz fribidi pango pixman cairo libetpan claws-mail \
 		libassuan cyrus-sasl icu4c ytnef libpsl hunspell \
-		w32pth regex libiconv gettext libical gumbo-parser
+		w32pth regex libiconv gettext libical gumbo-parser lua
 
 # Extra options to configure for individual packages.
 # We can use $(idir) here for the installation prefix.
@@ -59,6 +59,7 @@ cm_pkg_enchant_make_args = -j$(NUMPROC)
 cm_pkg_hunspell_make_args = -j$(NUMPROC)
 cm_pkg_libtasn1_make_args = -j$(NUMPROC)
 cm_pkg_curl_make_args = -j$(NUMPROC)
+cm_pkg_lua_make_args = -j$(NUMPROC)
 cm_pkg_libxslt_make_args = -j$(NUMPROC)
 cm_pkg_libxml2_make_args = -j$(NUMPROC)
 cm_pkg_libetpan_make_args = -j$(NUMPROC)
@@ -246,6 +247,10 @@ cm_pkg_curl_configure = \
 	--without-ca-bundle --without-ca-path \
 	CPPFLAGS=\"-I$(idir)/include\" LIBS=\"-L$(idir)/lib\"
 
+cm_pkg_lua_configure = \
+	CFLAGS=-fPIC \
+	CPPFLAGS=\"-I$(idir)/include\" LIBS=\"-L$(idir)/lib\"
+
 cm_pkg_libxml2_configure = \
 	--enable-shared --without-python --with-iconv=$(idir)
 
@@ -283,6 +288,7 @@ cm_pkg_claws_mail_configure = \
 	--disable-newmail-plugin --disable-mailmbox-plugin \
 	--disable-dillo-plugin --enable-tnef_parse-plugin \
 	--with-password-encryption=gnutls \
+	--with-lua-incdir=$(idir)/include --with-lua-libdir=$(idir)/lib \
 	CPPFLAGS=\"-I$(idir)/include -D_POSIX_C_SOURCE -DLITEHTML_UTF8\" \
 	LDFLAGS=\"-L$(idir)/lib\" LIBS=\"-lexpat\"
 

@@ -1,0 +1,2956 @@
+#!/bin/sh
+patch -p1 -f $* < $0
+exit $?
+
+diff -urN claws-mail-3.17.8.org/configure.ac claws-mail-3.17.8/configure.ac
+--- claws-mail-3.17.8.org/configure.ac	2020-10-19 12:37:56.000000000 +0200
++++ claws-mail-3.17.8/configure.ac	2021-04-12 00:05:34.567217970 +0200
+@@ -571,6 +571,22 @@
+ esac
+ 
+ 
++AC_ARG_WITH(lua-incdir, [  --with-lua-incdir=DIR     Directory with Lua include files],
++	    with_lua_incdir="$withval", with_lua_incdir="/usr/include")
++
++AC_ARG_WITH(lua-libdir, [  --with-lua-libdir=DIR     Directory with Lua libraries],
++	    with_lua_libdir="$withval", with_lua_libdir="/usr/lib")
++
++AC_ARG_WITH(lua-libname, [  --with-lua-libname=NAME  Lua library filename with lib prefix and suffix stripped],
++	    with_lua_libname="$withval", with_lua_libname="lua")
++
++LUA_CFLAGS="-I$with_lua_incdir"
++AC_SUBST(LUA_CFLAGS)
++
++LUA_LIBS="-L$with_lua_libdir -l$with_lua_libname"
++AC_SUBST(LUA_LIBS)
++
++
+ dnl ************************
+ dnl ** GTK user interface **
+ dnl ************************
+@@ -1079,6 +1095,10 @@
+ 		[  --disable-litehtml_viewer-plugin       Do not build litehtml_viewer plugin],
+ 		[enable_litehtml_viewer_plugin=$enableval], [enable_litehtml_viewer_plugin=auto])
+ 
++AC_ARG_ENABLE(lua-plugin,
++		[  --disable-lua-plugin       Do not build lua plugin],
++		[enable_lua_plugin=$enableval], [enable_lua_plugin=auto])
++
+ AC_ARG_ENABLE(mailmbox-plugin,
+ 		[  --disable-mailmbox-plugin       Do not build mailmbox plugin],
+ 		[enable_mailmbox_plugin=$enableval], [enable_mailmbox_plugin=auto])
+@@ -1161,6 +1181,7 @@
+ dnl Gdata:		libgdata
+ dnl Litehtml		a C++ compiler, >=glib-2.36, cairo, fontconfig, gumbo, curl
+ dnl Libravatar:		libcurl
++dnl Lua:		lua
+ dnl Notification:	optionally libnotify  unity/messaging-menu
+ dnl 				   libcanberra_gtk hotkey
+ dnl Pdf-Viewer:		libpoppler
+@@ -1253,6 +1274,19 @@
+ AC_SUBST(LIBICAL_CFLAGS)
+ AC_SUBST(LIBICAL_LIBS)
+ 
++dnl lua ***********************************************************************
++#AC_CHECK_PROG(HAVE_LUA, lua, yes, no)
++#if test x"$HAVE_LUA" = xyes; then
++#	AC_MSG_CHECKING(for lua >= 5.1)
++#	LUA_VER=`lua -e 'print $] > 5.0079999 ? "yes" : "no"'`
++#	if test "$LUA_VER" = "yes"; then
++#		AC_MSG_RESULT(yes)
++#	else
++#		AC_MSG_RESULT(no)
++#		HAVE_LUA=no
++#	fi
++#fi
++
+ dnl Poppler ********************************************************************
+ PKG_CHECK_MODULES(POPPLER, poppler-glib >= 0.12.0, HAVE_POPPLER=yes, HAVE_POPPLER=no)
+ AC_SUBST(POPPLER_LIBS)
+@@ -1654,6 +1688,31 @@
+         AC_MSG_RESULT(no)
+ fi
+ 
++AC_MSG_CHECKING([whether to build lua plugin])
++if test x"$enable_lua_plugin" != xno; then
++	dependencies_missing=""
++
++#	if test x"$HAVE_LUA" = xno; then
++#		dependencies_missing="$missing_lua $dependencies_missing"
++#	fi
++
++	if test x"$dependencies_missing" = x; then
++		PLUGINS="$PLUGINS lua"
++		AC_MSG_RESULT(yes)
++	elif test x"$enable_lua_plugin" = xauto; then
++		AC_MSG_RESULT(no)
++		AC_MSG_WARN("Plugin lua will not be built; missing $dependencies_missing")
++		enable_lua_plugin=no
++		MISSING_DEPS_PLUGINS="$MISSING_DEPS_PLUGINS lua"
++	else
++		AC_MSG_RESULT(no)
++		AC_MSG_ERROR("Plugin lua cannot be built; missing $dependencies_missing")
++	fi
++else
++	DISABLED_PLUGINS="$DISABLED_PLUGINS lua"
++	AC_MSG_RESULT(no)
++fi
++
+ AC_MSG_CHECKING([whether to build mailmbox plugin])
+ if test x"$enable_mailmbox_plugin" != xno; then
+ 	PLUGINS="$PLUGINS mailmbox"
+@@ -2068,6 +2127,7 @@
+ AM_CONDITIONAL(BUILD_GDATA_PLUGIN,		test x"$enable_gdata_plugin" != xno)
+ AM_CONDITIONAL(BUILD_LIBRAVATAR_PLUGIN,		test x"$enable_libravatar_plugin" != xno)
+ AM_CONDITIONAL(BUILD_LITEHTML_VIEWER_PLUGIN,	test x"$enable_litehtml_viewer_plugin" != xno)
++AM_CONDITIONAL(BUILD_LUA_PLUGIN,		test x"$enable_lua_plugin" != xno)
+ AM_CONDITIONAL(BUILD_MAILMBOX_PLUGIN,		test x"$enable_mailmbox_plugin" != xno)
+ AM_CONDITIONAL(BUILD_MANAGESIEVE_PLUGIN,	test x"$enable_managesieve_plugin" != xno)
+ AM_CONDITIONAL(BUILD_NEWMAIL_PLUGIN,		test x"$enable_newmail_plugin" != xno)
+@@ -2120,6 +2180,7 @@
+ src/plugins/litehtml_viewer/Makefile
+ src/plugins/litehtml_viewer/litehtml/Makefile
+ src/plugins/libravatar/Makefile
++src/plugins/lua/Makefile
+ src/plugins/mailmbox/Makefile
+ src/plugins/managesieve/Makefile
+ src/plugins/newmail/Makefile
+diff -urN claws-mail-3.17.8.org/src/addr_compl.c claws-mail-3.17.8/src/addr_compl.c
+--- claws-mail-3.17.8.org/src/addr_compl.c	2020-10-19 12:37:56.000000000 +0200
++++ claws-mail-3.17.8/src/addr_compl.c	2021-04-12 00:05:34.567217970 +0200
+@@ -892,6 +892,8 @@
+ 		cw->in_mouse = FALSE;
+ 	}
+ 	
++	/* Re-enable keyboard, required at least for Gtk3/Win32 */
++	gdk_keyboard_ungrab(GDK_CURRENT_TIME);
+ }
+ 
+ /**
+diff -urN claws-mail-3.17.8.org/src/plugins/lua/bindings/clawsmail.account.c claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.account.c
+--- claws-mail-3.17.8.org/src/plugins/lua/bindings/clawsmail.account.c	1970-01-01 01:00:00.000000000 +0100
++++ claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.account.c	2021-04-12 00:05:34.567217970 +0200
+@@ -0,0 +1,60 @@
++/*
++ * Lua plugin for Claws Mail, created by Milan Obuch
++ *
++ * Claws Mail -- a GTK+ based, lightweight, and fast e-mail client
++ * Copyright (C) 1999-2021 the Claws Mail Team
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program. If not, see <http://www.gnu.org/licenses/>.
++ *
++ */
++
++#include "compose.h"
++
++#include "bindings/clawsmail.h"
++
++// __index function
++// stack on entry:
++// 1 - userdata (PrefsAccount *) account
++// 2 - string (index) = "folders"
++// stack on exit added:
++// 3 - table[1..n] string
++static int _account_folders_get(lua_State *L, const void *ptr, luaC_Function *F)
++{PrefsAccount *account = (PrefsAccount *)ptr;
++ GList *walk;
++ for (walk = folder_get_list(); walk; walk = walk->next)
++  {Folder *folder = walk->data;
++   if (!g_strcmp0(account->account_name,folder->name))
++    {if (folder->node)
++      {int n_children = g_node_n_children(folder->node);
++       int i_child;
++       lua_createtable(L,n_children,0);
++       for (i_child = 0; i_child < n_children; )
++        {GNode *node = g_node_nth_child(folder->node,i_child);
++         luaC_pushobject(L,(void *)node->data,FOLDER_OID);
++         lua_rawseti(L,-2,++i_child);
++        }
++       return 1;
++      }
++    }
++  }
++ lua_createtable(L,0,0);
++ return 1;
++}
++
++LOC_DECLARE(account,ACCOUNT)
++LOM_PROPERTY("address",PrefsAccount,        address,     LT_STRING)
++LOM_PROPERTY("default",PrefsAccount,        is_default,  LT_BOOLEAN)
++LOM_PROPERTY("name",   PrefsAccount,        account_name,LT_STRING)
++LOM_GET(     "folders",_account_folders_get)
++LOC_REGISTER(account,ACCOUNT)
+diff -urN claws-mail-3.17.8.org/src/plugins/lua/bindings/clawsmail.c claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.c
+--- claws-mail-3.17.8.org/src/plugins/lua/bindings/clawsmail.c	1970-01-01 01:00:00.000000000 +0100
++++ claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.c	2021-04-13 20:39:35.047774153 +0200
+@@ -0,0 +1,504 @@
++/*
++ * Lua plugin for Claws Mail, created by Milan Obuch
++ *
++ * Claws Mail -- a GTK+ based, lightweight, and fast e-mail client
++ * Copyright (C) 1999-2021 the Claws Mail Team
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program. If not, see <http://www.gnu.org/licenses/>.
++ *
++ */
++
++#include <glib.h>
++#include <glib/gi18n.h>
++
++#include "account.h"
++#include "compose.h"
++#include "folderview.h"
++#include "main.h"
++#include "mainwindow.h"
++#include "prefs_common.h"
++#include "procheader.h"
++#include "summaryview.h"
++#include "common/tags.h"
++
++#include "bindings/clawsmail.h"
++#include "bindings/gtk.h"
++
++// helper function
++// converts Lua table of userdata items with pointer
++// into GSList linked list of pointers from userdata items
++// index is stack position with table to convert
++// uses Lua stack for table traversal
++static GSList *Table2GSList(lua_State *L, int index)
++{GSList *msginfos = NULL;
++ lua_pushnil(L);                                       // first key
++ while (lua_next(L,index) != 0)                        // -2: 'key', -1: 'value'
++  {if (lua_isuserdata(L,-1))
++    {luaC_Object *o = (luaC_Object *)lua_touserdata(L,-1);
++     if (o->pointer != NULL)
++      msginfos = g_slist_prepend(msginfos,(gpointer)o->pointer);
++    }
++   lua_pop(L,1);                                       // removes 'value'; keeps 'key' for next iteration
++  }
++ return msginfos;
++}
++
++// __index function
++// stack on entry:
++// 1 - table (clawsmail, empty)
++// 2 - string (index) = "accounts"
++// stack on exit added:
++// 3 - table[1..n] userdata account
++static int _clawsmail_accounts(lua_State *L, const void *ptr, luaC_Function *F)
++{GList *accounts_list = account_get_list();
++ lua_createtable(L,g_list_length(accounts_list),0);
++ GList *walk;
++ int iAccount = 1;
++ for (walk = accounts_list; walk; walk = walk->next)
++  {luaC_pushobject(L,(void *)walk->data,ACCOUNT_OID);
++   lua_rawseti(L,-2,iAccount++);
++  }
++ return 1;
++}
++
++// __index function
++// stack on entry:
++// 1 - table (clawsmail, empty)
++// 2 - string (index) = "current_account"
++// stack on exit added:
++// 3 - userdata account
++static int _clawsmail_current_account(lua_State *L, const void *ptr, luaC_Function *F)
++{PrefsAccount *account = account_get_cur_account();
++ if (account)
++  luaC_pushobject(L,(void *)account,ACCOUNT_OID);
++ else
++  lua_pushnil(L);
++ return 1;
++}
++
++// __index function
++// stack on entry:
++// 1 - table (clawsmail, empty)
++// 2 - string (index) = "default_account"
++// stack on exit added:
++// 3 - userdata account
++static int _clawsmail_default_account(lua_State *L, const void *ptr, luaC_Function *F)
++{PrefsAccount *account = account_get_default();
++ if (account)
++  luaC_pushobject(L,(void *)account,ACCOUNT_OID);
++ else
++  lua_pushnil(L);
++ return 1;
++}
++
++// __index function
++// stack on entry:
++// 1 - table (clawsmail, empty)
++// 2 - string (index) = "exiting"
++// stack on exit added:
++// 3 - boolean
++static int _clawsmail_exiting(lua_State *L, const void *ptr, luaC_Function *F)
++{
++ lua_pushboolean(L,claws_is_exiting());
++ return 1;
++}
++
++// __index function
++// stack on entry:
++// 1 - table (clawsmail, empty)
++// 2 - string (index) = "folderview_selected"
++// stack on exit added:
++// 3 - userdata folder
++//     userdata mailbox
++//     nil
++static int _clawsmail_folderview_selected(lua_State *L, const void *ptr, luaC_Function *F)
++{
++ if (lua_istable(L,1))
++  {MainWindow *mainwin = mainwindow_get_mainwindow();
++   if (!mainwin || !mainwin->folderview)
++    {printf("FolderView not found\n");
++     goto err;
++    }
++   FolderItem *item = folderview_get_selected_item(mainwin->folderview);
++   if (item)
++    {gchar *id;
++     id = folder_item_get_identifier(item);
++     if (id)             // If there is an id, it's a folder, not a mailbox
++      {g_free(id);
++       luaC_pushobject(L,(void *)item,FOLDER_OID);
++      }
++     else
++      luaC_pushobject(L,(void *)item->folder,MAILBOX_OID);
++    }
++   return 1;
++  }
++err:
++ lua_pushnil(L);
++ return 1;
++}
++
++// __index function
++// stack on entry:
++// 1 - table (clawsmail, empty)
++// 2 - string (index) = "mailboxes"
++// stack on exit added:
++// 3 - table[1..n] userdata mailbox
++static int _clawsmail_mailboxes(lua_State *L, const void *ptr, luaC_Function *F)
++{GList *mailboxes_list = folder_get_list();
++ lua_createtable(L,g_list_length(mailboxes_list),0);
++ GList *walk;
++ int iMailbox = 1;
++ for (walk = mailboxes_list; walk; walk = walk->next)
++  {luaC_pushobject(L,(void *)walk->data,MAILBOX_OID);
++   lua_rawseti(L,-2,iMailbox++);
++  }
++ return 1;
++}
++
++// __index function
++// stack on entry:
++// 1 - table (clawsmail, empty)
++// 2 - string (index) = "mainwindow_action_group"
++// stack on exit added:
++// 3 - userdata action_group
++//     nil
++static int _clawsmail_mainwindow_action_group(lua_State *L, const void *ptr, luaC_Function *F)
++{MainWindow *mainwin = mainwindow_get_mainwindow();
++ if (mainwin)
++  luaC_pushobject(L,(void *)mainwin->action_group,ACTION_GROUP_OID);
++ else
++  lua_pushnil(L);
++ return 1;
++}
++
++// __index function
++// stack on entry:
++// 1 - table (clawsmail, empty)
++// 2 - string (index) = "mainwindow_ui_manager"
++// stack on exit added:
++// 3 - userdata ui_manager
++//     nil
++static int _clawsmail_mainwindow_ui_manager(lua_State *L, const void *ptr, luaC_Function *F)
++{MainWindow *mainwin = mainwindow_get_mainwindow();
++ if (mainwin)
++  luaC_pushobject(L,(void *)mainwin->ui_manager,UI_MANAGER_OID);
++ else
++  lua_pushnil(L);
++ return 1;
++}
++
++// __index function
++// stack on entry:
++// 1 - table (clawsmail, empty)
++// 2 - string (index) = "summaryview_selected_messages"
++// stack on exit added:
++// 3 - table[1..n] userdata msg_info
++//     nil
++static int _clawsmail_summaryview_selected_messages(lua_State *L, const void *ptr, luaC_Function *F)
++{
++ if (lua_istable(L,1))
++  {MainWindow *mainwin = mainwindow_get_mainwindow();
++   if (!mainwin || !mainwin->summaryview)
++    {printf("SummaryView not found\n");
++     goto err;
++    }
++   GSList *list, *walk;
++   list = summary_get_selected_msg_list(mainwin->summaryview);
++   lua_createtable(L,g_slist_length(list),0);
++   int iMsg = 1;
++   for (walk = list; walk; walk = walk->next)
++    {MsgInfo *msginfo = (MsgInfo *)walk->data;
++     if (msginfo)
++      {luaC_pushobject(L,(void *)msginfo,MSG_INFO_OID);
++       lua_rawseti(L,-2,iMsg++);
++      }
++    }
++   g_slist_free(list);
++   return 1;
++  }
++err:
++ lua_pushnil(L);
++ return 1;
++}
++
++// __index function
++// stack on entry:
++// 1 - table (clawsmail, empty)
++// 2 - string (index) = "tags"
++// stack on exit added:
++// 3 - table[1..n] string
++static int _clawsmail_tags(lua_State *L, const void *ptr, luaC_Function *F)
++{GSList *tags_list = tags_get_list();
++ lua_createtable(L,g_slist_length(tags_list),0);
++ GSList *walk;
++ int iTag = 1;
++ for (walk = tags_list; walk; walk = walk->next)
++  {lua_pushstring(L,tags_get_tag(GPOINTER_TO_INT(walk->data)));
++   lua_rawseti(L,-2,iTag++);
++  }
++ g_slist_free(tags_list);
++ return 1;
++}
++
++// global function registered in clawsmail namespace
++// stack on entry:
++// 1 - string (tag)
++static int _clawsmail_add_tag(lua_State *L)
++{
++ if (lua_isstring(L,1))
++  {const char *tag_str = lua_tostring(L,1);
++   if (IS_NOT_RESERVED_TAG(tag_str) == FALSE)
++    {printf("Tag name is reserved\n");
++     return 0;
++    }
++   tags_add_tag(tag_str);
++  }
++ return 0;
++}
++
++// global function registered in clawsmail namespace
++// stack on entry:
++// 1 - string (tag)
++static int _clawsmail_delete_tag(lua_State *L)
++{
++ if (lua_isstring(L,1))
++  {const char *tag_str = lua_tostring(L,1);
++   gint tag_id = tags_get_id_for_str(tag_str);
++   if (tag_id == -1)
++    {printf("Tag does not exist\n");
++     return 0;
++    }
++   tags_remove_tag(tag_id);
++   MainWindow *mainwin = mainwindow_get_mainwindow();   // update display
++   if (mainwin)
++    summary_redisplay_msg(mainwin->summaryview);
++  }
++ return 0;
++}
++
++// global function registered in clawsmail namespace
++// stack on entry:
++// 1 - string (old tag)
++// 2 - string (new tag)
++static int _clawsmail_rename_tag(lua_State *L)
++{
++ if (lua_isstring(L,1) && lua_isstring(L,2))
++  {const char *old_tag_str = lua_tostring(L,1);
++   const char *new_tag_str = lua_tostring(L,2);
++   if ((IS_NOT_RESERVED_TAG(new_tag_str) == FALSE) || (IS_NOT_RESERVED_TAG(old_tag_str) == FALSE))
++    {printf("Tag name is reserved\n");
++     return 0;
++    }
++   gint tag_id = tags_get_id_for_str(old_tag_str);
++   if (tag_id == -1)
++    {printf("Tag does not exist\n");
++     return 0;
++    }
++   tags_update_tag(tag_id,new_tag_str);
++   MainWindow *mainwin = mainwindow_get_mainwindow();   // update display
++   if (mainwin)
++    summary_redisplay_msg(mainwin->summaryview);
++  }
++ return 0;
++}
++
++// global function registered in clawsmail namespace
++// stack on entry:
++// 1 - string (address)
++static int _clawsmail_compose(lua_State *L)
++{MainWindow *mainwin = mainwindow_get_mainwindow();
++ FolderItem *item = mainwin->summaryview->folder_item;
++ PrefsAccount *ac = NULL;
++ Compose *compose = NULL;
++ const char *address = NULL;
++ if (lua_isstring(L,1))
++  address = lua_tostring(L,1);
++ if (address)
++  {ac = account_find_from_address(address,FALSE);
++   if (ac && ac->protocol != A_NNTP)
++    goto do_compose;
++  }
++ if (item)
++  {ac = account_find_from_item(item);
++   if (ac && ac->protocol != A_NNTP)
++    goto do_compose;
++  }
++ ac = account_get_cur_account();
++ if (ac && ac->protocol != A_NNTP)
++    goto do_compose;
++ GList* list = account_get_list();                     // just get the first one
++ GList* cur;
++ for (cur = list ; cur != NULL ; cur = g_list_next(cur))
++  {ac = (PrefsAccount *)cur->data;
++   if (ac->protocol != A_NNTP)
++    goto do_compose;
++  }
++ lua_pushnil(L);
++ return 1;
++do_compose:
++ compose = compose_new_with_folderitem(ac,item,NULL);
++ luaC_pushobject(L,(void *)compose,COMPOSE_WINDOW_OID);
++ gtk_widget_show_all(compose->window);
++ flush_gtk_queue();
++ return 1;
++}
++
++// global function registered in clawsmail namespace
++// stack on entry:
++// 1 - userdata (object)
++static int _clawsmail_folderview_select(lua_State *L)
++{
++ if (lua_istable(L,1))
++  {lua_getfield(L,1,"__type");
++   if (lua_isstring(L,-1))
++    {const char *type = lua_tostring(L,-1);
++     MainWindow *mainwin = mainwindow_get_mainwindow();
++     if (mainwin && mainwin->folderview)
++      {luaC_Object *o = (luaC_Object *)lua_touserdata(L,1);
++       if (o->pointer != NULL)
++        {if (!strcmp(type,FOLDER_OID))
++          folderview_select(mainwin->folderview,(FolderItem *)o->pointer);
++         else if (!strcmp(type,MAILBOX_OID))
++          {Folder *folder = (Folder *)o->pointer;
++           if (folder && folder->node)
++            folderview_select(mainwin->folderview,folder->node->data);
++          }
++        }
++      }
++    }
++   else
++    printf("clawsmail.folderview_select argument __type is not a string\n");
++  }
++ else
++  printf("clawsmail.folderview_select argument is not an object\n");
++ return 0;
++}
++
++// global function registered in clawsmail namespace
++// stack on entry:
++// 1 - string (search string) or none (clear)
++// 2 - string (search type) or none
++static int _clawsmail_quicksearch(lua_State *L)
++{MainWindow *mainwin = mainwindow_get_mainwindow();
++ if (!mainwin || !mainwin->summaryview || !mainwin->summaryview->quicksearch)
++  {printf("Quicksearch not found\n");
++   return 0;
++  }
++ int searchtype = prefs_common_get_prefs()->summary_quicksearch_type;
++ const char *searchstring = "";
++ if (lua_isstring(L,1))
++  {searchstring = lua_tostring(L,1);
++   if (lua_isstring(L,2))
++    {const char *string = lua_tostring(L,2);
++     if (!strcasecmp(string,"Subject"))
++      searchtype = 0;
++     else if (!strcasecmp(string,"From"))
++      searchtype = 1;
++     else if (!strcasecmp(string,"To"))
++      searchtype = 2;
++     else if (!strcasecmp(string,"Extended"))
++      searchtype = 3;
++     else if (!strcasecmp(string,"Mixed"))
++      searchtype = 4;
++     else if (!strcasecmp(string,"Tag"))
++      searchtype = 5;
++     else
++      printf("clawsmail.quicksearch argument 2 is an undefined string, %s, ignored\n",string);
++    }
++  }
++ else if (!lua_isnone(L,1))
++  {printf("clawsmail.quicksearch argument 1 is neither absent nor a string, %s\n",lua_typename(L,lua_type(L,1)));
++   return 0;
++  }
++ quicksearch_set(mainwin->summaryview->quicksearch,searchtype,searchstring);
++ return 0;
++}
++
++// global function registered in clawsmail namespace
++// stack on entry:
++// 1 - table (object list)
++static int _clawsmail_summaryview_select_messages(lua_State *L)
++{
++ if (lua_istable(L,1))
++  {MainWindow *mainwin = mainwindow_get_mainwindow();
++   if (!mainwin || !mainwin->summaryview)
++    {printf("SummaryView not found\n");
++     return 0;
++    }
++   GSList *msginfos = Table2GSList(L,1);
++   summary_unselect_all(mainwin->summaryview);
++   summary_select_by_msg_list(mainwin->summaryview,msginfos);
++   g_slist_free(msginfos);
++  }
++ return 0;
++}
++
++// helper function doing real work for copy/move messages global functions
++static int _clawsmail_move_or_copy_messages(lua_State *L, gboolean move)
++{
++ if (lua_istable(L,1) && lua_isuserdata(L,2))
++  {luaC_Object *o = (luaC_Object *)lua_touserdata(L,2);
++   if (o->pointer == NULL)
++    return 0;
++   GSList *msginfos = Table2GSList(L,1);
++   GSList *walk;
++   if (msginfos == NULL)
++    return 0;
++   for (walk = msginfos; walk; walk = walk->next)
++    procmsg_msginfo_set_to_folder((MsgInfo *)walk->data,(FolderItem *)o->pointer);
++   folder_item_update_freeze();
++   if (move)
++    procmsg_move_messages(msginfos);
++   else
++    procmsg_copy_messages(msginfos);
++   folder_item_update_thaw();
++   g_slist_free(msginfos);
++  }
++ return 0;
++}
++
++// global function registered in clawsmail namespace
++static int _clawsmail_copy_messages(lua_State *L)
++{
++ return _clawsmail_move_or_copy_messages(L,FALSE);
++}
++
++// global function registered in clawsmail namespace
++static int _clawsmail_move_messages(lua_State *L)
++{
++ return _clawsmail_move_or_copy_messages(L,TRUE);
++}
++
++LOC_DECLARE(clawsmail,CLAWSMAIL)
++LOM_GET(   "accounts",                     _clawsmail_accounts)
++LOM_GET(   "current_account",              _clawsmail_current_account)
++LOM_GET(   "default_account",              _clawsmail_default_account)
++LOM_GET(   "exiting",                      _clawsmail_exiting)
++LOM_GET(   "folderview_selected",          _clawsmail_folderview_selected)
++LOM_GET(   "mailboxes",                    _clawsmail_mailboxes)
++LOM_GET(   "mainwindow_action_group",      _clawsmail_mainwindow_action_group)
++LOM_GET(   "mainwindow_ui_manager",        _clawsmail_mainwindow_ui_manager)
++LOM_GET(   "summaryview_selected_messages",_clawsmail_summaryview_selected_messages)
++LOM_GET(   "tags",                         _clawsmail_tags)
++LOM_METHOD("add_tag",                      _clawsmail_add_tag)
++LOM_METHOD("compose",                      _clawsmail_compose)
++LOM_METHOD("copy_messages",                _clawsmail_copy_messages)
++LOM_METHOD("delete_tag",                   _clawsmail_delete_tag)
++LOM_METHOD("folderview_select",            _clawsmail_folderview_select)
++LOM_METHOD("move_messages",                _clawsmail_move_messages)
++LOM_METHOD("quicksearch",                  _clawsmail_quicksearch)
++LOM_METHOD("rename_tag",                   _clawsmail_rename_tag)
++LOM_METHOD("summaryview_select_messages",  _clawsmail_summaryview_select_messages)
++#include "loli-instance.h"
++LOC_REGISTER(clawsmail,CLAWSMAIL)
+diff -urN claws-mail-3.17.8.org/src/plugins/lua/bindings/clawsmail.compose_window.c claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.compose_window.c
+--- claws-mail-3.17.8.org/src/plugins/lua/bindings/clawsmail.compose_window.c	1970-01-01 01:00:00.000000000 +0100
++++ claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.compose_window.c	2021-04-12 00:05:34.571217963 +0200
+@@ -0,0 +1,477 @@
++/*
++ * Lua plugin for Claws Mail, created by Milan Obuch
++ *
++ * Claws Mail -- a GTK+ based, lightweight, and fast e-mail client
++ * Copyright (C) 1999-2021 the Claws Mail Team
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program. If not, see <http://www.gnu.org/licenses/>.
++ *
++ */
++
++#include <glib.h>
++#include <glib/gi18n.h>
++
++#include "compose.h"
++#include "procheader.h"
++
++#include "bindings/clawsmail.h"
++#include "bindings/gtk.h"
++
++// helper function to ensure actions required are really performed,
++// this way changes are visible in UI
++void flush_gtk_queue(void)
++{
++ while (gtk_events_pending())
++  gtk_main_iteration();
++}
++
++// __newindex function
++// stack on entry:
++// 1 - userdata (Compose *) compose_window
++// 2 - string (index) = "modified"
++// 3 - boolean (modified new value)
++// Compose member used:
++// 1 - modified (rm)
++static void _compose_window_modified_set(lua_State *L, const void *ptr, luaC_Function *F)
++{Compose *compose = (Compose *)ptr;
++ if (lua_isboolean(L,3))
++  {gboolean modified = lua_toboolean(L,3);
++   gboolean old_modified = compose->modified;
++   compose->modified = (modified != 0);
++   /* If the modified state changed, rewrite window title.
++    * This partly duplicates functionality in compose.c::compose_set_title().
++    * While it's nice to not have to modify Claws Mail for this to work,
++    * it would be cleaner to export that function in Claws Mail. */
++   if ((strcmp(gtk_window_get_title(GTK_WINDOW(compose->window)),_("Compose message")) != 0) && (old_modified != compose->modified))
++    {gchar *str;
++     gchar *edited;
++     gchar *subject;
++     edited = compose->modified ? _(" [Edited]") : "";
++     subject = gtk_editable_get_chars(GTK_EDITABLE(compose->subject_entry),0,-1);
++     if (subject && strlen(subject))
++      str = g_strdup_printf(_("%s - Compose message%s"),subject,edited);
++     else
++      str = g_strdup_printf(_("[no subject] - Compose message%s"),edited);
++     gtk_window_set_title(GTK_WINDOW(compose->window),str);
++     g_free(str);
++     g_free(subject);
++    }
++   flush_gtk_queue();
++  }
++}
++
++// __newindex function
++// stack on entry:
++// 1 - userdata (Compose *) compose_window
++// 2 - string (index) = "account"
++// 3 - string/userdata (modified new value)
++// Compose member used:
++// 1 - modified (rm)
++/*static int _compose_window_account_set(lua_State *L, const void *ptr, luaC_Function *F)
++{Compose *compose = (Compose *)ptr;
++{PrefsAccount *target_account;
++  if (value == NULL)
++   {PyErr_SetString(PyExc_TypeError, "Cannot delete 'account' attribute");
++    return -1;
++   }
++  if (!clawsmail_account_check(value))
++   {PyErr_SetString(PyExc_TypeError, "ComposeWindow.account: Can only assign an account");
++    return -1;
++   }
++  target_account = clawsmail_account_get_account(value);
++  if (!target_account)
++   {PyErr_SetString(PyExc_TypeError, "Account value broken");
++    return -1;
++   }
++  if (!compose || !compose->account_combo)
++   {PyErr_SetString(PyExc_RuntimeError, "ComposeWindow: Cannot access account");
++    return -1;
++   }
++  combobox_select_by_data(GTK_COMBO_BOX(compose->account_combo),target_account->account_id);
++  return 0;
++}
++ return 0;
++}*/
++
++// __index function
++// stack on entry:
++// 1 - userdata (Compose *) compose_window
++// 2 - string (index) = "from"
++// stack on exit added:
++// 3 - string
++//     nil
++static int _compose_window_from_get(lua_State *L, const void *ptr, luaC_Function *F)
++{Compose *compose = (Compose *)ptr;
++ if (compose->from_name != NULL)
++  lua_pushstring(L,gtk_entry_get_text(GTK_ENTRY(compose->from_name)));
++ else
++  lua_pushnil(L);
++ return 1;
++}
++
++// __newindex function
++// stack on entry:
++// 1 - userdata (Compose *) compose_window
++// 2 - string (index) = "from"
++// 3 - string (new value)
++static void _compose_window_from_set(lua_State *L, const void *ptr, luaC_Function *F)
++{Compose *compose = (Compose *)ptr;
++ if (lua_isstring(L,3))
++  gtk_entry_set_text(GTK_ENTRY(compose->from_name),lua_tostring(L,3));
++}
++
++// __index function
++// stack on entry:
++// 1 - userdata (Compose *) compose_window
++// 2 - string (index) = "headers"
++// stack on exit added:
++// 3 - table[1..n] {header = "header", text = "text"}
++// Compose member used:
++// 1 - GSList *header_list (ro)
++static int _compose_window_headers_get(lua_State *L, const void *ptr, luaC_Function *F)
++{Compose *compose = (Compose *)ptr;
++ GSList *walk;
++ lua_createtable(L,g_slist_length(compose->header_list),0);
++ int iHeader = 1;
++ for (walk = compose->header_list; walk; walk = walk->next)
++  {ComposeHeaderEntry *headerentry = walk->data;
++   const gchar *header;
++   const gchar *text;
++   header = gtk_editable_get_chars(GTK_EDITABLE(gtk_bin_get_child(GTK_BIN(headerentry->combo))),0,-1);
++   text = gtk_entry_get_text(GTK_ENTRY(headerentry->entry));
++   if (text && strcmp("",text))
++    {lua_createtable(L,2,0);
++     lua_pushstring(L,"header");
++     lua_pushstring(L,header);
++     lua_rawset(L,-3);
++     lua_pushstring(L,"text");
++     lua_pushstring(L,text);
++     lua_rawset(L,-3);
++     lua_rawseti(L,-2,iHeader++);
++    }
++  }
++ return 1;
++}
++
++// __newindex function
++// stack on entry:
++// 1 - userdata (Compose *) compose_window
++// 2 - string (index) = "headers"
++// 3 - table[1..n] {header = "header", text = "text"}
++// Compose member used:
++// 1 - GSList *header_list (ro)
++static void _compose_window_headers_set(lua_State *L, const void *ptr, luaC_Function *F)
++{Compose *compose = (Compose *)ptr;
++ int t = lua_gettop(L);
++ gint header_count = g_slist_length(compose->header_list);
++ int iHeader = 0, ok = 1;
++ lua_pushnil(L);            // first key
++ while (lua_next(L,t) != 0) // uses 'key' (at index -2) and 'value' (at index -1)
++  {lua_pushstring(L,"header");
++   lua_rawget(L,-2);
++   lua_pushstring(L,"text");
++   lua_rawget(L,-3);
++   if (lua_isnumber(L,-4) && lua_isstring(L,-2) && lua_isstring(L,-1))
++    printf("header: key %d, header %s, text %s\n",lua_tointeger(L,-4),lua_tostring(L,-2),lua_tostring(L,-1));
++   else
++    ok = 0;
++   lua_pop(L,3);            // removes 'value', 'value.header', 'value.text'; keeps 'key' for next iteration
++   iHeader++;
++  }
++ if (!ok)
++  return;
++ // delete old headers
++ GSList *walk;
++ for (walk = compose->header_list; walk; walk = walk->next)
++  {ComposeHeaderEntry *headerentry = walk->data;
++   gtk_entry_set_text(GTK_ENTRY(headerentry->entry),"");
++  }
++ // if given header list is bigger than current header list, add dummy values
++ while (header_count < iHeader)
++  {compose_entry_append(compose,"dummy1dummy2dummy3",COMPOSE_TO,PREF_NONE);
++   header_count++;
++  }
++ /* set headers to new values */
++ iHeader = 0;
++ lua_pushnil(L);            // first key
++ while (lua_next(L,t) != 0) // uses 'key' (at index -2) and 'value' (at index -1)
++  {lua_pushstring(L,"header");
++   lua_rawget(L,-2);
++   lua_pushstring(L,"text");
++   lua_rawget(L,-3);
++   ComposeHeaderEntry *headerentry = g_slist_nth_data(compose->header_list,iHeader);
++   GtkEditable *editable = GTK_EDITABLE(gtk_bin_get_child(GTK_BIN(headerentry->combo)));
++   gint pos;
++   gtk_editable_delete_text(editable,0,-1);
++   gtk_editable_insert_text(editable,lua_tostring(L,-2),-1,&pos);        // set header field
++   gtk_entry_set_text(GTK_ENTRY(headerentry->entry),lua_tostring(L,-1)); // set header content
++   lua_pop(L,3);            // removes 'value', 'value.header', 'value.text'; keeps 'key' for next iteration
++   iHeader++;
++  }
++}
++
++// __index function
++// stack on entry:
++// 1 - userdata (Compose *) compose_window
++// 2 - string (index) = "sent_folder"
++// stack on exit added:
++// 3 - userdata (FolderItem *) folder
++//   - nil (save not active)
++static int _compose_window_sent_folder_get(lua_State *L, const void *ptr, luaC_Function *F)
++{Compose *compose = (Compose *)ptr;
++ GtkEditable *editable = GTK_EDITABLE(gtk_bin_get_child(GTK_BIN(compose->savemsg_combo)));
++ gboolean save_active = gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(compose->savemsg_checkbtn));
++ FolderItem *folder = NULL;
++ if (save_active)
++  folder = folder_find_item_from_identifier(gtk_editable_get_chars(editable,0,-1));
++ if (folder)
++  luaC_pushobject(L,(void *)folder,FOLDER_OID);
++ else
++  lua_pushnil(L);
++ return 1;
++}
++
++// __newindex function
++// stack on entry:
++// 1 - userdata (Compose *) compose_window
++// 2 - string (index) = "sent_folder"
++// 3 - string (foldername or '' when saving not desired)
++//   - nil (message not saved after being sent)
++//   - [TODO: userdata (folder)]
++static void _compose_window_sent_folder_set(lua_State *L, const void *ptr, luaC_Function *F)
++{Compose *compose = (Compose *)ptr;
++ const char *foldername = NULL;
++ gboolean save_active = FALSE;
++ if (lua_isstring(L,3))
++  {foldername = lua_tostring(L,3);
++   if (strlen(foldername) > 0)
++    save_active = TRUE;
++  }
++ else if (lua_isuserdata(L,3))
++  {lua_getfield(L,3,"__type");
++   if (lua_isstring(L,-1))
++    {printf("compose_window.sent_folder argument __type is not a string\n");
++     return;
++    }
++   const char *type = lua_tostring(L,-1);
++   if (strcmp(type,FOLDER_OID))
++    {printf("compose_window.sent_folder argument __type is not FOLDER_OID\n");
++     return;
++    }
++   luaC_Object *o = (luaC_Object *)lua_touserdata(L,3);
++   if (o->pointer == NULL)
++    {printf("compose_window.sent_folder argument value is NULL\n");
++     return;
++    }
++   FolderItem *folder = (FolderItem *)o->pointer;
++   foldername = folder_item_get_identifier(folder);
++   save_active = TRUE;
++  }
++ else if (!lua_isnil(L,3))
++  {printf("compose_window.sent_folder argument type illegal\n");
++   return;
++  }
++ gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(compose->savemsg_checkbtn),save_active);
++ if (save_active)
++  {gint pos;
++   GtkEditable *editable = GTK_EDITABLE(gtk_bin_get_child(GTK_BIN(compose->savemsg_combo)));
++   gtk_editable_delete_text(editable,0,-1);
++   gtk_editable_insert_text(editable,foldername,-1,&pos);
++  }
++ flush_gtk_queue();
++}
++
++// __index function
++// stack on entry:
++// 1 - userdata (Compose *) compose_window
++// 2 - string (index) = "subject"
++static int _compose_window_subject_get(lua_State *L, const void *ptr, luaC_Function *F)
++{Compose *compose = (Compose *)ptr;
++ if (compose->subject_entry != NULL)
++  lua_pushstring(L,gtk_entry_get_text(GTK_ENTRY(compose->subject_entry)));
++ else
++  lua_pushnil(L);
++ return 1;
++}
++
++// __newindex function
++// stack on entry:
++// 1 - userdata (Compose *) compose_window
++// 2 - string (index) = "subject"
++// 3 - string (new subject)
++static void _compose_window_subject_set(lua_State *L, const void *ptr, luaC_Function *F)
++{Compose *compose = (Compose *)ptr;
++ if (lua_isstring(L,3))
++  {const char *value = lua_tostring(L,3);
++   gtk_entry_set_text(GTK_ENTRY(compose->subject_entry),value);
++  }
++}
++
++// __index function
++// stack on entry:
++// 1 - userdata (Compose *) compose_window
++// 2 - string (index) = "text"
++static int _compose_window_text_get(lua_State *L, const void *ptr, luaC_Function *F)
++{Compose *compose = (Compose *)ptr;
++ if (compose->text != NULL)
++  {GtkTextView *textview = GTK_TEXT_VIEW(compose->text);
++   GtkTextBuffer *textbuffer = gtk_text_view_get_buffer(textview);
++   GtkTextIter start, end;
++   gtk_text_buffer_get_start_iter(textbuffer,&start);
++   gtk_text_buffer_get_end_iter(textbuffer,&end);
++   gchar *text = gtk_text_buffer_get_text(textbuffer,&start,&end,FALSE);
++   lua_pushstring(L,text);
++// luaC_pushobject(L,(void *)compose->text,GTK_WIDGET_OID);
++  }
++ else
++  lua_pushnil(L);
++ return 1;
++}
++
++// __newindex function
++// stack on entry:
++// 1 - userdata (Compose *) compose_window
++// 2 - string (index) = "text"
++// 3 - string (new text)
++static void _compose_window_text_set(lua_State *L, const void *ptr, luaC_Function *F)
++{Compose *compose = (Compose *)ptr;
++ if (lua_isstring(L,3))
++  {const char *value = lua_tostring(L,3);
++    {GtkTextView *textview = GTK_TEXT_VIEW(compose->text);
++     GtkTextBuffer *textbuffer = gtk_text_view_get_buffer(textview);
++     gtk_text_buffer_set_text(textbuffer,value,-1);
++    }
++  }
++}
++
++// compose_window object method
++// stack on entry:
++// 1 - userdata (Compose *) compose_window
++// 2 - string (address)
++static int _compose_window_add_to(lua_State *L)
++{
++ if (lua_isuserdata(L,1) && lua_isstring(L,2))
++  {luaC_Object *o = (luaC_Object *)lua_touserdata(L,1);
++   const char *string_to_add = lua_tostring(L,2);
++   Compose *compose = (Compose *)o->pointer;
++   compose_entry_append(compose,(gchar *)string_to_add,COMPOSE_TO,PREF_NONE);
++   flush_gtk_queue();
++  }
++ return 0;
++}
++
++// compose_window object method
++// stack on entry:
++// 1 - userdata (Compose *) compose_window
++// 2 - string (address)
++static int _compose_window_add_cc(lua_State *L)
++{
++ if (lua_isuserdata(L,1) && lua_isstring(L,2))
++  {luaC_Object *o = (luaC_Object *)lua_touserdata(L,1);
++   const char *string_to_add = lua_tostring(L,2);
++   Compose *compose = (Compose *)o->pointer;
++   compose_entry_append(compose,(gchar *)string_to_add,COMPOSE_CC,PREF_NONE);
++   flush_gtk_queue();
++  }
++ return 0;
++}
++
++// compose_window object method
++// stack on entry:
++// 1 - userdata (Compose *) compose_window
++// 2 - string (address)
++static int _compose_window_add_bcc(lua_State *L)
++{
++ if (lua_isuserdata(L,1) && lua_isstring(L,2))
++  {luaC_Object *o = (luaC_Object *)lua_touserdata(L,1);
++   const char *string_to_add = lua_tostring(L,2);
++   Compose *compose = (Compose *)o->pointer;
++   compose_entry_append(compose,(gchar *)string_to_add,COMPOSE_BCC,PREF_NONE);
++   flush_gtk_queue();
++  }
++ return 0;
++}
++
++// compose_window object method
++// stack on entry:
++// 1 - userdata (Compose *) compose_window
++// 2 - string (header)
++// 3 - string (text)
++// Compose member used:
++// 1 - GSList *header_list (ra)
++static int _compose_window_add_header(lua_State *L)
++{
++ if (lua_isuserdata(L,1) && lua_isstring(L,2) && lua_isstring(L,3))
++  {luaC_Object *o = (luaC_Object *)lua_touserdata(L,1);
++   const char *header = lua_tostring(L,2);
++   const char *text = lua_tostring(L,3);
++   Compose *compose = (Compose *)o->pointer;
++   /* add a dummy, and modify it then */
++   compose_entry_append(compose,"dummy1dummy2dummy3",COMPOSE_TO,PREF_NONE);
++   gint num = g_slist_length(compose->header_list);
++   if (num > 1)
++    {ComposeHeaderEntry *headerentry;
++     headerentry = g_slist_nth_data(compose->header_list,num - 2);
++     if (headerentry)
++      {GtkEditable *editable;
++       gint pos;
++       gtk_entry_set_text(GTK_ENTRY(headerentry->entry),text);
++       editable = GTK_EDITABLE(gtk_bin_get_child(GTK_BIN(headerentry->combo)));
++       gtk_editable_delete_text(editable,0,-1);
++       gtk_editable_insert_text(editable,header,-1,&pos);
++      }
++    }
++   flush_gtk_queue();
++  }
++ return 0;
++}
++
++// compose_window object method
++// stack on entry:
++// 1 - userdata (Compose *) compose_window
++// 2 - string (filename) [TODO: table (filenames)]
++static int _compose_window_attach(lua_State *L)
++{
++ if (lua_isuserdata(L,1) && lua_isstring(L,2))
++  {luaC_Object *o = (luaC_Object *)lua_touserdata(L,1);
++   const char *filename = lua_tostring(L,2);
++   Compose *compose = (Compose *)o->pointer;
++   GList *list = NULL;
++   list = g_list_prepend(list,(gpointer)filename);
++   compose_attach_from_list(compose,list,FALSE);
++   g_list_free(list);
++   flush_gtk_queue();
++  }
++ return 0;
++}
++
++LOC_DECLARE(compose_window,COMPOSE_WINDOW)
++LOM_PROPERTY_SET(      "modified",         Compose,                        modified,     LT_BOOLEAN, _compose_window_modified_set)
++LOM_PROPERTY_OID(      "account",          Compose,                        account,      ACCOUNT_OID)
++//LOM_PROPERTY_OID_SET("account",          Compose,                        account,      ACCOUNT_OID,_compose_window_account_set)
++//LOM_PROPERTY_OID(    "account_selection",Compose,                        account_combo,GTK_WIDGET_OID)
++LOM_PROPERTY_OID(      "fwdinfo",          Compose,                        fwdinfo,      MSG_INFO_OID)
++LOM_PROPERTY_OID(      "replyinfo",        Compose,                        replyinfo,    MSG_INFO_OID)
++LOM_PROPERTY_OID(      "ui_manager",       Compose,                        ui_manager,   UI_MANAGER_OID)
++LOM_GET_SET(           "from",             _compose_window_from_get,       _compose_window_from_set)
++LOM_GET_SET(           "headers",          _compose_window_headers_get,    _compose_window_headers_set)
++LOM_GET_SET(           "sent_folder",      _compose_window_sent_folder_get,_compose_window_sent_folder_set)
++LOM_GET_SET(           "subject",          _compose_window_subject_get,    _compose_window_subject_set)
++LOM_GET_SET(           "text",             _compose_window_text_get,       _compose_window_text_set)
++LOM_METHOD(            "add_to",           _compose_window_add_to)
++LOM_METHOD(            "add_cc",           _compose_window_add_cc)
++LOM_METHOD(            "add_bcc",          _compose_window_add_bcc)
++LOM_METHOD(            "add_header",       _compose_window_add_header)
++LOM_METHOD(            "attach",           _compose_window_attach)
++LOC_REGISTER(compose_window,COMPOSE_WINDOW)
+diff -urN claws-mail-3.17.8.org/src/plugins/lua/bindings/clawsmail.folder.c claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.folder.c
+--- claws-mail-3.17.8.org/src/plugins/lua/bindings/clawsmail.folder.c	1970-01-01 01:00:00.000000000 +0100
++++ claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.folder.c	2021-04-12 00:05:34.571217963 +0200
+@@ -0,0 +1,123 @@
++/*
++ * Lua plugin for Claws Mail, created by Milan Obuch
++ *
++ * Claws Mail -- a GTK+ based, lightweight, and fast e-mail client
++ * Copyright (C) 1999-2021 the Claws Mail Team
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program. If not, see <http://www.gnu.org/licenses/>.
++ *
++ */
++
++#include "compose.h"
++
++#include "bindings/clawsmail.h"
++
++static int _folder_folders_get(lua_State *L, const void *ptr, luaC_Function *F)
++{FolderItem *folder = (FolderItem *)ptr;
++ if (!folder)
++  return 0;
++ if (folder->node)
++  {int n_children = g_node_n_children(folder->node);
++   int i_child;
++   lua_createtable(L,n_children,0);
++   for (i_child = 0; i_child < n_children; )
++    {GNode *node = g_node_nth_child(folder->node,i_child);
++     luaC_pushobject(L,(void *)node->data,FOLDER_OID);
++     lua_rawseti(L,-2,++i_child);
++    }
++   return 1;
++  }
++ lua_createtable(L,0,0);
++ return 1;
++}
++
++// stack on entry:
++// 1 - userdata (FolderItem *)
++// 2 - string (index) = "identifier"
++// stack on exit added:
++// 3 - string
++static int _folder_identifier_get(lua_State *L, const void *ptr, luaC_Function *F)
++{FolderItem *folder = (FolderItem *)ptr;
++ if (!folder)
++  return 0;
++ gchar *id = folder_item_get_identifier(folder);
++ if (id)
++  {lua_pushstring(L,id);
++   g_free(id);
++   return 1;
++  }
++ lua_pushnil(L);
++ return 1;
++}
++
++// stack on entry:
++// 1 - userdata (FolderItem *)
++// 2 - string (index) = "messages"
++// stack on exit added:
++// 3 - table[1..n] {msginfo}
++static int _folder_messages_get(lua_State* L, const void *ptr, luaC_Function *F)
++{FolderItem *folder = (FolderItem *)ptr;
++ if (!folder)
++  return 0;
++ GSList *list = folder_item_get_msg_list(folder);
++ GSList *walk;
++ lua_createtable(L,g_slist_length(list),0);
++ int iMsg = 1;
++ for (walk = list; walk; walk = walk->next)
++  {MsgInfo *msginfo = (MsgInfo *)walk->data;
++   luaC_pushobject(L,(void *)msginfo,MSG_INFO_OID);
++   lua_rawseti(L,-2,iMsg++);
++  }
++ procmsg_msg_list_free(list);
++ return 1;
++}
++
++// stack on entry:
++// 1 - userdata (FolderItem *)
++// 2 - string (index) = "path"
++// stack on exit added:
++// 3 - string
++static int _folder_path_get(lua_State *L, const void *ptr, luaC_Function *F)
++{FolderItem *folder = (FolderItem *)ptr;
++ if (!folder)
++  return 0;
++ gchar *path = folder_item_get_path(folder);
++ if (path)
++  {lua_pushstring(L,path);
++   g_free(path);
++   return 1;
++  }
++ lua_pushnil(L);
++ return 1;
++}
++
++LOC_DECLARE(folder,FOLDER)
++LOM_PROPERTY(    "name",              FolderItem,            name,             LT_STRING)
++LOM_PROPERTY(    "msgc_forwarded",    FolderItem,            forwarded_msgs,   LT_NUMBER)
++LOM_PROPERTY(    "msgc_ignored",      FolderItem,            ignored_msgs,     LT_NUMBER)
++LOM_PROPERTY(    "msgc_locked",       FolderItem,            locked_msgs,      LT_NUMBER)
++LOM_PROPERTY(    "msgc_marked",       FolderItem,            marked_msgs,      LT_NUMBER)
++LOM_PROPERTY(    "msgc_new",          FolderItem,            new_msgs,         LT_NUMBER)
++LOM_PROPERTY(    "msgc_replied",      FolderItem,            replied_msgs,     LT_NUMBER)
++LOM_PROPERTY(    "msgc_total",        FolderItem,            total_msgs,       LT_NUMBER)
++LOM_PROPERTY(    "msgc_unread",       FolderItem,            unread_msgs,      LT_NUMBER)
++LOM_PROPERTY(    "msgc_unread_marked",FolderItem,            unreadmarked_msgs,LT_NUMBER)
++LOM_PROPERTY(    "msgc_watched",      FolderItem,            watched_msgs,     LT_NUMBER)
++LOM_PROPERTY_OID("mailbox",           FolderItem,            folder,           MAILBOX_OID)
++LOM_PROPERTY_OID("properties",        FolderItem,            prefs,            FOLDER_PROPERTIES_OID)
++LOM_GET(         "folders",           _folder_folders_get)
++LOM_GET(         "identifier",        _folder_identifier_get)
++LOM_GET(         "messages",          _folder_messages_get)
++LOM_GET(         "path",              _folder_path_get)
++LOC_REGISTER(folder,FOLDER)
+diff -urN claws-mail-3.17.8.org/src/plugins/lua/bindings/clawsmail.folder_properties.c claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.folder_properties.c
+--- claws-mail-3.17.8.org/src/plugins/lua/bindings/clawsmail.folder_properties.c	1970-01-01 01:00:00.000000000 +0100
++++ claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.folder_properties.c	2021-04-12 00:05:34.571217963 +0200
+@@ -0,0 +1,46 @@
++/*
++ * Lua plugin for Claws Mail, created by Milan Obuch
++ *
++ * Claws Mail -- a GTK+ based, lightweight, and fast e-mail client
++ * Copyright (C) 1999-2021 the Claws Mail Team
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program. If not, see <http://www.gnu.org/licenses/>.
++ *
++ */
++
++#include "account.h"
++#include "folder_item_prefs.h"
++
++#include "bindings/clawsmail.h"
++
++// stack on entry:
++// 1 - userdata (FolderItem *)
++// 2 - string (index) = "identifier"
++// stack on exit added:
++// 3 - string
++static int _folder_properties_default_account_get(lua_State *L, const void *ptr, luaC_Function *F)
++{FolderItemPrefs *folder_prefs = (FolderItemPrefs *)ptr;
++ if (!folder_prefs)
++  return 0;
++ PrefsAccount *account = account_find_from_id(folder_prefs->default_account);
++ if (account)
++  luaC_pushobject(L,(void *)account,ACCOUNT_OID);
++ else
++  lua_pushnil(L);
++ return 1;
++}
++
++LOC_DECLARE(folder_properties,FOLDER_PROPERTIES)
++LOM_GET("default_account",_folder_properties_default_account_get)
++LOC_REGISTER(folder_properties,FOLDER_PROPERTIES)
+diff -urN claws-mail-3.17.8.org/src/plugins/lua/bindings/clawsmail.h claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.h
+--- claws-mail-3.17.8.org/src/plugins/lua/bindings/clawsmail.h	1970-01-01 01:00:00.000000000 +0100
++++ claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.h	2021-04-12 00:05:34.571217963 +0200
+@@ -0,0 +1,83 @@
++/*
++ * Lua plugin for Claws Mail, created by Milan Obuch
++ *
++ * Claws Mail -- a GTK+ based, lightweight, and fast e-mail client
++ * Copyright (C) 1999-2021 the Claws Mail Team
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program. If not, see <http://www.gnu.org/licenses/>.
++ *
++ */
++
++#ifndef _CM__COMMON_H_
++#define _CM__COMMON_H_
++
++#include <lua.h>
++#include <lualib.h>
++#include <lauxlib.h>
++
++#include "loli.h"
++
++// account
++
++#define ACCOUNT_OID "clawsmail.account"
++
++void register_account(lua_State *);
++
++// clawsmail
++
++#define CLAWSMAIL_OID "clawsmail"
++
++void register_clawsmail(lua_State *);
++
++// compose window
++
++#define COMPOSE_WINDOW_OID "clawsmail.compose_window"
++
++void flush_gtk_queue(void);
++void register_compose_window(lua_State *);
++
++// folder
++
++#define FOLDER_OID "clawsmail.folder"
++
++void register_folder(lua_State *);
++
++// folder properties
++
++#define FOLDER_PROPERTIES_OID "clawsmail.folder_properties"
++
++void register_folder_properties(lua_State *);
++
++// mailbox
++
++#define MAILBOX_OID "clawsmail.mailbox"
++
++void register_mailbox(lua_State *);
++
++// msg info
++
++#define MSG_INFO_OID "clawsmail.msg_info"
++
++void register_msg_info(lua_State *);
++
++#define REGISTER_CM(L) \
++register_account(L); \
++register_clawsmail(L); \
++register_compose_window(L); \
++register_folder(L); \
++register_folder_properties(L); \
++register_mailbox(L); \
++register_msg_info(L);
++
++#endif
+diff -urN claws-mail-3.17.8.org/src/plugins/lua/bindings/clawsmail.mailbox.c claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.mailbox.c
+--- claws-mail-3.17.8.org/src/plugins/lua/bindings/clawsmail.mailbox.c	1970-01-01 01:00:00.000000000 +0100
++++ claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.mailbox.c	2021-04-12 00:05:34.571217963 +0200
+@@ -0,0 +1,46 @@
++/*
++ * Lua plugin for Claws Mail, created by Milan Obuch
++ *
++ * Claws Mail -- a GTK+ based, lightweight, and fast e-mail client
++ * Copyright (C) 1999-2021 the Claws Mail Team
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program. If not, see <http://www.gnu.org/licenses/>.
++ *
++ */
++
++#include "compose.h"
++
++#include "bindings/clawsmail.h"
++
++static int _mailbox_folders_get(lua_State *L, const void *ptr, luaC_Function *F)
++{Folder *folder = (Folder *)ptr;
++ if (folder->node)
++  {int n_children = g_node_n_children(folder->node);
++   int i_child;
++   lua_createtable(L,n_children,0);
++   for (i_child = 0; i_child < n_children; )
++    {GNode *node = g_node_nth_child(folder->node,i_child);
++     luaC_pushobject(L,(void *)node->data,FOLDER_OID);
++     lua_rawseti(L,-2,++i_child);
++    }
++   return 1;
++  }
++ lua_createtable(L,0,0);
++ return 1;
++}
++
++LOC_DECLARE(mailbox,MAILBOX)
++LOM_PROPERTY("name",  Folder,              name,LT_STRING)
++LOM_GET(    "folders",_mailbox_folders_get)
++LOC_REGISTER(mailbox,MAILBOX)
+diff -urN claws-mail-3.17.8.org/src/plugins/lua/bindings/clawsmail.msginfo.c claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.msginfo.c
+--- claws-mail-3.17.8.org/src/plugins/lua/bindings/clawsmail.msginfo.c	1970-01-01 01:00:00.000000000 +0100
++++ claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.msginfo.c	2021-04-12 00:05:34.571217963 +0200
+@@ -0,0 +1,201 @@
++/*
++ * Lua plugin for Claws Mail, created by Milan Obuch
++ *
++ * Claws Mail -- a GTK+ based, lightweight, and fast e-mail client
++ * Copyright (C) 1999-2021 the Claws Mail Team
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program. If not, see <http://www.gnu.org/licenses/>.
++ *
++ */
++
++#include "common/tags.h"
++#include "procheader.h"
++#include "summaryview.h"
++
++#include "bindings/clawsmail.h"
++
++static int _msg_info_flag_get(lua_State *L, const void *ptr, luaC_Function *F)
++{int flag = F->v_offset;
++ MsgInfo *msg = (MsgInfo *)ptr;
++ if (msg)
++  lua_pushboolean(L,(msg->flags.perm_flags & flag) != 0);
++ else
++  lua_pushnil(L);
++ return 1;
++}
++
++static void _msg_info_flag_set(lua_State *L, const void *ptr, luaC_Function *F)
++{int flag = F->v_offset;
++ MsgInfo *msg = (MsgInfo *)ptr;
++// if (value == NULL) {PyErr_SetString(PyExc_TypeError, "Cannot delete flag attribute"); return; }
++// if (!msg) {PyErr_SetString(PyExc_RuntimeError, "MessageInfo object broken"); return; }
++ if (msg && lua_isboolean(L,3))
++  {if (lua_toboolean(L,3))
++    procmsg_msginfo_set_flags(msg,flag,0);
++   else
++    procmsg_msginfo_unset_flags(msg,flag,0);
++  }
++}
++
++static int _msg_info_color_get(lua_State *L, const void *ptr, luaC_Function *F)
++{MsgInfo *msg = (MsgInfo *)ptr;
++// printf("msginfo color %d\n",MSG_GET_COLORLABEL_VALUE(msg->flags));
++ lua_pushinteger(L,MSG_GET_COLORLABEL_VALUE(msg->flags));
++ return 1;
++}
++
++static void _msg_info_color_set(lua_State *L, const void *ptr, luaC_Function *F)
++{MsgInfo *msg = (MsgInfo *)ptr;
++ if (lua_isnumber(L,3))
++  {int color = lua_tointeger(L,3);
++   procmsg_msginfo_unset_flags(msg,MSG_CLABEL_FLAG_MASK,0);
++   procmsg_msginfo_set_flags(msg,MSG_COLORLABEL_TO_FLAGS(color),0);
++   MSG_SET_COLORLABEL_VALUE(msg->flags,color);
++  }
++}
++
++static int _msg_info_filepath_get(lua_State *L, const void *ptr, luaC_Function *F)
++{MsgInfo *msg = (MsgInfo *)ptr;
++ if (msg)
++  {gchar *filepath = procmsg_get_message_file_path(msg);
++   if (filepath)
++    {lua_pushstring(L,filepath);
++     g_free(filepath);
++     return 1;
++    }
++  }
++ lua_pushnil(L);
++ return 1;
++}
++
++static int _msg_info_tags_get(lua_State *L, const void *ptr, luaC_Function *F)
++{MsgInfo *msg = (MsgInfo *)ptr;
++ GSList *tags_list = msg->tags;
++ lua_createtable(L,g_slist_length(tags_list),0);
++ GSList *walk;
++ int i = 1;
++ for (walk = tags_list; walk; walk = walk->next)
++  {lua_pushstring(L,tags_get_tag(GPOINTER_TO_INT(walk->data)));
++   lua_rawseti(L,-2,i++);
++  }
++ return 1;
++}
++
++// stack on entry:
++// 1 - userdata (MsgInfo *)
++// 2 - string (tag)
++static void _msg_info_add_remove_tag(lua_State *L, int add)
++{
++ if (lua_isuserdata(L,1) && lua_isstring(L,2))
++  {luaC_Object *o = (luaC_Object *)lua_touserdata(L,1);
++   MsgInfo *msg = (MsgInfo *)o->pointer;
++   const char *tag = lua_tostring(L,2);
++   gint tag_id = tags_get_id_for_str(tag);
++   if (tag_id == -1)
++    {// Err("Tag does not exist");
++     return;
++    }
++   if (!add)
++    {if (!g_slist_find(msg->tags,GINT_TO_POINTER(tag_id))) // raise KeyError if tag is not set
++      {// Err("Tag is not set on this message");
++       return;
++      }
++    }
++   procmsg_msginfo_update_tags(msg,add,tag_id);
++   MainWindow *mainwin = mainwindow_get_mainwindow();      // update display
++   if (mainwin)
++    summary_redisplay_msg(mainwin->summaryview);
++  }
++}
++
++// stack on entry:
++// 1 - userdata (MsgInfo *)
++// 2 - string (tag)
++static int _msg_info_add_tag(lua_State *L)
++{
++ _msg_info_add_remove_tag(L,TRUE);
++ return 0;
++}
++
++// stack on entry:
++// 1 - userdata (MsgInfo *)
++// 2 - string (tag)
++static int _msg_info_remove_tag(lua_State *L)
++{
++ _msg_info_add_remove_tag(L,FALSE);
++ return 0;
++}
++
++// stack on entry:
++// 1 - userdata (MsgInfo *)
++static int _msg_info_compose_reedit(lua_State *L)
++{
++ if (lua_isuserdata(L,1))
++  {luaC_Object *o = (luaC_Object *)lua_touserdata(L,1);
++   MsgInfo *msg = (MsgInfo *)o->pointer;
++   Compose *compose = compose_reedit(msg,FALSE);
++   luaC_pushobject(L,(void *)compose,COMPOSE_WINDOW_OID);
++   gtk_widget_show_all(compose->window);
++   flush_gtk_queue();
++   return 1;
++  }
++ lua_pushnil(L);
++ return 1;
++}
++
++// stack on entry:
++// 1 - userdata (MsgInfo *)
++// 2 - string (header)
++static int _msg_info_header_get(lua_State *L)
++{
++printf("msginfo header get\n");
++ if (lua_isuserdata(L,1) && lua_isstring(L,2))
++  {luaC_Object *o = (luaC_Object *)lua_touserdata(L,1);
++   MsgInfo *msg = (MsgInfo *)o->pointer;
++   gchar *header_k = (gchar *)lua_tostring(L,2);
++   gchar *header_t = NULL;
++   if (!procheader_get_header_from_msginfo(msg,&header_t,header_k))
++    {gchar *header_v = header_t + strlen(header_k);
++     extract_address(header_v);
++     lua_pushstring(L,header_v);
++     g_free(header_t);
++     return 1;
++    }
++  }
++ lua_pushnil(L);
++ return 1;
++}
++
++LOC_DECLARE(msg_info,MSG_INFO)
++LOM_PROPERTY(    "cc",            MsgInfo,                 cc,                 LT_STRING)
++LOM_PROPERTY(    "date",          MsgInfo,                 date,               LT_STRING)
++LOM_PROPERTY(    "from",          MsgInfo,                 from,               LT_STRING)
++LOM_PROPERTY(    "msgid",         MsgInfo,                 msgid,              LT_STRING)
++LOM_PROPERTY(    "subject",       MsgInfo,                 subject,            LT_STRING)
++LOM_PROPERTY(    "to",            MsgInfo,                 to,                 LT_STRING)
++LOM_PROPERTY_OID("folder",        MsgInfo,                 folder,             FOLDER_OID)
++LOM_GET(         "filepath",      _msg_info_filepath_get)
++LOM_GET(         "tags",          _msg_info_tags_get)
++LOM_GET_SET(     "color",         _msg_info_color_get,     _msg_info_color_set)
++LOM_GET_SET_AUX( "unread",        _msg_info_flag_get,      _msg_info_flag_set, MSG_UNREAD)
++LOM_GET_SET_AUX( "locked",        _msg_info_flag_get,      _msg_info_flag_set, MSG_LOCKED)
++LOM_GET_SET_AUX( "marked",        _msg_info_flag_get,      _msg_info_flag_set, MSG_MARKED)
++LOM_GET_AUX(     "new",           _msg_info_flag_get,                          MSG_NEW)
++LOM_GET_AUX(     "replied",       _msg_info_flag_get,                          MSG_REPLIED)
++LOM_GET_AUX(     "forwarded",     _msg_info_flag_get,                          MSG_FORWARDED)
++LOM_METHOD(      "add_tag",       _msg_info_add_tag)
++LOM_METHOD(      "compose_reedit",_msg_info_compose_reedit)
++LOM_METHOD(      "header",        _msg_info_header_get)
++LOM_METHOD(      "remove_tag",    _msg_info_remove_tag)
++LOC_REGISTER(msg_info,MSG_INFO)
+diff -urN claws-mail-3.17.8.org/src/plugins/lua/bindings/gtk.action_group.c claws-mail-3.17.8/src/plugins/lua/bindings/gtk.action_group.c
+--- claws-mail-3.17.8.org/src/plugins/lua/bindings/gtk.action_group.c	1970-01-01 01:00:00.000000000 +0100
++++ claws-mail-3.17.8/src/plugins/lua/bindings/gtk.action_group.c	2021-04-12 00:05:34.571217963 +0200
+@@ -0,0 +1,28 @@
++/*
++ * Lua binding for the GTK via LOLI
++ *
++ * The GTK Project -- a free and open-source cross-platform widget toolkit
++ * Copyright (C) 1997-2020 the GTK Team
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, see
++ * https://gitlab.gnome.org/GNOME/gtk/-/blob/master/COPYING
++ *
++ */
++
++#include <glib.h>
++
++#include "bindings/gtk.h"
++
++LOC_DECLARE(action_group,ACTION_GROUP)
++LOC_REGISTER(action_group,ACTION_GROUP)
+diff -urN claws-mail-3.17.8.org/src/plugins/lua/bindings/gtk.h claws-mail-3.17.8/src/plugins/lua/bindings/gtk.h
+--- claws-mail-3.17.8.org/src/plugins/lua/bindings/gtk.h	1970-01-01 01:00:00.000000000 +0100
++++ claws-mail-3.17.8/src/plugins/lua/bindings/gtk.h	2021-04-12 00:05:34.571217963 +0200
+@@ -0,0 +1,40 @@
++/*
++ * Lua binding for the GTK via LOLI
++ *
++ * The GTK Project -- a free and open-source cross-platform widget toolkit
++ * Copyright (C) 1997-2020 the GTK Team
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, see
++ * https://gitlab.gnome.org/GNOME/gtk/-/blob/master/COPYING
++ *
++ */
++
++#ifndef _GTK__COMMON_H_
++#define _GTK__COMMON_H_
++
++#include "loli.h"
++
++#define ACTION_GROUP_OID "gtk.action_group"
++
++void register_action_group(lua_State *);
++
++#define UI_MANAGER_OID "gtk.ui_manager"
++
++void register_ui_manager(lua_State *);
++
++#define REGISTER_GTK(L) \
++register_action_group(L); \
++register_ui_manager(L);
++
++#endif
+diff -urN claws-mail-3.17.8.org/src/plugins/lua/bindings/gtk.ui_manager.c claws-mail-3.17.8/src/plugins/lua/bindings/gtk.ui_manager.c
+--- claws-mail-3.17.8.org/src/plugins/lua/bindings/gtk.ui_manager.c	1970-01-01 01:00:00.000000000 +0100
++++ claws-mail-3.17.8/src/plugins/lua/bindings/gtk.ui_manager.c	2021-04-12 00:05:34.571217963 +0200
+@@ -0,0 +1,60 @@
++/*
++ * Lua binding for the GTK via LOLI
++ *
++ * The GTK Project -- a free and open-source cross-platform widget toolkit
++ * Copyright (C) 1997-2020 the GTK Team
++ *
++ * This library is free software; you can redistribute it and/or
++ * modify it under the terms of the GNU Library General Public
++ * License as published by the Free Software Foundation; either
++ * version 2 of the License, or (at your option) any later version.
++ *
++ * This library is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
++ * Library General Public License for more details.
++ *
++ * You should have received a copy of the GNU Library General Public
++ * License along with this library; if not, see
++ * https://gitlab.gnome.org/GNOME/gtk/-/blob/master/COPYING
++ *
++ */
++
++#include <glib.h>
++#include <gtk/gtk.h>
++
++#include "bindings/gtk.h"
++
++// stack on entry:
++// 1 - userdata (GtkUIManager *)
++// 2 - string (index) = "ui"
++// stack on exit added:
++// 3 - string
++static int _ui_manager_ui_get(lua_State *L, const void *ptr, luaC_Function *F)
++{GtkUIManager *ui_manager = (GtkUIManager *)ptr;
++ lua_pushstring(L,gtk_ui_manager_get_ui(ui_manager));
++ return 1;
++}
++
++// stack on entry:
++// 1 - userdata (GtkUIManager *)
++// 2 - string
++static int _ui_manager_add_ui(lua_State *L)
++{
++ if (lua_isuserdata(L,1) && lua_isstring(L,2))
++  {luaC_Object *o = (luaC_Object *)lua_touserdata(L,1);
++   const char *string_to_add = lua_tostring(L,2);
++   GtkUIManager *ui_manager = (GtkUIManager *)o->pointer;
++   GError *error;
++   guint mid = gtk_ui_manager_add_ui_from_string(ui_manager,(gchar *)string_to_add,-1,&error);
++   printf("_ui_manager_add_ui_from_string mid %d\n",mid);
++   lua_pushnumber(L,mid);
++   return 1;
++  }
++ return 0;
++}
++
++LOC_DECLARE(ui_manager,UI_MANAGER)
++LOM_GET(    "ui",    _ui_manager_ui_get)
++LOM_METHOD( "add_ui",_ui_manager_add_ui)
++LOC_REGISTER(ui_manager,UI_MANAGER)
+diff -urN claws-mail-3.17.8.org/src/plugins/lua/claws.def claws-mail-3.17.8/src/plugins/lua/claws.def
+--- claws-mail-3.17.8.org/src/plugins/lua/claws.def	1970-01-01 01:00:00.000000000 +0100
++++ claws-mail-3.17.8/src/plugins/lua/claws.def	2021-04-13 20:38:19.335817872 +0200
+@@ -0,0 +1,52 @@
++LIBRARY CLAWS-MAIL.EXE
++EXPORTS
++account_find_from_address
++account_find_from_id
++account_find_from_item
++account_get_cur_account
++account_get_default
++account_get_list
++check_plugin_version
++claws_is_exiting
++compose_attach_from_list
++compose_entry_append
++compose_new_with_folderitem
++compose_reedit
++extract_address
++file_exist
++folder_find_item_from_identifier
++folder_get_list
++folder_item_get_identifier
++folder_item_get_msg_list
++folder_item_get_path
++folder_item_update_freeze
++folder_item_update_thaw
++folderview_get_selected_item
++folderview_select
++get_rc_dir
++hooks_register_hook
++hooks_unregister_hook
++mainwindow_get_mainwindow
++prefs_common_get_prefs
++prefs_toolbar_register_plugin_item
++prefs_toolbar_unregister_plugin_item
++procheader_get_header_from_msginfo
++procmsg_copy_messages
++procmsg_get_message_file_path
++procmsg_move_messages
++procmsg_msginfo_set_flags
++procmsg_msginfo_set_to_folder
++procmsg_msginfo_unset_flags
++procmsg_msginfo_update_tags
++procmsg_msg_list_free
++quicksearch_set
++summary_get_selected_msg_list
++summary_redisplay_msg
++summary_select_by_msg_list
++summary_unselect_all
++tags_add_tag
++tags_get_id_for_str
++tags_get_list
++tags_get_tag
++tags_remove_tag
++tags_update_tag
+diff -urN claws-mail-3.17.8.org/src/plugins/lua/loli.c claws-mail-3.17.8/src/plugins/lua/loli.c
+--- claws-mail-3.17.8.org/src/plugins/lua/loli.c	1970-01-01 01:00:00.000000000 +0100
++++ claws-mail-3.17.8/src/plugins/lua/loli.c	2021-04-12 00:05:34.571217963 +0200
+@@ -0,0 +1,117 @@
++/******************************************************************************
++* Copyright (C) 2020-2021 Milan Obuch
++*
++* Permission is hereby granted, free of charge, to any person obtaining
++* a copy of this software and associated documentation files (the
++* "Software"), to deal in the Software without restriction, including
++* without limitation the rights to use, copy, modify, merge, publish,
++* distribute, sublicense, and/or sell copies of the Software, and to
++* permit persons to whom the Software is furnished to do so, subject to
++* the following conditions:
++*
++* The above copyright notice and this permission notice shall be
++* included in all copies or substantial portions of the Software.
++*
++* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
++* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
++* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
++* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
++* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
++* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
++* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
++******************************************************************************/
++
++#include <string.h>
++
++#include "loli.h"
++
++void luaC_pushobject(lua_State *L, const void *pointer, const char *oid)
++{
++ luaC_Object *o = (luaC_Object *)lua_newuserdata(L,sizeof(luaC_Object));
++ o->pointer = pointer;
++ luaL_getmetatable(L,oid);
++ lua_setmetatable(L,-2);
++}
++
++// Lua stack on entry:
++// 1 - userdata/luaC_Object
++//     table (empty) for global variable
++// 2 - string: index
++// 3 - value for newindex - new value of property
++int luaC_dispatch(lua_State *L, luaC_Function *fntab, int newindex)
++{const void *ptr = NULL;
++ if (!((lua_istable(L,1) || lua_isuserdata(L,1)) && lua_isstring(L,2)))
++  {printf("invalid call for dispatch\n");
++   return 0;
++  }
++ if (lua_isuserdata(L,1))
++  {luaC_Object *o = (luaC_Object *)lua_touserdata(L,1);
++   ptr = o->pointer;
++  }
++ const char *index = lua_tostring(L,2);
++ const char *class = fntab->cv1;       // first entry in fntab is __type
++ if (!strcmp(index,"__type"))
++  {lua_pushstring(L,class);
++   return 1;
++  }
++ if (lua_isuserdata(L,1) && ptr == NULL)
++  return 0;
++ while (fntab->name)
++  {if (!strcmp(index,fntab->name))
++    break;
++   fntab++;
++  }
++ if (fntab->name == NULL)
++  {printf("'%s.%s' invalid property\n",class,index);
++   return 0;
++  }
++ if (newindex)
++  {if (fntab->setfn == NULL)
++    {printf("'%s.%s' could not be set\n",class,index);
++     return 0;
++    }
++   fntab->setfn(L,ptr,fntab);
++   return 0;
++  }
++ char *s;
++ switch (fntab->v_type)
++  {case LT_STRING:
++        if (fntab->v_offset == -1)
++         break;
++        s = ((char **)(ptr + fntab->v_offset))[0];
++        if (s == NULL)
++         break;
++        lua_pushstring(L,s);
++        return 1;
++   case LT_BOOLEAN:
++        if (fntab->v_offset == -1)
++         break;
++        s = ((char **)(ptr + fntab->v_offset))[0];
++        lua_pushboolean(L,(int)s);
++        return 1;
++   case LT_NUMBER:
++        if (fntab->v_offset == -1)
++         break;
++        s = ((char **)(ptr + fntab->v_offset))[0];
++        lua_pushinteger(L,(int)s);
++        return 1;
++   case LT_OBJECT:
++        if (fntab->v_offset == -1)
++         break;
++        s = ((char **)(ptr + fntab->v_offset))[0];
++        if (s == NULL)
++         break;
++        luaC_pushobject(L,(void *)s,fntab->cv1);
++        return 1;
++   case LT_CLOSURE:
++        lua_pushcclosure(L,(lua_CFunction)fntab->method,0);
++        return 1;
++   case LT_UNKNOWN:
++        return fntab->getfn(L,ptr,fntab);
++   case LT_TABLE:
++   case LT_NIL:
++        break;
++  }
++ lua_pushnil(L);
++ return 1;
++}
+diff -urN claws-mail-3.17.8.org/src/plugins/lua/loli.h claws-mail-3.17.8/src/plugins/lua/loli.h
+--- claws-mail-3.17.8.org/src/plugins/lua/loli.h	1970-01-01 01:00:00.000000000 +0100
++++ claws-mail-3.17.8/src/plugins/lua/loli.h	2021-04-12 00:05:34.571217963 +0200
+@@ -0,0 +1,123 @@
++/******************************************************************************
++* Copyright (C) 2020-2021 Milan Obuch
++*
++* Permission is hereby granted, free of charge, to any person obtaining
++* a copy of this software and associated documentation files (the
++* "Software"), to deal in the Software without restriction, including
++* without limitation the rights to use, copy, modify, merge, publish,
++* distribute, sublicense, and/or sell copies of the Software, and to
++* permit persons to whom the Software is furnished to do so, subject to
++* the following conditions:
++*
++* The above copyright notice and this permission notice shall be
++* included in all copies or substantial portions of the Software.
++*
++* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
++* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
++* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
++* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
++* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
++* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
++* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
++******************************************************************************/
++
++#ifndef _LOLI_H_
++#define _LOLI_H_
++
++#include <lua.h>
++#include <lualib.h>
++#include <lauxlib.h>
++
++// lua object interface using userdata
++
++typedef struct _luaC_Object luaC_Object;
++struct _luaC_Object
++ {const void *pointer;
++ };
++
++void luaC_pushobject(lua_State *, const void *, const char *);
++
++#define LT_UNKNOWN    1
++#define LT_NIL        2
++#define LT_BOOLEAN    4
++#define LT_NUMBER     8
++#define LT_STRING  0x10
++#define LT_TABLE   0x20
++#define LT_CLOSURE 0x40
++#define LT_OBJECT  0x80
++
++typedef struct _luaC_Function luaC_Function;
++struct  _luaC_Function
++ {const char *name;
++  const int v_type;
++  const int v_offset;
++  const char *cv1;
++  int (*method)(lua_State *);
++  int (*getfn)(lua_State *, const void *, luaC_Function *);
++  void (*setfn)(lua_State *, const void *, luaC_Function *);
++ };
++
++//       name      v_type      v_offset               cv1   method    getfn  setfn
++#define LOM_HEADER(OID) \
++        {"__type", LT_UNKNOWN, -1,                    OID,  NULL,     NULL,  NULL},
++#define LOM_PROPERTY(name,Struct,Elem,type) \
++        {name,     type,       offsetof(Struct,Elem), NULL, NULL,     NULL,  NULL},
++#define LOM_PROPERTY_SET(name,Struct,Elem,type,setfn) \
++        {name,     type,       offsetof(Struct,Elem), NULL, NULL,     NULL,  setfn},
++#define LOM_PROPERTY_OID(name,Struct,Elem,OID) \
++        {name,     LT_OBJECT,  offsetof(Struct,Elem), OID,  NULL,     NULL,  NULL},
++#define LOM_PROPERTY_OID_SET(name,Struct,Elem,OID,setfn) \
++        {name,     LT_OBJECT,  offsetof(Struct,Elem), OID,  NULL,     NULL,  setfn},
++#define LOM_GET(name,getfn) \
++        {name,     LT_UNKNOWN, -1,                    NULL, NULL,     getfn, NULL},
++#define LOM_GET_SET(name,getfn,setfn) \
++        {name,     LT_UNKNOWN, -1,                    NULL, NULL,     getfn, setfn},
++#define LOM_GET_AUX(name,getfn,flag) \
++        {name,     LT_UNKNOWN, flag,                  NULL, NULL,     getfn, NULL},
++#define LOM_GET_SET_AUX(name,getfn,setfn,flag) \
++        {name,     LT_UNKNOWN, flag,                  NULL, NULL,     getfn, setfn},
++#define LOM_METHOD(name,function) \
++        {name,     LT_CLOSURE, -1,                    NULL, function, NULL,  NULL},
++#define LOM_END \
++        {NULL,     LT_UNKNOWN, -1,                    NULL, NULL,     NULL,  NULL}
++
++int luaC_dispatch(lua_State *, luaC_Function *, int);
++
++#define __LR_HEAD
++#define __LR_FOOT(a) lua_pop(L,1);
++
++#define LOC_DECLARE(CLASS_NAME,CLASS_OID) \
++\
++luaC_Function _##CLASS_NAME##_functions[] = \
++{ \
++LOM_HEADER(CLASS_OID##_OID)
++
++#define LOC_REGISTER(CLASS_NAME,CLASS_OID) \
++LOM_END \
++}; \
++\
++static int _##CLASS_NAME##_index(lua_State* L) \
++{ \
++ return luaC_dispatch(L,_##CLASS_NAME##_functions,FALSE); \
++} \
++\
++static int _##CLASS_NAME##_newindex(lua_State* L) \
++{ \
++ return luaC_dispatch(L,_##CLASS_NAME##_functions,TRUE); \
++} \
++\
++static const struct luaL_Reg CLASS_NAME##_meta_methods[] = \
++ {{"__index",    _##CLASS_NAME##_index}, \
++  {"__newindex", _##CLASS_NAME##_newindex}, \
++  {NULL,         NULL} \
++ }; \
++\
++void register_##CLASS_NAME(lua_State *L) \
++{ \
++__LR_HEAD \
++ if (luaL_newmetatable(L,CLASS_OID##_OID)) \
++  luaL_setfuncs(L,CLASS_NAME##_meta_methods,0); \
++__LR_FOOT(#CLASS_NAME) \
++}
++
++#endif
+diff -urN claws-mail-3.17.8.org/src/plugins/lua/loli-instance.h claws-mail-3.17.8/src/plugins/lua/loli-instance.h
+--- claws-mail-3.17.8.org/src/plugins/lua/loli-instance.h	1970-01-01 01:00:00.000000000 +0100
++++ claws-mail-3.17.8/src/plugins/lua/loli-instance.h	2021-04-12 00:05:34.571217963 +0200
+@@ -0,0 +1,29 @@
++/******************************************************************************
++* Copyright (C) 2020-2021 Milan Obuch
++*
++* Permission is hereby granted, free of charge, to any person obtaining
++* a copy of this software and associated documentation files (the
++* "Software"), to deal in the Software without restriction, including
++* without limitation the rights to use, copy, modify, merge, publish,
++* distribute, sublicense, and/or sell copies of the Software, and to
++* permit persons to whom the Software is furnished to do so, subject to
++* the following conditions:
++*
++* The above copyright notice and this permission notice shall be
++* included in all copies or substantial portions of the Software.
++*
++* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
++* EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
++* MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
++* IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
++* CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
++* TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
++* SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
++******************************************************************************/
++
++#undef __LR_HEAD
++#define __LR_HEAD lua_createtable(L,0,0);
++#undef __LR_FOOT
++#define __LR_FOOT(a) \
++lua_setmetatable(L,-2); \
++lua_setglobal(L,a);
+diff -urN claws-mail-3.17.8.org/src/plugins/lua/lua_plugin.c claws-mail-3.17.8/src/plugins/lua/lua_plugin.c
+--- claws-mail-3.17.8.org/src/plugins/lua/lua_plugin.c	1970-01-01 01:00:00.000000000 +0100
++++ claws-mail-3.17.8/src/plugins/lua/lua_plugin.c	2021-04-12 00:05:34.571217963 +0200
+@@ -0,0 +1,583 @@
++/*
++ * Lua plugin for Claws Mail, created by Milan Obuch
++ *
++ * Claws Mail -- a GTK+ based, lightweight, and fast e-mail client
++ * Copyright (C) 1999-2021 the Claws Mail Team
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program. If not, see <http://www.gnu.org/licenses/>.
++ *
++ */
++
++#include <glib.h>
++#include <glib/gi18n.h>
++
++#include "version.h"
++#include "claws.h"
++#include "plugin.h"
++#include "utils.h"
++#include "hooks.h"
++#include "log.h"
++
++#include "gtk/menu.h"
++#include "compose.h"
++#include "folder.h"
++#include "main.h"
++#include "mainwindow.h"
++#include "messageview.h"
++#include "prefs_toolbar.h"
++#include "procheader.h"
++#include "procmsg.h"
++
++#include <errno.h>
++#include <lua.h>
++#include <lualib.h>
++#include <lauxlib.h>
++
++#include "bindings/clawsmail.h"
++#include "bindings/gtk.h"
++
++#define PLUGIN_NAME (_("Lua"))
++
++#define LUA_SCRIPTS_BASE_DIR    "lua"
++#define LUA_SCRIPTS_HOOK_DIR    "hook"
++#define LUA_SCRIPTS_MAIN_DIR    "main"
++#define LUA_SCRIPTS_MSGVIEW_DIR "msgview"
++#define LUA_SCRIPTS_COMPOSE_DIR "compose"
++
++#define LUA_SCRIPTS_ACTION_PREFIX "Tools/LuaScripts/"
++
++void print_lua_stack(lua_State* L)
++{int r, n;
++ r = lua_gettop(L);
++ printf("top\n");
++ while (r > 0)
++  {printf("%d %s",r,luaL_typename(L,r));
++   if (lua_isnil(L,r))
++    printf(" [N]");
++   if (lua_isboolean(L,r))
++    printf(" [B] %d",lua_toboolean(L,r));
++   if (lua_isstring(L,r))
++    printf(" [S] %s",lua_tostring(L,r));
++   if (lua_isnumber(L,r))
++    printf(" [#] %f",lua_tonumber(L,r));
++   if (lua_istable(L,r))
++    {n = 0;
++     lua_pushnil(L);                                       // first key
++     while (lua_next(L,r) != 0)
++      {printf("%s %s - %s",n++ ? "," : " [T]",
++                           lua_typename(L,lua_type(L,-2)), // uses 'key' (at index -2)
++                           lua_typename(L,lua_type(L,-1))  // and 'value' (at index -1)
++             );
++       lua_pop(L,1);                                       // removes 'value'; keeps 'key' for next iteration
++      }
++    }
++   printf("\n");
++   r--;
++  }
++ printf("bottom\n");
++}
++
++static void run_lua_script_file(lua_State* L, const gchar *filename, const gpointer data, const char *oid)
++{int i;
++ errno = 0;
++// printf("run lua script file %s\n",filename);
++ i = luaL_loadfile(L,filename);
++ if (i != LUA_OK)
++  {printf("error %d loading script %s",i,filename);
++   if (errno)
++    printf(", errno %d",errno);
++   printf("\n");
++   int r = lua_gettop(L);
++   if (lua_isstring(L,r))
++    {printf("%s\n",lua_tostring(L,r));
++     lua_pop(L,1);
++    }
++  }
++ else
++  {if (data != NULL)
++    luaC_pushobject(L,(void *)data,oid);
++   i = lua_pcall(L,(data != NULL),0,0);
++   if (i != LUA_OK)
++    {printf("error %d calling script %s\n",i,filename);
++     int r = lua_gettop(L);
++     if (lua_isstring(L,r))
++      {printf("%s\n",lua_tostring(L,r));
++       lua_pop(L,1);
++      }
++    }
++  }
++// print_lua_stack(L);
++}
++
++static void run_lua_script_file_aux(lua_State* L, const gchar *cathegory, const gchar *filename, const gpointer data, const char *oid)
++{gchar *filepath;
++ filepath = g_strconcat(get_rc_dir(),G_DIR_SEPARATOR_S,
++                        LUA_SCRIPTS_BASE_DIR,G_DIR_SEPARATOR_S,
++                        cathegory == NULL ? "" : cathegory,cathegory == NULL ? "" : G_DIR_SEPARATOR_S,
++                        filename,NULL
++                       );
++ if (file_exist(filepath,FALSE))
++  run_lua_script_file(L,filepath,data,oid);
++ g_free(filepath);
++}
++
++static char* make_sure_script_directory_exists(const gchar *subdir)
++{char *dir;
++ char *retval = NULL;
++ dir = g_strconcat(get_rc_dir(),G_DIR_SEPARATOR_S,LUA_SCRIPTS_BASE_DIR,G_DIR_SEPARATOR_S,subdir,NULL);
++ if (!g_file_test(dir,G_FILE_TEST_IS_DIR))
++  {if (g_mkdir(dir,0777) != 0)
++    retval = g_strdup_printf("Could not create directory '%s': %s",dir,g_strerror(errno));
++  }
++ g_free(dir);
++ return retval;
++}
++
++static int make_sure_directories_exist(char **error)
++{const char* dirs[] =
++  {"",
++   LUA_SCRIPTS_HOOK_DIR,
++   LUA_SCRIPTS_MAIN_DIR,
++   LUA_SCRIPTS_MSGVIEW_DIR,
++   LUA_SCRIPTS_COMPOSE_DIR,
++   NULL
++  };
++ const char **dir = dirs;
++ *error = NULL;
++ while (*dir)
++  {*error = make_sure_script_directory_exists(*dir);
++   if (*error)
++    break;
++   dir++;
++  }
++ return (*error == NULL);
++}
++
++static void read_directory(const gchar *subdir, GSList **list)
++{char *directory;
++ GDir *dir;
++ GError *error = NULL;
++ GSList *filenames = NULL;
++ const char *filename;
++ directory = g_strconcat(get_rc_dir(),G_DIR_SEPARATOR_S,LUA_SCRIPTS_BASE_DIR,G_DIR_SEPARATOR_S,subdir,NULL);
++ dir = g_dir_open(directory,0,&error);
++ g_free(directory);
++ if (!dir)
++  {printf("Could not open directory '%s': %s\n",subdir,error->message);
++   g_error_free(error);
++   return;
++  }
++ while ((filename = g_dir_read_name(dir)) != NULL)
++  {char *fn = g_strdup(filename);
++   filenames = g_slist_insert_sorted(filenames,fn,(GCompareFunc)g_ascii_strcasecmp);
++  }
++ g_dir_close(dir);
++ *list = filenames;
++}
++
++static lua_State* L;                                       // the Lua interpreter
++
++static void main_toolbar_callback(gpointer parent, const gchar *item_name, gpointer data)
++{gchar *filename;
++ filename = g_strconcat(get_rc_dir(),G_DIR_SEPARATOR_S,LUA_SCRIPTS_BASE_DIR,G_DIR_SEPARATOR_S,LUA_SCRIPTS_MAIN_DIR,G_DIR_SEPARATOR_S,item_name,NULL);
++ run_lua_script_file(L,filename,NULL,NULL);
++ g_free(filename);
++}
++
++static void msgview_toolbar_callback(gpointer parent, const gchar *item_name, gpointer data)
++{gchar *filename;
++ filename = g_strconcat(get_rc_dir(),G_DIR_SEPARATOR_S,LUA_SCRIPTS_BASE_DIR,G_DIR_SEPARATOR_S,LUA_SCRIPTS_MSGVIEW_DIR,G_DIR_SEPARATOR_S,item_name,NULL);
++// run_lua_script_file(L,filename,parent,MSGVIEW_OID);
++ run_lua_script_file(L,filename,NULL,NULL);
++ g_free(filename);
++}
++
++static void compose_toolbar_callback(gpointer parent, const gchar *item_name, gpointer data)
++{gchar *filename;
++ filename = g_strconcat(get_rc_dir(),G_DIR_SEPARATOR_S,LUA_SCRIPTS_BASE_DIR,G_DIR_SEPARATOR_S,LUA_SCRIPTS_COMPOSE_DIR,G_DIR_SEPARATOR_S,item_name,NULL);
++ run_lua_script_file(L,filename,parent,COMPOSE_WINDOW_OID);
++ g_free(filename);
++}
++
++static GtkActionEntry compose_tools_lua_actions[] =
++ {{"Tools/LuaScripts",NULL,N_("Lua scripts"),NULL,NULL,NULL},
++ };
++
++typedef struct _AuxActionData AuxActionData;
++struct _AuxActionData
++ {gchar *name;
++  Compose *compose;
++ };
++
++static void action_script_callback(GtkAction *action, gpointer data)
++{char *filename;
++ AuxActionData *dat = (AuxActionData*)data;
++ filename = g_strconcat(get_rc_dir(),G_DIR_SEPARATOR_S,LUA_SCRIPTS_BASE_DIR,G_DIR_SEPARATOR_S,dat->compose == NULL ? LUA_SCRIPTS_MAIN_DIR : LUA_SCRIPTS_COMPOSE_DIR,G_DIR_SEPARATOR_S,dat->name,NULL);
++ run_lua_script_file(L,filename,dat->compose,COMPOSE_WINDOW_OID);
++ g_free(filename);
++}
++
++static void AuxActionData_destroy_cb(gpointer data)
++{AuxActionData *dat = (AuxActionData*)data;
++ g_free(dat->name);
++ g_free(dat);
++}
++
++static GSList *menu_id_list = NULL;
++static GSList *lua_mainwin_scripts_id_list = NULL;
++static GSList *lua_mainwin_scripts_names = NULL;
++static GSList *lua_msgview_scripts_names = NULL;
++static GSList *lua_compose_scripts_names = NULL;
++
++static gboolean compose_check_before_send_hook(gpointer cw, gpointer data)
++{Compose *compose = (Compose*)cw;
++ run_lua_script_file_aux(L,LUA_SCRIPTS_HOOK_DIR,"compose_check_before_send",cw,COMPOSE_WINDOW_OID);
++ return FALSE;
++}
++
++static gboolean compose_created_hook(gpointer cw, gpointer data)
++{gint ii;
++ GSList *walk;
++ GtkActionEntry *entries;
++ GtkActionGroup *action_group;
++ Compose *compose = (Compose*)cw;
++ guint num_entries = g_slist_length(lua_compose_scripts_names);
++ action_group = gtk_action_group_new("LuaPlugin");
++ gtk_action_group_add_actions(action_group,compose_tools_lua_actions,1,NULL);
++ entries = g_new0(GtkActionEntry,num_entries);
++ ii = 0;
++ for (walk = lua_compose_scripts_names; walk; walk = walk->next)
++  {AuxActionData *dat;
++   entries[ii].name = g_strconcat(LUA_SCRIPTS_ACTION_PREFIX,walk->data,NULL);
++   entries[ii].label = walk->data;
++   entries[ii].callback = G_CALLBACK(action_script_callback);
++   dat = g_new0(AuxActionData,1);
++   dat->name = g_strdup(walk->data);
++   dat->compose = compose;
++   gtk_action_group_add_actions_full(action_group,&(entries[ii]),1,dat,AuxActionData_destroy_cb);
++   ii++;
++  }
++ gtk_ui_manager_insert_action_group(compose->ui_manager,action_group,0);
++ MENUITEM_ADDUI_MANAGER(compose->ui_manager,"/Menu/Tools","LuaScripts","Tools/LuaScripts",GTK_UI_MANAGER_MENU)
++ for (ii = 0; ii < num_entries; ii++)
++  {MENUITEM_ADDUI_MANAGER(compose->ui_manager,"/Menu/" LUA_SCRIPTS_ACTION_PREFIX,entries[ii].label,entries[ii].name,GTK_UI_MANAGER_MENUITEM)
++  }
++ g_free(entries);
++ run_lua_script_file_aux(L,LUA_SCRIPTS_HOOK_DIR,"compose_created",cw,COMPOSE_WINDOW_OID);
++ return FALSE;
++}
++
++static gboolean folder_item_update_hook(gpointer source, gpointer data)
++{FolderItemUpdateData *update_data = source;
++ printf("folder item update hook %s %s [",update_data->item->name,update_data->item->path);
++ printf("%s",(update_data->msg != NULL) ? update_data->msg->subject : "(null)");
++ printf("] %x",update_data->update_flags);
++ if (update_data->update_flags & F_ITEM_UPDATE_MSGCNT)
++  printf(" F_ITEM_UPDATE_MSGCNT");
++ if (update_data->update_flags & F_ITEM_UPDATE_CONTENT)
++  printf(" F_ITEM_UPDATE_CONTENT");
++ if (update_data->update_flags & F_ITEM_UPDATE_ADDMSG)
++  printf(" F_ITEM_UPDATE_ADDMSG");
++ if (update_data->update_flags & F_ITEM_UPDATE_REMOVEMSG)
++  printf(" F_ITEM_UPDATE_REMOVEMSG");
++ if (update_data->update_flags & F_ITEM_UPDATE_NAME)
++  printf(" F_ITEM_UPDATE_NAME");
++ printf("\n");
++ return FALSE;
++}
++
++static gboolean msginfo_update_hook(gpointer source, gpointer data)
++{MsgInfoUpdate *msginfo_update = (MsgInfoUpdate *) source;
++ MessageView *messageview = (MessageView *)data;
++ MsgInfo *old_msginfo = messageview->msginfo;
++ printf("msginfo update hook ");
++// ,(old_msginfo && old_msginfo->subject) ? old_msginfo->subject);
++// printf("msginfo update hook %s %s [",old_msginfo->subject,msginfo_update->msginfo->subject);
++// printf("%s",(update_data->msg != NULL) ? update_data->msg->subject : "(null)");
++ printf("%x",msginfo_update->flags);
++ if (msginfo_update->flags & MSGINFO_UPDATE_FLAGS)
++  printf(" MSGINFO_UPDATE_FLAGS");
++ if (msginfo_update->flags & MSGINFO_UPDATE_DELETED)
++  printf(" MSGINFO_UPDATE_DELETED");
++ printf("\n");
++ return FALSE;
++}
++
++static void register_scripts_toolbar(GSList *scripts_names, ToolbarType toolbar_type, ToolbarPluginCallback cb)
++{GSList *walk;
++ for (walk = scripts_names; walk; walk = walk->next)
++  {prefs_toolbar_register_plugin_item(toolbar_type,"Lua",walk->data,cb,NULL);
++//   printf("register_scripts %s\n",walk->data);
++  }
++}
++
++static void unregister_scripts_toolbar(GSList *scripts_names, ToolbarType toolbar_type)
++{GSList *walk;
++ for (walk = scripts_names; walk; walk = walk->next)
++  {prefs_toolbar_unregister_plugin_item(toolbar_type,"Lua",walk->data);
++//   printf("unregister_scripts %s\n",walk->data);
++  }
++}
++
++static void release_scripts_memory(GSList **scripts_names)
++{GSList *walk;
++ for (walk = *scripts_names; walk; walk = walk->next)
++  g_free(walk->data);
++ g_slist_free(*scripts_names);
++ *scripts_names = NULL;
++}
++
++static void main_menu_add_scripts(MainWindow *mainwin, GSList *scripts_names)
++{guint id;
++ GtkUIManager *ui_manager = mainwin->ui_manager;
++ GSList *walk;
++ GtkActionEntry *entry;
++ entry = g_new0(GtkActionEntry,1);
++ for (walk = scripts_names; walk; walk = walk->next)
++  {AuxActionData *dat;
++   entry->name = g_strconcat(LUA_SCRIPTS_ACTION_PREFIX,walk->data,NULL);
++   entry->label = walk->data;
++   entry->callback = G_CALLBACK(action_script_callback);
++   dat = g_new0(AuxActionData,1);
++   dat->name = g_strdup(walk->data);
++   dat->compose = NULL;
++   gtk_action_group_add_actions_full(mainwin->action_group,entry,1,dat,AuxActionData_destroy_cb);
++   MENUITEM_ADDUI_ID_MANAGER(ui_manager,"/Menu/" LUA_SCRIPTS_ACTION_PREFIX,entry->label,entry->name,GTK_UI_MANAGER_MENUITEM,id)
++//   printf("main menu add scripts %s %d\n",walk->data,id);
++   lua_mainwin_scripts_id_list = g_slist_prepend(lua_mainwin_scripts_id_list,GUINT_TO_POINTER(id));
++  }
++ g_free(entry);
++}
++
++static void main_menu_remove_scripts(MainWindow *mainwin)
++{
++ if (mainwin && !claws_is_exiting())
++  {GSList *walk;
++   for (walk = lua_mainwin_scripts_id_list; walk; walk = walk->next)
++//    {printf("main menu remove scripts %d\n",GPOINTER_TO_UINT(walk->data));
++     gtk_ui_manager_remove_ui(mainwin->ui_manager,GPOINTER_TO_UINT(walk->data));
++//    }
++   g_slist_free(lua_mainwin_scripts_id_list);
++   lua_mainwin_scripts_id_list = NULL;
++   for (walk = lua_mainwin_scripts_names; walk; walk = walk->next)
++    {GtkAction *action;
++     gchar *entry;
++     entry = g_strconcat(LUA_SCRIPTS_ACTION_PREFIX,walk->data,NULL);
++     action = gtk_action_group_get_action(mainwin->action_group,entry);
++     if (action)
++      {gtk_action_group_remove_action(mainwin->action_group,action);
++//       printf("main menu remove scripts %s\n",entry);
++      }
++     g_free(entry);
++    }
++//   printf("main menu remove scripts done\n");
++  }
++}
++
++static void refresh_lua_scripts_menus(GtkAction *action, gpointer data)
++{
++// printf("refresh unregister main\n");
++ unregister_scripts_toolbar(lua_mainwin_scripts_names,TOOLBAR_MAIN);
++ release_scripts_memory(&lua_mainwin_scripts_names);
++// printf("refresh unregister msgview\n");
++ unregister_scripts_toolbar(lua_msgview_scripts_names,TOOLBAR_MSGVIEW);
++ release_scripts_memory(&lua_msgview_scripts_names);
++// printf("refresh unregister compose\n");
++ unregister_scripts_toolbar(lua_compose_scripts_names,TOOLBAR_COMPOSE);
++ release_scripts_memory(&lua_compose_scripts_names);
++ read_directory(LUA_SCRIPTS_MAIN_DIR,&lua_mainwin_scripts_names);
++// printf("refresh register main\n");
++ register_scripts_toolbar(lua_mainwin_scripts_names,TOOLBAR_MAIN,main_toolbar_callback);
++ read_directory(LUA_SCRIPTS_MSGVIEW_DIR,&lua_msgview_scripts_names);
++// printf("refresh register msgview\n");
++ register_scripts_toolbar(lua_msgview_scripts_names,TOOLBAR_MSGVIEW,msgview_toolbar_callback);
++ read_directory(LUA_SCRIPTS_COMPOSE_DIR,&lua_compose_scripts_names);
++// printf("refresh register compose\n");
++ register_scripts_toolbar(lua_compose_scripts_names,TOOLBAR_COMPOSE,compose_toolbar_callback);
++}
++
++static GtkActionEntry mainwindow_tools_lua_actions[] =
++{{"Tools/LuaScripts",         NULL, N_("Lua scripts"), NULL, NULL, NULL },
++ {"Tools/LuaScripts/Refresh", NULL, N_("Refresh"),     NULL, NULL, G_CALLBACK(refresh_lua_scripts_menus) },
++ {"Tools/LuaScripts/---",     NULL, "---",             NULL, NULL, NULL },
++};
++
++static void main_menu_add_tools(MainWindow *mainwin)
++{guint id;
++ GtkUIManager *ui_manager = mainwin->ui_manager;
++ gtk_action_group_add_actions(mainwin->action_group,mainwindow_tools_lua_actions,2,mainwin);
++ MENUITEM_ADDUI_ID_MANAGER(ui_manager,"/Menu/Tools",           "LuaScripts","Tools/LuaScripts",GTK_UI_MANAGER_MENU,id)
++// printf("main menu add tools %s %d\n","/Menu/Tools/LuaScripts",id);
++ menu_id_list = g_slist_prepend(menu_id_list,GUINT_TO_POINTER(id));
++ MENUITEM_ADDUI_ID_MANAGER(ui_manager,"/Menu/Tools/LuaScripts","Refresh",   "Tools/LuaScripts/Refresh",GTK_UI_MANAGER_MENUITEM,id)
++// printf("main menu add tools %s %d\n","/Menu/Tools/LuaScripts/Refresh",id);
++ menu_id_list = g_slist_prepend(menu_id_list,GUINT_TO_POINTER(id));
++ MENUITEM_ADDUI_ID_MANAGER(ui_manager,"/Menu/Tools/LuaScripts","Separator1","Tools/LuaScripts/---",GTK_UI_MANAGER_SEPARATOR,id)
++// printf("main menu add tools %s %d\n","/Menu/Tools/LuaScripts/Separator1",id);
++ menu_id_list = g_slist_prepend(menu_id_list,GUINT_TO_POINTER(id));
++}
++
++static void main_menu_remove_tools(MainWindow *mainwin)
++{
++ if (mainwin && !claws_is_exiting())
++  {GSList *walk;
++   for (walk = menu_id_list; walk; walk = walk->next)
++//    {printf("main menu remove tools %d\n",GPOINTER_TO_UINT(walk->data));
++     gtk_ui_manager_remove_ui(mainwin->ui_manager,GPOINTER_TO_UINT(walk->data));
++//    }
++   MENUITEM_REMUI_MANAGER(mainwin->ui_manager,mainwin->action_group,"Tools/LuaScripts",0);
++   MENUITEM_REMUI_MANAGER(mainwin->ui_manager,mainwin->action_group,"Tools/LuaScripts/Refresh",0);
++   MENUITEM_REMUI_MANAGER(mainwin->ui_manager,mainwin->action_group,"Tools/LuaScripts/---", 0);
++  }
++}
++
++static gulong compose_check_before_send_hook_id = HOOK_NONE;
++static gulong compose_created_hook_id = HOOK_NONE;
++static gulong folder_item_hook_id = HOOK_NONE;
++static gulong msginfo_hook_id = HOOK_NONE;
++
++gint plugin_init(gchar **error)
++{MainWindow *mainwin;
++ if (!check_plugin_version(MAKE_NUMERIC_VERSION(2,9,2,72),VERSION_NUMERIC,PLUGIN_NAME,error))
++  return -1;
++ if (!make_sure_directories_exist(error)) // create script directories if needed
++  return -1;
++ read_directory(LUA_SCRIPTS_MAIN_DIR,&lua_mainwin_scripts_names);
++// printf("plugin_init lua register main\n");
++ register_scripts_toolbar(lua_mainwin_scripts_names,TOOLBAR_MAIN,main_toolbar_callback);
++ read_directory(LUA_SCRIPTS_MSGVIEW_DIR,&lua_msgview_scripts_names);
++// printf("plugin_init lua register msgview\n");
++ register_scripts_toolbar(lua_msgview_scripts_names,TOOLBAR_MSGVIEW,msgview_toolbar_callback);
++ read_directory(LUA_SCRIPTS_COMPOSE_DIR,&lua_compose_scripts_names);
++// printf("plugin_init lua register compose\n");
++ register_scripts_toolbar(lua_compose_scripts_names,TOOLBAR_COMPOSE,compose_toolbar_callback);
++// printf("plugin_init lua init state\n");
++ L = luaL_newstate();                     // initialize Lua
++ luaL_openlibs(L);                        // load various Lua libraries
++ REGISTER_CM(L);                          // call register functions for clawsmail bindings
++ REGISTER_GTK(L);                         // call register functions for GTK bindings
++// printf("plugin_init lua register hook1\n");
++ compose_check_before_send_hook_id = hooks_register_hook(COMPOSE_CHECK_BEFORE_SEND_HOOKLIST,compose_check_before_send_hook,NULL);
++ if (compose_check_before_send_hook_id == HOOK_NONE)
++  {*error = g_strdup(_("Failed to register \"compose check before send hook\" in the Lua plugin"));
++   goto err;
++  }
++// printf("plugin_init lua register hook2\n");
++ compose_created_hook_id = hooks_register_hook(COMPOSE_CREATED_HOOKLIST,compose_created_hook,NULL);
++ if (compose_created_hook_id == HOOK_NONE)
++  {*error = g_strdup(_("Failed to register \"compose created hook\" in the Lua plugin"));
++   goto err;
++  }
++/* printf("plugin_init lua register hook3\n");
++ folder_item_hook_id = hooks_register_hook(FOLDER_ITEM_UPDATE_HOOKLIST,folder_item_update_hook,NULL);
++ if (folder_item_hook_id == HOOK_NONE)
++  {*error = g_strdup(_("Failed to register \"folder item update hook\" in the Lua plugin"));
++   goto err;
++  }*/
++// printf("plugin_init lua register hook4\n");
++ msginfo_hook_id = hooks_register_hook(MSGINFO_UPDATE_HOOKLIST,msginfo_update_hook,NULL);
++ if (msginfo_hook_id == HOOK_NONE)
++  {*error = g_strdup(_("Failed to register \"msginfo update hook\" in the Lua plugin"));
++   goto err;
++  }
++// printf("plugin_init lua get main\n");
++ mainwin = mainwindow_get_mainwindow();
++ if (!mainwin)
++  {*error = g_strdup("Could not get main window");
++   goto err;
++  }
++// printf("plugin_init lua add menu 1\n");
++ main_menu_add_tools(mainwin);
++// printf("plugin_init lua add menu 2\n");
++// main_menu_add_scripts(mainwin,lua_mainwin_scripts_names);
++// printf("plugin_init lua load\n");
++ run_lua_script_file_aux(L,NULL,"load",NULL,NULL);
++ g_print("Lua plugin loaded\n");
++ return 0;
++err:
++ if (msginfo_hook_id != HOOK_NONE)
++  hooks_unregister_hook(MSGINFO_UPDATE_HOOKLIST,msginfo_hook_id);
++ if (folder_item_hook_id != HOOK_NONE)
++  hooks_unregister_hook(FOLDER_ITEM_UPDATE_HOOKLIST,folder_item_hook_id);
++ if (compose_created_hook_id != HOOK_NONE)
++  hooks_unregister_hook(COMPOSE_CREATED_HOOKLIST,compose_created_hook_id);
++ if (compose_check_before_send_hook_id != HOOK_NONE)
++  hooks_unregister_hook(COMPOSE_CHECK_BEFORE_SEND_HOOKLIST,compose_check_before_send_hook_id);
++ lua_close(L);                            // cleanup Lua
++ return -1;
++}
++
++gboolean plugin_done(void)
++{MainWindow *mainwin;
++ mainwin = mainwindow_get_mainwindow();
++ run_lua_script_file_aux(L,NULL,"unload",NULL,NULL);
++ lua_close(L);                            // cleanup Lua
++// printf("plugin_done lua unregister hook\n");
++ hooks_unregister_hook(MSGINFO_UPDATE_HOOKLIST,msginfo_hook_id);
++// hooks_unregister_hook(FOLDER_ITEM_UPDATE_HOOKLIST,folder_item_hook_id);
++ hooks_unregister_hook(COMPOSE_CREATED_HOOKLIST,compose_created_hook_id);
++ hooks_unregister_hook(COMPOSE_CHECK_BEFORE_SEND_HOOKLIST,compose_check_before_send_hook_id);
++// printf("plugin_done lua remove menu 2\n");
++// main_menu_remove_scripts(mainwin);
++// printf("plugin_done lua remove menu 1\n");
++ main_menu_remove_tools(mainwin);
++// printf("plugin_done lua unregister main\n");
++ unregister_scripts_toolbar(lua_mainwin_scripts_names,TOOLBAR_MAIN);
++ release_scripts_memory(&lua_mainwin_scripts_names);
++// printf("plugin_done lua unregister msgview\n");
++ unregister_scripts_toolbar(lua_msgview_scripts_names,TOOLBAR_MSGVIEW);
++ release_scripts_memory(&lua_msgview_scripts_names);
++// printf("plugin_done lua unregister compose\n");
++ unregister_scripts_toolbar(lua_compose_scripts_names,TOOLBAR_COMPOSE);
++ release_scripts_memory(&lua_compose_scripts_names);
++ g_print("Lua plugin unloaded\n");
++ return TRUE;
++}
++
++const gchar *plugin_name(void)
++{
++ return PLUGIN_NAME;
++}
++
++const gchar *plugin_desc(void)
++{
++ return _("This Plugin provides Lua integration features.\n\n"
++          "Lua code scripts are stored in files located in directory ~/.claws-mail/lua and some subdirectories there.\n"
++          "Some scripts are used as handlers for defined event, others are usable as actions in toolbars via Claws Mail's built-in toolbar editor\n"
++          "It installs a hook handler for selected events and provides some functions to manipulate properties of selected objects."
++         );
++}
++
++const gchar *plugin_type(void)
++{
++ return "GTK2";
++}
++
++const gchar *plugin_licence(void)
++{
++ return "GPL3+";
++}
++
++const gchar *plugin_version(void)
++{
++ return VERSION;
++}
++
++struct PluginFeature *plugin_provides(void)
++{static struct PluginFeature features[] =
++  {{PLUGIN_OTHER,   N_("Lua Integration")},
++   {PLUGIN_NOTHING, NULL}
++  };
++ return features;
++}
+diff -urN claws-mail-3.17.8.org/src/plugins/lua/lua_plugin.h claws-mail-3.17.8/src/plugins/lua/lua_plugin.h
+--- claws-mail-3.17.8.org/src/plugins/lua/lua_plugin.h	1970-01-01 01:00:00.000000000 +0100
++++ claws-mail-3.17.8/src/plugins/lua/lua_plugin.h	2021-04-12 00:05:34.571217963 +0200
+@@ -0,0 +1,22 @@
++/*
++ * Lua plugin for Claws Mail, created by Milan Obuch
++ *
++ * Claws Mail -- a GTK+ based, lightweight, and fast e-mail client
++ * Copyright (C) 1999-2021 the Claws Mail Team
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program. If not, see <http://www.gnu.org/licenses/>.
++ *
++ */
++
++void print_lua_stack(lua_State *);
+diff -urN claws-mail-3.17.8.org/src/plugins/lua/Makefile.am claws-mail-3.17.8/src/plugins/lua/Makefile.am
+--- claws-mail-3.17.8.org/src/plugins/lua/Makefile.am	1970-01-01 01:00:00.000000000 +0100
++++ claws-mail-3.17.8/src/plugins/lua/Makefile.am	2021-04-12 01:22:01.647466047 +0200
+@@ -0,0 +1,96 @@
++# Copyright 1999-2021 the Claws Mail team.
++# This file is part of Claws Mail package, and distributed under the
++# terms of the General Public License version 3 (or later).
++# See COPYING file for license details.
++
++EXTRA_DIST = claws.def plugin.def version.rc
++
++IFLAGS = \
++	-I$(top_srcdir)/src \
++	-I$(top_srcdir)/src/common \
++	-I$(top_builddir)/src/common \
++	-I$(top_srcdir)/src/gtk
++
++if OS_WIN32
++
++LTRCCOMPILE = $(LIBTOOL) --mode=compile --tag=RC $(RC) \
++     `echo $(DEFS) $(DEFAULT_INCLUDES) $(IFLAGS) | \
++     sed -e 's/-I/--include-dir /g;s/-D/--define /g'`
++
++%.lo : %.rc
++	$(LTRCCOMPILE) -i $< -o $@
++
++plugin_res = version.lo
++plugin_res_ldflag = -Wl,.libs/version.o
++
++export_symbols = -export-symbols $(srcdir)/plugin.def
++
++plugin_deps = libclaws.a $(plugin_res) plugin.def
++
++libclaws.a: claws.def
++	$(DLLTOOL) --output-lib $@ --def $<
++
++plugin_ldadd = -L. -lclaws
++
++else
++plugin_res =
++plugin_res_ldflag =
++export_symbols =
++plugin_deps =
++plugin_ldadd =
++endif
++
++if PLATFORM_WIN32
++no_undefined = -no-undefined
++else
++no_undefined =
++endif
++
++if CYGWIN
++cygwin_export_lib = -L$(top_builddir)/src -lclaws-mail
++else
++cygwin_export_lib =
++endif
++
++plugindir = $(pkglibdir)/plugins
++
++if BUILD_LUA_PLUGIN
++plugin_LTLIBRARIES = lua.la
++endif
++
++AUTOMAKE_OPTIONS = subdir-objects
++
++lua_la_LDFLAGS = \
++	$(plugin_res_ldflag) $(no_undefined) $(export_symbols) \
++	-avoid-version -module
++
++lua_la_DEPENDENCIES = $(plugin_deps)
++
++lua_la_LIBADD = $(plugin_ldadd) $(cygwin_export_lib) \
++	$(GTK_LIBS) \
++	$(LUA_LIBS)
++
++lua_la_CPPFLAGS = \
++	$(IFLAGS) \
++	$(GLIB_CFLAGS) \
++	$(GTK_CFLAGS) \
++	$(ENCHANT_CFLAGS) \
++	$(LUA_CFLAGS)
++
++lua_la_SOURCES = \
++	bindings/clawsmail.h \
++	bindings/clawsmail.c \
++	bindings/clawsmail.account.c \
++	bindings/clawsmail.compose_window.c \
++	bindings/clawsmail.folder.c \
++	bindings/clawsmail.folder_properties.c \
++	bindings/clawsmail.mailbox.c \
++	bindings/clawsmail.msginfo.c \
++	bindings/gtk.h \
++	bindings/gtk.action_group.c \
++	bindings/gtk.ui_manager.c \
++	loli.c loli.h loli-instance.h \
++	lua_plugin.c lua_plugin.h
++
++
++.PHONY: test
+diff -urN claws-mail-3.17.8.org/src/plugins/lua/plugin.def claws-mail-3.17.8/src/plugins/lua/plugin.def
+--- claws-mail-3.17.8.org/src/plugins/lua/plugin.def	1970-01-01 01:00:00.000000000 +0100
++++ claws-mail-3.17.8/src/plugins/lua/plugin.def	2020-10-19 12:37:56.000000000 +0200
+@@ -0,0 +1,10 @@
++EXPORTS
++        plugin_desc
++        plugin_done
++        plugin_init
++        plugin_licence
++        plugin_name
++        plugin_type
++	plugin_provides
++        plugin_version
++
+diff -urN claws-mail-3.17.8.org/src/plugins/lua/version.rc claws-mail-3.17.8/src/plugins/lua/version.rc
+--- claws-mail-3.17.8.org/src/plugins/lua/version.rc	1970-01-01 01:00:00.000000000 +0100
++++ claws-mail-3.17.8/src/plugins/lua/version.rc	2021-04-12 00:08:25.178941072 +0200
+@@ -0,0 +1,36 @@
++1 VERSIONINFO
++ FILEVERSION 0, 0, 0, 0
++ PRODUCTVERSION 0, 0, 0, 0
++ FILEFLAGSMASK 0x3fL
++#ifdef _DEBUG
++ FILEFLAGS 0x1L
++#else
++ FILEFLAGS 0x0L
++#endif
++ FILEOS 0x40004L
++ FILETYPE 0x2L
++ FILESUBTYPE 0x0L
++BEGIN
++    BLOCK "StringFileInfo"
++    BEGIN
++        BLOCK "000004b0"
++        BEGIN
++            VALUE "FileDescription", "Claws Mail LUA Plugin\0"
++            VALUE "FileVersion", "0.0.0.0\0"
++            VALUE "ProductVersion", "0.0.0.0 Win32\0"
++            VALUE "LegalCopyright", "GPL / © 1999-2017 Hiroyuki Yamamoto & The Claws Mail Team\0"
++            VALUE "CompanyName", "GNU / Free Software Foundation\0"
++            VALUE "ProductName", "Claws Mail\0"
++//            VALUE "Comments", "\0"
++//            VALUE "InternalName", "\0"
++//            VALUE "LegalTrademarks", "\0"
++//            VALUE "OriginalFilename", "\0"
++//            VALUE "PrivateBuild", "\0"
++//            VALUE "SpecialBuild", "\0"
++        END
++    END
++    BLOCK "VarFileInfo"
++    BEGIN
++        VALUE "Translation", 0x0, 1200
++    END
++END
+diff -urN claws-mail-3.17.8.org/src/plugins/Makefile.am claws-mail-3.17.8/src/plugins/Makefile.am
+--- claws-mail-3.17.8.org/src/plugins/Makefile.am	2020-10-19 12:37:56.000000000 +0200
++++ claws-mail-3.17.8/src/plugins/Makefile.am	2021-04-12 00:05:34.567217970 +0200
+@@ -21,6 +21,7 @@
+ 	gdata \
+ 	litehtml_viewer \
+ 	libravatar \
++	lua \
+ 	mailmbox \
+ 	managesieve \
+ 	newmail \

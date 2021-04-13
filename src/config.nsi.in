@@ -91,6 +91,9 @@
 !define cm_pkg_curl @cm_pkg_curl@
 !define cm_pkg_curl_version @cm_pkg_curl_version@
 
+!define cm_pkg_lua @cm_pkg_lua@
+!define cm_pkg_lua_version @cm_pkg_lua_version@
+
 !define cm_pkg_libxml2 @cm_pkg_libxml2@
 !define cm_pkg_libxml2_version @cm_pkg_libxml2_version@
 

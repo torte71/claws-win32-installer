@@ -674,6 +674,11 @@ File ${prefix}/bin/libgnutls-30.dll
 File ${prefix}/bin/libcurl-4.dll
 
 #######################################
+### lua
+!insertmacro SetPrefix lua
+File ${prefix}/bin/lua54.dll
+
+#######################################
 ### libxml2
 !insertmacro SetPrefix libxml2
 File ${prefix}/bin/libxml2-2.dll
@@ -810,6 +815,7 @@ File ${prefix}/lib/claws-mail/plugins/fancy.dll
 File ${prefix}/lib/claws-mail/plugins/fetchinfo.dll
 File ${prefix}/lib/claws-mail/plugins/libravatar.dll
 File ${prefix}/lib/claws-mail/plugins/litehtml_viewer.dll
+File ${prefix}/lib/claws-mail/plugins/lua.dll
 File ${prefix}/lib/claws-mail/plugins/managesieve.dll
 File ${prefix}/lib/claws-mail/plugins/notification.dll
 File ${prefix}/lib/claws-mail/plugins/pgpcore.dll

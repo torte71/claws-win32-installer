@@ -39,6 +39,7 @@ EXTRA_DIST = autogen.sh \
              patches/claws-mail-3.17.8/04-fclose.patch \
              patches/claws-mail-3.17.8/05-define-WIN32-for-litehtml.patch \
              patches/claws-mail-3.17.8/06-Double-buffer-row-drawing-in-gtkcmctree.patch \
+             patches/claws-mail-3.17.8/50-claws-mail-lua.patch \
              patches/cyrus-sasl-2.1.27/01-md5-typedef.patch \
              patches/cyrus-sasl-2.1.27/02-tchar.patch \
              patches/cyrus-sasl-2.1.27/03-exports.patch \

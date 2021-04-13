@@ -1,0 +1,52 @@
+#!/bin/bash
+
+# no autotools / configure for lua
+
+# copy complete source directory to build-directory
+SRCDIR=$(pwd)
+BUILDDIR=${SRCDIR}-build
+rm -rf $BUILDDIR
+cp -a $SRCDIR $BUILDDIR
+
+# create simulated "configure" script
+# evaluates 
+#   --prefix (install destination)
+#   --host   (compiler used)
+
+# -fPIC required to link against shared library (CFLAGS)
+
+cat << configure_EOF > configure
+#!/bin/sh
+
+echo "\$0 \$@"
+echo "PWD=\$(pwd)"
+while [ -n "\$1" ] ; do
+  case \$1 in
+    --host=*)
+      HOST=\${1##--host=}
+      echo "HOST=\$HOST"
+      ;;
+    --prefix=*)
+      PREFIX=\${1##--prefix=}
+      echo "PREFIX=\$PREFIX"
+      ;;
+  esac
+  shift
+done
+
+sed -i "/^TO_BIN=/      s#=.*#=lua.exe luac.exe lua*.dll#"	Makefile
+sed -i "/^PLAT=/        s#=.*#=mingw#"				Makefile
+sed -i "/^INSTALL_TOP=/ s#=.*#=\${PREFIX}#"			Makefile
+sed -i "/^PLAT=/        s#=.*#=mingw#"					src/Makefile
+sed -i "/^CFLAGS=/      s#.*#& -O2 -pipe -ggdb -mms-bitfields -fPIC#"	src/Makefile
+sed -i "/^CC=/          s#=.*#=\${HOST}-gcc -std=gnu99#"		src/Makefile
+
+sed -i "/(MAKE) \"LUAC_T=luac.exe\" luac.exe/ \\
+	s/.*/&\n\\
+	mv liblua.a liblua-static.a\n\\
+	gendef lua54.dll\n\\
+	\${HOST}-dlltool -d lua54.def -D lua54.dll -l liblua.a\n/\\
+	" src/Makefile
+
+configure_EOF
+chmod +x configure

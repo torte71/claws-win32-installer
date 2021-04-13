@@ -107,6 +107,14 @@ server https://curl.se/download
 file  curl-7.75.0.tar.xz
 chk   fe0c49d8468249000bda75bcfdf9e30ff7e9a86d35f1a21f428d79c389d55675
 
+#
+# lua for lua-plugin
+#
+
+server https://www.lua.org/ftp/
+
+file   lua-5.4.3.tar.gz
+chk    f8612276169e3bfcbcfb8f226195bfc6e466fe13042f1076cbde92b7ec96bbfb
 
 #
 # libxml2 & libxslt

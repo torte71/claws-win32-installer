@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# update Makefile.am (plugins/lua)
+
+NOCONFIGURE=1 ./autogen.sh
