@@ -2,9 +2,9 @@
 patch -p1 -f $* < $0
 exit $?
 
-diff -urN claws-mail-3.17.8-org/configure.ac claws-mail-3.17.8/configure.ac
+diff -urN claws-mail-3.17.8-org/configure.ac claws-mail-3.17.8-new/configure.ac
 --- claws-mail-3.17.8-org/configure.ac	2020-10-19 12:37:56.000000000 +0200
-+++ claws-mail-3.17.8/configure.ac	2021-04-17 14:12:53.215892165 +0200
++++ claws-mail-3.17.8-new/configure.ac	2021-04-29 14:12:05.222442419 +0200
 @@ -571,6 +571,28 @@
  esac
  
@@ -121,9 +121,123 @@ diff -urN claws-mail-3.17.8-org/configure.ac claws-mail-3.17.8/configure.ac
  src/plugins/mailmbox/Makefile
  src/plugins/managesieve/Makefile
  src/plugins/newmail/Makefile
-diff -urN claws-mail-3.17.8-org/patch-configure.ac claws-mail-3.17.8/patch-configure.ac
+diff -urN claws-mail-3.17.8-org/Makefile.am.orig claws-mail-3.17.8-new/Makefile.am.orig
+--- claws-mail-3.17.8-org/Makefile.am.orig	1970-01-01 01:00:00.000000000 +0100
++++ claws-mail-3.17.8-new/Makefile.am.orig	2021-04-29 14:12:09.818439044 +0200
+@@ -0,0 +1,96 @@
++# Copyright 1999-2014 the Claws Mail team.
++# This file is part of Claws Mail package, and distributed under the
++# terms of the General Public License version 3 (or later).
++# See COPYING file for license details.
++
++if BUILD_TESTS
++include $(top_srcdir)/tests.mk
++endif
++
++ACLOCAL_AMFLAGS = -I m4
++AUTOMAKE_OPTIONS = dist-bzip2 dist-xz
++
++SUBDIRS = m4 po src tools config doc manual
++
++EXTRA_DIST = \
++	ChangeLog \
++	ChangeLog.gtk1 \
++	ChangeLog.pre2.0.0 \
++	ChangeLog.2.0.0-3.0.0 \
++	ChangeLog.3.0.0-3.9.0 \
++	RELEASE_NOTES \
++	claws-mail-128x128.png \
++	claws-mail-64x64.png \
++	claws-mail.pc.in \
++	claws-mail.desktop \
++	claws-mail.png \
++	autogen.sh \
++	claws-features.h.in \
++	version
++
++# hicolor icon theme, base class of all icon themes
++pixmapdir=$(datadir)/icons/hicolor/48x48/apps
++pixmap_DATA=claws-mail.png
++
++pixmap64dir=$(datadir)/icons/hicolor/64x64/apps
++pixmap64_DATA=claws-mail-64x64.png
++
++pixmap128dir=$(datadir)/icons/hicolor/128x128/apps
++pixmap128_DATA=claws-mail-128x128.png
++
++# when changing the name or location of the .desktop file,
++# also update src/common/Makefile.am
++gnomapdir = $(datadir)/applications
++gnomap_DATA=claws-mail.desktop
++
++rename-icons:
++	@cd $(DESTDIR)$(datadir)/icons/hicolor/64x64/apps && \
++            mv claws-mail-64x64.png claws-mail.png
++	@cd $(DESTDIR)$(datadir)/icons/hicolor/128x128/apps && \
++            mv claws-mail-128x128.png claws-mail.png
++
++remove-icons:
++	rm -f $(DESTDIR)$(datadir)/icons/hicolor/64x64/apps/claws-mail.png
++	rm -f $(DESTDIR)$(datadir)/icons/hicolor/128x128/apps/claws-mail.png
++
++if UPDATE_GTK_ICON_CACHE
++gtk_update_icon_cache = gtk-update-icon-cache -f -t $(datadir)/icons/hicolor
++
++install-data-hook: rename-icons update-icon-cache
++uninstall-hook: remove-icons update-icon-cache
++
++update-icon-cache:
++	@-if test -z "$(DESTDIR)"; then					\
++                echo "Updating Gtk icon cache.";			\
++                $(gtk_update_icon_cache);				\
++        else								\
++                echo "*** Icon cache not updated. Remember to run:";	\
++		echo "***";						\
++                echo "***   $(gtk_update_icon_cache)";			\
++		echo "***";						\
++        fi
++else
++
++install-data-hook: rename-icons
++uninstall-hook: remove-icons
++
++endif
++
++pkgconfigdir = $(libdir)/pkgconfig
++pkgconfig_DATA = claws-mail.pc
++
++clawsincludedir = $(pkgincludedir)
++clawsinclude_HEADERS = \
++	claws-features.h
++
++relnotesdir = $(docdir)
++relnotes_DATA = RELEASE_NOTES
++
++dist-local: ChangeLog
++
++maintainer-clean-local:
++	@rm -f ChangeLog
++	@rm -f version
++
++ChangeLog: version
++	@./tools/gitlog2changelog.py 3.9.0 > ChangeLog
+diff -urN claws-mail-3.17.8-org/Makefile.am.rej claws-mail-3.17.8-new/Makefile.am.rej
+--- claws-mail-3.17.8-org/Makefile.am.rej	1970-01-01 01:00:00.000000000 +0100
++++ claws-mail-3.17.8-new/Makefile.am.rej	2021-04-29 14:12:09.818439044 +0200
+@@ -0,0 +1,10 @@
++--- Makefile.am.orig	2020-10-19 12:37:56.000000000 +0200
+++++ Makefile.am	2021-04-17 14:23:32.462826645 +0200
++@@ -21,6 +21,7 @@
++ 	gdata \
++ 	litehtml_viewer \
++ 	libravatar \
+++	lua \
++ 	mailmbox \
++ 	managesieve \
++ 	newmail \
+diff -urN claws-mail-3.17.8-org/patch-configure.ac claws-mail-3.17.8-new/patch-configure.ac
 --- claws-mail-3.17.8-org/patch-configure.ac	1970-01-01 01:00:00.000000000 +0100
-+++ claws-mail-3.17.8/patch-configure.ac	2021-03-22 08:42:39.000000000 +0100
++++ claws-mail-3.17.8-new/patch-configure.ac	2021-03-22 08:42:39.000000000 +0100
 @@ -0,0 +1,118 @@
 +--- configure.ac.orig	2020-10-19 12:37:56.000000000 +0200
 ++++ configure.ac	2021-03-22 08:42:07.345272000 +0100
@@ -243,9 +357,23 @@ diff -urN claws-mail-3.17.8-org/patch-configure.ac claws-mail-3.17.8/patch-confi
 + src/plugins/mailmbox/Makefile
 + src/plugins/managesieve/Makefile
 + src/plugins/newmail/Makefile
-diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.account.c claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.account.c
+diff -urN claws-mail-3.17.8-org/patch-src__plugins__Makefile.am claws-mail-3.17.8-new/patch-src__plugins__Makefile.am
+--- claws-mail-3.17.8-org/patch-src__plugins__Makefile.am	1970-01-01 01:00:00.000000000 +0100
++++ claws-mail-3.17.8-new/patch-src__plugins__Makefile.am	2021-04-29 09:03:59.000000000 +0200
+@@ -0,0 +1,10 @@
++--- src/plugins/Makefile.am.orig	2020-10-19 12:37:56.000000000 +0200
+++++ src/plugins/Makefile.am	2021-04-17 14:23:32.462826645 +0200
++@@ -21,6 +21,7 @@
++ 	gdata \
++ 	litehtml_viewer \
++ 	libravatar \
+++	lua \
++ 	mailmbox \
++ 	managesieve \
++ 	newmail \
+diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.account.c claws-mail-3.17.8-new/src/plugins/lua/bindings/clawsmail.account.c
 --- claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.account.c	1970-01-01 01:00:00.000000000 +0100
-+++ claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.account.c	2021-03-23 06:24:11.000000000 +0100
++++ claws-mail-3.17.8-new/src/plugins/lua/bindings/clawsmail.account.c	2021-03-23 06:24:11.000000000 +0100
 @@ -0,0 +1,62 @@
 +/*
 + * Lua plugin for Claws Mail, created by Milan Obuch
@@ -309,10 +437,10 @@ diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.account.c cla
 +LOM_PROPERTY("name",   PrefsAccount,        name,        LT_STRING)
 +LOM_GET(     "folders",_account_folders_get)
 +LOC_REGISTER(account,ACCOUNT)
-diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.c claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.c
+diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.c claws-mail-3.17.8-new/src/plugins/lua/bindings/clawsmail.c
 --- claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.c	1970-01-01 01:00:00.000000000 +0100
-+++ claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.c	2021-04-17 11:54:47.000000000 +0200
-@@ -0,0 +1,572 @@
++++ claws-mail-3.17.8-new/src/plugins/lua/bindings/clawsmail.c	2021-04-17 12:23:29.000000000 +0200
+@@ -0,0 +1,565 @@
 +/*
 + * Lua plugin for Claws Mail, created by Milan Obuch
 + *
@@ -748,20 +876,13 @@ diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.c claws-mail-
 +  {printf("clawsmail.print argument is not a string\n");
 +   return 0;
 +  }
-+// printf("cp 1\n");
 + FILE *fp = fopen(cpofname,"a");
-+// printf("cp 2\n");
 + if (fp)
 +  {char *s = lua_tostring(L,1);
-+// printf("cp 2\n");
 +   fputs(s,fp);
-+// printf("cp 3\n");
 +   fputs("\n",fp);
-+// printf("cp 4\n");
 +   fclose(fp);
-+// printf("cp 5\n");
 +  }
-+// printf("cp 6\n");
 + return 0;
 +}
 +
@@ -885,9 +1006,9 @@ diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.c claws-mail-
 +LOM_METHOD("rename_tag",                   _clawsmail_rename_tag)
 +LOM_METHOD("summaryview_select_messages",  _clawsmail_summaryview_select_messages)
 +LOC_REGISTER(clawsmail,CLAWSMAIL)
-diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.compose_window.c claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.compose_window.c
+diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.compose_window.c claws-mail-3.17.8-new/src/plugins/lua/bindings/clawsmail.compose_window.c
 --- claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.compose_window.c	1970-01-01 01:00:00.000000000 +0100
-+++ claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.compose_window.c	2021-03-23 06:24:11.000000000 +0100
++++ claws-mail-3.17.8-new/src/plugins/lua/bindings/clawsmail.compose_window.c	2021-03-23 06:24:11.000000000 +0100
 @@ -0,0 +1,471 @@
 +/*
 + * Lua plugin for Claws Mail, created by Milan Obuch
@@ -1360,9 +1481,9 @@ diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.compose_windo
 +LOM_METHOD(            "add_header",       _compose_window_add_header)
 +LOM_METHOD(            "attach",           _compose_window_attach)
 +LOC_REGISTER(compose_window,COMPOSE_WINDOW)
-diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.folder.c claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.folder.c
+diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.folder.c claws-mail-3.17.8-new/src/plugins/lua/bindings/clawsmail.folder.c
 --- claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.folder.c	1970-01-01 01:00:00.000000000 +0100
-+++ claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.folder.c	2021-03-23 06:24:11.000000000 +0100
++++ claws-mail-3.17.8-new/src/plugins/lua/bindings/clawsmail.folder.c	2021-03-23 06:24:11.000000000 +0100
 @@ -0,0 +1,123 @@
 +/*
 + * Lua plugin for Claws Mail, created by Milan Obuch
@@ -1487,9 +1608,9 @@ diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.folder.c claw
 +LOM_GET(         "messages",          _folder_messages_get)
 +LOM_GET(         "path",              _folder_path_get)
 +LOC_REGISTER(folder,FOLDER)
-diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.folder_properties.c claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.folder_properties.c
+diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.folder_properties.c claws-mail-3.17.8-new/src/plugins/lua/bindings/clawsmail.folder_properties.c
 --- claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.folder_properties.c	1970-01-01 01:00:00.000000000 +0100
-+++ claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.folder_properties.c	2021-03-23 06:24:11.000000000 +0100
++++ claws-mail-3.17.8-new/src/plugins/lua/bindings/clawsmail.folder_properties.c	2021-03-23 06:24:11.000000000 +0100
 @@ -0,0 +1,46 @@
 +/*
 + * Lua plugin for Claws Mail, created by Milan Obuch
@@ -1537,9 +1658,9 @@ diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.folder_proper
 +LOC_DECLARE(folder_properties,FOLDER_PROPERTIES)
 +LOM_GET("default_account",_folder_properties_default_account_get)
 +LOC_REGISTER(folder_properties,FOLDER_PROPERTIES)
-diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.h claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.h
+diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.h claws-mail-3.17.8-new/src/plugins/lua/bindings/clawsmail.h
 --- claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.h	1970-01-01 01:00:00.000000000 +0100
-+++ claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.h	2021-04-17 11:54:53.000000000 +0200
++++ claws-mail-3.17.8-new/src/plugins/lua/bindings/clawsmail.h	2021-04-17 11:54:53.000000000 +0200
 @@ -0,0 +1,63 @@
 +// Header file generated using helper script loli-header.lua, do not edit!
 +
@@ -1604,9 +1725,9 @@ diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.h claws-mail-
 +register_msg_info(L);
 +
 +#endif
-diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.mailbox.c claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.mailbox.c
+diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.mailbox.c claws-mail-3.17.8-new/src/plugins/lua/bindings/clawsmail.mailbox.c
 --- claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.mailbox.c	1970-01-01 01:00:00.000000000 +0100
-+++ claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.mailbox.c	2021-03-23 07:52:45.000000000 +0100
++++ claws-mail-3.17.8-new/src/plugins/lua/bindings/clawsmail.mailbox.c	2021-03-23 07:52:45.000000000 +0100
 @@ -0,0 +1,46 @@
 +/*
 + * Lua plugin for Claws Mail, created by Milan Obuch
@@ -1654,9 +1775,9 @@ diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.mailbox.c cla
 +LOM_PROPERTY("name",  Folder,              name,LT_STRING)
 +LOM_GET(    "folders",_mailbox_folders_get)
 +LOC_REGISTER(mailbox,MAILBOX)
-diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.msg_info.c claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.msg_info.c
+diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.msg_info.c claws-mail-3.17.8-new/src/plugins/lua/bindings/clawsmail.msg_info.c
 --- claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.msg_info.c	1970-01-01 01:00:00.000000000 +0100
-+++ claws-mail-3.17.8/src/plugins/lua/bindings/clawsmail.msg_info.c	2021-03-23 06:24:11.000000000 +0100
++++ claws-mail-3.17.8-new/src/plugins/lua/bindings/clawsmail.msg_info.c	2021-03-23 06:24:11.000000000 +0100
 @@ -0,0 +1,198 @@
 +/*
 + * Lua plugin for Claws Mail, created by Milan Obuch
@@ -1856,9 +1977,9 @@ diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/clawsmail.msg_info.c cl
 +LOM_METHOD(      "header",        _msg_info_header_get)
 +LOM_METHOD(      "remove_tag",    _msg_info_remove_tag)
 +LOC_REGISTER(msg_info,MSG_INFO)
-diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/gtk.action_group.c claws-mail-3.17.8/src/plugins/lua/bindings/gtk.action_group.c
+diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/gtk.action_group.c claws-mail-3.17.8-new/src/plugins/lua/bindings/gtk.action_group.c
 --- claws-mail-3.17.8-org/src/plugins/lua/bindings/gtk.action_group.c	1970-01-01 01:00:00.000000000 +0100
-+++ claws-mail-3.17.8/src/plugins/lua/bindings/gtk.action_group.c	2021-03-23 06:24:11.000000000 +0100
++++ claws-mail-3.17.8-new/src/plugins/lua/bindings/gtk.action_group.c	2021-03-23 06:24:11.000000000 +0100
 @@ -0,0 +1,28 @@
 +/*
 + * Lua binding for the GTK via LOLI
@@ -1888,9 +2009,9 @@ diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/gtk.action_group.c claw
 +
 +LOC_DECLARE(action_group,ACTION_GROUP)
 +LOC_REGISTER(action_group,ACTION_GROUP)
-diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/gtk.h claws-mail-3.17.8/src/plugins/lua/bindings/gtk.h
+diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/gtk.h claws-mail-3.17.8-new/src/plugins/lua/bindings/gtk.h
 --- claws-mail-3.17.8-org/src/plugins/lua/bindings/gtk.h	1970-01-01 01:00:00.000000000 +0100
-+++ claws-mail-3.17.8/src/plugins/lua/bindings/gtk.h	2021-04-13 16:01:05.000000000 +0200
++++ claws-mail-3.17.8-new/src/plugins/lua/bindings/gtk.h	2021-04-13 16:01:05.000000000 +0200
 @@ -0,0 +1,28 @@
 +// Header file generated using helper script loli-header.lua, do not edit!
 +
@@ -1920,9 +2041,9 @@ diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/gtk.h claws-mail-3.17.8
 +register_ui_manager(L);
 +
 +#endif
-diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/gtk.ui_manager.c claws-mail-3.17.8/src/plugins/lua/bindings/gtk.ui_manager.c
+diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/gtk.ui_manager.c claws-mail-3.17.8-new/src/plugins/lua/bindings/gtk.ui_manager.c
 --- claws-mail-3.17.8-org/src/plugins/lua/bindings/gtk.ui_manager.c	1970-01-01 01:00:00.000000000 +0100
-+++ claws-mail-3.17.8/src/plugins/lua/bindings/gtk.ui_manager.c	2021-03-23 06:24:11.000000000 +0100
++++ claws-mail-3.17.8-new/src/plugins/lua/bindings/gtk.ui_manager.c	2021-03-23 06:24:11.000000000 +0100
 @@ -0,0 +1,60 @@
 +/*
 + * Lua binding for the GTK via LOLI
@@ -1984,9 +2105,9 @@ diff -urN claws-mail-3.17.8-org/src/plugins/lua/bindings/gtk.ui_manager.c claws-
 +LOM_GET(    "ui",    _ui_manager_ui_get)
 +LOM_METHOD( "add_ui",_ui_manager_add_ui)
 +LOC_REGISTER(ui_manager,UI_MANAGER)
-diff -urN claws-mail-3.17.8-org/src/plugins/lua/claws.def claws-mail-3.17.8/src/plugins/lua/claws.def
+diff -urN claws-mail-3.17.8-org/src/plugins/lua/claws.def claws-mail-3.17.8-new/src/plugins/lua/claws.def
 --- claws-mail-3.17.8-org/src/plugins/lua/claws.def	1970-01-01 01:00:00.000000000 +0100
-+++ claws-mail-3.17.8/src/plugins/lua/claws.def	2021-04-13 20:41:48.199676038 +0200
++++ claws-mail-3.17.8-new/src/plugins/lua/claws.def	2021-04-29 08:44:58.000000000 +0200
 @@ -0,0 +1,53 @@
 +LIBRARY CLAWS-MAIL.EXE
 +EXPORTS
@@ -2041,9 +2162,9 @@ diff -urN claws-mail-3.17.8-org/src/plugins/lua/claws.def claws-mail-3.17.8/src/
 +tags_get_tag
 +tags_remove_tag
 +tags_update_tag
-diff -urN claws-mail-3.17.8-org/src/plugins/lua/loli/loli.c claws-mail-3.17.8/src/plugins/lua/loli/loli.c
+diff -urN claws-mail-3.17.8-org/src/plugins/lua/loli/loli.c claws-mail-3.17.8-new/src/plugins/lua/loli/loli.c
 --- claws-mail-3.17.8-org/src/plugins/lua/loli/loli.c	1970-01-01 01:00:00.000000000 +0100
-+++ claws-mail-3.17.8/src/plugins/lua/loli/loli.c	2021-03-23 06:24:11.000000000 +0100
++++ claws-mail-3.17.8-new/src/plugins/lua/loli/loli.c	2021-03-23 06:24:11.000000000 +0100
 @@ -0,0 +1,117 @@
 +/******************************************************************************
 +* Copyright (C) 2020-2021 Milan Obuch
@@ -2162,9 +2283,9 @@ diff -urN claws-mail-3.17.8-org/src/plugins/lua/loli/loli.c claws-mail-3.17.8/sr
 + lua_pushnil(L);
 + return 1;
 +}
-diff -urN claws-mail-3.17.8-org/src/plugins/lua/loli/loli.h claws-mail-3.17.8/src/plugins/lua/loli/loli.h
+diff -urN claws-mail-3.17.8-org/src/plugins/lua/loli/loli.h claws-mail-3.17.8-new/src/plugins/lua/loli/loli.h
 --- claws-mail-3.17.8-org/src/plugins/lua/loli/loli.h	1970-01-01 01:00:00.000000000 +0100
-+++ claws-mail-3.17.8/src/plugins/lua/loli/loli.h	2021-03-23 06:24:11.000000000 +0100
++++ claws-mail-3.17.8-new/src/plugins/lua/loli/loli.h	2021-03-23 06:24:11.000000000 +0100
 @@ -0,0 +1,123 @@
 +/******************************************************************************
 +* Copyright (C) 2020-2021 Milan Obuch
@@ -2289,9 +2410,9 @@ diff -urN claws-mail-3.17.8-org/src/plugins/lua/loli/loli.h claws-mail-3.17.8/sr
 +}
 +
 +#endif
-diff -urN claws-mail-3.17.8-org/src/plugins/lua/loli/loli-header.lua claws-mail-3.17.8/src/plugins/lua/loli/loli-header.lua
+diff -urN claws-mail-3.17.8-org/src/plugins/lua/loli/loli-header.lua claws-mail-3.17.8-new/src/plugins/lua/loli/loli-header.lua
 --- claws-mail-3.17.8-org/src/plugins/lua/loli/loli-header.lua	1970-01-01 01:00:00.000000000 +0100
-+++ claws-mail-3.17.8/src/plugins/lua/loli/loli-header.lua	2021-03-23 06:24:11.000000000 +0100
++++ claws-mail-3.17.8-new/src/plugins/lua/loli/loli-header.lua	2021-03-23 06:24:11.000000000 +0100
 @@ -0,0 +1,51 @@
 +--print(string.format("dst file %s",arg[1]))
 +local header_define = '_LOLI_HEADER__' .. string.gsub(string.gsub(string.upper(arg[1]),'/','__'),'%.','_') .. '_'
@@ -2344,9 +2465,9 @@ diff -urN claws-mail-3.17.8-org/src/plugins/lua/loli/loli-header.lua claws-mail-
 +
 +header_file:write("\n\n#endif\n")
 +header_file:close()
-diff -urN claws-mail-3.17.8-org/src/plugins/lua/loli/loli-instance.h claws-mail-3.17.8/src/plugins/lua/loli/loli-instance.h
+diff -urN claws-mail-3.17.8-org/src/plugins/lua/loli/loli-instance.h claws-mail-3.17.8-new/src/plugins/lua/loli/loli-instance.h
 --- claws-mail-3.17.8-org/src/plugins/lua/loli/loli-instance.h	1970-01-01 01:00:00.000000000 +0100
-+++ claws-mail-3.17.8/src/plugins/lua/loli/loli-instance.h	2021-03-23 06:24:11.000000000 +0100
++++ claws-mail-3.17.8-new/src/plugins/lua/loli/loli-instance.h	2021-03-23 06:24:11.000000000 +0100
 @@ -0,0 +1,29 @@
 +/******************************************************************************
 +* Copyright (C) 2020-2021 Milan Obuch
@@ -2377,9 +2498,9 @@ diff -urN claws-mail-3.17.8-org/src/plugins/lua/loli/loli-instance.h claws-mail-
 +#define __LR_FOOT(a) \
 +lua_setmetatable(L,-2); \
 +lua_setglobal(L,a);
-diff -urN claws-mail-3.17.8-org/src/plugins/lua/lua_plugin.c claws-mail-3.17.8/src/plugins/lua/lua_plugin.c
+diff -urN claws-mail-3.17.8-org/src/plugins/lua/lua_plugin.c claws-mail-3.17.8-new/src/plugins/lua/lua_plugin.c
 --- claws-mail-3.17.8-org/src/plugins/lua/lua_plugin.c	1970-01-01 01:00:00.000000000 +0100
-+++ claws-mail-3.17.8/src/plugins/lua/lua_plugin.c	2021-04-17 11:34:48.000000000 +0200
++++ claws-mail-3.17.8-new/src/plugins/lua/lua_plugin.c	2021-04-17 12:22:29.000000000 +0200
 @@ -0,0 +1,597 @@
 +/*
 + * Lua plugin for Claws Mail, created by Milan Obuch
@@ -2849,7 +2970,7 @@ diff -urN claws-mail-3.17.8-org/src/plugins/lua/lua_plugin.c claws-mail-3.17.8/s
 +                        LUA_SCRIPTS_BASE_DIR,G_DIR_SEPARATOR_S,
 +                        "output",NULL
 +                       );
-+ printf("cpofname = %s\n",cpofname);
++// printf("cpofname = %s\n",cpofname);
 + read_directory(LUA_SCRIPTS_MAIN_DIR,&lua_mainwin_scripts_names);
 +// printf("plugin_init lua register main\n");
 + register_scripts_toolbar(lua_mainwin_scripts_names,TOOLBAR_MAIN,main_toolbar_callback);
@@ -2978,9 +3099,9 @@ diff -urN claws-mail-3.17.8-org/src/plugins/lua/lua_plugin.c claws-mail-3.17.8/s
 +  };
 + return features;
 +}
-diff -urN claws-mail-3.17.8-org/src/plugins/lua/lua_plugin.h claws-mail-3.17.8/src/plugins/lua/lua_plugin.h
+diff -urN claws-mail-3.17.8-org/src/plugins/lua/lua_plugin.h claws-mail-3.17.8-new/src/plugins/lua/lua_plugin.h
 --- claws-mail-3.17.8-org/src/plugins/lua/lua_plugin.h	1970-01-01 01:00:00.000000000 +0100
-+++ claws-mail-3.17.8/src/plugins/lua/lua_plugin.h	2021-03-23 06:24:11.000000000 +0100
++++ claws-mail-3.17.8-new/src/plugins/lua/lua_plugin.h	2021-03-23 06:24:11.000000000 +0100
 @@ -0,0 +1,23 @@
 +/*
 + * Lua plugin for Claws Mail, created by Milan Obuch
@@ -3005,9 +3126,9 @@ diff -urN claws-mail-3.17.8-org/src/plugins/lua/lua_plugin.h claws-mail-3.17.8/s
 +
 +void print_lua_stack(lua_State *);
 +void flush_gtk_queue(void);
-diff -urN claws-mail-3.17.8-org/src/plugins/lua/Makefile.am claws-mail-3.17.8/src/plugins/lua/Makefile.am
+diff -urN claws-mail-3.17.8-org/src/plugins/lua/Makefile.am claws-mail-3.17.8-new/src/plugins/lua/Makefile.am
 --- claws-mail-3.17.8-org/src/plugins/lua/Makefile.am	1970-01-01 01:00:00.000000000 +0100
-+++ claws-mail-3.17.8/src/plugins/lua/Makefile.am	2021-04-17 15:03:08.855526189 +0200
++++ claws-mail-3.17.8-new/src/plugins/lua/Makefile.am	2021-04-29 08:45:48.000000000 +0200
 @@ -0,0 +1,116 @@
 +# Copyright 1999-2021 the Claws Mail team.
 +# This file is part of Claws Mail package, and distributed under the
@@ -3125,23 +3246,22 @@ diff -urN claws-mail-3.17.8-org/src/plugins/lua/Makefile.am claws-mail-3.17.8/sr
 +headers: $(bindings_headers_SOURCES)
 +
 +.PHONY: test headers
-diff -urN claws-mail-3.17.8-org/src/plugins/lua/plugin.def claws-mail-3.17.8/src/plugins/lua/plugin.def
+diff -urN claws-mail-3.17.8-org/src/plugins/lua/plugin.def claws-mail-3.17.8-new/src/plugins/lua/plugin.def
 --- claws-mail-3.17.8-org/src/plugins/lua/plugin.def	1970-01-01 01:00:00.000000000 +0100
-+++ claws-mail-3.17.8/src/plugins/lua/plugin.def	2021-04-13 20:41:48.199676038 +0200
-@@ -0,0 +1,10 @@
++++ claws-mail-3.17.8-new/src/plugins/lua/plugin.def	2021-04-29 08:39:02.000000000 +0200
+@@ -0,0 +1,9 @@
 +EXPORTS
-+        plugin_desc
-+        plugin_done
-+        plugin_init
-+        plugin_licence
-+        plugin_name
-+        plugin_type
++	plugin_desc
++	plugin_done
++	plugin_init
++	plugin_licence
++	plugin_name
++	plugin_type
 +	plugin_provides
-+        plugin_version
-+
-diff -urN claws-mail-3.17.8-org/src/plugins/lua/version.rc claws-mail-3.17.8/src/plugins/lua/version.rc
++	plugin_version
+diff -urN claws-mail-3.17.8-org/src/plugins/lua/version.rc claws-mail-3.17.8-new/src/plugins/lua/version.rc
 --- claws-mail-3.17.8-org/src/plugins/lua/version.rc	1970-01-01 01:00:00.000000000 +0100
-+++ claws-mail-3.17.8/src/plugins/lua/version.rc	2021-04-13 20:41:48.199676038 +0200
++++ claws-mail-3.17.8-new/src/plugins/lua/version.rc	2021-04-29 08:39:29.000000000 +0200
 @@ -0,0 +1,36 @@
 +1 VERSIONINFO
 + FILEVERSION 0, 0, 0, 0
@@ -3179,9 +3299,9 @@ diff -urN claws-mail-3.17.8-org/src/plugins/lua/version.rc claws-mail-3.17.8/src
 +        VALUE "Translation", 0x0, 1200
 +    END
 +END
-diff -urN claws-mail-3.17.8-org/src/plugins/Makefile.am claws-mail-3.17.8/src/plugins/Makefile.am
+diff -urN claws-mail-3.17.8-org/src/plugins/Makefile.am claws-mail-3.17.8-new/src/plugins/Makefile.am
 --- claws-mail-3.17.8-org/src/plugins/Makefile.am	2020-10-19 12:37:56.000000000 +0200
-+++ claws-mail-3.17.8/src/plugins/Makefile.am	2021-04-17 14:23:32.462826645 +0200
++++ claws-mail-3.17.8-new/src/plugins/Makefile.am	2021-04-29 14:13:27.194380430 +0200
 @@ -21,6 +21,7 @@
  	gdata \
  	litehtml_viewer \
