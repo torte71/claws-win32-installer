@@ -275,6 +275,7 @@ cm_pkg_libetpan_configure = --with-gnutls --enable-threads \
 
 # -D_POSIX_C_SOURCE is there so that time.h from mingw64-4.x
 # actually gives us gmtime_r() and localtime_r() prototype declarations
+#	--with-lua-incdir=$(idir)/include --with-lua-libdir=$(idir)/lib
 cm_pkg_claws_mail_configure = \
 	--enable-silent-rules \
 	--with-lib-prefix=$(idir) \
@@ -288,7 +289,8 @@ cm_pkg_claws_mail_configure = \
 	--disable-newmail-plugin --disable-mailmbox-plugin \
 	--disable-dillo-plugin --enable-tnef_parse-plugin \
 	--with-password-encryption=gnutls \
-	--with-lua-incdir=$(idir)/include --with-lua-libdir=$(idir)/lib \
+	LUA_CFLAGS=\"-I$(idir)/include\" \
+	LUA_LIBS=\"-L$(idir)/lib -llua\" \
 	CPPFLAGS=\"-I$(idir)/include -D_POSIX_C_SOURCE -DLITEHTML_UTF8\" \
 	LDFLAGS=\"-L$(idir)/lib\" LIBS=\"-lexpat\"
 
