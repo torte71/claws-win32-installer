@@ -1,0 +1,157 @@
+#!/bin/sh
+patch -p1 -f $* < $0
+exit $?
+
+From cfd5ff71f414d6b72fda2c70d256280c138ecb5a Mon Sep 17 00:00:00 2001
+From: Thorsten Maerz <info@netztorte.de>
+Date: Tue, 4 May 2021 10:21:51 +0200
+Subject: [PATCH] Allow compilation from outside source directory (2)
+
+Templates for manual need to be searched in $srcdir,
+so they are accessible when working in $builddir.
+---
+ manual/de/dist/html/Makefile.am | 2 +-
+ manual/de/dist/txt/Makefile.am  | 2 +-
+ manual/dist/html/Makefile.am    | 2 +-
+ manual/dist/txt/Makefile.am     | 2 +-
+ manual/es/dist/html/Makefile.am | 2 +-
+ manual/es/dist/txt/Makefile.am  | 2 +-
+ manual/fr/dist/html/Makefile.am | 2 +-
+ manual/fr/dist/txt/Makefile.am  | 2 +-
+ manual/pl/dist/html/Makefile.am | 2 +-
+ manual/pl/dist/txt/Makefile.am  | 2 +-
+ 10 files changed, 10 insertions(+), 10 deletions(-)
+
+diff --git a/manual/de/dist/html/Makefile.am b/manual/de/dist/html/Makefile.am
+index 391a8ab73..705cd9265 100644
+--- a/manual/de/dist/html/Makefile.am
++++ b/manual/de/dist/html/Makefile.am
+@@ -23,7 +23,7 @@ claws-mail-manual.html: \
+ 	../../starting.xml \
+ 	../../claws-mail-manual.xml 
+ 	-SP_ENCODING=xml $(DOCBOOK2HTML) -u -o . \
+-		../../claws-mail-manual.xml
++		$(srcdir)/../../claws-mail-manual.xml
+ 	-mv -f claws-mail-manual.html claws-mail-manual.html.raw
+ 	-$(SED) 's,^><META,><META http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"><META,' < claws-mail-manual.html.raw > claws-mail-manual.html
+ 	
+diff --git a/manual/de/dist/txt/Makefile.am b/manual/de/dist/txt/Makefile.am
+index 51eca84f1..f15539f60 100644
+--- a/manual/de/dist/txt/Makefile.am
++++ b/manual/de/dist/txt/Makefile.am
+@@ -22,7 +22,7 @@ claws-mail-manual.txt: \
+ 	../../plugins.xml \
+ 	../../starting.xml \
+ 	../../claws-mail-manual.xml 
+-	-$(DOCBOOK2TXT) -o . ../../claws-mail-manual.xml
++	-$(DOCBOOK2TXT) -o . $(srcdir)/../../claws-mail-manual.xml
+ 	
+ maintainer-clean:
+ 	-rm claws-mail-manual.txt
+diff --git a/manual/dist/html/Makefile.am b/manual/dist/html/Makefile.am
+index babe8f650..c863a74d9 100644
+--- a/manual/dist/html/Makefile.am
++++ b/manual/dist/html/Makefile.am
+@@ -23,7 +23,7 @@ claws-mail-manual.html: \
+ 	../../starting.xml \
+ 	../../claws-mail-manual.xml 
+ 	-SP_ENCODING=xml $(DOCBOOK2HTML) -u -o . \
+-		../../claws-mail-manual.xml
++		$(srcdir)/../../claws-mail-manual.xml
+ 	-mv -f claws-mail-manual.html claws-mail-manual.html.raw
+ 	-$(SED) 's,^><META,><META http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"><META,' < claws-mail-manual.html.raw > claws-mail-manual.html
+ 	
+diff --git a/manual/dist/txt/Makefile.am b/manual/dist/txt/Makefile.am
+index fd29137a6..755a4a7b7 100644
+--- a/manual/dist/txt/Makefile.am
++++ b/manual/dist/txt/Makefile.am
+@@ -22,7 +22,7 @@ claws-mail-manual.txt: \
+ 	../../plugins.xml \
+ 	../../starting.xml \
+ 	../../claws-mail-manual.xml 
+-	-$(DOCBOOK2TXT) -o . ../../claws-mail-manual.xml
++	-$(DOCBOOK2TXT) -o . $(srcdir)/../../claws-mail-manual.xml
+ 	
+ maintainer-clean:
+ 	-rm claws-mail-manual.txt
+diff --git a/manual/es/dist/html/Makefile.am b/manual/es/dist/html/Makefile.am
+index 977c6e8e0..fdb5e548a 100644
+--- a/manual/es/dist/html/Makefile.am
++++ b/manual/es/dist/html/Makefile.am
+@@ -23,7 +23,7 @@ claws-mail-manual.html: \
+ 	../../starting.xml \
+ 	../../claws-mail-manual.xml 
+ 	-SP_ENCODING=xml $(DOCBOOK2HTML) -u -o . \
+-		../../claws-mail-manual.xml
++		$(srcdir)/../../claws-mail-manual.xml
+ 	-mv -f claws-mail-manual.html claws-mail-manual.html.raw
+ 	-$(SED) 's,^><META,><META http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"><META,' < claws-mail-manual.html.raw > claws-mail-manual.html
+ 	
+diff --git a/manual/es/dist/txt/Makefile.am b/manual/es/dist/txt/Makefile.am
+index 44d888426..c0853ad7d 100644
+--- a/manual/es/dist/txt/Makefile.am
++++ b/manual/es/dist/txt/Makefile.am
+@@ -22,7 +22,7 @@ claws-mail-manual.txt: \
+ 	../../plugins.xml \
+ 	../../starting.xml \
+ 	../../claws-mail-manual.xml 
+-	-$(DOCBOOK2TXT) -o . ../../claws-mail-manual.xml
++	-$(DOCBOOK2TXT) -o . $(srcdir)/../../claws-mail-manual.xml
+ 	
+ maintainer-clean:
+ 	-rm claws-mail-manual.txt
+diff --git a/manual/fr/dist/html/Makefile.am b/manual/fr/dist/html/Makefile.am
+index e48304be4..109c19b30 100644
+--- a/manual/fr/dist/html/Makefile.am
++++ b/manual/fr/dist/html/Makefile.am
+@@ -23,7 +23,7 @@ claws-mail-manual.html: \
+ 	../../starting.xml \
+ 	../../claws-mail-manual.xml 
+ 	-SP_ENCODING=xml $(DOCBOOK2HTML) -u -o . \
+-		../../claws-mail-manual.xml
++		$(srcdir)/../../claws-mail-manual.xml
+ 	-mv -f claws-mail-manual.html claws-mail-manual.html.raw
+ 	-$(SED) 's,^><META,><META http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"><META,' < claws-mail-manual.html.raw > claws-mail-manual.html
+ 	
+diff --git a/manual/fr/dist/txt/Makefile.am b/manual/fr/dist/txt/Makefile.am
+index 42d680766..34b6a0e42 100644
+--- a/manual/fr/dist/txt/Makefile.am
++++ b/manual/fr/dist/txt/Makefile.am
+@@ -22,7 +22,7 @@ claws-mail-manual.txt: \
+ 	../../plugins.xml \
+ 	../../starting.xml \
+ 	../../claws-mail-manual.xml 
+-	-$(DOCBOOK2TXT) -o . ../../claws-mail-manual.xml
++	-$(DOCBOOK2TXT) -o . $(srcdir)/../../claws-mail-manual.xml
+ 	
+ maintainer-clean:
+ 	-rm claws-mail-manual.txt
+diff --git a/manual/pl/dist/html/Makefile.am b/manual/pl/dist/html/Makefile.am
+index ea14590f5..bf965ad6f 100644
+--- a/manual/pl/dist/html/Makefile.am
++++ b/manual/pl/dist/html/Makefile.am
+@@ -23,7 +23,7 @@ claws-mail-manual.html: \
+ 	../../starting.xml \
+ 	../../claws-mail-manual.xml 
+ 	-SP_ENCODING=xml $(DOCBOOK2HTML) -u -o . \
+-		../../claws-mail-manual.xml
++		$(srcdir)/../../claws-mail-manual.xml
+ 	-mv -f claws-mail-manual.html claws-mail-manual.html.raw
+ 	-$(SED) 's,^><META,><META http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\"><META,' < claws-mail-manual.html.raw > claws-mail-manual.html
+ 	
+diff --git a/manual/pl/dist/txt/Makefile.am b/manual/pl/dist/txt/Makefile.am
+index 226529f03..cbf266d70 100644
+--- a/manual/pl/dist/txt/Makefile.am
++++ b/manual/pl/dist/txt/Makefile.am
+@@ -22,7 +22,7 @@ claws-mail-manual.txt: \
+ 	../../plugins.xml \
+ 	../../starting.xml \
+ 	../../claws-mail-manual.xml 
+-	-$(DOCBOOK2TXT) -o . ../../claws-mail-manual.xml
++	-$(DOCBOOK2TXT) -o . $(srcdir)/../../claws-mail-manual.xml
+ 	
+ maintainer-clean:
+ 	-rm claws-mail-manual.txt
+-- 
+2.25.1
+
